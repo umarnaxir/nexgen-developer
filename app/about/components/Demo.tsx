@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export default function Demo() {
   return (
     <section className="container mx-auto p-8 text-center">

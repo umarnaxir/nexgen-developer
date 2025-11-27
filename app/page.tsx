@@ -1,5 +1,11 @@
-import Demo from "./home/components/Demo";
-
+import HeroSection from "./home/HeroSection";
+import Hero from "./home/Hero";
+  
 export default function HomePage() {
-  return <Demo />;
+  return (
+    <>
+      {/* <HeroSection /> */}
+      <Hero />
+    </>
+  );
 }
