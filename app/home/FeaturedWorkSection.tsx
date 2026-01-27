@@ -1,156 +1,281 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, PanInfo } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 
 export default function FeaturedWorkSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
+      title: "Dr. Jibran Bashir – Orthopedic Care Website",
+      description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
       image: "/images/project2.png",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      category: "Web Development",
-      link: "/projects"
+      link: "https://drjibranbashir.com"
     },
     {
       id: 2,
-      title: "Mobile Banking App",
-      description: "Secure mobile banking application with biometric authentication and real-time transaction processing.",
-      image: "/images/project2.png",
-      technologies: ["React Native", "Firebase", "Node.js"],
-      category: "App Development",
-      link: "/projects"
+      title: "Hotel Sea View – Luxury Stay Website",
+      description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
+      image: "/images/project3.png",
+      link: "https://thehotelseaview.in"
     },
     {
       id: 3,
-      title: "AI-Powered Analytics Dashboard",
-      description: "Intelligent business analytics platform with machine learning predictions and data visualization.",
-      image: "/images/project3.png",
-      technologies: ["Python", "TensorFlow", "React", "D3.js"],
-      category: "AI/ML",
-      link: "/projects"
+      title: "Kindness Towards Humanity Foundation",
+      description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
+      image: "/images/project1.png",
+      link: "https://kindnesstowardshumanity.in"
     },
     {
       id: 4,
-      title: "Healthcare Management System",
-      description: "Comprehensive healthcare management system with Client records, appointments, and telemedicine features.",
+      title: "Saibbyweb Office Management Dashboard",
+      description: "A web-based system for managing employees, attendance, and documents with secure login and clean UI.",
       image: "/images/project4.png",
-      technologies: ["Next.js", "PostgreSQL", "AWS", "WebRTC"],
-      category: "Full Stack",
-      link: "/projects"
+      link: "https://sw-office.vercel.app"
     }
   ];
 
+  const totalProjects = projects.length;
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalProjects);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, totalProjects]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalProjects);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
+  };
+
+  // Swipe handlers
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
+  // Pan handler for framer motion
+  const handlePanEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      prevSlide();
+    } else if (info.offset.x < -swipeThreshold) {
+      nextSlide();
+    }
+  };
+
   return (
-    <section id="projects" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section id="projects" className="h-[90vh] bg-white flex flex-col">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl sm:h-full flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 sm:mb-12 md:mb-16"
+          className="text-center mb-4 sm:mb-6"
         >
-          <p className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
-            -PROJECTS
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4">
             FEATURED WORK
           </h2>
-          <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto px-4">
-            We are passionate about building scalable Websites, creating effective solutions, and learning every day to grow professionally in the IT field.
-          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {projects.map((project, index) => (
-            <Link key={project.id} href={project.link} className="block group cursor-pointer">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ scale: 1.03, y: -8 }}
-                className="relative aspect-[16/9] sm:aspect-[2/1] rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                {/* Full-card Image */}
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-
-                {/* Black gradient overlay for text visibility */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"
-                  aria-hidden
-                />
-
-                {/* Category badge - top left */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-bold rounded uppercase border border-white/30">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* View Project - small button top right */}
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white/90 text-black text-xs font-semibold rounded-md group-hover:bg-white transition-colors shadow-md whitespace-nowrap">
-                    View project
-                    <svg className="w-3.5 h-3.5 shrink-0 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-
-                {/* Text - anchored at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 z-10 flex flex-col">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-3 line-clamp-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 4).map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2.5 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-medium rounded border border-white/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-
-        {/* View All Projects Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 text-center"
+        {/* Carousel Container */}
+        <div 
+          className="relative flex-1 flex flex-col"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          ref={containerRef}
         >
-          <Link href="/projects">
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-8 py-4 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl"
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.1}
+            onPanEnd={handlePanEnd}
+            className="overflow-hidden flex-1"
+          >
+            <motion.div
+              className="flex h-full"
+              animate={{
+                x: `-${currentIndex * 100}%`
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }}
             >
-              View All Projects
+              {projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="w-full flex-shrink-0 h-full"
+                  style={{ minWidth: '100%' }}
+                >
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="block group cursor-pointer h-full relative">
+                    <div className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow-2xl h-full relative">
+                      {/* Black shadow/line on hover - appears below */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
+                      
+                      {/* Image Section - Left (Larger) */}
+                      <div className="relative w-full md:w-2/3 h-48 sm:h-56 md:h-full">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-opacity duration-300"
+                          sizes="(max-width: 768px) 100vw, 66vw"
+                        />
+                      </div>
+
+                      {/* Text Section - Right with Black Background (Smaller) */}
+                      <div className="w-full md:w-1/3 bg-black text-white p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col justify-center">
+                        <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
+                            {project.description}
+                          </p>
+                          <motion.div
+                            whileHover={{ x: 5 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <a 
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-white bg-transparent border-2 border-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 group/readmore text-xs sm:text-sm"
+                            >
+                              <span>Read more</span>
+                              <svg 
+                                className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover/readmore:translate-x-1 transition-transform text-purple-400 group-hover/readmore:text-purple-600" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </a>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Navigation Controls - Bottom */}
+          <div className="flex items-center justify-between mt-3 sm:mt-4 px-2 sm:px-4">
+            {/* Left: Play/Pause Button */}
+            <motion.button
+              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              aria-label={isAutoPlaying ? "Pause carousel" : "Play carousel"}
+            >
+              {isAutoPlaying ? (
+                <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+              ) : (
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+              )}
             </motion.button>
-          </Link>
-        </motion.div>
+
+            {/* Center: Slide Indicator */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-semibold text-gray-700">
+                {currentIndex + 1}/{totalProjects}
+              </span>
+            </div>
+
+            {/* Right: Navigation Arrows */}
+            <div className="flex items-center gap-2">
+              <motion.button
+                onClick={prevSlide}
+                whileHover={{ scale: 1.1, x: -2 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
+                aria-label="Previous project"
+              >
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              </motion.button>
+              <motion.button
+                onClick={nextSlide}
+                whileHover={{ scale: 1.1, x: 2 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
+                aria-label="Next project"
+              >
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex justify-center items-center gap-2 mt-2">
+            {projects.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => goToSlide(index)}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className={`rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? 'w-6 h-1.5 bg-black'
+                    : 'w-1.5 h-1.5 bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
