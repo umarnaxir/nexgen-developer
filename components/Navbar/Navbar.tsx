@@ -91,8 +91,22 @@ export default function Navbar() {
       />
 
       {/* Modals */}
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-      <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        onClose={() => setIsLoginModalOpen(false)}
+        onSwitchToSignup={() => {
+          setIsLoginModalOpen(false);
+          setTimeout(() => setIsSignupModalOpen(true), 100);
+        }}
+      />
+      <SignupModal 
+        isOpen={isSignupModalOpen} 
+        onClose={() => setIsSignupModalOpen(false)}
+        onSwitchToLogin={() => {
+          setIsSignupModalOpen(false);
+          setTimeout(() => setIsLoginModalOpen(true), 100);
+        }}
+      />
     </motion.header>
   );
 }

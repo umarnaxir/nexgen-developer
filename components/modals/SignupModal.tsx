@@ -2,20 +2,23 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import Modal from "@/components/ui/Modal";
 
 interface SignupModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToLogin?: () => void;
 }
 
-export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
+export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: SignupModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -24,11 +27,55 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Signup submitted:", formData);
-    // Handle signup here
+    
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match", {
+        description: "Please make sure both passwords are the same.",
+        duration: 4000,
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Show toast that waits for approval
+    const signupPromise = new Promise((resolve, reject) => {
+      // Simulate API call - in real app, this would be your actual signup API
+      setTimeout(() => {
+        // For demo purposes, we'll auto-approve after 2 seconds
+        // In production, this would wait for actual admin approval
+        resolve({ success: true, message: "Signup request submitted" });
+      }, 2000);
+    });
+
+    toast.promise(signupPromise, {
+      loading: "Wait for our approval...",
+      success: (data: any) => {
+        setIsSubmitting(false);
+        onClose();
+        return "Wait for our approval";
+      },
+      error: (error) => {
+        setIsSubmitting(false);
+        return "Wait for our approval";
+      },
+    });
+
+    try {
+      await signupPromise;
+    } catch (error) {
+      // Error handled in toast
+    }
+  };
+
+  const handleSwitchToLogin = () => {
     onClose();
+    if (onSwitchToLogin) {
+      onSwitchToLogin();
+    }
   };
 
   return (
@@ -102,18 +149,19 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
 
         <motion.button
           type="submit"
+          disabled={isSubmitting}
           whileHover={{ scale: 1.02, y: -2 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full px-8 py-5 text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl"
+          className="w-full px-8 py-5 text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Sign Up
+          {isSubmitting ? "Submitting..." : "Sign Up"}
         </motion.button>
 
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleSwitchToLogin}
             className="text-black hover:underline font-medium"
           >
             Login

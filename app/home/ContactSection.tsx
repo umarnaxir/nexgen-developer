@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import Image from "next/image";
 import Select from "@/components/ui/Select";
 
 export default function ContactSection() {
@@ -94,12 +95,21 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 sm:mb-12 md:mb-16"
+          className="mb-10 sm:mb-12 md:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4">
-            Contact Us
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4 px-4">
+            <Image 
+              src="/images/contact-icon.png" 
+              alt="Contact icon" 
+              width={48} 
+              height={48}
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain"
+            />
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black">
+              Contact Us
+            </h2>
+          </div>
+          <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4 text-center">
             Ready to bring your ideas to life? We're here to help you succeed.
           </p>
         </motion.div>

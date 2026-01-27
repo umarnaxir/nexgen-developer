@@ -40,7 +40,7 @@ export default function AboutPage() {
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-black mb-4">
               About NexGen Developers
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-4xl mx-auto">
               Where Innovation Meets Excellence
             </p>
           </motion.div>

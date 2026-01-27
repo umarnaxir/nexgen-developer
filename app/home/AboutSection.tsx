@@ -21,7 +21,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6 text-center"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 text-center"
           >
             Where Innovation Meets Excellence
           </motion.h3>
