@@ -185,10 +185,7 @@ export default function FeaturedWorkSection() {
                             whileHover={{ x: 5 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <a 
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <span 
                               className="inline-flex items-center gap-1.5 text-white bg-transparent border-2 border-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 group/readmore text-xs sm:text-sm"
                             >
                               <span>Read more</span>
@@ -200,7 +197,7 @@ export default function FeaturedWorkSection() {
                               >
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                               </svg>
-                            </a>
+                            </span>
                           </motion.div>
                         </motion.div>
                       </div>
