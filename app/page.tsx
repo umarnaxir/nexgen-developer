@@ -1,11 +1,23 @@
 import HeroSection from "./home/HeroSection";
-import Hero from "./home/Hero";
+import AboutSection from "./home/AboutSection";
+import FeaturedWorkSection from "./home/FeaturedWorkSection";
+import ServicesSection from "./home/ServicesSection";
+import SkillsSection from "./home/SkillsSection";
+import ClientReviewsSection from "./home/ClientReviewsSection";
+import FAQSection from "./home/FAQSection";
+import ContactSection from "./home/ContactSection";
   
 export default function HomePage() {
   return (
     <>
-      {/* <HeroSection /> */}
-      <Hero />
+      <HeroSection />
+      <AboutSection />
+      <FeaturedWorkSection />
+      <ServicesSection />
+      <SkillsSection />
+      <ClientReviewsSection />
+      <FAQSection />
+      <ContactSection />
     </>
   );
 }

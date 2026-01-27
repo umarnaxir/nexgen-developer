@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import FooterLogo from "./FooterLogo";
 import FooterLinks from "./FooterLinks";
-import FooterContact from "./FooterContact";
 import FooterSocials from "./FooterSocials";
 
 interface FooterLink {
@@ -14,50 +14,140 @@ interface FooterLink {
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const siteLinks: FooterLink[] = [
+  const quickLinks: FooterLink[] = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
+    { label: "About Us", href: "/about" },
+    { label: "Projects", href: "/projects" },
     { label: "Services", href: "/services" },
+  ];
+
+  const otherPages: FooterLink[] = [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Blogs", href: "/blogs" },
     { label: "Team", href: "/team" },
   ];
 
-  const moreLinks: FooterLink[] = [
-    { label: "Blogs", href: "/blogs" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
+  const legalLinks: FooterLink[] = [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
   ];
 
-  const workLinks: FooterLink[] = [
-    { label: "Work With Us", href: "/work" },
-    { label: "Write For Us", href: "/write" },
-    { label: "Contact Us", href: "/contact" },
-  ];
+  const [email, setEmail] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Email subscribed:", email);
+    setEmail("");
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
+  };
 
   return (
-    <footer className="bg-white border-t border-gray-100 mt-12 pt-10 pb-6">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pb-10 items-start">
-          {/* Links Section */}
-          <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            <FooterLinks title="Site" links={siteLinks} index={0} />
-            <FooterLinks title="More" links={moreLinks} index={1} />
-            <FooterLinks title="Work" links={workLinks} index={2} />
+    <footer className="bg-gray-100 border-t border-gray-200 mt-12 pt-4 sm:pt-6 pb-3">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pb-4 sm:pb-5">
+          {/* Logo Section */}
+          <div className="sm:col-span-2 lg:col-span-1 flex items-start justify-start">
+            <FooterLogo />
           </div>
 
-          {/* Logo and Contact Section */}
-          <div className="md:col-span-1 flex flex-col items-center md:items-end gap-6">
-            <FooterLogo />
-            <FooterContact />
+          {/* Quick Links */}
+          <div>
+            <FooterLinks title="Quick Links" links={quickLinks} index={0} />
           </div>
+
+          {/* Other Pages */}
+          <div>
+            <FooterLinks title="Other Pages" links={otherPages} index={1} />
+          </div>
+
+          {/* Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 mb-2">
+              Contact
+            </h3>
+            <div className="space-y-1.5 text-xs sm:text-sm text-gray-700 mb-3">
+              <motion.a 
+                href="tel:6006161726" 
+                whileHover={{ scale: 1.05, x: 2 }}
+                className="hover:text-black transition-colors block font-medium"
+              >
+                Call on +91 600-616-1726
+              </motion.a>
+              <motion.a 
+                href="mailto:nexgendevelopers11@gmail.com" 
+                whileHover={{ scale: 1.05, x: 2 }}
+                className="hover:text-black transition-colors font-medium break-all block"
+              >
+                nexgendevelopers11@gmail.com
+              </motion.a>
+            </div>
+            {/* Social Icons */}
+            <div className="mt-3">
+              <FooterSocials />
+            </div>
+          </motion.div>
+
+          {/* Email Subscription */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="relative"
+          >
+            <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 mb-2">
+              Subscribe
+            </h3>
+            <form onSubmit={handleSubscribe} className="space-y-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg outline-none transition-all text-black"
+                required
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full px-4 py-2 text-xs sm:text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide"
+              >
+                Subscribe
+              </motion.button>
+            </form>
+            
+            {/* Alert Message */}
+            {showAlert && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full left-0 right-0 mt-2 p-3 bg-black text-white text-xs sm:text-sm rounded-lg shadow-lg z-10"
+              >
+                Thank you for subscribing! We'll keep you updated.
+              </motion.div>
+            )}
+          </motion.div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-100 pt-6 pb-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          <div className="text-sm text-gray-500">
-            © Copyright {currentYear} NexGen Developers
+        {/* Copyright */}
+        <div className="border-t border-gray-200 pt-3 sm:pt-4 pb-3">
+          <div className="text-center">
+            <div className="text-xs sm:text-sm text-gray-500">
+              © {currentYear} NexGen Developers. All Rights Reserved.
+            </div>
           </div>
-          <FooterSocials />
         </div>
       </div>
     </footer>

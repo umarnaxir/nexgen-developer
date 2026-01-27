@@ -39,15 +39,13 @@ export default function Footer() {
 
   const moreLinks: FooterLink[] = [
     { label: 'Blogs', href: '/blogs' },
-    { label: 'Contact', href: '/contact' },
     { label: 'Privacy', href: '/privacy' },
     { label: 'Terms', href: '/terms' }
   ];
 
   const workLinks: FooterLink[] = [
     { label: 'Work with us', href: '/work-with-us' },
-    { label: 'Write for us', href: '/write-for-us' },
-    { label: 'Contact Us', href: '/contact' }
+    { label: 'Write for us', href: '/write-for-us' }
   ];
 
   return (

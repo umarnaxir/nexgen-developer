@@ -71,7 +71,7 @@ export default function Navigation() {
         <div className="hidden md:flex items-center space-x-4 ml-auto"> {/* ml-auto pushes these to the right */}
           <a 
             href="/login" 
-            className="text-sm uppercase font-extrabold tracking-wide text-gray-900 transition-colors duration-300 px-3 py-2 border border-transparent rounded-md hover:border-black"
+            className="text-sm uppercase font-extrabold tracking-wide text-gray-900 transition-colors duration-300 px-3 py-2 border border-transparent rounded-md"
           >
             Login
           </a>

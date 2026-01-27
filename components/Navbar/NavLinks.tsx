@@ -32,7 +32,7 @@ export default function NavLinks({ links, isMobile = false, onLinkClick }: NavLi
             <Link
               href={link.href}
               onClick={onLinkClick}
-              className="relative block py-3 px-4 text-sm uppercase font-extrabold tracking-wide text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
+              className="relative block py-3 px-4 text-sm font-extrabold tracking-wide text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
             >
               {link.label}
               <motion.span
@@ -50,22 +50,33 @@ export default function NavLinks({ links, isMobile = false, onLinkClick }: NavLi
 
   return (
     <>
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="relative text-sm uppercase font-extrabold tracking-wide py-4 px-3 text-gray-900 transition-colors duration-300 group"
-          aria-current={pathname === link.href ? 'page' : undefined}
-        >
-          {link.label}
-          <motion.span
-            className="absolute bottom-2 left-1/2 h-[2px] bg-black rounded-full"
-            initial={{ width: 0, x: "-50%" }}
-            whileHover={{ width: "40%", x: "-50%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          />
-        </Link>
-      ))}
+      {links.map((link) => {
+        const isActive = pathname === link.href;
+        return (
+          <motion.div
+            key={link.href}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link
+              href={link.href}
+              className={`relative text-sm font-extrabold tracking-wide py-4 px-3 text-gray-900 transition-all duration-300 group ${
+                isActive ? 'text-gray-900' : 'hover:text-gray-700'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+              <motion.span
+                className="absolute bottom-2 left-1/2 h-[2px] bg-black rounded-full"
+                initial={{ width: isActive ? "60%" : 0, x: "-50%" }}
+                animate={{ width: isActive ? "60%" : 0, x: "-50%" }}
+                whileHover={{ width: "60%", x: "-50%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+            </Link>
+          </motion.div>
+        );
+      })}
     </>
   );
 }
