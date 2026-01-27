@@ -106,7 +106,7 @@ export default function FeaturedWorkSection() {
   };
 
   return (
-    <section id="projects" className="h-[90vh] bg-white flex flex-col">
+    <section id="projects" className="sm:h-[90vh] bg-white flex flex-col">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl sm:h-full flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

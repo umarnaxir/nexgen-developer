@@ -21,7 +21,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 text-center"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 text-start"
           >
             Where Innovation Meets Excellence
           </motion.h3>
@@ -30,7 +30,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8 text-center"
+            className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8 text-start"
           >
             We are NexGen Developers, a collective of 5-10 engineering professionals from leading tech companies united to deliver premium freelance services. Our team combines diverse expertise with a passion for technological innovation, enabling us to tackle complex challenges with precision and creativity.
           </motion.p>
@@ -51,16 +51,6 @@ export default function AboutSection() {
               </motion.div>
             ))}
           </div>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-base sm:text-lg text-gray-700 leading-relaxed mt-8 sm:mt-12 text-center max-w-3xl mx-auto"
-          >
-            Our mission is to help startups and local businesses build high-quality digital solutions that drive growth and success in the digital landscape.
-          </motion.p>
         </div>
       </div>
     </section>

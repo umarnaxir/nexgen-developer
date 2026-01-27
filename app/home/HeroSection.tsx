@@ -60,6 +60,18 @@ export default function HeroSection() {
   };
 
   return (
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 768px) {
+          .mobile-button-custom {
+            width: 100% !important;
+            max-width: 100% !important;
+            border-radius: 0.75rem !important;
+            padding: clamp(0.875rem, 2.5vh, 1.25rem) clamp(1.5rem, 4vw, 2rem) !important;
+            font-size: clamp(0.875rem, 2.5vw, 1rem) !important;
+          }
+        }
+      `}} />
     <section className="relative h-[80vh] sm:h-[85vh] md:h-[90vh] flex items-center justify-center pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8 lg:pb-12 overflow-visible bg-white text-black">
       {/* Graph/Grid Background */}
       <div className="absolute inset-0 opacity-[0.12]">
@@ -76,11 +88,11 @@ export default function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-7xl relative z-10 w-full">
-        <div className="max-w-4xl mx-auto text-center relative w-full">
+        <div className="max-w-4xl mx-auto text-left md:text-center relative w-full">
           
           {/* Star Above Content - Top Right */}
           <motion.div 
-            className="absolute top-0 sm:top-2 md:top-4 right-0 sm:right-2 md:right-4 lg:right-8 z-10 cursor-pointer pointer-events-auto"
+            className="absolute top-0 sm:top-2 md:top-4 right-0 sm:right-2 md:right-4 lg:right-8 z-10 cursor-pointer pointer-events-auto hidden md:block"
             onMouseMove={handleRightStarMouseMove}
             onMouseEnter={() => setRightStarHovered(true)}
             onMouseLeave={() => handleStarMouseLeave('right')}
@@ -140,12 +152,44 @@ export default function HeroSection() {
             Team of Freelancers
           </motion.p>
           
-          {/* Main Headline */}
+          {/* Main Headline - Mobile: Split into two lines */}
+          <div className="block md:hidden">
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                fontSize: 'clamp(4rem, 15vw, 6rem)',
+                fontWeight: 900,
+                lineHeight: 1,
+                marginBottom: '0.25rem'
+              }}
+              className="font-extrabold tracking-tighter uppercase"
+            >
+              NEXGEN
+            </motion.h1>
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              style={{
+                fontSize: 'clamp(3rem, 12vw, 4.5rem)',
+                fontWeight: 900,
+                lineHeight: 1,
+                marginBottom: '1rem'
+              }}
+              className="font-extrabold tracking-tighter"
+            >
+              Developers
+            </motion.h1>
+          </div>
+
+          {/* Desktop Headline */}
           <motion.h1 
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-extrabold leading-[1.1] tracking-tighter mb-3 sm:mb-4 md:mb-6 px-2"
+            className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-extrabold leading-[1.1] tracking-tighter mb-3 sm:mb-4 md:mb-6 px-2"
           >
             We are <motion.span 
               className="text-black inline-block"
@@ -165,17 +209,23 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-3 sm:mt-4 md:mt-6 text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed px-4 pl-8 sm:pl-12 md:pl-16 lg:pl-20"
+            style={{
+              fontSize: 'clamp(1rem, 3vw, 1.125rem)',
+              lineHeight: 1.6,
+              marginTop: 'clamp(1rem, 4vh, 2rem)',
+              marginBottom: 'clamp(1.5rem, 6vh, 3rem)'
+            }}
+            className="mt-3 sm:mt-4 md:mt-6 text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed md:pl-8 lg:pl-20"
           >
             We are freelancers helping startups and local businesses with AI/ML, chatbots, web & app development, SEO, and graphic design to create stunning digital experiences that make a lasting impact.
           </motion.p>
 
-          {/* Action Buttons - Centered below content */}
+          {/* Action Buttons - Mobile: Vertical stack, Desktop: Horizontal */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-row gap-3 sm:gap-4 justify-center items-center mt-4 sm:mt-5 md:mt-6"
+            className="flex flex-col md:flex-row gap-3 sm:gap-4 md:justify-center items-stretch md:items-center mt-4 sm:mt-5 md:mt-6"
           >
             <motion.button
               onClick={() => setIsContactModalOpen(true)}
@@ -191,7 +241,7 @@ export default function HeroSection() {
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="inline-flex items-center justify-center w-auto px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-white bg-black border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide"
+              className="mobile-button-custom w-full md:w-auto inline-flex items-center justify-center px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-white bg-black border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
             >
               Get Started
             </motion.button>
@@ -212,7 +262,7 @@ export default function HeroSection() {
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }
               }}
-              className="inline-flex items-center justify-center w-auto px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-black bg-white border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide"
+              className="mobile-button-custom w-full md:w-auto inline-flex items-center justify-center px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-black bg-white border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
             >
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
@@ -226,7 +276,7 @@ export default function HeroSection() {
 
           {/* Star Below Content - Bottom Left */}
           <motion.div 
-            className="absolute bottom-0 sm:bottom-2 md:bottom-4 -left-4 sm:-left-2 md:left-0 lg:left-4 z-10 cursor-pointer pointer-events-auto"
+            className="absolute bottom-0 sm:bottom-2 md:bottom-4 -left-4 sm:-left-2 md:left-0 lg:left-4 z-10 cursor-pointer pointer-events-auto hidden md:block"
             onMouseMove={handleLeftStarMouseMove}
             onMouseEnter={() => setLeftStarHovered(true)}
             onMouseLeave={() => handleStarMouseLeave('left')}
@@ -278,5 +328,6 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }
