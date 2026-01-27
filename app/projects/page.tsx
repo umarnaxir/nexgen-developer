@@ -13,7 +13,7 @@ export default function ProjectsPage() {
       id: 1,
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-      image: "/images/project1.png",
+      image: "/images/project2.png",
       technologies: ["React", "Node.js", "MongoDB", "Stripe", "Express", "JWT", "AWS S3"],
       category: "Web Development",
       features: ["Payment Integration", "Inventory Management", "Admin Dashboard", "Real-time Analytics", "Product Recommendations", "Secure Authentication"],

@@ -11,7 +11,7 @@ export default function FeaturedWorkSection() {
       id: 1,
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-      image: "/images/project1.png",
+      image: "/images/project2.png",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
       category: "Web Development",
       link: "/projects"

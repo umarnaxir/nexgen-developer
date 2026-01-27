@@ -48,7 +48,7 @@ export default function Navigation() {
         
         {/* Logo */}
         <a href="/" className="flex items-center gap-3 shrink-0 py-3">
-          <Image src="/images/ND.png" alt="NexGenDevs" width={56} height={56} className="block" />
+          <Image src="/logo/2.png" alt="NexGenDevs" width={56} height={56} className="block" />
         </a>
 
         {/* Desktop Navigation */}

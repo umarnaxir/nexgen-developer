@@ -14,7 +14,7 @@ export default function NavLogo() {
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <Image 
-          src="/images/ND.png" 
+          src="/logo/2.png" 
           alt="NexGenDevs" 
           width={48} 
           height={48} 

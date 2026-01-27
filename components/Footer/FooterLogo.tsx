@@ -31,7 +31,7 @@ export default function FooterLogo() {
             }}
           >
             <Image
-              src="/images/ND.png"
+              src="/logo/2.png"
               alt="ND logo"
               width={520}
               height={170}

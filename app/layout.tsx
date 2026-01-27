@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import AOSInit from "@/components/AOSInit";
+import { Toaster } from "sonner";
 
 const spaceGrotesk = localFont({
   src: [
@@ -104,9 +105,12 @@ export const metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/logo/2.png", type: "image/png" },
+      { url: "/logo/2.png", sizes: "any" }
+    ],
+    shortcut: "/logo/2.png",
+    apple: "/logo/2.png",
   },
 
   verification: {
@@ -122,6 +126,7 @@ export default function RootLayout({ children }) {
         className={`${spaceGrotesk.variable} antialiased`}
       >
         <AOSInit />
+        <Toaster position="top-right" richColors />
         <div className={`min-h-screen bg-white text-gray-800 ${spaceGrotesk.className}`}>
           <Navbar />
           <main className="flex-1">{children}</main>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import Modal from "@/components/ui/Modal";
 import Select from "@/components/ui/Select";
 
@@ -18,6 +19,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     service: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const serviceOptions = [
     { value: "", label: "Select a Service" },
@@ -36,11 +38,63 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission here
-    onClose();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        // If not JSON, read as text to see what we got
+        const text = await response.text();
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      // Success toast
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you soon.",
+        duration: 4000,
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        service: "",
+        message: ""
+      });
+
+      // Close modal after a short delay
+      setTimeout(() => {
+        onClose();
+      }, 500);
+    } catch (error) {
+      // Error toast
+      toast.error("Failed to send message", {
+        description: error instanceof Error ? error.message : "Please try again later.",
+        duration: 4000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -118,11 +172,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Submit Button */}
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full px-8 py-4 text-base bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl"
+          disabled={isSubmitting}
+          whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+          whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+          className="w-full px-8 py-4 text-base bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </motion.button>
       </form>
     </Modal>
