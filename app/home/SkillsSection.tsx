@@ -8,75 +8,75 @@ export default function SkillsSection() {
   const skills = [
     { 
       name: "HTML", 
-      iconUrl: "https://www.svgrepo.com/show/452228/html-5.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/1216/1216733.png"
     },
     { 
       name: "CSS", 
-      iconUrl: "https://www.svgrepo.com/show/452185/css-3.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/732/732190.png"
     },
     { 
       name: "JavaScript", 
-      iconUrl: "https://www.svgrepo.com/show/452045/js.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968292.png"
     },
     { 
       name: "React", 
-      iconUrl: "https://www.svgrepo.com/show/452092/react.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/1183/1183672.png"
     },
     { 
       name: "Next.js", 
-      iconUrl: "https://www.svgrepo.com/show/452307/nextjs.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png"
     },
     { 
       name: "React Native", 
-      iconUrl: "https://www.svgrepo.com/show/452092/react.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/1183/1183672.png"
     },
     { 
       name: "Python", 
-      iconUrl: "https://www.svgrepo.com/show/452091/python.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
     },
     { 
       name: "AI/ML", 
-      iconUrl: "https://www.svgrepo.com/show/452195/artificial-intelligence.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2103/2103633.png"
     },
     { 
       name: "FastAPI", 
-      iconUrl: "https://www.svgrepo.com/show/452091/python.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
     },
     { 
       name: "Flask", 
-      iconUrl: "https://www.svgrepo.com/show/452091/python.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
     },
     { 
       name: "Django", 
-      iconUrl: "https://www.svgrepo.com/show/452091/python.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
     },
     { 
       name: "Computer Vision", 
-      iconUrl: "https://www.svgrepo.com/show/452195/artificial-intelligence.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2103/2103633.png"
     },
     { 
       name: "SQL", 
-      iconUrl: "https://www.svgrepo.com/show/452228/database.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2772/2772128.png"
     },
     { 
       name: "MongoDB", 
-      iconUrl: "https://www.svgrepo.com/show/452091/mongodb.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968342.png"
     },
     { 
       name: "Canva", 
-      iconUrl: "https://www.svgrepo.com/show/452091/design.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968520.png"
     },
     { 
       name: "Wordpress", 
-      iconUrl: "https://www.svgrepo.com/show/452091/wordpress.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/174/174881.png"
     },
     { 
       name: "Figma", 
-      iconUrl: "https://www.svgrepo.com/show/452091/figma.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
     },
     { 
       name: "Adobe PhotoShop", 
-      iconUrl: "https://www.svgrepo.com/show/452091/adobe-photoshop.svg"
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968520.png"
     }
   ];
 

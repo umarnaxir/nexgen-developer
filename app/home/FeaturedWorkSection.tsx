@@ -37,7 +37,7 @@ export default function FeaturedWorkSection() {
     {
       id: 4,
       title: "Healthcare Management System",
-      description: "Comprehensive healthcare management system with patient records, appointments, and telemedicine features.",
+      description: "Comprehensive healthcare management system with Client records, appointments, and telemedicine features.",
       image: "/images/project4.png",
       technologies: ["Next.js", "PostgreSQL", "AWS", "WebRTC"],
       category: "Full Stack",

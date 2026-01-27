@@ -2,7 +2,6 @@ import HeroSection from "./home/HeroSection";
 import AboutSection from "./home/AboutSection";
 import FeaturedWorkSection from "./home/FeaturedWorkSection";
 import ServicesSection from "./home/ServicesSection";
-import SkillsSection from "./home/SkillsSection";
 import ClientReviewsSection from "./home/ClientReviewsSection";
 import FAQSection from "./home/FAQSection";
 import ContactSection from "./home/ContactSection";
@@ -14,7 +13,6 @@ export default function HomePage() {
       <AboutSection />
       <FeaturedWorkSection />
       <ServicesSection />
-      <SkillsSection />
       <ClientReviewsSection />
       <FAQSection />
       <ContactSection />

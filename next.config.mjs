@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'www.svgrepo.com',
         pathname: '/show/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn-icons-png.flaticon.com',
+        pathname: '/**',
+      },
     ],
   },
 };
