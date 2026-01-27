@@ -35,7 +35,7 @@ export default function Hamburger({ isOpen, onClick }: HamburgerProps) {
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="block h-[2px] bg-gray-900 rounded-full"
+          className="block h-[6px] bg-black rounded-full"
           style={{
             width: i === 0 ? "24px" : i === 1 ? "20px" : "24px",
             originX: 0.5,
