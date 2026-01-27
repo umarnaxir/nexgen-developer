@@ -58,9 +58,9 @@ export default function FooterSocials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1, duration: 0.3 }}
-          whileHover={{ scale: 1.15, color: "#111827" }}
+          whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
-          className="text-gray-400 transition-colors duration-200 hover:text-black"
+          className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-200 hover:bg-gray-800 hover:scale-110"
         >
           {social.icon}
         </motion.a>

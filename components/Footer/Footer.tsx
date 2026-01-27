@@ -51,17 +51,17 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pb-4 sm:pb-5">
           {/* Logo Section */}
-          <div className="sm:col-span-2 lg:col-span-1 flex items-start justify-start">
+          <div className="hidden sm:flex sm:col-span-2 lg:col-span-1 items-center justify-start">
             <FooterLogo />
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="flex flex-col">
             <FooterLinks title="Quick Links" links={quickLinks} index={0} />
           </div>
 
           {/* Other Pages */}
-          <div>
+          <div className="flex flex-col">
             <FooterLinks title="Other Pages" links={otherPages} index={1} />
           </div>
 
@@ -71,10 +71,22 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col"
           >
-            <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 mb-2">
-              Contact
-            </h3>
+            <motion.div
+              className="group relative mb-2"
+            >
+              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
+                Contact
+              </h3>
+              <motion.div
+                className="absolute -top-1 left-0 h-[2px] bg-black"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                whileTap={{ width: "100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+            </motion.div>
             <div className="space-y-1.5 text-xs sm:text-sm text-gray-700 mb-3">
               <motion.a 
                 href="tel:6006161726" 
@@ -103,11 +115,22 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative"
+            className="relative flex flex-col"
           >
-            <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 mb-2">
-              Subscribe
-            </h3>
+            <motion.div
+              className="group relative mb-2"
+            >
+              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
+                Subscribe
+              </h3>
+              <motion.div
+                className="absolute -top-1 left-0 h-[2px] bg-black"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                whileTap={{ width: "100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+            </motion.div>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <input
                 type="email"

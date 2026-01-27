@@ -12,7 +12,7 @@ export default function FooterLogo() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="w-full max-w-xs"
+      className="w-full max-w-sm sm:max-w-md lg:max-w-lg"
     >
       <Link href="/" className="block w-full">
         <motion.div
