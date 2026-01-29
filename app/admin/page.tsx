@@ -1,5 +1,5 @@
-import Demo from "./components/Demo";
+import AdminContent from "./components/AdminContent";
 
 export default function AdminPage() {
-  return <Demo />;
+  return <AdminContent />;
 }

@@ -1,10 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, PanInfo } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase } from "lucide-react";
+import ProjectCarouselCard from "@/components/ProjectCarouselCard";
+
+// Helper function to generate slug from title
+const generateSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+};
 
 export default function FeaturedWorkSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,28 +26,56 @@ export default function FeaturedWorkSection() {
       title: "Dr. Jibran Bashir – Orthopedic Care Website",
       description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
       image: "/images/project2.png",
-      link: "https://drjibranbashir.com"
+      link: "https://drjibranbashir.com",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+      category: "Medical Website",
+      duration: "2 months",
+      client: "Dr. Jibran Bashir",
+      icon: Building2,
+      color: "bg-blue-500",
+      slug: generateSlug("Dr. Jibran Bashir – Orthopedic Care Website")
     },
     {
       id: 2,
       title: "Hotel Sea View – Luxury Stay Website",
       description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
       image: "/images/project3.png",
-      link: "https://thehotelseaview.in"
+      link: "https://thehotelseaview.in",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Image Optimization", "Booking Integration", "Google Maps API"],
+      category: "Hospitality Website",
+      duration: "2.5 months",
+      client: "Hotel Sea View",
+      icon: Globe,
+      color: "bg-amber-500",
+      slug: generateSlug("Hotel Sea View – Luxury Stay Website")
     },
     {
       id: 3,
       title: "Kindness Towards Humanity Foundation",
       description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
       image: "/images/project1.png",
-      link: "https://kindnesstowardshumanity.in"
+      link: "https://kindnesstowardshumanity.in",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
+      category: "Nonprofit Website",
+      duration: "3 months",
+      client: "Kindness Towards Humanity Foundation",
+      icon: Heart,
+      color: "bg-red-500",
+      slug: generateSlug("Kindness Towards Humanity Foundation")
     },
     {
       id: 4,
       title: "Saibbyweb Office Management Dashboard",
       description: "A web-based system for managing employees, attendance, and documents with secure login and clean UI.",
       image: "/images/project4.png",
-      link: "https://sw-office.vercel.app"
+      link: "https://sw-office.vercel.app",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Authentication System", "Database Integration", "File Upload System", "Dashboard Analytics"],
+      category: "Management System",
+      duration: "4 months",
+      client: "Saibbyweb",
+      icon: Briefcase,
+      color: "bg-purple-500",
+      slug: generateSlug("Saibbyweb Office Management Dashboard")
     }
   ];
 
@@ -61,13 +96,13 @@ export default function FeaturedWorkSection() {
     setCurrentIndex(index);
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalProjects);
-  };
+  }, [totalProjects]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
-  };
+  }, [totalProjects]);
 
   // Swipe handlers
   const minSwipeDistance = 50;
@@ -105,15 +140,29 @@ export default function FeaturedWorkSection() {
     }
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+      } else if (e.key === "ArrowRight") {
+        nextSlide();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [prevSlide, nextSlide]);
+
   return (
-    <section id="projects" className="sm:h-[90vh] bg-white flex flex-col">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl sm:h-full flex flex-col">
+    <section id="projects" className="py-8 lg:py-12 bg-white flex flex-col min-h-[600px]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-4 sm:mb-6"
+          className="text-center mb-6 sm:mb-8"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4">
             FEATURED WORK
@@ -122,21 +171,24 @@ export default function FeaturedWorkSection() {
 
         {/* Carousel Container */}
         <div 
-          className="relative flex-1 flex flex-col"
+          className="relative flex flex-col"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
           ref={containerRef}
+          tabIndex={0}
+          role="region"
+          aria-label="Featured projects carousel"
         >
           <motion.div
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.1}
             onPanEnd={handlePanEnd}
-            className="overflow-hidden flex-1"
+            className="overflow-hidden"
           >
             <motion.div
-              className="flex h-full"
+              className="flex"
               animate={{
                 x: `-${currentIndex * 100}%`
               }}
@@ -146,63 +198,26 @@ export default function FeaturedWorkSection() {
                 damping: 30
               }}
             >
-              {projects.map((project, index) => (
+              {projects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-full flex-shrink-0 h-full"
+                  className="w-full flex-shrink-0"
                   style={{ minWidth: '100%' }}
                 >
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="block group cursor-pointer h-full relative">
-                    <div className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow-2xl h-full relative">
-                      {/* Black shadow/line on hover - appears below */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
-                      
-                      {/* Image Section - Left (Larger) */}
-                      <div className="relative w-full md:w-2/3 h-48 sm:h-56 md:h-full">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover transition-opacity duration-300"
-                          sizes="(max-width: 768px) 100vw, 66vw"
-                        />
-                      </div>
-
-                      {/* Text Section - Right with Black Background (Smaller) */}
-                      <div className="w-full md:w-1/3 bg-black text-white p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col justify-center">
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-tight">
-                            {project.title}
-                          </h3>
-                          <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
-                            {project.description}
-                          </p>
-                          <motion.div
-                            whileHover={{ x: 5 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <span 
-                              className="inline-flex items-center gap-1.5 text-white bg-transparent border-2 border-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 group/readmore text-xs sm:text-sm"
-                            >
-                              <span>Read more</span>
-                              <svg 
-                                className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover/readmore:translate-x-1 transition-transform text-purple-400 group-hover/readmore:text-purple-600" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                viewBox="0 0 24 24"
-                              >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </span>
-                          </motion.div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </a>
+                  <ProjectCarouselCard
+                    id={project.id}
+                    title={project.title}
+                    description={project.description}
+                    image={project.image}
+                    link={project.link}
+                    technologies={project.technologies}
+                    category={project.category}
+                    duration={project.duration}
+                    client={project.client}
+                    icon={project.icon}
+                    color={project.color}
+                    slug={project.slug}
+                  />
                 </div>
               ))}
             </motion.div>

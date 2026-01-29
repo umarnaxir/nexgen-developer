@@ -123,7 +123,7 @@ export default function ClientReviewsSection() {
   };
 
   return (
-    <section id="reviews" className="py-8 md:py-20 lg:py-28 bg-gray-100">
+    <section id="reviews" className="py-8 md:py-20 lg:py-28 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -185,7 +185,7 @@ export default function ClientReviewsSection() {
                   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08)",
                   transition: { duration: 0.3 }
                 }}
-                className="w-full md:max-w-none bg-white p-4 md:p-8 rounded-2xl shadow-lg relative cursor-pointer group overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col"
+                className="w-full md:max-w-none bg-gray-50 p-4 md:p-8 rounded-2xl shadow-lg relative cursor-pointer group overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col"
               >
                 {/* Bottom Line on Hover */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />

@@ -55,6 +55,7 @@ export const metadata = {
     "app development",
     "graphic design",
     "digital marketing",
+    "Other services",
   ],
   authors: [{ name: "NexGen Developers", url: "https://nexgendevelopers.vercel.app" }],
   creator: "NexGen Developers",

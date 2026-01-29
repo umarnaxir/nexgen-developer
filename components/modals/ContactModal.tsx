@@ -29,6 +29,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     { value: "chatbot", label: "Chatbot Development" },
     { value: "seo-marketing", label: "SEO & Digital Marketing" },
     { value: "graphic-design", label: "Graphic Design" },
+    { value: "other", label: "Other Services" },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -42,38 +43,39 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s so server has time to connect to SMTP
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
 
-      // Check if response is JSON
+      clearTimeout(timeoutId);
+
       const contentType = response.headers.get("content-type");
-      let data;
-      
-      if (contentType && contentType.includes("application/json")) {
+      let data: { error?: string; details?: string; message?: string };
+
+      if (contentType?.includes("application/json")) {
         data = await response.json();
       } else {
-        // If not JSON, read as text to see what we got
         const text = await response.text();
-        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        throw new Error(text || `Server error: ${response.status}`);
       }
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message");
+        const msg = data.details ? `${data.error} (${data.details})` : (data.error || "Failed to send message");
+        throw new Error(msg);
       }
 
-      // Success toast
       toast.success("Message sent successfully!", {
         description: "We'll get back to you soon.",
         duration: 4000,
       });
 
-      // Reset form
       setFormData({
         name: "",
         phone: "",
@@ -82,17 +84,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         message: ""
       });
 
-      // Close modal after a short delay
-      setTimeout(() => {
-        onClose();
-      }, 500);
+      onClose();
     } catch (error) {
-      // Error toast
+      const message =
+        error instanceof Error
+          ? error.name === "AbortError"
+            ? "Request took too long. Please try again."
+            : error.message
+          : "Please try again later.";
       toast.error("Failed to send message", {
-        description: error instanceof Error ? error.message : "Please try again later.",
-        duration: 4000,
+        description: message,
+        duration: 5000,
       });
     } finally {
+      clearTimeout(timeoutId);
       setIsSubmitting(false);
     }
   };

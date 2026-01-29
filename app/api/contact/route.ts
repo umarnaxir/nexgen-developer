@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+const SEND_TIMEOUT_MS = 25000; // 25s max wait for sending (SMTP can be slow on some networks)
+
 export async function POST(request: NextRequest) {
   try {
     let body;
@@ -37,35 +39,29 @@ export async function POST(request: NextRequest) {
     const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
 
     if (!gmailUser || !gmailAppPassword) {
-      console.error("Missing Gmail credentials in environment variables");
+      console.error("Missing Gmail credentials: set GMAIL_USER and GMAIL_APP_PASSWORD in .env.local");
       return NextResponse.json(
-        { error: "Server configuration error" },
-        { status: 500 }
+        {
+          error: "Contact form is not configured. Please email us directly or try again later.",
+          code: "CONFIG_MISSING",
+        },
+        { status: 503 }
       );
     }
 
     // Remove spaces from app password if present (Gmail app passwords sometimes have spaces)
     const cleanPassword = gmailAppPassword.replace(/\s/g, "");
 
-    // Create transporter
+    // Create transporter with generous timeouts (Gmail SMTP can be slow or blocked on some networks)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: gmailUser,
         pass: cleanPassword,
       },
+      connectionTimeout: 20000, // 20s to establish connection
+      greetingTimeout: 10000,   // 10s for server greeting
     });
-
-    // Verify transporter configuration
-    try {
-      await transporter.verify();
-    } catch (verifyError) {
-      console.error("Nodemailer verification failed:", verifyError);
-      return NextResponse.json(
-        { error: "Email service configuration error. Please contact support." },
-        { status: 500 }
-      );
-    }
 
     // Email content
     const mailOptions = {
@@ -111,8 +107,12 @@ export async function POST(request: NextRequest) {
       `,
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    // Send email with timeout so we don't hang
+    const sendPromise = transporter.sendMail(mailOptions);
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Email send timed out")), SEND_TIMEOUT_MS)
+    );
+    await Promise.race([sendPromise, timeoutPromise]);
 
     return NextResponse.json(
       { message: "Email sent successfully" },
@@ -120,20 +120,29 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error("Error sending email:", error);
-    
-    // Ensure we always return JSON, even if there's an error
+
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-    
+    const isConnectionTimeout = /connection timeout|connection timed out|ETIMEDOUT|ECONNREFUSED/i.test(errorMessage);
+    const isSendTimeout = errorMessage.includes("timed out") && !isConnectionTimeout;
+    const isAuth = /invalid login|authentication failed|username and password/i.test(errorMessage);
+
+    let userMessage = "Failed to send email. Please try again later.";
+    if (isConnectionTimeout) {
+      userMessage = "Connection to email server timed out. Try again, or check if your network allows outbound email (ports 465/587).";
+    } else if (isSendTimeout) {
+      userMessage = "Request took too long. Please try again.";
+    } else if (isAuth && process.env.NODE_ENV === "development") {
+      userMessage = "Gmail auth failed. Check GMAIL_USER and GMAIL_APP_PASSWORD in .env.local.";
+    }
+
     return NextResponse.json(
-      { 
-        error: "Failed to send email. Please try again later.",
-        details: process.env.NODE_ENV === "development" ? errorMessage : undefined
+      {
+        error: userMessage,
+        details: process.env.NODE_ENV === "development" ? errorMessage : undefined,
       },
-      { 
+      {
         status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        }
+        headers: { "Content-Type": "application/json" },
       }
     );
   }
