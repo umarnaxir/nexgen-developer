@@ -1,6 +1,9 @@
 import PrivacyHero from "./components/PrivacyHero";
 import PrivacySections from "./components/PrivacySections";
 import PrivacySectionsPart2 from "./components/PrivacySectionsPart2";
+import { getPrivacySEO } from "@/lib/seo/page-seo";
+
+export const metadata = getPrivacySEO();
 
 export default function PrivacyPage() {
   return (

@@ -10,6 +10,8 @@ import BlogPostContent from "./components/BlogPostContent";
 import RelatedBlogs from "./components/RelatedBlogs";
 import BlogPostCTA from "./components/BlogPostCTA";
 import BlogPostNotFound from "./components/BlogPostNotFound";
+import { ArticleSchema } from "@/lib/seo/structured-data";
+import { seoConfig } from "@/lib/seo/config";
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -31,16 +33,34 @@ export default function BlogPostPage() {
     return <BlogPostNotFound />;
   }
 
+  // Convert date string to ISO format
+  const publishedDate = new Date(blog.date).toISOString();
+  const blogUrl = `${seoConfig.siteUrl}/blogs/${blog.slug}`;
+  const blogImage = blog.images?.[0] 
+    ? (blog.images[0].startsWith("http") ? blog.images[0] : `${seoConfig.siteUrl}${blog.images[0]}`)
+    : undefined;
+
   return (
-    <div className="min-h-screen bg-white">
-      <article className="py-20 lg:py-28">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <BlogPostHero blog={blog} />
-          <BlogPostContent blog={blog} />
-          <RelatedBlogs relatedBlogs={relatedBlogs} />
-          <BlogPostCTA />
-        </div>
-      </article>
-    </div>
+    <>
+      <ArticleSchema
+        title={blog.title}
+        description={blog.excerpt}
+        url={blogUrl}
+        image={blogImage}
+        publishedDate={publishedDate}
+        author={blog.author}
+        publisher={seoConfig.publisher}
+      />
+      <div className="min-h-screen bg-white">
+        <article className="py-20 lg:py-28">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <BlogPostHero blog={blog} />
+            <BlogPostContent blog={blog} />
+            <RelatedBlogs relatedBlogs={relatedBlogs} />
+            <BlogPostCTA />
+          </div>
+        </article>
+      </div>
+    </>
   );
 }

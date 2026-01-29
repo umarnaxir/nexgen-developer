@@ -1,5 +1,8 @@
 import BlogsHero from "./components/BlogsHero";
 import BlogsGrid from "./components/BlogsGrid";
+import { getBlogsSEO } from "@/lib/seo/page-seo";
+
+export const metadata = getBlogsSEO();
 
 export default function BlogsPage() {
   return (

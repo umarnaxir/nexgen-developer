@@ -1,6 +1,9 @@
 import TermsHero from "./components/TermsHero";
 import TermsSections from "./components/TermsSections";
 import TermsSectionsPart2 from "./components/TermsSectionsPart2";
+import { getTermsSEO } from "@/lib/seo/page-seo";
+
+export const metadata = getTermsSEO();
 
 export default function TermsPage() {
   return (

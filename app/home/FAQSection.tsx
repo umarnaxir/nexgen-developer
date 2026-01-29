@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FAQSchema } from "@/lib/seo/faq-schema";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -39,6 +40,7 @@ export default function FAQSection() {
 
   return (
     <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8 bg-white">
+      <FAQSchema faqs={faqs} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

@@ -7,6 +7,9 @@ import ClientReviewsSection from "./home/ClientReviewsSection";
 import FAQSection from "./home/FAQSection";
 import ContactSection from "./home/ContactSection";
 import ProjectsStats from "./projects/components/ProjectsStats";
+import { getHomeSEO } from "@/lib/seo/page-seo";
+
+export const metadata = getHomeSEO();
   
 export default function HomePage() {
   return (

@@ -5,8 +5,9 @@ import ValuesSection from "./components/ValuesSection";
 import PricingSection from "./components/PricingSection";
 import ContactCTA from "./components/ContactCTA";
 import ProjectsStats from "@/app/projects/components/ProjectsStats";
-import ClientReviewsSection from "@/app/home/ClientReviewsSection";
-import FAQSection from "@/app/home/FAQSection";
+import { getAboutSEO } from "@/lib/seo/page-seo";
+
+export const metadata = getAboutSEO();
 
 export default function AboutPage() {
   return (

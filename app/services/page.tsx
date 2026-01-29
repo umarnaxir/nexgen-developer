@@ -4,6 +4,10 @@ import ClientReviewsSection from "@/app/home/ClientReviewsSection";
 import FAQSection from "@/app/home/FAQSection";
 import ProjectsStats from "@/app/projects/components/ProjectsStats";
 import ContactCTA from "../about/components/ContactCTA";
+import { getServicesSEO } from "@/lib/seo/page-seo";
+
+export const metadata = getServicesSEO();
+
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
