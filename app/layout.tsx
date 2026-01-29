@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import AOSInit from "@/components/AOSInit";
+import BackToTop from "@/components/BackToTop/BackToTop";
 import { Toaster } from "sonner";
 import { getHomeSEO } from "@/lib/seo/page-seo";
 import { OrganizationSchema, WebsiteSchema } from "@/lib/seo/structured-data";
@@ -52,10 +53,11 @@ export default function RootLayout({ children }) {
         <WebsiteSchema />
         <AOSInit />
         <Toaster position="top-right" richColors />
-        <div className={`min-h-screen bg-white text-gray-800 ${spaceGrotesk.className}`}>
+        <div id="layout-root" className={`relative min-h-screen bg-white text-gray-800 ${spaceGrotesk.className}`}>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <BackToTop />
         </div>
       </body>
     </html>

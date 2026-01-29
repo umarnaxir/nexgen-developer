@@ -33,7 +33,7 @@ export function getHomeSEO(): Metadata {
 export function getAboutSEO(): Metadata {
   return generateMetadata({
     title: "About Us - NexGen Developers",
-    description: "Learn about NexGen Developers, a team of skilled freelancers specializing in AI/ML, web development, app development, chatbots, SEO, and digital marketing services.",
+    description: "Learn about NexGen Developers, a team of skilled freelancers specializing in AI/ML, web development, app development, chatbots, SEO, and other services.",
     keywords: [
       "about nexgen developers",
       "freelance team",
@@ -57,7 +57,7 @@ export function getAboutSEO(): Metadata {
 export function getServicesSEO(): Metadata {
   return generateMetadata({
     title: "Our Services - NexGen Developers",
-    description: "Comprehensive services including web development, mobile app development, AI/ML solutions, chatbot development, SEO & digital marketing, graphic design, and more.",
+    description: "Comprehensive services including web development, mobile app development, AI/ML solutions, chatbot development, SEO & digital marketing, and more.",
     keywords: [
       "web development services",
       "mobile app development",
