@@ -9,7 +9,7 @@ export const metadata = getProjectsSEO();
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <ProjectsHero />
       <ProjectsList />
       <ProjectsStats />

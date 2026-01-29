@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ProjectsHero() {
   return (
-    <section className="relative py-8 lg:py-12 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="relative py-8 lg:py-12 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

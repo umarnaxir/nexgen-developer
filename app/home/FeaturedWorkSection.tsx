@@ -155,7 +155,7 @@ export default function FeaturedWorkSection() {
   }, [prevSlide, nextSlide]);
 
   return (
-    <section id="projects" className="py-8 lg:py-12 bg-white flex flex-col min-h-[600px]">
+    <section id="projects" className="py-8 lg:py-12 flex flex-col min-h-[600px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -164,7 +164,10 @@ export default function FeaturedWorkSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6 sm:mb-8"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4">
+          <h2 
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4"
+            style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
+          >
             FEATURED WORK
           </h2>
         </motion.div>
@@ -234,15 +237,24 @@ export default function FeaturedWorkSection() {
               aria-label={isAutoPlaying ? "Pause carousel" : "Play carousel"}
             >
               {isAutoPlaying ? (
-                <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+                <Pause 
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-black" 
+                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+                />
               ) : (
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+                <Play 
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-black" 
+                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+                />
               )}
             </motion.button>
 
             {/* Center: Slide Indicator */}
             <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-semibold text-gray-700">
+              <span 
+                className="text-xs sm:text-sm font-semibold text-gray-700"
+                style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 255, 255, 0.6)' }}
+              >
                 {currentIndex + 1}/{totalProjects}
               </span>
             </div>
@@ -256,7 +268,10 @@ export default function FeaturedWorkSection() {
                 className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
                 aria-label="Previous project"
               >
-                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronLeft 
+                  className="w-4 h-4 sm:w-5 sm:h-5" 
+                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+                />
               </motion.button>
               <motion.button
                 onClick={nextSlide}
@@ -265,7 +280,10 @@ export default function FeaturedWorkSection() {
                 className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
                 aria-label="Next project"
               >
-                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                <ChevronRight 
+                  className="w-4 h-4 sm:w-5 sm:h-5" 
+                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+                />
               </motion.button>
             </div>
           </div>

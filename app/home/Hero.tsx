@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
   `;
 
   return (
-    <div className="min-h-screen bg-white text-black flex items-center justify-center overflow-hidden px-4">
+    <div className="min-h-screen text-black flex items-center justify-center overflow-hidden px-4">
       <h1 
         className="font-extrabold relative leading-none select-none w-full text-center"
         style={{ 

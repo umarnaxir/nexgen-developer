@@ -81,7 +81,7 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="py-12 sm:py-14 md:py-16 lg:py-16 bg-white">
+    <section id="skills" className="py-12 sm:py-14 md:py-16 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -93,10 +93,16 @@ export default function SkillsSection() {
           <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
             -SKILLS
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-black mb-2 sm:mb-3 px-4">
+          <h2 
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-black mb-2 sm:mb-3 px-4"
+            style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
+          >
             AREA OF EXPERTISE
           </h2>
-          <p className="text-sm sm:text-base text-gray-700 max-w-3xl mx-auto px-4">
+          <p 
+            className="text-sm sm:text-base text-gray-700 max-w-3xl mx-auto px-4"
+            style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5)' }}
+          >
             Let's kickstart your project and collaborate to build something amazing. We bring our expertise to make your next project shine.
           </p>
         </motion.div>
@@ -120,13 +126,17 @@ export default function SkillsSection() {
                     width={56} 
                     height={56} 
                     className="w-full h-full object-contain brightness-0" 
+                    style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))' }}
                     unoptimized 
                   />
                 </div>
               </div>
               
               {/* Skill name */}
-              <h3 className="text-xs sm:text-sm font-bold text-black uppercase tracking-wide">
+              <h3 
+                className="text-xs sm:text-sm font-bold text-black uppercase tracking-wide"
+                style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 255, 255, 0.6)' }}
+              >
                 {skill.name}
               </h3>
             </motion.div>

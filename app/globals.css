@@ -23,3 +23,57 @@ body {
   color: var(--foreground);
   font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* Global grid background (small boxes graph) - always white bg, light black grid lines */
+.page-bg {
+  --grid-color: rgba(0, 0, 0, 0.06);
+  --grid-size: 32px;
+  background-color: #ffffff !important;
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Moving 360 light shadow - soft glow, subtle (less visible) */
+.page-bg::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background: radial-gradient(
+    ellipse 120% 80% at 20% 10%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.01) 50%,
+    transparent 70%
+  );
+  animation: movingLightShadow 20s ease-in-out infinite;
+}
+
+/* Moving light overlay stays subtle on white bg (no dark-mode override) */
+
+@keyframes movingLightShadow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(5%, 10%) scale(1.05);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-5%, 5%) scale(1.1);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(10%, -5%) scale(1.05);
+    opacity: 0.9;
+  }
+}

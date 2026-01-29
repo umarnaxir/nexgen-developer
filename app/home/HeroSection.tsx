@@ -1,78 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import Image from "next/image";
 import ContactModal from "@/components/modals/ContactModal";
 
 export default function HeroSection() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [leftStarHovered, setLeftStarHovered] = useState(false);
-  const [rightStarHovered, setRightStarHovered] = useState(false);
-  
-  // Mouse position tracking for interactive stars
-  const leftStarX = useMotionValue(0);
-  const leftStarY = useMotionValue(0);
-  const rightStarX = useMotionValue(0);
-  const rightStarY = useMotionValue(0);
-  
-  const leftSpringX = useSpring(leftStarX, { stiffness: 150, damping: 15 });
-  const leftSpringY = useSpring(leftStarY, { stiffness: 150, damping: 15 });
-  const rightSpringX = useSpring(rightStarX, { stiffness: 150, damping: 15 });
-  const rightSpringY = useSpring(rightStarY, { stiffness: 150, damping: 15 });
-  
-  const leftRotateX = useTransform(leftSpringY, [-0.5, 0.5], [15, -15]);
-  const leftRotateY = useTransform(leftSpringX, [-0.5, 0.5], [-15, 15]);
-  const rightRotateX = useTransform(rightSpringY, [-0.5, 0.5], [15, -15]);
-  const rightRotateY = useTransform(rightSpringX, [-0.5, 0.5], [-15, 15]);
-  
-  const handleLeftStarMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const x = (e.clientX - centerX) / (rect.width / 2);
-    const y = (e.clientY - centerY) / (rect.height / 2);
-    leftStarX.set(x);
-    leftStarY.set(y);
-  };
-  
-  const handleRightStarMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const x = (e.clientX - centerX) / (rect.width / 2);
-    const y = (e.clientY - centerY) / (rect.height / 2);
-    rightStarX.set(x);
-    rightStarY.set(y);
-  };
-  
-  const handleStarMouseLeave = (side: 'left' | 'right') => {
-    if (side === 'left') {
-      leftStarX.set(0);
-      leftStarY.set(0);
-      setLeftStarHovered(false);
-    } else {
-      rightStarX.set(0);
-      rightStarY.set(0);
-      setRightStarHovered(false);
-    }
-  };
+  const [displayedText, setDisplayedText] = useState("");
+  const fullText = "NEXGEN DEVELOPERS";
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayedText(fullText.slice(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        setIsTypingComplete(true);
+        clearInterval(typingInterval);
+      }
+    }, 100); // Adjust speed as needed
+
+    return () => clearInterval(typingInterval);
+  }, []);
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
-        @media (max-width: 768px) {
-          .mobile-button-custom {
-            width: 100% !important;
-            max-width: 100% !important;
-            border-radius: 0.75rem !important;
-            padding: clamp(0.875rem, 2.5vh, 1.25rem) clamp(1.5rem, 4vw, 2rem) !important;
-            font-size: clamp(0.875rem, 2.5vw, 1rem) !important;
-          }
-        }
-      `}} />
-    <section className="relative h-[80vh] sm:h-[85vh] md:h-[90vh] flex items-center justify-center pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8 lg:pb-12 overflow-visible bg-white text-black">
+    <section className="relative h-screen flex items-center justify-center pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8 lg:pb-12 overflow-visible text-black">
       {/* Graph/Grid Background */}
       <div className="absolute inset-0 opacity-[0.12]">
         <div 
@@ -88,121 +44,60 @@ export default function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-7xl relative z-10 w-full">
-        <div className="max-w-4xl mx-auto text-left md:text-center relative w-full">
+        <div className="max-w-5xl mx-auto text-center relative w-full">
           
-          {/* Star Above Content - Top Right */}
-          <motion.div 
-            className="absolute top-0 sm:top-2 md:top-4 right-0 sm:right-2 md:right-4 lg:right-8 z-10 cursor-pointer pointer-events-auto hidden md:block"
-            onMouseMove={handleRightStarMouseMove}
-            onMouseEnter={() => setRightStarHovered(true)}
-            onMouseLeave={() => handleStarMouseLeave('right')}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1,
-              rotate: [360, 0],
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.5 },
-              scale: { duration: 0.8, delay: 0.5, type: "spring", stiffness: 200 },
-              rotate: {
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear"
-              }
-            }}
-            whileHover={{ scale: 1.3, y: -5 }}
-            whileTap={{ scale: 0.9 }}
-            style={{
-              rotateX: rightRotateX,
-              rotateY: rightRotateY,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.15, 1],
-                opacity: [0.8, 1, 0.8],
-                y: [0, -5, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5
-              }}
-            >
-              <Image 
-                src="/images/star.png" 
-                alt="Decorative star" 
-                width={200} 
-                height={200}
-                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 drop-shadow-2xl"
-                priority
-              />
-            </motion.div>
-          </motion.div>
           {/* Subheading */}
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-gray-600 mb-2 sm:mb-3 md:mb-4 uppercase tracking-wider"
+            style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)' }}
           >
             Team of Freelancers
           </motion.p>
           
-          {/* Main Headline - Mobile: Split into two lines */}
-          <div className="block md:hidden">
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
+          {/* Main Headline - Mobile and Desktop: Split into two lines with same styling */}
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               style={{
-                fontSize: 'clamp(4rem, 15vw, 6rem)',
+                fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                 fontWeight: 900,
-                lineHeight: 1,
-                marginBottom: '0.25rem'
+                lineHeight: 1.2,
+                marginBottom: '0.5rem',
+                textShadow: '0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.7), 0 0 45px rgba(255, 255, 255, 0.5)'
               }}
-              className="font-extrabold tracking-tighter uppercase"
+              className="font-extrabold tracking-tighter text-black"
             >
-              NEXGEN
-            </motion.h1>
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              We are
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
               style={{
-                fontSize: 'clamp(3rem, 12vw, 4.5rem)',
+                fontSize: 'clamp(3.5rem, 10vw, 6.5rem)',
                 fontWeight: 900,
-                lineHeight: 1,
-                marginBottom: '1rem'
+                lineHeight: 1.1,
+                marginBottom: '1rem',
+                textShadow: '0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.5)'
               }}
-              className="font-extrabold tracking-tighter"
+              className="font-extrabold tracking-tighter uppercase text-black"
             >
-              Developers
-            </motion.h1>
+              {displayedText}
+              {!isTypingComplete && (
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-block w-1 h-[1em] bg-black ml-1"
+                  style={{ boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)' }}
+                />
+              )}
+            </motion.div>
           </div>
-
-          {/* Desktop Headline */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
-            className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-extrabold leading-[1.1] tracking-tighter mb-3 sm:mb-4 md:mb-6 px-2"
-          >
-            We are <motion.span 
-              className="text-black inline-block"
-              animate={{ 
-                textShadow: [
-                  "0 0 0px rgba(0,0,0,0)",
-                  "0 0 20px rgba(0,0,0,0.1)",
-                  "0 0 0px rgba(0,0,0,0)"
-                ]
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >NexGen Developers</motion.span>
-          </motion.h1>
           
           {/* Description Text */}
           <motion.p 
@@ -210,12 +105,13 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             style={{
-              fontSize: 'clamp(1rem, 3vw, 1.125rem)',
-              lineHeight: 1.6,
-              marginTop: 'clamp(1rem, 4vh, 2rem)',
-              marginBottom: 'clamp(1.5rem, 6vh, 3rem)'
+              fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+              lineHeight: 1.5,
+              marginTop: 'clamp(1.5rem, 4vh, 2.5rem)',
+              marginBottom: 'clamp(2rem, 5vh, 3rem)',
+              textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)'
             }}
-            className="mt-3 sm:mt-4 md:mt-6 text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed md:pl-8 lg:pl-20"
+            className="mt-4 md:mt-6 text-gray-700 max-w-4xl mx-auto text-center leading-tight"
           >
             We are freelancers helping startups and local businesses with AI/ML, chatbots, web & app development, SEO, and graphic design to create stunning digital experiences that make a lasting impact.
           </motion.p>
@@ -225,23 +121,23 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-3 sm:gap-4 md:justify-center items-stretch md:items-center mt-4 sm:mt-5 md:mt-6"
+            className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center items-center mt-4 md:mt-6"
           >
             <motion.button
               onClick={() => setIsContactModalOpen(true)}
-              whileHover={{ scale: 1.08, y: -3, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}
+              whileHover={{ scale: 1.05, y: -2, boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}
               whileTap={{ scale: 0.95 }}
               animate={{
                 boxShadow: [
-                  "0 4px 15px rgba(0,0,0,0.1)",
-                  "0 6px 20px rgba(0,0,0,0.15)",
-                  "0 4px 15px rgba(0,0,0,0.1)"
+                  "0 2px 10px rgba(0,0,0,0.1)",
+                  "0 4px 15px rgba(0,0,0,0.12)",
+                  "0 2px 10px rgba(0,0,0,0.1)"
                 ]
               }}
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="mobile-button-custom w-full md:w-auto inline-flex items-center justify-center px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-white bg-black border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
+              className="w-full md:w-auto inline-flex items-center justify-center px-8 md:px-10 py-2.5 md:py-2.5 text-sm md:text-sm font-bold text-white bg-black border-2 border-black rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
             >
               Get Started
             </motion.button>
@@ -250,81 +146,31 @@ export default function HeroSection() {
               href="https://api.whatsapp.com/message/X7TDAPSVHSFNC1?autoload=1&app_absent=0" 
               target="_blank" 
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.08, y: -3, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}
+              whileHover={{ scale: 1.05, y: -2, boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}
               whileTap={{ scale: 0.95 }}
               animate={{
                 boxShadow: [
-                  "0 4px 15px rgba(0,0,0,0.1)",
-                  "0 6px 20px rgba(0,0,0,0.15)",
-                  "0 4px 15px rgba(0,0,0,0.1)"
+                  "0 2px 10px rgba(0,0,0,0.1)",
+                  "0 4px 15px rgba(0,0,0,0.12)",
+                  "0 2px 10px rgba(0,0,0,0.1)"
                 ]
               }}
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }
               }}
-              className="mobile-button-custom w-full md:w-auto inline-flex items-center justify-center px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 text-xs sm:text-sm md:text-base font-bold text-black bg-white border-2 border-black rounded-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
+              className="w-full md:w-auto inline-flex items-center justify-center px-8 md:px-10 py-2.5 md:py-2.5 text-sm md:text-sm font-bold text-black bg-white border-2 border-black rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-black/20 uppercase tracking-wide active:scale-[0.96]"
             >
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))' }}
               >
-                <MessageCircle className="w-5 h-5 mr-2" />
+                <MessageCircle className="w-4 h-4 md:w-4 md:h-4 mr-2" />
               </motion.div>
               WhatsApp
             </motion.a>
           </motion.div>
 
-          {/* Star Below Content - Bottom Left */}
-          <motion.div 
-            className="absolute bottom-0 sm:bottom-2 md:bottom-4 -left-4 sm:-left-2 md:left-0 lg:left-4 z-10 cursor-pointer pointer-events-auto hidden md:block"
-            onMouseMove={handleLeftStarMouseMove}
-            onMouseEnter={() => setLeftStarHovered(true)}
-            onMouseLeave={() => handleStarMouseLeave('left')}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1,
-              rotate: [0, 360],
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.8 },
-              scale: { duration: 0.8, delay: 0.8, type: "spring", stiffness: 200 },
-              rotate: {
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }
-            }}
-            whileHover={{ scale: 1.3, y: 5 }}
-            whileTap={{ scale: 0.9 }}
-            style={{
-              rotateX: leftRotateX,
-              rotateY: leftRotateY,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.8, 1, 0.8],
-                y: [0, 5, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Image 
-                src="/images/star.png" 
-                alt="Decorative star" 
-                width={200} 
-                height={200}
-                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 xl:w-40 xl:h-40 drop-shadow-2xl"
-                priority
-              />
-            </motion.div>
-          </motion.div>
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
+    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="px-4">
           <motion.h3 
@@ -22,6 +22,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-2xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 text-start"
+            style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
           >
             Where Innovation Meets Excellence
           </motion.h3>
@@ -31,6 +32,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8 text-start"
+            style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5)' }}
           >
             We are NexGen Developers, a collective of 5-10 engineering professionals from leading tech companies united to deliver premium freelance services. Our team combines diverse expertise with a passion for technological innovation, enabling us to tackle complex challenges with precision and creativity.
           </motion.p>
@@ -46,8 +48,18 @@ export default function AboutSection() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className={`bg-gray-50 p-4 sm:p-6 rounded-lg border-2 border-transparent transition-all duration-300 ${service.span ? 'md:col-span-2' : ''}`}
               >
-                <h4 className="text-lg sm:text-xl font-bold text-black mb-2 sm:mb-3">{service.title}</h4>
-                <p className="text-sm sm:text-base text-gray-700">{service.desc}</p>
+                <h4 
+                  className="text-lg sm:text-xl font-bold text-black mb-2 sm:mb-3"
+                  style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)' }}
+                >
+                  {service.title}
+                </h4>
+                <p 
+                  className="text-sm sm:text-base text-gray-700"
+                  style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5)' }}
+                >
+                  {service.desc}
+                </p>
               </motion.div>
             ))}
           </div>

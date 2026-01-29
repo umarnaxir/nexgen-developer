@@ -123,7 +123,7 @@ export default function ClientReviewsSection() {
   };
 
   return (
-    <section id="reviews" className="py-8 md:py-10 lg:py-10 bg-white">
+    <section id="reviews" className="py-8 md:py-10 lg:py-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -132,10 +132,16 @@ export default function ClientReviewsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6 md:mb-16"
         >
-          <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-black mb-2 md:mb-4 px-2 md:px-4">
+          <h2 
+            className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-black mb-2 md:mb-4 px-2 md:px-4"
+            style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
+          >
             CLIENT REVIEWS
           </h2>
-          <p className="text-sm md:text-lg text-gray-700 max-w-3xl mx-auto px-2 md:px-4">
+          <p 
+            className="text-sm md:text-lg text-gray-700 max-w-3xl mx-auto px-2 md:px-4"
+            style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5)' }}
+          >
             See what our clients have to say about working with NexGen Developers
           </p>
         </motion.div>
@@ -157,7 +163,10 @@ export default function ClientReviewsSection() {
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 md:-translate-x-8 z-10 bg-white text-black p-2 md:p-4 rounded-full hover:bg-black hover:text-white transition-all duration-300 shadow-xl flex items-center justify-center border-2 border-gray-200 hover:border-black group"
               aria-label="Previous reviews"
             >
-              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" />
+              <ChevronLeft 
+                className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" 
+                style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+              />
             </motion.button>
           )}
 
@@ -233,10 +242,16 @@ export default function ClientReviewsSection() {
                   <div className="flex-1">
                     <motion.h4 
                       className="font-bold text-black text-base md:text-lg mb-0.5 md:mb-1 group-hover:text-gray-800 transition-colors duration-300"
+                      style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 255, 255, 0.6)' }}
                     >
                       {review.name}
                     </motion.h4>
-                    <p className="text-xs md:text-sm text-gray-600 mb-1.5 md:mb-2">{review.project}</p>
+                    <p 
+                      className="text-xs md:text-sm text-gray-600 mb-1.5 md:mb-2"
+                      style={{ textShadow: '0 0 6px rgba(255, 255, 255, 0.7), 0 0 12px rgba(255, 255, 255, 0.5)' }}
+                    >
+                      {review.project}
+                    </p>
                     {/* Rating */}
                     <div className="flex items-center gap-1.5 md:gap-2">
                       <div className="flex gap-0.5">
@@ -260,6 +275,7 @@ export default function ClientReviewsSection() {
                 {/* Review Text */}
                 <motion.p 
                   className="text-gray-700 mb-4 md:mb-6 leading-relaxed text-sm md:text-base relative z-10 group-hover:text-gray-900 transition-colors duration-300 flex-grow"
+                  style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5)' }}
                 >
                   {review.review}
                 </motion.p>
@@ -274,7 +290,12 @@ export default function ClientReviewsSection() {
                     <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                     </svg>
-                    <span className="text-xs md:text-sm font-medium text-black">Verified Client</span>
+                    <span 
+                      className="text-xs md:text-sm font-medium text-black"
+                      style={{ textShadow: '0 0 6px rgba(255, 255, 255, 0.8)' }}
+                    >
+                      Verified Client
+                    </span>
                   </motion.div>
                 )}
               </motion.div>
@@ -290,7 +311,10 @@ export default function ClientReviewsSection() {
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 md:translate-x-8 z-10 bg-white text-black p-2 md:p-4 rounded-full hover:bg-black hover:text-white transition-all duration-300 shadow-xl flex items-center justify-center border-2 border-gray-200 hover:border-black group"
               aria-label="Next reviews"
             >
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" />
+              <ChevronRight 
+                className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" 
+                style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
+              />
             </motion.button>
           )}
 

@@ -53,11 +53,13 @@ export default function RootLayout({ children }) {
         <WebsiteSchema />
         <AOSInit />
         <Toaster position="top-right" richColors />
-        <div id="layout-root" className={`relative min-h-screen bg-white text-gray-800 ${spaceGrotesk.className}`}>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <BackToTop />
+        <div id="layout-root" className={`page-bg relative min-h-screen text-gray-800 ${spaceGrotesk.className}`}>
+          <div className="relative z-10">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <BackToTop />
+          </div>
         </div>
       </body>
     </html>

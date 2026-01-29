@@ -96,7 +96,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white">
+    <section id="contact" className="py-12 sm:py-16 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -112,12 +112,19 @@ export default function ContactSection() {
               width={48} 
               height={48}
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain"
+              style={{ filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))' }}
             />
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black"
+              style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
+            >
               Contact Us
             </h2>
           </div>
-          <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4 text-center">
+          <p 
+            className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4 text-center"
+            style={{ textShadow: '0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5)' }}
+          >
             Ready to bring your ideas to life? We're here to help you succeed.
           </p>
         </motion.div>
@@ -147,7 +154,7 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
                     required
                   />
                 </motion.div>
@@ -165,7 +172,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Your Email"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
                     required
                   />
                 </motion.div>
@@ -186,7 +193,7 @@ export default function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
                     required
                   />
                 </motion.div>
@@ -221,7 +228,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   placeholder="Tell us about your project"
                   rows={4}
-                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black bg-white"
                   required
                 />
               </motion.div>
