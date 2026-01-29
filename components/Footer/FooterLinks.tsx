@@ -83,7 +83,7 @@ export default function FooterLinks({ title, links, index }: FooterLinksProps) {
           >
             <Link
               href={link.href}
-              className="group relative inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 py-1.5 w-fit border-b border-gray-300 hover:border-black transition-colors duration-200"
+              className="group relative inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-gray-700 py-1.5 w-fit transition-colors duration-200"
             >
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}

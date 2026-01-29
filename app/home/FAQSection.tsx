@@ -38,7 +38,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
+    <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -47,9 +47,6 @@ export default function FAQSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 sm:mb-12 md:mb-16"
         >
-          <p className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
-            -FAQ
-          </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4">
             FREQUENTLY ASKED QUESTIONS
           </h2>

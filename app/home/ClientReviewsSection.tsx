@@ -123,7 +123,7 @@ export default function ClientReviewsSection() {
   };
 
   return (
-    <section id="reviews" className="py-8 md:py-20 lg:py-28 bg-white">
+    <section id="reviews" className="py-8 md:py-10 lg:py-10 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -132,9 +132,6 @@ export default function ClientReviewsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6 md:mb-16"
         >
-          <p className="text-xs md:text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1.5 md:mb-2">
-            -TESTIMONIALS
-          </p>
           <h2 className="text-2xl md:text-5xl lg:text-6xl font-extrabold text-black mb-2 md:mb-4 px-2 md:px-4">
             CLIENT REVIEWS
           </h2>
