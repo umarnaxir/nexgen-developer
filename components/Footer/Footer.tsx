@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import FooterLogo from "./FooterLogo";
 import FooterLinks from "./FooterLinks";
 import FooterSocials from "./FooterSocials";
@@ -47,7 +46,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-100 border-t border-gray-200 mt-12 pt-4 sm:pt-6 pb-3">
+    <footer className="bg-gray-100 border-t border-gray-200 mt-12 pt-4 sm:pt-6 pb-3" data-aos="fade-up">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pb-4 sm:pb-5">
           {/* Logo Section */}
@@ -66,102 +65,65 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col"
-          >
-            <motion.div
-              className="group relative mb-2"
-            >
+          <div className="flex flex-col">
+            <div className="group relative mb-2">
               <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
                 Contact
               </h3>
-              <motion.div
-                className="absolute -top-1 left-0 h-[2px] bg-black"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                whileTap={{ width: "100%" }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-            </motion.div>
+              <div className="absolute -top-1 left-0 h-[2px] bg-black w-0 group-hover:w-full transition-all duration-300 ease-in-out" />
+            </div>
             <div className="space-y-1.5 text-xs sm:text-sm text-gray-700 mb-3">
-              <motion.a 
+              <a 
                 href="tel:6006161726" 
-                whileHover={{ scale: 1.05, x: 2 }}
-                className="hover:text-black transition-colors block font-medium"
+                className="hover:text-black transition-colors block font-medium hover:translate-x-0.5"
               >
                 Call on +91 600-616-1726
-              </motion.a>
-              <motion.a 
+              </a>
+              <a 
                 href="mailto:nexgendevelopers11@gmail.com" 
-                whileHover={{ scale: 1.05, x: 2 }}
-                className="hover:text-black transition-colors font-medium break-all block"
+                className="hover:text-black transition-colors font-medium break-all block hover:translate-x-0.5"
               >
                 nexgendevelopers11@gmail.com
-              </motion.a>
+              </a>
             </div>
             {/* Social Icons */}
             <div className="mt-3">
               <FooterSocials />
             </div>
-          </motion.div>
+          </div>
 
           {/* Email Subscription */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative flex flex-col"
-          >
-            <motion.div
-              className="group relative mb-2"
-            >
+          <div className="relative flex flex-col">
+            <div className="group relative mb-2">
               <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
                 Subscribe
               </h3>
-              <motion.div
-                className="absolute -top-1 left-0 h-[2px] bg-black"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                whileTap={{ width: "100%" }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-            </motion.div>
+              <div className="absolute -top-1 left-0 h-[2px] bg-black w-0 group-hover:w-full transition-all duration-300 ease-in-out" />
+            </div>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg outline-none transition-all text-black"
+                className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg outline-none transition-all text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
                 required
               />
-              <motion.button
+              <button
                 type="submit"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-4 py-2 text-xs sm:text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide"
+                className="w-full px-4 py-2 text-xs sm:text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400/30 transition-all duration-300 uppercase tracking-wide hover:scale-105 hover:-translate-y-0.5 active:scale-95"
               >
                 Subscribe
-              </motion.button>
+              </button>
             </form>
             
             {/* Alert Message */}
             {showAlert && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="absolute top-full left-0 right-0 mt-2 p-3 bg-black text-white text-xs sm:text-sm rounded-lg shadow-lg z-10"
-              >
+              <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-black text-white text-xs sm:text-sm rounded-lg shadow-lg z-10">
                 Thank you for subscribing! We'll keep you updated.
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
         </div>
 
         {/* Copyright */}

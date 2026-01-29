@@ -65,7 +65,7 @@ export default function BackToTop() {
   }, [updateProgress]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   if (!visible) return null;

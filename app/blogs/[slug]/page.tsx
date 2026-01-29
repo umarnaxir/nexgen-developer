@@ -1,9 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
 import { useParams } from "next/navigation";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { blogPosts, allBlogs } from "./data";
 import BlogPostHero from "./components/BlogPostHero";
 import BlogPostContent from "./components/BlogPostContent";
@@ -16,15 +13,6 @@ import { seoConfig } from "@/lib/seo/config";
 export default function BlogPostPage() {
   const params = useParams();
   const slug = params?.slug as string;
-
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: true,
-      offset: 100,
-    });
-  }, []);
 
   const blog = blogPosts[slug];
   const relatedBlogs = allBlogs.filter(b => b.slug !== slug).slice(0, 3);

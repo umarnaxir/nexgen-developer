@@ -1,19 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { pricingOptions } from "../data";
 import { Check } from "lucide-react";
 
 export default function PricingSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.3 }}
+    <div
       className="mb-12 md:mb-16"
+      data-aos="fade-up"
     >
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-6 sm:mb-8 md:mb-12 px-2">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-6 sm:mb-8 md:mb-12 px-2" data-aos="zoom-in">
         Pricing & Packages
       </h2>
 
@@ -21,12 +17,8 @@ export default function PricingSection() {
       <div className="md:hidden -mx-4 px-4 mb-6">
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {pricingOptions.map((option, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
               className={`bg-black text-white rounded-xl p-4 sm:p-6 min-h-[300px] sm:min-h-[340px] flex flex-col border-2 border-black ${
                 index === 2 ? "col-span-2" : ""
               }`}
@@ -41,7 +33,7 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
         <div className="text-center mt-6 px-2">
@@ -62,14 +54,9 @@ export default function PricingSection() {
           </h3>
           <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
             {pricingOptions.map((option, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ scale: 1.03, y: -6 }}
-                className="bg-white p-5 sm:p-6 rounded-xl border-2 border-gray-300 hover:border-black hover:shadow-xl transition-all duration-300 cursor-default"
+                className="bg-white p-5 sm:p-6 rounded-xl border-2 border-gray-300 hover:border-black hover:shadow-xl transition-all duration-300 cursor-default hover:scale-[1.03] hover:-translate-y-1.5"
               >
                 <h4 className="text-lg sm:text-xl font-bold text-black mb-2 sm:mb-3">{option.title}</h4>
                 <p className="text-gray-700 text-sm mb-3 sm:mb-4">{option.description}</p>
@@ -81,7 +68,7 @@ export default function PricingSection() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
           </div>
           <div className="text-center pt-2">
@@ -94,6 +81,6 @@ export default function PricingSection() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

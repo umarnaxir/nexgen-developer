@@ -2,8 +2,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-import AOSInit from "@/components/AOSInit";
 import BackToTop from "@/components/BackToTop/BackToTop";
+import ScrollToTop from "@/components/ScrollToTop";
+import AOSInit from "@/components/AOSInit";
 import { Toaster } from "sonner";
 import { getHomeSEO } from "@/lib/seo/page-seo";
 import { OrganizationSchema, WebsiteSchema } from "@/lib/seo/structured-data";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
       >
         <OrganizationSchema />
         <WebsiteSchema />
+        <ScrollToTop />
         <AOSInit />
         <Toaster position="top-right" richColors />
         <div id="layout-root" className={`page-bg relative min-h-screen text-gray-800 ${spaceGrotesk.className}`}>

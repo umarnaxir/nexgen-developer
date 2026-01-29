@@ -1,16 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { PenTool, Link2, TrendingUp, UserCheck, AlertCircle } from "lucide-react";
 
 export default function TermsSectionWriteForUs() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.3 }}
+    <section
       className="bg-black p-4 sm:p-6 lg:p-8 rounded-xl text-white"
+      data-aos="zoom-in"
     >
       <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div className="bg-white p-2 sm:p-3 rounded-lg flex-shrink-0">
@@ -66,6 +62,6 @@ export default function TermsSectionWriteForUs() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

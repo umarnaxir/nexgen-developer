@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function SkillsSection() {
@@ -83,11 +82,7 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="py-12 sm:py-14 md:py-16 lg:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div 
           className="text-center mb-8 sm:mb-10"
         >
           <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
@@ -105,16 +100,12 @@ export default function SkillsSection() {
           >
             Let's kickstart your project and collaborate to build something amazing. We bring our expertise to make your next project shine.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 px-4">
           {skills.map((skill, index) => (
-            <motion.div 
+            <div 
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
               className="bg-white p-4 sm:p-5 rounded-xl shadow-lg text-center border-2 border-gray-200"
             >
               {/* Icon container */}
@@ -139,7 +130,7 @@ export default function SkillsSection() {
               >
                 {skill.name}
               </h3>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

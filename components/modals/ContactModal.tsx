@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { toast } from "sonner";
 import Modal from "@/components/ui/Modal";
 import Select from "@/components/ui/Select";
@@ -115,7 +114,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               value={formData.name}
               onChange={handleChange}
               placeholder="Your Name"
-              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
               required
             />
           </div>
@@ -128,7 +127,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               value={formData.email}
               onChange={handleChange}
               placeholder="Your Email"
-              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
               required
             />
           </div>
@@ -144,7 +143,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+              className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
               required
             />
           </div>
@@ -169,21 +168,19 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             onChange={handleChange}
             placeholder="Tell us about your project"
             rows={4}
-            className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black"
+            className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
             required
           />
         </div>
 
         {/* Submit Button */}
-        <motion.button
+        <button
           type="submit"
           disabled={isSubmitting}
-          whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
-          whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-          className="w-full px-8 py-4 text-base bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-8 py-4 text-base bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-teal-400/30 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98]"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
-        </motion.button>
+        </button>
       </form>
     </Modal>
   );

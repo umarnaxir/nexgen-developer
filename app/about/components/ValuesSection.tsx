@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import { aboutValues } from "../data";
 
 const CARD_GAP = 16;
@@ -34,25 +33,22 @@ export default function ValuesSection() {
     const card = firstCardRef.current;
     if (!el || !card) return;
     const cardWidth = card.offsetWidth;
-    el.scrollTo({ left: index * (cardWidth + CARD_GAP), behavior: "smooth" });
+    el.scrollTo({ left: index * (cardWidth + CARD_GAP), behavior: "auto" });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+    <div
       className="mb-12 md:mb-16"
+      data-aos="fade-up"
     >
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-8 md:mb-12 px-2">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-8 md:mb-12 px-2" data-aos="zoom-in">
         Our Values
       </h2>
 
       {/* Mobile: horizontal scroll carousel */}
       <div
         ref={containerRef}
-        className="md:hidden overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-smooth flex gap-4 pb-2 -mx-4 px-4 touch-pan-x"
+        className="md:hidden overflow-x-auto overflow-y-visible snap-x snap-mandatory flex gap-4 pb-2 -mx-4 px-4 touch-pan-x"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         {aboutValues.map((value, index) => {
@@ -100,14 +96,9 @@ export default function ValuesSection() {
           const isFeatured = value.isFeatured;
 
           return (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -8 }}
-              className={`p-8 rounded-xl border h-[280px] flex flex-col justify-end transition-all duration-300 cursor-pointer group ${
+              className={`p-8 rounded-xl border h-[280px] flex flex-col justify-end transition-all duration-300 cursor-pointer group hover:scale-[1.02] hover:-translate-y-2 ${
                 isFeatured
                   ? "bg-black border-black"
                   : "bg-white border-gray-300 hover:bg-black"
@@ -127,10 +118,10 @@ export default function ValuesSection() {
               >
                 {value.description}
               </p>
-            </motion.div>
+            </div>
           );
         })}
       </div>
-    </motion.div>
+    </div>
   );
 }

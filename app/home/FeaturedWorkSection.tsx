@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase } from "lucide-react";
 import ProjectCarouselCard from "@/components/ProjectCarouselCard";
 
@@ -27,7 +26,7 @@ export default function FeaturedWorkSection() {
       description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
       image: "/images/project2.png",
       link: "https://drjibranbashir.com",
-      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Medical Website",
       duration: "2 months",
       client: "Dr. Jibran Bashir",
@@ -130,16 +129,6 @@ export default function FeaturedWorkSection() {
     }
   };
 
-  // Pan handler for framer motion
-  const handlePanEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const swipeThreshold = 50;
-    if (info.offset.x > swipeThreshold) {
-      prevSlide();
-    } else if (info.offset.x < -swipeThreshold) {
-      nextSlide();
-    }
-  };
-
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -155,14 +144,11 @@ export default function FeaturedWorkSection() {
   }, [prevSlide, nextSlide]);
 
   return (
-    <section id="projects" className="py-8 lg:py-12 flex flex-col min-h-[600px]">
+    <section id="projects" className="py-8 lg:py-12 flex flex-col min-h-[600px]" data-aos="fade-up">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div 
           className="text-center mb-6 sm:mb-8"
+          data-aos="zoom-in"
         >
           <h2 
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4"
@@ -170,7 +156,7 @@ export default function FeaturedWorkSection() {
           >
             FEATURED WORK
           </h2>
-        </motion.div>
+        </div>
 
         {/* Carousel Container */}
         <div 
@@ -183,23 +169,10 @@ export default function FeaturedWorkSection() {
           role="region"
           aria-label="Featured projects carousel"
         >
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.1}
-            onPanEnd={handlePanEnd}
-            className="overflow-hidden"
-          >
-            <motion.div
-              className="flex"
-              animate={{
-                x: `-${currentIndex * 100}%`
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30
-              }}
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {projects.map((project) => (
                 <div
@@ -223,16 +196,14 @@ export default function FeaturedWorkSection() {
                   />
                 </div>
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Navigation Controls - Bottom */}
           <div className="flex items-center justify-between mt-3 sm:mt-4 px-2 sm:px-4">
             {/* Left: Play/Pause Button */}
-            <motion.button
+            <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
               className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
               aria-label={isAutoPlaying ? "Pause carousel" : "Play carousel"}
             >
@@ -247,7 +218,7 @@ export default function FeaturedWorkSection() {
                   style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
                 />
               )}
-            </motion.button>
+            </button>
 
             {/* Center: Slide Indicator */}
             <div className="flex items-center gap-2">
@@ -261,10 +232,8 @@ export default function FeaturedWorkSection() {
 
             {/* Right: Navigation Arrows */}
             <div className="flex items-center gap-2">
-              <motion.button
+              <button
                 onClick={prevSlide}
-                whileHover={{ scale: 1.1, x: -2 }}
-                whileTap={{ scale: 0.9 }}
                 className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
                 aria-label="Previous project"
               >
@@ -272,11 +241,9 @@ export default function FeaturedWorkSection() {
                   className="w-4 h-4 sm:w-5 sm:h-5" 
                   style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
                 />
-              </motion.button>
-              <motion.button
+              </button>
+              <button
                 onClick={nextSlide}
-                whileHover={{ scale: 1.1, x: 2 }}
-                whileTap={{ scale: 0.9 }}
                 className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all duration-300"
                 aria-label="Next project"
               >
@@ -284,18 +251,16 @@ export default function FeaturedWorkSection() {
                   className="w-4 h-4 sm:w-5 sm:h-5" 
                   style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
                 />
-              </motion.button>
+              </button>
             </div>
           </div>
 
           {/* Pagination Dots */}
           <div className="flex justify-center items-center gap-2 mt-2">
             {projects.map((_, index) => (
-              <motion.button
+              <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
                 className={`rounded-full transition-all duration-300 ${
                   index === currentIndex
                     ? 'w-6 h-1.5 bg-black'

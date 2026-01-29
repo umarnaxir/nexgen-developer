@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { toast } from "sonner";
 import Modal from "@/components/ui/Modal";
 
@@ -147,15 +146,13 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
           </label>
         </div>
 
-        <motion.button
+        <button
           type="submit"
           disabled={isSubmitting}
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full px-8 py-5 text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-8 py-5 text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98]"
         >
           {isSubmitting ? "Submitting..." : "Sign Up"}
-        </motion.button>
+        </button>
 
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}

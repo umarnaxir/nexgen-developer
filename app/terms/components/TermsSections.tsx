@@ -6,7 +6,7 @@ import TermsSectionWriteForUs from "./TermsSectionWriteForUs";
 
 export default function TermsSections() {
   return (
-    <div className="space-y-6 sm:space-y-8 lg:space-y-12">
+    <div className="space-y-6 sm:space-y-8 lg:space-y-12" data-aos="fade-up">
       <TermsSection icon={FileText} title="1. Acceptance of Terms" delay={0}>
         <p className="mb-3 sm:mb-4">
           By accessing and using the NexGen Developers website, services, or platform, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by the above, please do not use this service.

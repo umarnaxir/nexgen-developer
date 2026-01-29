@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import NavLogo from "./NavLogo";
 import DesktopNav from "./DesktopNav";
@@ -49,10 +48,7 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? "bg-white shadow-sm border-b border-gray-100" 
@@ -70,22 +66,18 @@ export default function Navbar() {
             
             {/* Login/Signup Buttons */}
             <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-gray-200">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <button
-                  onClick={() => setIsLoginModalOpen(true)}
-                  className="text-sm uppercase font-extrabold tracking-wide text-gray-900 px-4 py-2 border-[1.5px] border-black rounded-md hover:shadow-md transition-all duration-300"
-                >
-                  Login
-                </button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <button
-                  onClick={() => setIsSignupModalOpen(true)}
-                  className="px-6 py-2.5 bg-gray-900 text-white text-sm uppercase font-extrabold rounded-md hover:bg-gray-800 hover:shadow-lg transition-all duration-300"
-                >
-                  Signup
-                </button>
-              </motion.div>
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="text-sm uppercase font-extrabold tracking-wide text-gray-900 px-4 py-2 border-[1.5px] border-black rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => setIsSignupModalOpen(true)}
+                className="px-6 py-2.5 bg-gray-900 text-white text-sm uppercase font-extrabold rounded-md hover:bg-gray-800 hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                Signup
+              </button>
             </div>
           </div>
 
@@ -122,7 +114,7 @@ export default function Navbar() {
           setTimeout(() => setIsLoginModalOpen(true), 100);
         }}
       />
-    </motion.header>
+    </header>
   );
 }
 

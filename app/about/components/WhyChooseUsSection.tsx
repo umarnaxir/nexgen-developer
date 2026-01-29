@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import { whyChooseUsCards } from "../data";
 
 const CARD_GAP = 16;
@@ -34,25 +33,22 @@ export default function WhyChooseUsSection() {
     const card = firstCardRef.current;
     if (!el || !card) return;
     const cardWidth = card.offsetWidth;
-    el.scrollTo({ left: index * (cardWidth + CARD_GAP), behavior: "smooth" });
+    el.scrollTo({ left: index * (cardWidth + CARD_GAP), behavior: "auto" });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+    <div
       className="mb-12 md:mb-16"
+      data-aos="fade-up"
     >
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-8 md:mb-12 px-2">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center mb-8 md:mb-12 px-2" data-aos="zoom-in">
         Why Choose NexGen Developers
       </h2>
 
       {/* Mobile: horizontal scroll carousel */}
       <div
         ref={containerRef}
-        className="md:hidden overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-smooth flex gap-4 pb-2 -mx-4 px-4 touch-pan-x"
+        className="md:hidden overflow-x-auto overflow-y-visible snap-x snap-mandatory flex gap-4 pb-2 -mx-4 px-4 touch-pan-x"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         {whyChooseUsCards.map((card, index) => {
@@ -128,6 +124,6 @@ export default function WhyChooseUsSection() {
           );
         })}
       </div>
-    </motion.div>
+    </div>
   );
 }

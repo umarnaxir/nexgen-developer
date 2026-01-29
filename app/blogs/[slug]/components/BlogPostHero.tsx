@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,13 +17,7 @@ interface BlogPostHeroProps {
 export default function BlogPostHero({ blog }: BlogPostHeroProps) {
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-8"
-        data-aos="fade-up"
-      >
+      <div className="mb-8" data-aos="fade-up">
         <Link 
           href="/blogs"
           className="inline-flex items-center text-black hover:text-gray-700 font-bold group"
@@ -34,15 +27,9 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
           </svg>
           Back to Blogs
         </Link>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-8"
-        data-aos="fade-up"
-      >
+      <div className="mb-8" data-aos="zoom-in">
         <div className="mb-4">
           <span className="inline-block px-3 py-1 bg-black text-white text-xs font-bold rounded uppercase">
             {blog.category}
@@ -58,23 +45,16 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
           <span>•</span>
           <span>{blog.readTime}</span>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="relative w-full h-64 sm:h-96 mb-12 rounded-xl overflow-hidden"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
+      <div className="relative w-full h-64 sm:h-96 mb-12 rounded-xl overflow-hidden">
         <Image
           src={blog.images[0]}
           alt={blog.title}
           fill
           className="object-cover"
         />
-      </motion.div>
+      </div>
     </>
   );
 }

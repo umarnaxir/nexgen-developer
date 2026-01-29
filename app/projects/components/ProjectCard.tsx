@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, Calendar, Users, Code2, CheckCircle2, ArrowRight, LucideIcon } from "lucide-react";
 
@@ -29,12 +28,10 @@ export default function ProjectCard({ project, index, isExpanded, onToggleExpand
   const IconComponent = project.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+    <div
       className="group"
+      data-aos="zoom-in"
+      data-aos-delay={index * 80}
     >
       <div className="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
         <div className="flex flex-col lg:flex-row">
@@ -94,13 +91,8 @@ export default function ProjectCard({ project, index, isExpanded, onToggleExpand
                 </div>
               </div>
 
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+              {isExpanded && (
+                  <div
                     className="overflow-hidden mb-6"
                   >
                     <div className="pt-6 border-t border-gray-200">
@@ -123,36 +115,31 @@ export default function ProjectCard({ project, index, isExpanded, onToggleExpand
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
 
               <div className="flex flex-wrap gap-3 mt-auto pt-6">
-                <motion.a
+                <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                 >
                   <span>Visit Website</span>
                   <ExternalLink className="w-4 h-4" />
-                </motion.a>
-                <motion.button
+                </a>
+                <button
                   onClick={onToggleExpand}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-900 font-bold rounded-lg hover:bg-gray-200 transition-colors"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-900 font-bold rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 active:scale-95"
                 >
                   <span>{isExpanded ? "Show Less" : "View Details"}</span>
                   <ArrowRight className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-90" : ""}`} />
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

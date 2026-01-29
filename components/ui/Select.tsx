@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
 
 interface SelectOption {
@@ -49,12 +48,10 @@ export default function Select({
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      <motion.button
+      <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`w-full flex items-center justify-between gap-2 px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all bg-white text-black`}
+        className={`w-full flex items-center justify-between gap-2 px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all bg-white text-black focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 hover:scale-[1.02] active:scale-[0.98]`}
       >
         <span className="flex-1 text-left text-black">
           {selectedOption ? selectedOption.label : placeholder}
@@ -64,38 +61,31 @@ export default function Select({
             isOpen ? "rotate-180" : ""
           }`}
         />
-      </motion.button>
+      </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto"
-          >
-            <div className="py-2">
-              {options.map((option) => (
-                <motion.button
-                  key={option.value}
-                  type="button"
-                  onClick={() => handleSelect(option.value)}
-                  whileHover={{ backgroundColor: "#f3f4f6" }}
-                  className={`w-full flex items-center justify-between gap-2 px-4 py-2 text-left transition-colors ${
-                    value === option.value ? "bg-gray-50" : ""
-                  }`}
-                >
-                  <span className="flex-1 text-sm sm:text-base text-black">{option.label}</span>
-                  {value === option.value && (
-                    <Check className="w-4 h-4 text-black" />
-                  )}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div
+          className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto"
+        >
+          <div className="py-2">
+            {options.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleSelect(option.value)}
+                className={`w-full flex items-center justify-between gap-2 px-4 py-2 text-left transition-colors hover:bg-gray-100 ${
+                  value === option.value ? "bg-gray-50" : ""
+                }`}
+              >
+                <span className="flex-1 text-sm sm:text-base text-black">{option.label}</span>
+                {value === option.value && (
+                  <Check className="w-4 h-4 text-black" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

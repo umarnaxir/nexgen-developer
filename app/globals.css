@@ -3,12 +3,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Tertiary: teal — use sparingly for accents, borders, focus */
+  --teal-100: #ccfbf1;
+  --teal-200: #99f6e4;
+  --teal-300: #5eead4;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-space-grotesk);
+  --color-teal-100: var(--teal-100);
+  --color-teal-200: var(--teal-200);
+  --color-teal-300: var(--teal-300);
+  --color-teal-400: var(--teal-400);
+  --color-teal-500: var(--teal-500);
+  --color-teal-600: var(--teal-600);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,10 +31,15 @@
   }
 }
 
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 /* Global grid background (small boxes graph) - always white bg, light black grid lines */

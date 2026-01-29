@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,27 +18,18 @@ interface RelatedBlogsProps {
 
 export default function RelatedBlogs({ relatedBlogs }: RelatedBlogsProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <div
       className="mt-16"
       data-aos="fade-up"
     >
-      <h2 className="text-3xl font-bold text-black mb-8">Related Articles</h2>
+      <h2 className="text-3xl font-bold text-black mb-8" data-aos="zoom-in">Related Articles</h2>
       <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
         {relatedBlogs.map((relatedBlog, index) => (
-          <motion.div
+          <div
             key={relatedBlog.slug}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="bg-gray-50 p-0 rounded-xl border-2 border-transparent transition-all duration-300 overflow-hidden"
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
+            className="bg-gray-50 p-0 rounded-xl border-2 border-transparent transition-all duration-300 overflow-hidden hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1"
+            data-aos="zoom-in"
+            data-aos-delay={index * 80}
           >
             <Link href={`/blogs/${relatedBlog.slug}`}>
               <div className="relative w-full h-48 overflow-hidden">
@@ -67,9 +57,9 @@ export default function RelatedBlogs({ relatedBlogs }: RelatedBlogsProps) {
                 </span>
               </div>
             </Link>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

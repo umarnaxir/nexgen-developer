@@ -2,7 +2,6 @@
 
 import React from "react";
 import { MessageCircle, Facebook, Linkedin, Instagram, Github } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -40,32 +39,19 @@ const socialLinks: SocialLink[] = [
 
 export default function FooterSocials() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="flex space-x-3"
-    >
-      {socialLinks.map((social, index) => (
-        <motion.a
+    <div className="flex space-x-3">
+      {socialLinks.map((social) => (
+        <a
           key={social.ariaLabel}
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.ariaLabel}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1, duration: 0.3 }}
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-200 hover:bg-gray-800 hover:scale-110"
+          className="flex items-center justify-center w-8 h-8 rounded-full bg-black text-white transition-all duration-200 hover:bg-gray-800 hover:scale-110 active:scale-95"
         >
           {social.icon}
-        </motion.a>
+        </a>
       ))}
-    </motion.div>
+    </div>
   );
 }
-

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FAQSchema } from "@/lib/seo/faq-schema";
 
 export default function FAQSection() {
@@ -39,15 +38,12 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8">
+    <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8" data-aos="fade-up">
       <FAQSchema faqs={faqs} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div 
           className="text-center mb-10 sm:mb-12 md:mb-16"
+          data-aos="zoom-in"
         >
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4"
@@ -61,17 +57,15 @@ export default function FAQSection() {
           >
             Find answers to common questions about our services and process
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl border-2 border-transparent transition-all duration-300 overflow-hidden"
+              className={`bg-gray-50 rounded-xl border-2 transition-all duration-300 overflow-hidden ${openIndex === index ? "border-gray-200 border-l-4 border-l-teal-400" : "border-transparent"}`}
+              data-aos="zoom-in"
+              data-aos-delay={index * 60}
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -83,39 +77,31 @@ export default function FAQSection() {
                 >
                   {faq.question}
                 </h3>
-                <motion.svg
-                  className="w-6 h-6 text-black flex-shrink-0"
+                <svg
+                  className={`w-6 h-6 text-black flex-shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  animate={{ rotate: openIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
                   style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </motion.svg>
+                </svg>
               </button>
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 sm:px-8 pb-4 sm:pb-6">
-                      <p 
-                        className="text-gray-700 leading-relaxed text-sm sm:text-base"
-                        style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5)' }}
-                      >
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {openIndex === index && (
+                <div
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 sm:px-8 pb-4 sm:pb-6">
+                    <p 
+                      className="text-gray-700 leading-relaxed text-sm sm:text-base"
+                      style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5)' }}
+                    >
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>

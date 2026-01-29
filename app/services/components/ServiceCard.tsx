@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface ServiceCardProps {
   service: {
     title: string;
@@ -14,13 +12,10 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ scale: 1.02, y: -5 }}
-      className="bg-gray-50 p-6 sm:p-8 rounded-xl border-2 border-transparent transition-all duration-300"
+    <div
+      className="bg-gray-50 p-6 sm:p-8 rounded-xl border-2 border-transparent transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]"
+      data-aos="zoom-in"
+      data-aos-delay={index * 80}
     >
       <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4">{service.title}</h2>
       <p className="text-gray-700 mb-6 leading-relaxed text-sm sm:text-base">{service.description}</p>
@@ -45,6 +40,6 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
           <p className="text-xs sm:text-sm text-gray-600">{service.technologies}</p>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Calendar, Users, Code2, ArrowRight, LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface ProjectCarouselCardProps {
   id: number;
@@ -105,29 +104,22 @@ export default function ProjectCarouselCard({
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-3 mt-auto pt-6">
-              <motion.a
+              <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
               >
                 <span>Visit Website</span>
                 <ExternalLink className="w-4 h-4" />
-              </motion.a>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </a>
+              <Link
+                href={`/projects`}
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-900 font-bold rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 active:scale-95"
               >
-                <Link
-                  href={`/projects`}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-900 font-bold rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <span>View Details</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
+                <span>View Details</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

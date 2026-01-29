@@ -17,7 +17,7 @@ interface BlogPostContentProps {
 
 export default function BlogPostContent({ blog }: BlogPostContentProps) {
   return (
-    <div className="prose prose-lg max-w-none">
+    <div className="prose prose-lg max-w-none" data-aos="fade-up">
       {blog.sections.map((section, index) => {
         if (section.type === 'heading') {
           const HeadingTag = `h${section.headingLevel || 2}` as keyof React.JSX.IntrinsicElements;
@@ -29,8 +29,6 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
                 section.headingLevel === 2 ? 'text-3xl' :
                 'text-2xl'
               }`}
-              data-aos="fade-up"
-              data-aos-delay={index * 50}
             >
               {section.heading}
             </HeadingTag>
@@ -42,8 +40,6 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
             <div
               key={index}
               className="relative w-full h-64 sm:h-96 my-12 rounded-xl overflow-hidden"
-              data-aos="zoom-in"
-              data-aos-delay={index * 50}
             >
               <Image
                 src={section.image || "/images/dummy-img.jpeg"}
@@ -60,8 +56,6 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
             <p
               key={index}
               className="text-gray-700 leading-relaxed mb-6 text-base sm:text-lg"
-              data-aos="fade-up"
-              data-aos-delay={index * 50}
             >
               {section.content}
             </p>

@@ -1,16 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export default function AboutContent() {
   return (
-    <div className="mb-10 sm:mb-12 md:mb-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+    <div className="mb-10 sm:mb-12 md:mb-16" data-aos="fade-up">
+      <div
         className="space-y-6 sm:space-y-8"
+        data-aos="zoom-in"
       >
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-black mb-3 sm:mb-4">Who We Are</h2>
@@ -51,7 +46,7 @@ export default function AboutContent() {
             We prioritize quality, performance, and user experience in everything we build. Every project is tailored to your specific needs, ensuring that the final product aligns perfectly with your business goals.
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

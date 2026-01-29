@@ -420,7 +420,7 @@
 
 aos@^2.3.4:
   version "2.3.4"
-  resolved "https://registry.npmjs.org/aos/-/aos-2.3.4.tgz"
+  resolved "https://registry.yarnpkg.com/aos/-/aos-2.3.4.tgz#eb1c29f5c1806a197cf6323080747547edd3db8e"
   integrity sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==
   dependencies:
     classlist-polyfill "^1.0.3"
@@ -464,15 +464,6 @@ enhanced-resolve@^5.18.3:
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
-
-framer-motion@^12.23.24:
-  version "12.23.24"
-  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-12.23.24.tgz"
-  integrity sha512-HMi5HRoRCTou+3fb3h9oTLyJGBxHfW+HnNE25tAXOvVx/IvwMHK0cx7IR4a2ZU6sh3IX1Z+4ts32PcYBOqka8w==
-  dependencies:
-    motion-dom "^12.23.23"
-    motion-utils "^12.23.6"
-    tslib "^2.4.0"
 
 graceful-fs@^4.2.4:
   version "4.2.11"
@@ -585,18 +576,6 @@ minizlib@^3.1.0:
   integrity sha512-KZxYo1BUkWD2TVFLr0MQoM8vUUigWD3LlD83a/75BqC+4qE0Hb1Vo5v1FgcfaNXvfXzr+5EhQ6ing/CaBijTlw==
   dependencies:
     minipass "^7.1.2"
-
-motion-dom@^12.23.23:
-  version "12.23.23"
-  resolved "https://registry.npmjs.org/motion-dom/-/motion-dom-12.23.23.tgz"
-  integrity sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA==
-  dependencies:
-    motion-utils "^12.23.6"
-
-motion-utils@^12.23.6:
-  version "12.23.6"
-  resolved "https://registry.npmjs.org/motion-utils/-/motion-utils-12.23.6.tgz"
-  integrity sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==
 
 nanoid@^3.3.11, nanoid@^3.3.6:
   version "3.3.11"

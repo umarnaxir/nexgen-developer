@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface PrivacySectionProps {
@@ -19,12 +18,10 @@ export default function PrivacySection({ icon: Icon, title, children, delay = 0,
     ? "bg-white p-4 sm:p-6 lg:p-8 rounded-xl border-2 border-gray-200 transition-all duration-300"
     : "bg-gray-50 p-4 sm:p-6 lg:p-8 rounded-xl border-2 border-gray-200 transition-all duration-300";
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+    <section
       className={bgClass}
+      data-aos="zoom-in"
+      data-aos-delay={delay * 100}
     >
       <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-4">
         <div className={dark ? "bg-white p-2 sm:p-3 rounded-lg flex-shrink-0" : "bg-black p-2 sm:p-3 rounded-lg flex-shrink-0"}>
@@ -39,6 +36,6 @@ export default function PrivacySection({ icon: Icon, title, children, delay = 0,
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

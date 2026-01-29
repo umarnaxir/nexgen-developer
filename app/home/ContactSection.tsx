@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { toast } from "sonner";
 import Image from "next/image";
 import Select from "@/components/ui/Select";
@@ -96,14 +95,11 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-12 sm:py-16 md:py-20">
+    <section id="contact" className="py-12 sm:py-16 md:py-20" data-aos="fade-up">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div 
           className="mb-10 sm:mb-12 md:mb-16"
+          data-aos="zoom-in"
         >
           <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4 px-4">
             <Image 
@@ -127,26 +123,16 @@ export default function ContactSection() {
           >
             Ready to bring your ideas to life? We're here to help you succeed.
           </p>
-        </motion.div>
+        </div>
 
-        <div>
+        <div data-aos="zoom-in">
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <h3 className="text-xl sm:text-2xl font-bold text-black mb-6 sm:mb-8 text-center">Send Us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Row 1: Name and Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
+                <div>
                   <input
                     type="text"
                     id="name"
@@ -154,17 +140,12 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
                     required
                   />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
+                <div>
                   <input
                     type="email"
                     id="email"
@@ -172,20 +153,15 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Your Email"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
                     required
                   />
-                </motion.div>
+                </div>
               </div>
 
               {/* Row 2: Phone and Service */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
+                <div>
                   <input
                     type="tel"
                     id="phone"
@@ -193,17 +169,12 @@ export default function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
                     required
                   />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
+                <div>
                   <Select
                     options={serviceOptions}
                     value={formData.service}
@@ -211,16 +182,11 @@ export default function ContactSection() {
                     placeholder="Select a Service"
                     required
                   />
-                </motion.div>
+                </div>
               </div>
 
               {/* Message Textarea */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
+              <div>
                 <textarea
                   id="message"
                   name="message"
@@ -228,31 +194,25 @@ export default function ContactSection() {
                   onChange={handleChange}
                   placeholder="Tell us about your project"
                   rows={4}
-                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black bg-white"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base border border-gray-300 rounded-lg outline-none transition-all resize-none placeholder:text-black text-black bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20"
                   required
                 />
-              </motion.div>
+              </div>
 
               {/* Submit Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+              <div
                 className="pt-2"
               >
-                <motion.button
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={!isSubmitting ? { scale: 1.03, y: -2 } : {}}
-                  whileTap={!isSubmitting ? { scale: 0.97 } : {}}
-                  className="w-full px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-teal-400/30 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
-                </motion.button>
-              </motion.div>
+                </button>
+              </div>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

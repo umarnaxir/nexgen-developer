@@ -1,17 +1,10 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 export default function FooterContact() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="w-full md:w-[360px] text-center md:text-right space-y-1.5"
-    >
+    <div className="w-full md:w-[360px] text-center md:text-right space-y-1.5">
       <h4 className="text-sm font-extrabold uppercase text-gray-900 mb-3">
         Contact
       </h4>
@@ -41,7 +34,6 @@ export default function FooterContact() {
           nexgendevelopers11@gmail.com
         </a>
       </div>
-    </motion.div>
+    </div>
   );
 }
-

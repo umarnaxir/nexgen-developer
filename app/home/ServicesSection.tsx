@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
   Globe, 
@@ -48,7 +47,7 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-28 relative overflow-hidden">
+    <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-28 relative overflow-hidden" data-aos="fade-up">
       {/* Subtle Grid Background - black/gray only */}
       <div className="absolute inset-0 opacity-[0.06]">
         <div 
@@ -65,12 +64,9 @@ export default function ServicesSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div 
           className="text-center mb-10 sm:mb-12 md:mb-16"
+          data-aos="zoom-in"
         >
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4"
@@ -84,21 +80,19 @@ export default function ServicesSection() {
           >
             The goal is not just to build a website or an app, but to grow your business.
           </p>
-        </motion.div>
+        </div>
 
         {/* Services Grid - 2 rows x 3 columns for 6 services */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <motion.div 
+              <Link
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white p-5 sm:p-6 md:p-7 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200"
+                href="/services"
+                className="block bg-white p-5 sm:p-6 md:p-7 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                data-aos="zoom-in"
+                data-aos-delay={index * 80}
               >
                 {/* Icon Container - gray */}
                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-100 rounded-lg flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
@@ -123,18 +117,14 @@ export default function ServicesSection() {
                 >
                   {service.description}
                 </p>
-                <Link 
-                  href="/services"
-                  className="inline-flex items-center text-black hover:text-gray-700 font-bold group"
-                  style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7)' }}
-                >
+                <span className="inline-flex items-center text-black group-hover:text-teal-600 font-bold group transition-colors duration-300" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.7)' }}>
                   Read More
                   <ArrowRight 
                     className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
                     style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))' }}
                   />
-                </Link>
-              </motion.div>
+                </span>
+              </Link>
             );
           })}
         </div>

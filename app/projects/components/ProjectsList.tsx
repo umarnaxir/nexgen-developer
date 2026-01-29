@@ -12,7 +12,7 @@ export default function ProjectsList() {
   };
 
   return (
-    <section className="py-8 lg:py-12">
+    <section className="py-8 lg:py-12" data-aos="fade-up">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="space-y-12">
           {projects.map((project, index) => (
