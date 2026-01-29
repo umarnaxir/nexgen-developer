@@ -29,11 +29,11 @@ export const seoConfig = {
     "Other services",
   ],
   
-  // Default OG Image
-  defaultOgImage: "https://nexgendevelopers.vercel.app/og-image.jpg",
+  // Default OG Image - Using logo
+  defaultOgImage: "https://nexgendevelopers.vercel.app/logo/2.png",
   defaultOgImageWidth: 1200,
-  defaultOgImageHeight: 630,
-  defaultOgImageAlt: "NexGen Developers - Team of Freelancers",
+  defaultOgImageHeight: 1200, // Logo is typically square, adjust if needed
+  defaultOgImageAlt: "NexGen Developers Logo",
   
   // Social Media
   twitterHandle: "@nexgendevelopers",

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { generateMetadata, SEOProps } from "./utils";
+import { seoConfig } from "./config";
 
 /**
  * Home Page SEO
@@ -172,8 +173,8 @@ export function getBlogPostSEO({
 }): Metadata {
   const url = `/blogs/${slug}`;
   const ogImage = image 
-    ? (image.startsWith("http") ? image : `https://nexgendevelopers.vercel.app${image}`)
-    : "https://nexgendevelopers.vercel.app/og-image.jpg";
+    ? (image.startsWith("http") ? image : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`)
+    : seoConfig.defaultOgImage;
 
   return generateMetadata({
     title: title,
