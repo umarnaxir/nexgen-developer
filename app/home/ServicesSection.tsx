@@ -17,33 +17,39 @@ export default function ServicesSection() {
     {
       title: "Web Development",
       description: "We build modern, responsive, and high-performance websites tailored to your business needs, ensuring seamless user experiences.",
-      icon: Globe
+      icon: Globe,
+      href: "/services/website-development",
     },
     {
       title: "App Development",
       description: "We develop powerful mobile and web applications using the latest technologies, ensuring scalability and performance.",
-      icon: Smartphone
+      icon: Smartphone,
+      href: "/services/app-development",
     },
     {
       title: "AI & ML Solutions",
       description: "We integrate Artificial Intelligence and Machine Learning to automate processes, enhance decision-making, and create smart applications.",
-      icon: Cpu
+      icon: Cpu,
+      href: "/services/ai-ml",
     },
     {
       title: "Chatbots Development",
       description: "Enhance customer engagement with AI-powered chatbots that provide instant and intelligent support across platforms.",
-      icon: MessageCircle
+      icon: MessageCircle,
+      href: "/services/chatbot-development",
     },
     {
       title: "SEO & Digital Marketing",
       description: "Boost your online presence with expert SEO, Google Ads, and digital marketing strategies tailored to your business.",
-      icon: TrendingUp
+      icon: TrendingUp,
+      href: "/services/digital-marketing",
     },
     {
       title: "Graphic Design",
       description: "From logos to social media posts, we craft visually compelling designs that strengthen your brand identity.",
-      icon: Palette
-    }
+      icon: Palette,
+      href: "/services/digital-marketing/graphic-designing",
+    },
   ];
 
   return (
@@ -89,7 +95,7 @@ export default function ServicesSection() {
             return (
               <Link
                 key={index}
-                href="/services"
+                href={service.href}
                 className="block bg-white p-5 sm:p-6 md:p-7 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 data-aos="zoom-in"
                 data-aos-delay={index * 80}

@@ -292,3 +292,50 @@ export function getTermsSEO(): Metadata {
     },
   });
 }
+
+/**
+ * Service Page SEO (dynamic: top-level or digital-marketing sub)
+ * Includes canonical, OpenGraph, Twitter, and OG image.
+ */
+export function getServiceSEO(
+  canonicalPath: string,
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+  },
+  ogImage?: string
+): Metadata {
+  const imageUrl = ogImage
+    ? ogImage.startsWith("http")
+      ? ogImage
+      : `${seoConfig.siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`
+    : seoConfig.defaultOgImage;
+
+  return generateMetadata({
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+    canonical: canonicalPath,
+    openGraph: {
+      type: "website",
+      title: seo.title,
+      description: seo.description,
+      url: canonicalPath,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: seo.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+      images: [imageUrl],
+    },
+  });
+}

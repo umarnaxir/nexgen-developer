@@ -8,15 +8,11 @@ import NavLinks from "./NavLinks";
 import NavLogo from "./NavLogo";
 import Hamburger from "./Hamburger";
 import { User, canAccessAdmin } from "@/types/auth";
-
-interface NavLink {
-  href: string;
-  label: string;
-}
+import type { NavLinkItem } from "./Navbar";
 
 interface MobileNavProps {
   isOpen: boolean;
-  links: NavLink[];
+  links: NavLinkItem[];
   onLinkClick: () => void;
   onLoginClick: () => void;
   onSignupClick: () => void;

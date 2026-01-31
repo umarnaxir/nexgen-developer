@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { seoConfig } from "@/lib/seo/config";
 import { blogs } from "@/app/blogs/data";
+import { getAllServiceUrls } from "@/app/services/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = seoConfig.siteUrl;
@@ -63,6 +64,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Service pages (top-level + digital-marketing sub)
+  const servicePages: MetadataRoute.Sitemap = getAllServiceUrls().map(
+    ({ url }) => ({
+      url: `${baseUrl}${url}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })
+  );
+
   // Dynamic blog pages
   const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
@@ -71,5 +82,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages];
+  return [...staticPages, ...servicePages, ...blogPages];
 }

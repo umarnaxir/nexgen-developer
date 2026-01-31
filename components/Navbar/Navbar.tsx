@@ -13,15 +13,17 @@ import SignupModal from "@/components/modals/SignupModal";
 import LogoutModal from "@/components/modals/LogoutModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { canAccessAdmin } from "@/types/auth";
+import { getServicesNavItems } from "@/app/services/config";
 
-interface NavLink {
+export interface NavLinkItem {
   href: string;
   label: string;
+  children?: { label: string; href: string; children?: { label: string; href: string }[] }[];
 }
 
-const navLinks: NavLink[] = [
+const navLinks: NavLinkItem[] = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
+  { href: "/services", label: "Services", children: getServicesNavItems() },
   { href: "/projects", label: "Projects" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
