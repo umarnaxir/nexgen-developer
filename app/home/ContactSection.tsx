@@ -16,7 +16,6 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const serviceOptions = [
-    { value: "", label: "Select a Service" },
     { value: "web-development", label: "Web Development" },
     { value: "app-development", label: "App Development" },
     { value: "ai-ml", label: "AI & ML Solutions" },

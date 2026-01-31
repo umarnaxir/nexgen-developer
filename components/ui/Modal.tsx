@@ -10,11 +10,13 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
-  size?: "default" | "large" | "auth";
+  size?: "sm" | "md" | "default" | "large" | "auth";
 }
 
 export default function Modal({ isOpen, onClose, children, title, size = "default" }: ModalProps) {
   const sizeClasses = {
+    sm: "max-w-sm",
+    md: "max-w-md",
     default: "max-w-4xl",
     large: "max-w-5xl",
     auth: "max-w-6xl"

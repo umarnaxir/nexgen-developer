@@ -3,7 +3,10 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import Modal from "@/components/ui/Modal";
+import { useAuth } from "@/contexts/AuthContext";
+import { canAccessAdmin } from "@/types/auth";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -12,8 +15,10 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginModalProps) {
+  const router = useRouter();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: ""
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -30,33 +35,33 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Show toast that waits for approval
-    const loginPromise = new Promise((resolve, reject) => {
-      // Simulate API call - in real app, this would be your actual login API
-      setTimeout(() => {
-        // For demo purposes, we'll auto-approve after 2 seconds
-        // In production, this would wait for actual admin approval
-        resolve({ success: true, message: "Login request submitted" });
-      }, 2000);
-    });
-
-    toast.promise(loginPromise, {
-      loading: "Wait for our approval...",
-      success: (data: any) => {
-        setIsSubmitting(false);
-        onClose();
-        return "Wait for our approval";
-      },
-      error: (error) => {
-        setIsSubmitting(false);
-        return "Wait for our approval";
-      },
-    });
-
     try {
-      await loginPromise;
+      const result = await login({
+        username: formData.username,
+        password: formData.password,
+      });
+
+      if (result.success) {
+        toast.success("Login successful!");
+        onClose();
+        // Reset form
+        setFormData({ username: "", password: "" });
+        // Redirect to admin if user has admin access
+        // We need to get the user from auth state to check role
+        const authData = localStorage.getItem("nexgen_auth");
+        if (authData) {
+          const { user } = JSON.parse(authData);
+          if (user && canAccessAdmin(user.role)) {
+            router.push("/admin");
+          }
+        }
+      } else {
+        toast.error(result.error || "Login failed");
+      }
     } catch (error) {
-      // Error handled in toast
+      toast.error("An error occurred during login");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -72,12 +77,12 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <input
-            type="email"
-            id="login-email"
-            name="email"
-            value={formData.email}
+            type="text"
+            id="login-username"
+            name="username"
+            value={formData.username}
             onChange={handleChange}
-            placeholder="your.email@example.com"
+            placeholder="Enter your username"
             className="w-full px-5 py-4 text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
             required
           />
@@ -119,7 +124,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
           disabled={isSubmitting}
           className="w-full px-8 py-5 text-lg bg-black text-white font-bold rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-black/20 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98]"
         >
-          {isSubmitting ? "Submitting..." : "Login"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
 
         <p className="text-center text-sm text-gray-600">

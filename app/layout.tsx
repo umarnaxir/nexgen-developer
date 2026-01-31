@@ -1,13 +1,12 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
-import BackToTop from "@/components/BackToTop/BackToTop";
 import ScrollToTop from "@/components/ScrollToTop";
 import AOSInit from "@/components/AOSInit";
 import { Toaster } from "sonner";
 import { getHomeSEO } from "@/lib/seo/page-seo";
 import { OrganizationSchema, WebsiteSchema } from "@/lib/seo/structured-data";
+import { AuthProvider } from "@/contexts/AuthContext";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const spaceGrotesk = localFont({
   src: [
@@ -44,25 +43,22 @@ const spaceGrotesk = localFont({
 // Root layout uses default home SEO
 export const metadata = getHomeSEO();
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${spaceGrotesk.className} antialiased`}
       >
-        <OrganizationSchema />
-        <WebsiteSchema />
-        <ScrollToTop />
-        <AOSInit />
-        <Toaster position="top-right" richColors />
-        <div id="layout-root" className={`page-bg relative min-h-screen text-gray-800 ${spaceGrotesk.className}`}>
-          <div className="relative z-10">
-            <Navbar />
-            <main className="flex-1 pt-16 lg:pt-0">{children}</main>
-            <Footer />
-            <BackToTop />
-          </div>
-        </div>
+        <AuthProvider>
+          <OrganizationSchema />
+          <WebsiteSchema />
+          <ScrollToTop />
+          <AOSInit />
+          <Toaster position="top-right" richColors />
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

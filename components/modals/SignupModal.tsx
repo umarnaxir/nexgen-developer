@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import Modal from "@/components/ui/Modal";
 
@@ -18,6 +19,8 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
     confirmPassword: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -106,30 +109,46 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
           />
         </div>
 
-        <div>
+        <div className="relative">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="signup-password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="Create a password"
-            className="w-full px-5 py-4 text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+            className="w-full px-5 py-4 pr-12 text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-black transition-colors"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
         </div>
 
-        <div>
+        <div className="relative">
           <input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             id="signup-confirm"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
             placeholder="Confirm your password"
-            className="w-full px-5 py-4 text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
+            className="w-full px-5 py-4 pr-12 text-base border border-gray-300 rounded-lg outline-none transition-all placeholder:text-black text-black"
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-black transition-colors"
+            aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+          >
+            {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
         </div>
 
         <div className="flex items-center">
