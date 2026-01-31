@@ -25,8 +25,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     { value: "app-development", label: "App Development" },
     { value: "ai-ml", label: "AI & ML Solutions" },
     { value: "chatbot", label: "Chatbot Development" },
-    { value: "seo-marketing", label: "SEO & Digital Marketing" },
-    { value: "graphic-design", label: "Graphic Design" },
+    { value: "digital-marketing", label: "Digital Marketing" },
     { value: "other", label: "Other Services" },
   ];
 
@@ -153,6 +152,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               value={formData.service}
               onChange={(value) => setFormData({ ...formData, service: value })}
               placeholder="Select a Service"
+              className="h-auto py-3 sm:py-4 px-4 sm:px-5 text-sm sm:text-base border-gray-300"
               required
             />
           </div>

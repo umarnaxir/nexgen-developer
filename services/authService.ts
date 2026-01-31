@@ -85,10 +85,34 @@ const DEFAULT_USERS: User[] = [
 // Default credentials (for demo / deploy; login with username)
 const DEFAULT_CREDENTIALS: Record<string, string> = {
   umar: "2356",
-  team: "admin@11",
+  admin: "admin@21",
   waseem: "waseem123",
   test: "test",
 };
+
+// Ensure default credentials exist in localStorage (so deploy / returning visitors can login with waseem, test, admin)
+function ensureDefaultCredentials(): void {
+  if (typeof window === "undefined") return;
+  const credentialsJson = localStorage.getItem("nexgen_credentials");
+  let credentials: Record<string, string> = {};
+  if (credentialsJson) {
+    try {
+      credentials = JSON.parse(credentialsJson);
+    } catch {
+      /* use empty */
+    }
+  }
+  let changed = false;
+  for (const [username, password] of Object.entries(DEFAULT_CREDENTIALS)) {
+    if (!(username.toLowerCase() in credentials) || credentials[username.toLowerCase()] !== password) {
+      credentials[username.toLowerCase()] = password;
+      changed = true;
+    }
+  }
+  if (changed || !credentialsJson) {
+    localStorage.setItem("nexgen_credentials", JSON.stringify(credentials));
+  }
+}
 
 // Initialize default users in localStorage
 export function initializeUsers(): void {
@@ -98,18 +122,32 @@ export function initializeUsers(): void {
   if (!existingUsers) {
     localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
   } else {
-    // Migrate default admin avatar to me.JPG
+    // Migrate default admin avatar and ensure default users (admin, waseem, test) exist
     try {
       const users: User[] = JSON.parse(existingUsers);
-      const adminUser = users.find(u => u.username === "umar");
+      const usernames = new Set(users.map((u) => u.username.toLowerCase()));
+      let changed = false;
+      const adminUser = users.find((u) => u.username === "umar");
       if (adminUser && adminUser.avatar !== "/images/team/umar-nazir.jpeg") {
         adminUser.avatar = "/images/team/umar-nazir.jpeg";
+        changed = true;
+      }
+      for (const defaultUser of DEFAULT_USERS) {
+        if (!usernames.has(defaultUser.username.toLowerCase())) {
+          users.push(defaultUser);
+          usernames.add(defaultUser.username.toLowerCase());
+          changed = true;
+        }
+      }
+      if (changed) {
         localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
       }
     } catch {
       // Ignore parse errors
     }
   }
+  // Always ensure default logins (umar, admin, waseem, test) exist so they work after deploy
+  ensureDefaultCredentials();
 }
 
 // Get all users from localStorage (excludes soft-deleted)

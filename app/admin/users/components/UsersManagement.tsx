@@ -413,117 +413,140 @@ export default function UsersManagement() {
           resetForm();
         }}
         title={isCreateModalOpen ? "Create New User" : "Edit User"}
-        size="md"
+        size="xl"
       >
         <form onSubmit={(e) => {
           e.preventDefault();
           isCreateModalOpen ? handleCreateUser() : handleEditUser();
         }} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Username <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
-              placeholder="Enter username"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
-              placeholder="Enter full name"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
-              placeholder="Enter email address"
-              required
-            />
-          </div>
-
-          {isCreateModalOpen && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password <span className="text-red-500">*</span>
+                Username <span className="text-red-500">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
-                  placeholder="Enter password"
-                  required={isCreateModalOpen}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-600 hover:text-black transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+              <input
+                type="text"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
+                placeholder="Enter username"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
+                placeholder="Enter full name"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
+                placeholder="Enter email address"
+                required
+              />
+            </div>
+
+            {isCreateModalOpen ? (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Password <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10 placeholder:text-gray-500"
+                    placeholder="Enter password"
+                    required={isCreateModalOpen}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-600 hover:text-black transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
+            ) : (canAssignRoles || isCreateModalOpen) ? (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Role
+                </label>
+                <Select
+                  value={formData.role}
+                  onValueChange={(value) => setFormData({ ...formData, role: value as UserRole })}
+                >
+                  <SelectTrigger className="w-full border-gray-300">
+                    <SelectValue placeholder="Select role" />
+                  </SelectTrigger>
+                  <SelectContent className="z-[10001]">
+                    {(isCreateModalOpen
+                      ? creatableRoles
+                      : [...assignableRoles, ...(assignableRoles.includes(formData.role) ? [] : [formData.role])]
+                    ).map((role) => (
+                      <SelectItem key={role} value={role}>
+                        {getRoleDisplayName(role)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            ) : null}
 
-          {(canAssignRoles || isCreateModalOpen) && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Role
+            {(canAssignRoles || isCreateModalOpen) && isCreateModalOpen && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Role
+                </label>
+                <Select
+                  value={formData.role}
+                  onValueChange={(value) => setFormData({ ...formData, role: value as UserRole })}
+                >
+                  <SelectTrigger className="w-full border-gray-300">
+                    <SelectValue placeholder="Select role" />
+                  </SelectTrigger>
+                  <SelectContent className="z-[10001]">
+                    {creatableRoles.map((role) => (
+                      <SelectItem key={role} value={role}>
+                        {getRoleDisplayName(role)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="isActive"
+                checked={formData.isActive}
+                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                className="w-4 h-4 rounded border-gray-300"
+              />
+              <label htmlFor="isActive" className="text-sm text-gray-700">
+                Active account
               </label>
-              <Select
-                value={formData.role}
-                onValueChange={(value) => setFormData({ ...formData, role: value as UserRole })}
-              >
-                <SelectTrigger className="w-full border-gray-300">
-                  <SelectValue placeholder="Select role" />
-                </SelectTrigger>
-                <SelectContent className="z-[10001]">
-                  {(isCreateModalOpen
-                    ? creatableRoles
-                    : [...assignableRoles, ...(assignableRoles.includes(formData.role) ? [] : [formData.role])]
-                  ).map((role) => (
-                    <SelectItem key={role} value={role}>
-                      {getRoleDisplayName(role)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
-          )}
-
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="isActive"
-              checked={formData.isActive}
-              onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-              className="w-4 h-4 rounded border-gray-300"
-            />
-            <label htmlFor="isActive" className="text-sm text-gray-700">
-              Active account
-            </label>
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
@@ -588,7 +611,7 @@ export default function UsersManagement() {
         </div>
       </Modal>
 
-      {/* View User Details Modal */}
+      {/* View User Details Modal - wide, compact, 2-column on desktop */}
       <Modal
         isOpen={isViewModalOpen}
         onClose={() => {
@@ -596,98 +619,101 @@ export default function UsersManagement() {
           setViewUser(null);
         }}
         title="User Details"
-        size="md"
+        size="xl"
       >
         {viewUser && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 pb-4 border-b border-gray-200">
-              <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                {viewUser.avatar ? (
-                  <img src={viewUser.avatar} alt={viewUser.name} className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-gray-600 text-xl font-medium">{viewUser.name.charAt(0).toUpperCase()}</span>
-                )}
+          <div className="space-y-3">
+            {/* Compact profile + info grid in one row on desktop */}
+            <div className="flex flex-col md:flex-row md:items-start md:gap-6 pb-3 border-b border-gray-200">
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden ring-2 ring-gray-100 transition-shadow hover:ring-gray-200">
+                  {viewUser.avatar ? (
+                    <img src={viewUser.avatar} alt={viewUser.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-gray-600 text-lg font-medium">{viewUser.name.charAt(0).toUpperCase()}</span>
+                  )}
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">{viewUser.name}</p>
+                  <p className="text-sm text-gray-500">@{viewUser.username}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-lg font-semibold text-gray-900">{viewUser.name}</p>
-                <p className="text-sm text-gray-500">@{viewUser.username}</p>
-              </div>
+              {/* 2-column grid on desktop */}
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 flex-1 text-sm min-w-0">
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Email</dt>
+                  <dd className="text-gray-900 truncate">{viewUser.email}</dd>
+                </div>
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Username</dt>
+                  <dd className="text-gray-900">{viewUser.username}</dd>
+                </div>
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Role</dt>
+                  <dd>
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full transition-transform hover:scale-105 ${getRoleBadgeColor(viewUser.role)}`}>
+                      <Shield className="w-3 h-3" />
+                      {getRoleDisplayName(viewUser.role)}
+                    </span>
+                  </dd>
+                </div>
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Status</dt>
+                  <dd>
+                    <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full transition-transform hover:scale-105 ${viewUser.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                      {viewUser.isActive ? "Active" : "Inactive"}
+                    </span>
+                  </dd>
+                </div>
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Created</dt>
+                  <dd className="text-gray-900">{new Date(viewUser.createdAt).toLocaleString()}</dd>
+                </div>
+                <div className="group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <dt className="text-gray-500 font-medium">Last updated</dt>
+                  <dd className="text-gray-900">{new Date(viewUser.updatedAt).toLocaleString()}</dd>
+                </div>
+                {isSuperAdmin && (() => {
+                  const storedPassword = getPasswordForUser(viewUser.username, currentUser ?? undefined);
+                  return (
+                    <div className="sm:col-span-2 group px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                      <dt className="text-gray-500 font-medium mb-1">Password (Super Admin only)</dt>
+                      <dd className="flex items-center gap-2">
+                        <code className="flex-1 px-3 py-2 bg-gray-100 rounded-lg text-gray-900 font-mono text-sm border border-transparent focus-within:border-gray-300 focus-within:ring-1 focus-within:ring-gray-200 transition-all min-w-0">
+                          {storedPassword ? (showViewPassword ? storedPassword : "••••••••") : "—"}
+                        </code>
+                        {storedPassword && (
+                          <button
+                            type="button"
+                            onClick={() => setShowViewPassword(!showViewPassword)}
+                            className="p-2.5 text-gray-600 hover:text-black hover:bg-gray-200 rounded-lg transition-all active:scale-95 flex-shrink-0"
+                            aria-label={showViewPassword ? "Hide password" : "Show password"}
+                          >
+                            {showViewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        )}
+                      </dd>
+                    </div>
+                  );
+                })()}
+              </dl>
             </div>
-            <dl className="grid grid-cols-1 gap-3 text-sm">
-              <div>
-                <dt className="text-gray-500 font-medium">Email</dt>
-                <dd className="text-gray-900">{viewUser.email}</dd>
-              </div>
-              <div>
-                <dt className="text-gray-500 font-medium">Username</dt>
-                <dd className="text-gray-900">{viewUser.username}</dd>
-              </div>
-              <div>
-                <dt className="text-gray-500 font-medium">Role</dt>
-                <dd>
-                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${getRoleBadgeColor(viewUser.role)}`}>
-                    <Shield className="w-3 h-3" />
-                    {getRoleDisplayName(viewUser.role)}
-                  </span>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-gray-500 font-medium">Status</dt>
-                <dd>
-                  <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${viewUser.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
-                    {viewUser.isActive ? "Active" : "Inactive"}
-                  </span>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-gray-500 font-medium">Created</dt>
-                <dd className="text-gray-900">{new Date(viewUser.createdAt).toLocaleString()}</dd>
-              </div>
-              <div>
-                <dt className="text-gray-500 font-medium">Last updated</dt>
-                <dd className="text-gray-900">{new Date(viewUser.updatedAt).toLocaleString()}</dd>
-              </div>
-              {isSuperAdmin && (() => {
-                const storedPassword = getPasswordForUser(viewUser.username, currentUser ?? undefined);
-                return (
-                  <div>
-                    <dt className="text-gray-500 font-medium">Password (Super Admin only)</dt>
-                    <dd className="flex items-center gap-2">
-                      <code className="flex-1 px-3 py-2 bg-gray-100 rounded-lg text-gray-900 font-mono text-sm">
-                        {storedPassword ? (showViewPassword ? storedPassword : "••••••••") : "—"}
-                      </code>
-                      {storedPassword && (
-                        <button
-                          type="button"
-                          onClick={() => setShowViewPassword(!showViewPassword)}
-                          className="p-2 text-gray-600 hover:text-black rounded-lg transition-colors"
-                          aria-label={showViewPassword ? "Hide password" : "Show password"}
-                        >
-                          {showViewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      )}
-                    </dd>
-                  </div>
-                );
-              })()}
-            </dl>
-            {isSuperAdmin && (
-              <div className="pt-4 border-t border-gray-200">
+            {/* Actions row */}
+            <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
+              {isSuperAdmin && (
                 <button
                   type="button"
                   onClick={() => openChangePasswordModal(viewUser)}
-                  className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 active:scale-[0.98] transition-all shadow-sm hover:shadow"
                 >
                   <KeyRound className="w-4 h-4" />
                   Change password
                 </button>
-              </div>
-            )}
-            <div className="flex justify-end pt-4">
+              )}
               <button
                 type="button"
                 onClick={() => { setIsViewModalOpen(false); setViewUser(null); }}
-                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-gray-400 active:scale-[0.98] transition-all"
               >
                 Close
               </button>

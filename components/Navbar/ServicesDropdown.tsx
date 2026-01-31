@@ -154,8 +154,8 @@ export default function ServicesDropdown({
       {isOpen && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50">
           <div className="w-[720px] min-h-[320px] bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden flex">
-            {/* Left: headset/image panel */}
-            <div className="w-[200px] shrink-0 bg-gray-50 flex items-center justify-center p-6">
+            {/* Left: headset/image panel + contact */}
+            <div className="w-[200px] shrink-0 bg-gray-50 flex flex-col items-center justify-center p-6 gap-4">
               <Image
                 src="/images/services/digital-marketing-dropdown-icon.png"
                 alt="Digital Marketing"
@@ -163,6 +163,12 @@ export default function ServicesDropdown({
                 height={120}
                 className="object-contain"
               />
+              <a
+                href="tel:+916006161726"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors whitespace-nowrap underline underline-offset-2 decoration-gray-400 hover:decoration-gray-900 decoration-1"
+              >
+                +91 600-616-1726
+              </a>
             </div>
             {/* Right: 3 columns — col1: website/app/ai-ml | col2: chatbot/deploy/maintain | col3: digital-marketing */}
             <div className="flex-1 flex flex-col min-w-0">

@@ -10,7 +10,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
-  size?: "sm" | "md" | "default" | "large" | "auth";
+  size?: "sm" | "md" | "default" | "large" | "xl" | "auth";
 }
 
 export default function Modal({ isOpen, onClose, children, title, size = "default" }: ModalProps) {
@@ -19,6 +19,7 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
     md: "max-w-md",
     default: "max-w-4xl",
     large: "max-w-5xl",
+    xl: "max-w-5xl w-[95vw] sm:w-[90vw] md:w-[80vw]",
     auth: "max-w-6xl"
   };
   
