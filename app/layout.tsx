@@ -41,7 +41,12 @@ const spaceGrotesk = localFont({
 });
 
 // Root layout uses default home SEO
-export const metadata = getHomeSEO();
+export const metadata = {
+  ...getHomeSEO(),
+  verification: {
+    google: "K5WPaPu_n40Lp7BlSC2vph3oTrM3QzSlCbkCSZpA2iE",
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
