@@ -211,6 +211,32 @@ export function getBlogPostSEO({
 }
 
 /**
+ * Pricing Page SEO
+ */
+export function getPricingSEO(): Metadata {
+  return generateMetadata({
+    title: "Transparent Pricing Models - NexGen Developers",
+    description: "Choose the perfect plan for your business: Essential, Growth, Premium, or Enterprise. from entry-level to custom solutions.",
+    keywords: [
+      "pricing",
+      "web development pricing",
+      "website packages",
+      "essential plan",
+      "growth plan",
+      "premium plan",
+      "enterprise solution",
+    ],
+    canonical: "/pricing",
+    openGraph: {
+      type: "website",
+      title: "Transparent Pricing Models - NexGen Developers",
+      description: "Choose the perfect plan for your business. From essential presence to scalable digital assets.",
+      url: "/pricing",
+    },
+  });
+}
+
+/**
  * Privacy Page SEO
  */
 export function getPrivacySEO(): Metadata {

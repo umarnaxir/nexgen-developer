@@ -42,7 +42,7 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
               className="relative w-full h-64 sm:h-96 my-12 rounded-xl overflow-hidden"
             >
               <Image
-                src={section.image || "/images/dummy-img.jpeg"}
+                src={section.image || "/images/blogs/dummy-img.jpeg"}
                 alt={`${blog.title} - Image ${index + 1}`}
                 fill
                 className="object-cover"

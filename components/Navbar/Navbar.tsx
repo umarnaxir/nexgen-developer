@@ -18,8 +18,9 @@ const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
-  { href: "/team", label: "Team" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
+  { href: "/team", label: "Team" },
   { href: "/blogs", label: "Blogs" },
 ];
 
@@ -49,10 +50,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] bg-white transition-all duration-300 lg:sticky lg:z-50 ${
         isScrolled 
-          ? "bg-white shadow-sm border-b border-gray-100" 
-          : "bg-transparent"
+          ? "lg:bg-white lg:shadow-sm lg:border-b lg:border-gray-100" 
+          : "lg:bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,8 +82,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Hamburger */}
-          <div className="lg:hidden">
+          {/* Mobile Hamburger - aligned with logo row */}
+          <div className="lg:hidden flex items-center justify-center shrink-0 w-10 h-10">
             <Hamburger isOpen={isMobileMenuOpen} onClick={toggleMobileMenu} />
           </div>
         </div>

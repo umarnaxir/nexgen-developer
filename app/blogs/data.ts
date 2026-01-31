@@ -5,7 +5,7 @@ export const blogs = [
     excerpt: "Learn how artificial intelligence and machine learning can transform your business operations and drive growth.",
     date: "January 15, 2025",
     category: "AI/ML",
-    image: "/images/ai.jpg"
+    image: "/images/blogs/ai.jpg"
   },
   {
     title: "Best Practices for Web Development in 2025",
@@ -13,7 +13,7 @@ export const blogs = [
     excerpt: "Discover the latest trends and best practices in web development to create modern, responsive websites.",
     date: "January 10, 2025",
     category: "Web Development",
-    image: "/images/website.jpg"
+    image: "/images/blogs/website.jpg"
   },
   {
     title: "SEO Strategies That Actually Work",
@@ -21,7 +21,7 @@ export const blogs = [
     excerpt: "Explore proven SEO strategies that can help improve your website's visibility and drive organic traffic.",
     date: "January 5, 2025",
     category: "SEO",
-    image: "/images/seo.jpg"
+    image: "/images/blogs/seo.jpg"
   },
   {
     title: "Building Scalable Applications: A Complete Guide",
@@ -29,7 +29,7 @@ export const blogs = [
     excerpt: "Learn how to build applications that can grow with your business and handle increasing traffic.",
     date: "December 28, 2024",
     category: "App Development",
-    image: "/images/app.jpg"
+    image: "/images/blogs/app.jpg"
   },
   {
     title: "The Future of Chatbots in Customer Service",
@@ -37,7 +37,7 @@ export const blogs = [
     excerpt: "Discover how AI-powered chatbots are revolutionizing customer service and improving user experiences.",
     date: "December 20, 2024",
     category: "Chatbots",
-    image: "/images/chatbot.jpg"
+    image: "/images/blogs/chatbot.jpg"
   },
   {
     title: "Graphic Design Trends for 2025",
@@ -45,6 +45,6 @@ export const blogs = [
     excerpt: "Stay ahead of the curve with the latest graphic design trends that will shape the visual landscape in 2025.",
     date: "December 15, 2024",
     category: "Design",
-    image: "/images/graphic.jpg"
+    image: "/images/blogs/graphic.jpg"
   }
 ];

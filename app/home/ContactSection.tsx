@@ -103,7 +103,7 @@ export default function ContactSection() {
         >
           <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4 px-4">
             <Image 
-              src="/images/contact-icon.png" 
+              src="/images/common/contact-icon.png" 
               alt="Contact icon" 
               width={48} 
               height={48}

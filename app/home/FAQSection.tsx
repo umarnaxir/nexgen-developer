@@ -38,13 +38,10 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8" data-aos="fade-up">
+    <section id="faq" className="py-8 sm:py-10 md:py-10 lg:py-8">
       <FAQSchema faqs={faqs} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div 
-          className="text-center mb-10 sm:mb-12 md:mb-16"
-          data-aos="zoom-in"
-        >
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 px-4"
             style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
@@ -64,8 +61,6 @@ export default function FAQSection() {
             <div
               key={index}
               className={`bg-gray-50 rounded-xl border-2 transition-all duration-300 overflow-hidden ${openIndex === index ? "border-gray-200 border-l-4 border-l-teal-400" : "border-transparent"}`}
-              data-aos="zoom-in"
-              data-aos-delay={index * 60}
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -87,10 +82,12 @@ export default function FAQSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              {openIndex === index && (
-                <div
-                  className="overflow-hidden"
-                >
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                  openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="min-h-0 overflow-hidden">
                   <div className="px-6 sm:px-8 pb-4 sm:pb-6">
                     <p 
                       className="text-gray-700 leading-relaxed text-sm sm:text-base"
@@ -100,7 +97,7 @@ export default function FAQSection() {
                     </p>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

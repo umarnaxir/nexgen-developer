@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
         <div id="layout-root" className={`page-bg relative min-h-screen text-gray-800 ${spaceGrotesk.className}`}>
           <div className="relative z-10">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 pt-16 lg:pt-0">{children}</main>
             <Footer />
             <BackToTop />
           </div>
