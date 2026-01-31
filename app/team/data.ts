@@ -70,7 +70,7 @@ export const teamMembers = [
     title: "Software Developer Freelancer",
     description:
       "Ummar Farooq is a Software Developer and Freelancer, experienced in delivering custom software solutions and quality development projects for clients across various domains.",
-    image: "/images/team/ummar-farooq.jpeg",
+    image: "/images/team/ummar.jpeg",
     company: "Freelancer",
     icon: Code2,
     color: "from-cyan-500/10 to-cyan-600/10",

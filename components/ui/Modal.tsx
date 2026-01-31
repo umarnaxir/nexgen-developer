@@ -39,10 +39,10 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
 
   const modalContent = (
     <>
-      {/* Backdrop - Fixed and Blurred */}
+      {/* Backdrop - Fixed and Blurred, with horizontal padding on mobile */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/50 backdrop-blur-lg z-[9999] flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black/50 backdrop-blur-lg z-[9999] flex items-center justify-center px-5 py-4 sm:p-6"
         style={{ 
           position: 'fixed',
           top: 0,
@@ -51,14 +51,13 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
           bottom: 0,
           width: '100vw',
           height: '100vh',
-          margin: 0,
-          padding: 0
+          margin: 0
         }}
       >
-        {/* Modal Content - Centered */}
+        {/* Modal Content - Centered, touch-friendly on mobile */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white rounded-lg shadow-2xl w-full ${sizeClasses[size]} ${size === "auth" ? "min-h-[600px] flex" : "flex flex-col"} max-h-[90vh] overflow-hidden relative mx-auto`}
+          className={`bg-white rounded-lg shadow-2xl w-full ${sizeClasses[size]} ${size === "auth" ? "min-h-[400px] sm:min-h-[600px] flex" : "flex flex-col"} max-h-[85vh] sm:max-h-[90vh] overflow-hidden relative mx-auto touch-manipulation`}
           style={{ margin: 'auto' }}
         >
           {size === "auth" ? (
@@ -78,45 +77,45 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
               </div>
 
               {/* Right Side - Form */}
-              <div className="w-full lg:w-1/2 flex flex-col min-h-[600px]">
-                {/* Header with Close Button */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+              <div className="w-full lg:w-1/2 flex flex-col min-h-0">
+                {/* Header with Close Button - responsive px for mobile */}
+                <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-gray-200 flex-shrink-0">
                   {title && (
-                    <h2 className="text-2xl font-bold text-black">{title}</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-black">{title}</h2>
                   )}
                   <button
                     onClick={onClose}
-                    className="ml-auto p-2 hover:bg-gray-100 rounded-full transition-colors hover:scale-110 hover:rotate-90 active:scale-95"
+                    className="ml-auto p-2.5 -mr-1 min-w-[44px] min-h-[44px] hover:bg-gray-100 rounded-full transition-colors hover:scale-110 hover:rotate-90 active:scale-95 flex items-center justify-center touch-manipulation"
                     aria-label="Close"
                   >
                     <X className="w-6 h-6 text-black" />
                   </button>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6">
+                {/* Content - scrollable on mobile with overscroll containment */}
+                <div className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-5 py-5 sm:p-6 min-h-0">
                   {children}
                 </div>
               </div>
             </>
           ) : (
             <>
-              {/* Header with Close Button */}
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10 w-full">
+              {/* Header with Close Button - responsive px for mobile */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-5 sm:px-6 py-4 flex items-center justify-between z-10 w-full flex-shrink-0">
                 {title && (
-                  <h2 className="text-2xl font-bold text-black">{title}</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-black">{title}</h2>
                 )}
                 <button
                   onClick={onClose}
-                  className="ml-auto p-2 hover:bg-gray-100 rounded-full transition-colors hover:scale-110 hover:rotate-90 active:scale-95"
+                  className="ml-auto p-2.5 -mr-1 min-w-[44px] min-h-[44px] hover:bg-gray-100 rounded-full transition-colors hover:scale-110 hover:rotate-90 active:scale-95 flex items-center justify-center touch-manipulation"
                   aria-label="Close"
                 >
                   <X className="w-6 h-6 text-black" />
                 </button>
               </div>
 
-              {/* Content */}
-              <div className="p-8 w-full overflow-y-auto">
+              {/* Content - scrollable on mobile with overscroll containment */}
+              <div className="px-5 py-5 sm:p-8 w-full overflow-y-auto overflow-x-hidden overscroll-contain min-h-0">
                 {children}
               </div>
             </>

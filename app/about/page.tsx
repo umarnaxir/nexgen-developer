@@ -2,7 +2,6 @@ import AboutHero from "./components/AboutHero";
 import AboutContent from "./components/AboutContent";
 import WhyChooseUsSection from "./components/WhyChooseUsSection";
 import ValuesSection from "./components/ValuesSection";
-import PricingSection from "./components/PricingSection";
 import ContactCTA from "./components/ContactCTA";
 import ProjectsStats from "@/app/projects/components/ProjectsStats";
 import { getAboutSEO } from "@/lib/seo/page-seo";
@@ -17,7 +16,6 @@ export default function AboutPage() {
           <AboutContent />
           <WhyChooseUsSection />
           <ValuesSection />
-          <PricingSection />
           <ProjectsStats />
           <ContactCTA />
         </div>

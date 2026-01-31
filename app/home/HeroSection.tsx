@@ -27,7 +27,7 @@ export default function HeroSection() {
 
   return (
     <>
-    <section className="relative sm:h-screen h-auto flex items-center justify-center pt-24 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8 lg:pb-12 overflow-visible text-black" data-aos="fade-up">
+    <section className="relative min-h-screen sm:h-screen flex items-center justify-center pt-24 sm:pt-16 md:pt-20 lg:pt-24 pb-4 sm:pb-6 md:pb-8 lg:pb-12 overflow-visible text-black" data-aos="fade-up">
       {/* Graph/Grid Background */}
       <div className="absolute inset-0 opacity-[0.12]">
         <div 

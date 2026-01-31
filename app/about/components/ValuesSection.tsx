@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { aboutValues } from "../data";
 
 const CARD_GAP = 16;
 
 export default function ValuesSection() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [scrollIndex, setScrollIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const firstCardRef = useRef<HTMLDivElement>(null);
@@ -32,9 +32,13 @@ export default function ValuesSection() {
     const el = containerRef.current;
     const card = firstCardRef.current;
     if (!el || !card) return;
+    const clampedIndex = Math.max(0, Math.min(index, aboutValues.length - 1));
     const cardWidth = card.offsetWidth;
-    el.scrollTo({ left: index * (cardWidth + CARD_GAP), behavior: "auto" });
+    el.scrollTo({ left: clampedIndex * (cardWidth + CARD_GAP), behavior: "smooth" });
   };
+
+  const goPrev = () => scrollToSlide(scrollIndex - 1);
+  const goNext = () => scrollToSlide(scrollIndex + 1);
 
   return (
     <div
@@ -45,49 +49,64 @@ export default function ValuesSection() {
         Our Values
       </h2>
 
-      {/* Mobile: horizontal scroll carousel */}
-      <div
-        ref={containerRef}
-        className="md:hidden overflow-x-auto overflow-y-visible snap-x snap-mandatory flex gap-4 pb-2 -mx-4 px-4 touch-pan-x"
-        style={{ WebkitOverflowScrolling: "touch" }}
-      >
-        {aboutValues.map((value, index) => {
-          const isActive = activeIndex === index;
-          const isFeatured = value.isFeatured;
-          const showActive = isFeatured || isActive;
-
-          return (
+      {/* Mobile: carousel - 1 card per screen, black bg */}
+      <div className="md:hidden px-6">
+        <div
+          ref={containerRef}
+          className="overflow-x-auto overflow-y-visible snap-x snap-mandatory flex gap-4 pb-2 touch-pan-x scrollbar-hide"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          {aboutValues.map((value, index) => (
             <div
               key={index}
               ref={index === 0 ? firstCardRef : undefined}
-              onClick={() => setActiveIndex(isActive && !isFeatured ? null : index)}
-              className={`snap-center flex-shrink-0 w-[85vw] max-w-[340px] min-h-[360px] rounded-xl flex flex-col justify-end p-6 transition-all duration-300 cursor-pointer ${
-                showActive ? "bg-black text-white" : "bg-white border border-gray-300"
-              }`}
+              className="snap-center flex-shrink-0 w-[calc(100vw-3rem)] min-h-[360px] rounded-xl flex flex-col justify-end p-6 bg-black text-white"
             >
-              <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${showActive ? "text-white" : "text-black"}`}>
+              <h3 className="text-xl font-bold mb-3 text-white">
                 {value.title}
               </h3>
-              <p className={`text-sm leading-relaxed transition-colors duration-300 ${showActive ? "text-white" : "text-gray-700"}`}>
+              <p className="text-sm leading-relaxed text-gray-300">
                 {value.description}
               </p>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
 
-      {/* Mobile: dots */}
-      <div className="md:hidden flex justify-center items-center gap-2 mt-5">
-        {aboutValues.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
-            className={`rounded-full transition-all duration-300 flex-shrink-0 ${
-              scrollIndex === index ? "w-6 h-2 bg-black" : "w-2 h-2 bg-gray-300"
-            }`}
-          />
-        ))}
+        {/* Dots left, arrows right - properly aligned */}
+        <div className="flex items-center justify-between gap-4 mt-5 min-h-10">
+          <div className="flex items-center gap-2">
+            {aboutValues.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`rounded-full transition-all duration-300 flex-shrink-0 ${
+                  scrollIndex === index
+                    ? "w-6 h-2 bg-black"
+                    : "w-2 h-2 bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={goPrev}
+              disabled={scrollIndex === 0}
+              aria-label="Previous card"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white disabled:opacity-30 disabled:pointer-events-none hover:bg-gray-800 transition-colors shrink-0"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={goNext}
+              disabled={scrollIndex === aboutValues.length - 1}
+              aria-label="Next card"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white disabled:opacity-30 disabled:pointer-events-none hover:bg-gray-800 transition-colors shrink-0"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Desktop: grid, hover = black + white, one featured always black */}
