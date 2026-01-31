@@ -60,7 +60,7 @@ export const seoConfig = {
   
   // Verification Codes (Update these with actual codes from Search Console)
   verification: {
-    google: "your-google-verification-code",
+    google: "K5WPaPu_n40Lp7BlSC2vph3oTrM3QzSlCbkCSZpA2iE",
     bing: "your-bing-verification-code",
   },
 } as const;
