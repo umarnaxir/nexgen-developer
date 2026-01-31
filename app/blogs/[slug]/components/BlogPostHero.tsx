@@ -9,7 +9,6 @@ interface BlogPostHeroProps {
     category: string;
     date: string;
     author: string;
-    readTime: string;
     images: string[];
   };
 }
@@ -42,8 +41,6 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
           <span>{blog.date}</span>
           <span>•</span>
           <span>{blog.author}</span>
-          <span>•</span>
-          <span>{blog.readTime}</span>
         </div>
       </div>
 

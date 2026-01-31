@@ -46,7 +46,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-100 border-t border-gray-200 mt-12 pt-4 sm:pt-6 pb-3" data-aos="fade-up">
+    <footer className="bg-gray-100 border-t border-gray-200 pt-8 sm:pt-6 pb-3" data-aos="fade-up">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 pb-4 sm:pb-5">
           {/* Logo Section */}
@@ -66,11 +66,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col">
-            <div className="group relative mb-2">
-              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
+            <div className="mb-2">
+              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900">
                 Contact
               </h3>
-              <div className="absolute -top-1 left-0 h-[2px] bg-black w-0 group-hover:w-full transition-all duration-300 ease-in-out" />
             </div>
             <div className="space-y-1.5 text-xs sm:text-sm text-gray-700 mb-3">
               <a 
@@ -94,11 +93,10 @@ export default function Footer() {
 
           {/* Email Subscription */}
           <div className="relative flex flex-col">
-            <div className="group relative mb-2">
-              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
+            <div className="mb-2">
+              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900">
                 Subscribe
               </h3>
-              <div className="absolute -top-1 left-0 h-[2px] bg-black w-0 group-hover:w-full transition-all duration-300 ease-in-out" />
             </div>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <input

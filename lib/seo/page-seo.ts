@@ -161,6 +161,7 @@ export function getBlogPostSEO({
   modifiedDate,
   author,
   category,
+  keywords: postKeywords,
 }: {
   title: string;
   description: string;
@@ -170,20 +171,24 @@ export function getBlogPostSEO({
   modifiedDate?: string;
   author?: string;
   category?: string;
+  keywords?: string[];
 }): Metadata {
   const url = `/blogs/${slug}`;
   const ogImage = image 
     ? (image.startsWith("http") ? image : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`)
     : seoConfig.defaultOgImage;
 
+  const keywords = [
+    category || "blog",
+    "nexgen developers",
+    ...(title.toLowerCase().split(" ") || []),
+    ...(postKeywords || []),
+  ];
+
   return generateMetadata({
     title: title,
     description: description,
-    keywords: [
-      category || "blog",
-      "nexgen developers",
-      ...(title.toLowerCase().split(" ") || []),
-    ],
+    keywords,
     canonical: url,
     openGraph: {
       type: "article",

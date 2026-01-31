@@ -26,7 +26,6 @@ export default function TeamCard({ member, index, setHoveredCard }: TeamCardProp
       onMouseEnter={() => setHoveredCard(index)}
       onMouseLeave={() => setHoveredCard(null)}
       data-aos="zoom-in"
-      data-aos-delay={index * 80}
     >
       <div
         className="relative border border-white/20 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900 to-black transition-all duration-300 hover:border-white/40 hover:shadow-xl hover:shadow-white/10 hover:-translate-y-2 hover:scale-[1.02]"

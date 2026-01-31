@@ -40,6 +40,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -62,11 +73,11 @@ export default function Navbar() {
           <NavLogo />
 
           {/* Desktop Navigation Links - Right Side */}
-          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 ml-auto">
+          <div className="hidden lg:flex items-center ml-auto gap-6">
             <DesktopNav links={navLinks} />
             
             {/* Login/Signup Buttons */}
-            <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-gray-200">
+            <div className="flex items-center gap-3 ml-2 pl-4 border-l border-gray-200">
               <button
                 onClick={() => setIsLoginModalOpen(true)}
                 className="text-sm uppercase font-extrabold tracking-wide text-gray-900 px-4 py-2 border-[1.5px] border-black rounded-md hover:shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
@@ -89,13 +100,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Full screen overlay */}
       <MobileNav 
         isOpen={isMobileMenuOpen} 
         links={navLinks} 
         onLinkClick={closeMobileMenu}
         onLoginClick={() => setIsLoginModalOpen(true)}
         onSignupClick={() => setIsSignupModalOpen(true)}
+        onClose={closeMobileMenu}
       />
 
       {/* Modals */}

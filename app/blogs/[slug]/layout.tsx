@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: BlogLayoutProps): Promise<Met
     publishedDate: publishedDate,
     author: blog.author,
     category: blog.category,
+    keywords: blog.keywords,
   });
 }
 

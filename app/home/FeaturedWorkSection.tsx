@@ -28,7 +28,7 @@ export default function FeaturedWorkSection() {
       link: "https://drjibranbashir.com",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Medical Website",
-      duration: "2 months",
+      duration: "15 - 20 days",
       client: "Dr. Jibran Bashir",
       icon: Building2,
       color: "bg-blue-500",
@@ -42,7 +42,7 @@ export default function FeaturedWorkSection() {
       link: "https://thehotelseaview.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Image Optimization", "Booking Integration", "Google Maps API"],
       category: "Hospitality Website",
-      duration: "2.5 months",
+      duration: "15 - 20 days",
       client: "Hotel Sea View",
       icon: Globe,
       color: "bg-amber-500",
@@ -56,7 +56,7 @@ export default function FeaturedWorkSection() {
       link: "https://kindnesstowardshumanity.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
       category: "Nonprofit Website",
-      duration: "3 months",
+      duration: "15 - 20 days",
       client: "Kindness Towards Humanity Foundation",
       icon: Heart,
       color: "bg-red-500",
@@ -70,7 +70,7 @@ export default function FeaturedWorkSection() {
       link: "https://sw-office.vercel.app",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Authentication System", "Database Integration", "File Upload System", "Dashboard Analytics"],
       category: "Management System",
-      duration: "4 months",
+      duration: "15 - 20 days",
       client: "Saibbyweb",
       icon: Briefcase,
       color: "bg-purple-500",
@@ -144,14 +144,14 @@ export default function FeaturedWorkSection() {
   }, [prevSlide, nextSlide]);
 
   return (
-    <section id="projects" className="py-8 lg:py-12 flex flex-col min-h-[600px]" data-aos="fade-up">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
+    <section id="projects" className="py-4 sm:py-6 lg:py-12 flex flex-col min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]" data-aos="fade-up">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
         <div 
-          className="text-center mb-6 sm:mb-8"
+          className="text-center mb-4 sm:mb-8"
           data-aos="zoom-in"
         >
           <h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black px-4"
+            className="text-4xl sm:text-5xl font-extrabold text-black px-2 sm:px-4"
             style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6)' }}
           >
             FEATURED WORK
@@ -200,7 +200,7 @@ export default function FeaturedWorkSection() {
           </div>
 
           {/* Navigation Controls - Bottom */}
-          <div className="flex items-center justify-between mt-3 sm:mt-4 px-2 sm:px-4">
+          <div className="flex items-center justify-between mt-2 sm:mt-4 px-1 sm:px-4">
             {/* Left: Play/Pause Button */}
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
@@ -256,7 +256,7 @@ export default function FeaturedWorkSection() {
           </div>
 
           {/* Pagination Dots */}
-          <div className="flex justify-center items-center gap-2 mt-2">
+          <div className="flex justify-center items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2">
             {projects.map((_, index) => (
               <button
                 key={index}

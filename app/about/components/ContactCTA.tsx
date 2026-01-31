@@ -8,7 +8,7 @@ export default function ContactCTA() {
 
   return (
     <div
-      className="text-center"
+      className="text-center pb-12 sm:pb-16"
       data-aos="fade-up"
     >
       <h2 className="text-2xl sm:text-3xl font-bold text-black mb-3 sm:mb-4 px-2">Ready to Start Your Project?</h2>
@@ -17,7 +17,7 @@ export default function ContactCTA() {
       </p>
       <button
         onClick={() => setIsContactModalOpen(true)}
-        className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-black text-white text-sm sm:text-base font-bold rounded-lg hover:bg-gray-800 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl active:scale-95"
+        className="inline-block mt-2 mb-4 px-6 sm:px-8 py-3 sm:py-4 bg-black text-white text-sm sm:text-base font-bold rounded-lg hover:bg-gray-800 transition-all duration-300 uppercase tracking-wide shadow-lg hover:shadow-xl active:scale-95"
       >
         Contact Us Now
       </button>

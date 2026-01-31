@@ -3,7 +3,7 @@
 export default function BlogsHero() {
   return (
     <div 
-      className="text-center mb-16"
+      className="text-center mb-10 pt-8"
       data-aos="fade-up"
     >
       <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-black mb-4">

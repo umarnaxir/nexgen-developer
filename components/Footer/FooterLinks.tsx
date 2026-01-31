@@ -46,11 +46,10 @@ export default function FooterLinks({ title, links, index }: FooterLinksProps) {
       className={`flex flex-col space-y-2 ${title ? '' : 'flex-row gap-4'}`}
     >
       {title && (
-        <div className="group relative mb-2">
-          <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900 relative">
+        <div className="mb-2">
+          <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-gray-900">
             {title}
           </h3>
-          <div className="absolute -top-1 left-0 h-[2px] bg-black w-0 group-hover:w-full transition-all duration-300 ease-in-out" />
         </div>
       )}
       {links.map((link) => {

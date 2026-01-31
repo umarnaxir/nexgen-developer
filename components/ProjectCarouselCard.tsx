@@ -34,10 +34,10 @@ export default function ProjectCarouselCard({
   slug,
 }: ProjectCarouselCardProps) {
   return (
-    <div className="group bg-white border-2 border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
+    <div className="group bg-white border-2 border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full">
       <div className="flex flex-col lg:flex-row h-full">
         {/* Image Section - Left */}
-        <div className="relative w-full lg:w-1/2 h-64 sm:h-80 lg:h-auto min-h-[400px]">
+        <div className="relative w-full lg:w-1/2 h-48 sm:h-72 lg:h-auto min-h-[280px] sm:min-h-[360px] lg:min-h-[400px]">
           <Image
             src={image}
             alt={title}
@@ -47,10 +47,10 @@ export default function ProjectCarouselCard({
           />
           
           {/* Category Badge */}
-          <div className="absolute top-6 left-6 z-10">
-            <div className={`${color} text-white px-4 py-2 rounded-lg flex items-center gap-2 shadow-lg`}>
+          <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-10">
+            <div className={`${color} text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 shadow-lg`}>
               <IconComponent className="w-4 h-4" />
-              <span className="font-bold text-sm">{category}</span>
+              <span className="font-bold text-xs sm:text-sm">{category}</span>
             </div>
           </div>
         </div>
@@ -61,19 +61,19 @@ export default function ProjectCarouselCard({
           <div className="w-full h-[2px] bg-black"></div>
           
           {/* Content Below Black Line */}
-          <div className="p-6 sm:p-8 lg:p-10 flex flex-col h-full group-hover:bg-gray-50 transition-colors duration-300">
+          <div className="p-4 sm:p-6 lg:p-10 flex flex-col h-full group-hover:bg-gray-50 transition-colors duration-300">
             {/* Header */}
-            <div className="mb-6">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black mb-4 leading-tight">
+            <div className="mb-3 sm:mb-6">
+              <h2 className="text-lg sm:text-3xl lg:text-4xl font-extrabold text-black mb-2 sm:mb-4 leading-tight">
                 {title}
               </h2>
-              <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6">
+              <p className="text-gray-700 text-sm sm:text-lg leading-relaxed mb-3 sm:mb-6">
                 {description}
               </p>
             </div>
 
-            {/* Tech Stack */}
-            <div className="mb-6">
+            {/* Tech Stack - Hidden on mobile */}
+            <div className="mb-3 sm:mb-6 hidden sm:block">
               <div className="flex items-center gap-2 mb-3">
                 <Code2 className="w-5 h-5 text-gray-600" />
                 <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Technologies</h3>
@@ -91,7 +91,7 @@ export default function ProjectCarouselCard({
             </div>
 
             {/* Project Meta */}
-            <div className="flex flex-wrap gap-4 mb-6 text-sm text-gray-600">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span className="font-semibold">{duration}</span>
@@ -103,19 +103,19 @@ export default function ProjectCarouselCard({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-3 mt-auto pt-6">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mt-auto pt-4 sm:pt-6">
               <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg bg-black text-white hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
               >
                 <span>Visit Website</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
               <Link
                 href={`/projects`}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-900 font-bold rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 active:scale-95"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors hover:scale-105 active:scale-95"
               >
                 <span>View Details</span>
                 <ArrowRight className="w-4 h-4" />

@@ -77,6 +77,36 @@ body {
 
 /* Moving light overlay stays subtle on white bg (no dark-mode override) */
 
+/* One-time spin for close button */
+@keyframes spinOnce {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-once {
+  animation: spinOnce 0.6s ease-out forwards;
+}
+
+/* Smooth open for mobile nav overlay */
+@keyframes mobileNavIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-mobile-nav-in {
+  animation: mobileNavIn 0.4s ease-out forwards;
+}
+
 @keyframes movingLightShadow {
   0%, 100% {
     transform: translate(0, 0) scale(1);

@@ -15,7 +15,7 @@ interface DesktopNavProps {
 
 export default function DesktopNav({ links }: DesktopNavProps) {
   return (
-    <nav className="flex items-center space-x-2 xl:space-x-6">
+    <nav className="flex items-center gap-1 sm:gap-3">
       <NavLinks links={links} />
     </nav>
   );

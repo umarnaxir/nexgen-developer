@@ -50,11 +50,27 @@ export const teamMembers = [
     },
   },
   {
+    name: "Waseem Tariq",
+    title: "Full Stack Software Engineer",
+    description:
+      "Waseem Tariq is a Full Stack Software Engineer experienced in building end-to-end web applications using modern frontend and backend technologies.",
+    image: "/images/team/waseem.jpeg",
+    company: "Freelance",
+    icon: Code2,
+    color: "from-pink-500/10 to-pink-600/10",
+    socials: {
+      facebook: "https://www.facebook.com/people/NexGen-Developers/61572910985245/",
+      instagram: "https://www.instagram.com/nexgendevelopers_/",
+      twitter: "#",
+      linkedin: "#",
+    },
+  },
+  {
     name: "Ummar Farooq",
     title: "Software Developer Freelancer",
     description:
       "Ummar Farooq is a Software Developer and Freelancer, experienced in delivering custom software solutions and quality development projects for clients across various domains.",
-    image: "/images/team/employee-no-profile.jpg",
+    image: "/images/team/ummar-farooq.jpeg",
     company: "Freelancer",
     icon: Code2,
     color: "from-cyan-500/10 to-cyan-600/10",
@@ -70,26 +86,10 @@ export const teamMembers = [
     title: "Digital Marketing Analyst",
     description:
       "Mohsin Jan is an Digital Marketing Analyst based in Hyderabad, helping businesses improve online visibility and organic growth.",
-    image: "/images/team/mohsin.jpeg",
+    image: "/images/team/mohsin-jan.jpeg",
     company: "Bitlogic Systems",
     icon: Search,
     color: "from-orange-500/10 to-orange-600/10",
-    socials: {
-      facebook: "https://www.facebook.com/people/NexGen-Developers/61572910985245/",
-      instagram: "https://www.instagram.com/nexgendevelopers_/",
-      twitter: "#",
-      linkedin: "#",
-    },
-  },
-  {
-    name: "Waseem Tariq",
-    title: "Full Stack Software Engineer",
-    description:
-      "Waseem Tariq is a Full Stack Software Engineer experienced in building end-to-end web applications using modern frontend and backend technologies.",
-    image: "/images/team/waseem.jpeg",
-    company: "Freelance",
-    icon: Code2,
-    color: "from-pink-500/10 to-pink-600/10",
     socials: {
       facebook: "https://www.facebook.com/people/NexGen-Developers/61572910985245/",
       instagram: "https://www.instagram.com/nexgendevelopers_/",

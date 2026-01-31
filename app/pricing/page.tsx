@@ -6,7 +6,7 @@ export const metadata = getPricingSEO();
 export default function PricingPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative py-16 md:py-20 lg:py-24 overflow-visible">
+      <section className="relative pt-8 pb-16 md:pt-10 md:pb-20 lg:pt-12 lg:pb-24 overflow-visible">
         {/* Subtle grid background */}
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
           <div
