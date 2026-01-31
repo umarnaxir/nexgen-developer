@@ -43,9 +43,51 @@ const DEFAULT_ADMIN: User = {
   isActive: true,
 };
 
-// Default credentials (for demo purposes)
+// Additional default users (for deploy / demo)
+const DEFAULT_TEAM_USER: User = {
+  id: "2",
+  username: "admin",
+  email: "admin@nexgen.dev",
+  role: UserRole.ADMIN,
+  name: "NexGen Admin",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  isActive: true,
+};
+const DEFAULT_WASEEM_USER: User = {
+  id: "3",
+  username: "waseem",
+  email: "waseem@nexgen.dev",
+  role: UserRole.ADMIN,
+  name: "Waseem Tariq",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  isActive: true,
+};
+const DEFAULT_TEST_USER: User = {
+  id: "4",
+  username: "test",
+  email: "test@gmail.com",
+  role: UserRole.EMPLOYEE,
+  name: "test",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  isActive: true,
+};
+
+const DEFAULT_USERS: User[] = [
+  DEFAULT_ADMIN,
+  DEFAULT_TEAM_USER,
+  DEFAULT_WASEEM_USER,
+  DEFAULT_TEST_USER,
+];
+
+// Default credentials (for demo / deploy; login with username)
 const DEFAULT_CREDENTIALS: Record<string, string> = {
   umar: "2356",
+  team: "admin@11",
+  waseem: "waseem123",
+  test: "test",
 };
 
 // Initialize default users in localStorage
@@ -54,8 +96,7 @@ export function initializeUsers(): void {
   
   const existingUsers = localStorage.getItem(USERS_STORAGE_KEY);
   if (!existingUsers) {
-    const users: User[] = [DEFAULT_ADMIN];
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
   } else {
     // Migrate default admin avatar to me.JPG
     try {
@@ -78,7 +119,7 @@ export function getUsers(includeDeleted = false): User[] {
   const usersJson = localStorage.getItem(USERS_STORAGE_KEY);
   if (!usersJson) {
     initializeUsers();
-    return [DEFAULT_ADMIN];
+    return DEFAULT_USERS;
   }
   
   try {
@@ -86,7 +127,7 @@ export function getUsers(includeDeleted = false): User[] {
     if (includeDeleted) return users;
     return users.filter((u) => !u.deletedAt);
   } catch {
-    return [DEFAULT_ADMIN];
+    return DEFAULT_USERS;
   }
 }
 
@@ -395,4 +436,12 @@ export function updatePassword(username: string, newPassword: string): boolean {
   credentials[usernameLower] = newPassword;
   saveCredentials(credentials);
   return true;
+}
+
+/** Get stored password for a user. Only Super Admin can retrieve passwords. */
+export function getPasswordForUser(username: string, actor?: User): string | null {
+  if (actor && actor.role !== UserRole.SUPER_ADMIN) return null;
+  const credentials = getCredentials();
+  const stored = credentials[username.toLowerCase()];
+  return stored ?? null;
 }

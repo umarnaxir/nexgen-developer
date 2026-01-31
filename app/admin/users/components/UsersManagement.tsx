@@ -2,19 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { 
-  Plus, 
   Edit2, 
   Trash2, 
   Search,
   UserPlus,
   Shield,
-  X,
   Eye,
   EyeOff,
+  KeyRound,
 } from "lucide-react";
 import { toast } from "sonner";
 import { User, UserRole, getRoleDisplayName, getRoleBadgeColor } from "@/types/auth";
-import { getUsers, createUser, updateUser, deleteUser, PermissionError } from "@/services/authService";
+import { getUsers, createUser, updateUser, deleteUser, getPasswordForUser, updatePassword, PermissionError } from "@/services/authService";
 import { getCreatableRoles, getAssignableRoles, canDeleteUser as rbacCanDeleteUser } from "@/lib/rbac";
 import { useAuth } from "@/contexts/AuthContext";
 import Modal from "@/components/ui/Modal";
@@ -33,7 +32,12 @@ export default function UsersManagement() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [viewUser, setViewUser] = useState<User | null>(null);
+  const [passwordForm, setPasswordForm] = useState({ newPassword: "", confirmPassword: "" });
+  const [showViewPassword, setShowViewPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -181,6 +185,47 @@ export default function UsersManagement() {
     setIsDeleteModalOpen(true);
   };
 
+  // Open view modal
+  const openViewModal = (user: User) => {
+    setViewUser(user);
+    setShowViewPassword(false);
+    setIsViewModalOpen(true);
+  };
+
+  // Open change password modal (for another user)
+  const openChangePasswordModal = (user: User) => {
+    setSelectedUser(user);
+    setPasswordForm({ newPassword: "", confirmPassword: "" });
+    setIsChangePasswordModalOpen(true);
+    setIsViewModalOpen(false);
+  };
+
+  // Handle change password (Super Admin changing another user's password)
+  const handleChangeUserPassword = () => {
+    if (!selectedUser) return;
+    if (!passwordForm.newPassword || !passwordForm.confirmPassword) {
+      toast.error("Please fill in both password fields");
+      return;
+    }
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    if (passwordForm.newPassword.length < 4) {
+      toast.error("Password must be at least 4 characters");
+      return;
+    }
+    const ok = updatePassword(selectedUser.username, passwordForm.newPassword);
+    if (ok) {
+      toast.success(`Password updated for ${selectedUser.name}`);
+      setIsChangePasswordModalOpen(false);
+      setSelectedUser(null);
+      setPasswordForm({ newPassword: "", confirmPassword: "" });
+    } else {
+      toast.error("Failed to update password");
+    }
+  };
+
   // Reset form
   const resetForm = () => {
     setShowPassword(false);
@@ -200,6 +245,8 @@ export default function UsersManagement() {
   const assignableRoles = currentUser ? getAssignableRoles(currentUser.role) : [];
   const canDeleteUserFor = (target: User) =>
     currentUser && target.id !== currentUser.id && rbacCanDeleteUser(currentUser.role, target.role);
+  const isSuperAdmin = currentUser?.role === UserRole.SUPER_ADMIN;
+  const canViewUsers = hasPermission("view_users") || canManageUsers;
 
   return (
     <div className="space-y-6">
@@ -305,6 +352,15 @@ export default function UsersManagement() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">
                     <div className="flex items-center justify-end gap-2">
+                      {canViewUsers && (
+                        <button
+                          onClick={() => openViewModal(user)}
+                          className="p-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
+                          title="View user details"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </button>
+                      )}
                       {canManageUsers && (
                         <button
                           onClick={() => openEditModal(user)}
@@ -312,6 +368,15 @@ export default function UsersManagement() {
                           title="Edit user"
                         >
                           <Edit2 className="w-4 h-4" />
+                        </button>
+                      )}
+                      {isSuperAdmin && (
+                        <button
+                          onClick={() => openChangePasswordModal(user)}
+                          className="p-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
+                          title="Change password"
+                        >
+                          <KeyRound className="w-4 h-4" />
                         </button>
                       )}
                       {canDeleteUserFor(user) && (
@@ -521,6 +586,171 @@ export default function UsersManagement() {
             </button>
           </div>
         </div>
+      </Modal>
+
+      {/* View User Details Modal */}
+      <Modal
+        isOpen={isViewModalOpen}
+        onClose={() => {
+          setIsViewModalOpen(false);
+          setViewUser(null);
+        }}
+        title="User Details"
+        size="md"
+      >
+        {viewUser && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 pb-4 border-b border-gray-200">
+              <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                {viewUser.avatar ? (
+                  <img src={viewUser.avatar} alt={viewUser.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-gray-600 text-xl font-medium">{viewUser.name.charAt(0).toUpperCase()}</span>
+                )}
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-900">{viewUser.name}</p>
+                <p className="text-sm text-gray-500">@{viewUser.username}</p>
+              </div>
+            </div>
+            <dl className="grid grid-cols-1 gap-3 text-sm">
+              <div>
+                <dt className="text-gray-500 font-medium">Email</dt>
+                <dd className="text-gray-900">{viewUser.email}</dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 font-medium">Username</dt>
+                <dd className="text-gray-900">{viewUser.username}</dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 font-medium">Role</dt>
+                <dd>
+                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${getRoleBadgeColor(viewUser.role)}`}>
+                    <Shield className="w-3 h-3" />
+                    {getRoleDisplayName(viewUser.role)}
+                  </span>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 font-medium">Status</dt>
+                <dd>
+                  <span className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${viewUser.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                    {viewUser.isActive ? "Active" : "Inactive"}
+                  </span>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 font-medium">Created</dt>
+                <dd className="text-gray-900">{new Date(viewUser.createdAt).toLocaleString()}</dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 font-medium">Last updated</dt>
+                <dd className="text-gray-900">{new Date(viewUser.updatedAt).toLocaleString()}</dd>
+              </div>
+              {isSuperAdmin && (() => {
+                const storedPassword = getPasswordForUser(viewUser.username, currentUser ?? undefined);
+                return (
+                  <div>
+                    <dt className="text-gray-500 font-medium">Password (Super Admin only)</dt>
+                    <dd className="flex items-center gap-2">
+                      <code className="flex-1 px-3 py-2 bg-gray-100 rounded-lg text-gray-900 font-mono text-sm">
+                        {storedPassword ? (showViewPassword ? storedPassword : "••••••••") : "—"}
+                      </code>
+                      {storedPassword && (
+                        <button
+                          type="button"
+                          onClick={() => setShowViewPassword(!showViewPassword)}
+                          className="p-2 text-gray-600 hover:text-black rounded-lg transition-colors"
+                          aria-label={showViewPassword ? "Hide password" : "Show password"}
+                        >
+                          {showViewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      )}
+                    </dd>
+                  </div>
+                );
+              })()}
+            </dl>
+            {isSuperAdmin && (
+              <div className="pt-4 border-t border-gray-200">
+                <button
+                  type="button"
+                  onClick={() => openChangePasswordModal(viewUser)}
+                  className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  <KeyRound className="w-4 h-4" />
+                  Change password
+                </button>
+              </div>
+            )}
+            <div className="flex justify-end pt-4">
+              <button
+                type="button"
+                onClick={() => { setIsViewModalOpen(false); setViewUser(null); }}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      {/* Change User Password Modal (Super Admin) */}
+      <Modal
+        isOpen={isChangePasswordModalOpen}
+        onClose={() => {
+          setIsChangePasswordModalOpen(false);
+          setSelectedUser(null);
+          setPasswordForm({ newPassword: "", confirmPassword: "" });
+        }}
+        title={selectedUser ? `Change password for ${selectedUser.name}` : "Change password"}
+        size="md"
+      >
+        {selectedUser && (
+          <form onSubmit={(e) => { e.preventDefault(); handleChangeUserPassword(); }} className="space-y-4">
+            <p className="text-sm text-gray-600">Set a new password for <span className="font-medium text-gray-900">{selectedUser.name}</span> (@{selectedUser.username}).</p>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">New password</label>
+              <input
+                type="password"
+                value={passwordForm.newPassword}
+                onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10"
+                placeholder="Enter new password"
+                required
+                minLength={4}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Confirm new password</label>
+              <input
+                type="password"
+                value={passwordForm.confirmPassword}
+                onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10"
+                placeholder="Confirm new password"
+                required
+                minLength={4}
+              />
+            </div>
+            <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => { setIsChangePasswordModalOpen(false); setSelectedUser(null); setPasswordForm({ newPassword: "", confirmPassword: "" }); }}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Update password
+              </button>
+            </div>
+          </form>
+        )}
       </Modal>
     </div>
   );

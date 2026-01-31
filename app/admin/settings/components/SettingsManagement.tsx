@@ -12,9 +12,13 @@ import {
   Instagram,
   Linkedin,
   Youtube,
+  KeyRound,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
+import { authenticate, updatePassword } from "@/services/authService";
 
 interface SiteSettings {
   siteName: string;
@@ -57,9 +61,17 @@ const DEFAULT_SETTINGS: SiteSettings = {
 const SETTINGS_STORAGE_KEY = "nexgen_settings";
 
 export default function SettingsManagement() {
-  const { hasPermission } = useAuth();
+  const { user: currentUser, hasPermission, canAccessAdmin } = useAuth();
   const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
   const [hasChanges, setHasChanges] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -104,6 +116,37 @@ export default function SettingsManagement() {
   };
 
   const canManageSettings = hasPermission("manage_settings");
+
+  const handleChangeMyPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentUser?.username) return;
+    if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword) {
+      toast.error("Please fill in all password fields");
+      return;
+    }
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast.error("New password and confirmation do not match");
+      return;
+    }
+    if (passwordForm.newPassword.length < 4) {
+      toast.error("New password must be at least 4 characters");
+      return;
+    }
+    const result = authenticate({ username: currentUser.username, password: passwordForm.currentPassword });
+    if (!result.success) {
+      toast.error("Current password is incorrect");
+      return;
+    }
+    setIsChangingPassword(true);
+    const ok = updatePassword(currentUser.username, passwordForm.newPassword);
+    setIsChangingPassword(false);
+    if (ok) {
+      toast.success("Your password has been updated");
+      setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+    } else {
+      toast.error("Failed to update password");
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -317,6 +360,80 @@ export default function SettingsManagement() {
           </div>
         </div>
       </div>
+
+      {/* Change my password (any admin user) */}
+      {currentUser && canAccessAdmin() && (
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <KeyRound className="w-5 h-5" />
+            Change my password
+          </h2>
+          <form onSubmit={handleChangeMyPassword} className="space-y-4 max-w-md">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Current password</label>
+              <div className="relative">
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  value={passwordForm.currentPassword}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10"
+                  placeholder="Enter current password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-600 hover:text-black"
+                  aria-label={showCurrentPassword ? "Hide" : "Show"}
+                >
+                  {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">New password</label>
+              <div className="relative">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  value={passwordForm.newPassword}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10"
+                  placeholder="Enter new password"
+                  required
+                  minLength={4}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-600 hover:text-black"
+                  aria-label={showNewPassword ? "Hide" : "Show"}
+                >
+                  {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Confirm new password</label>
+              <input
+                type="password"
+                value={passwordForm.confirmPassword}
+                onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-black/10"
+                placeholder="Confirm new password"
+                required
+                minLength={4}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isChangingPassword}
+              className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
+            >
+              {isChangingPassword ? "Updating…" : "Update my password"}
+            </button>
+          </form>
+        </div>
+      )}
 
       {/* Save Button (Mobile) */}
       {canManageSettings && hasChanges && (
