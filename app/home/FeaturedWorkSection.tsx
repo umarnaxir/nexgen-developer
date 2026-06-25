@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2, GraduationCap, ShoppingBag, Dumbbell, BookOpen } from "lucide-react";
 import ProjectCarouselCard from "@/components/ProjectCarouselCard";
 
 // Helper function to generate slug from title
@@ -20,6 +20,62 @@ export default function FeaturedWorkSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const projects = [
+    {
+      id: 11,
+      title: "Exceptional IAS Academy – Coaching Institute Website",
+      description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
+      image: "/images/projects/exceptional.png",
+      link: "https://exceptionaliasacademy.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
+      category: "Education Website",
+      duration: "15 - 20 days",
+      client: "Exceptional IAS Academy",
+      icon: GraduationCap,
+      color: "bg-blue-500",
+      slug: generateSlug("Exceptional IAS Academy – Coaching Institute Website")
+    },
+    {
+      id: 12,
+      title: "ShoesHub Poonch – Footwear E-Commerce Store",
+      description: "A sleek online footwear store with product listings, categories, and a smooth shopping experience across all devices.",
+      image: "/images/projects/shoeshub.png",
+      link: "https://shoeshubpoonch.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-Commerce", "Cart System", "Responsive Design"],
+      category: "E-Commerce Website",
+      duration: "15 - 20 days",
+      client: "ShoesHub Poonch",
+      icon: ShoppingBag,
+      color: "bg-amber-500",
+      slug: generateSlug("ShoesHub Poonch – Footwear E-Commerce Store")
+    },
+    {
+      id: 13,
+      title: "FitSpace Gym – Fitness Center Website",
+      description: "A bold, energetic gym website highlighting programs, trainers, memberships, and schedules with a motivating design.",
+      image: "/images/projects/fitspacegym.png",
+      link: "https://fitspacegym.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+      category: "Fitness Website",
+      duration: "15 - 20 days",
+      client: "FitSpace Gym",
+      icon: Dumbbell,
+      color: "bg-red-500",
+      slug: generateSlug("FitSpace Gym – Fitness Center Website")
+    },
+    {
+      id: 14,
+      title: "Citadel Library – Library & Study Space Website",
+      description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
+      image: "/images/projects/citadil.png",
+      link: "https://citadellibrary.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
+      category: "Library Website",
+      duration: "15 - 20 days",
+      client: "Citadel Library",
+      icon: BookOpen,
+      color: "bg-emerald-500",
+      slug: generateSlug("Citadel Library – Library & Study Space Website")
+    },
     {
       id: 1,
       title: "Dr. Jibran Bashir – Orthopedic Care Website",

@@ -1,6 +1,102 @@
-import { Building2, Globe, Heart, Briefcase, Users, Calendar,Brain,Eye,Trophy, Share2,BarChart3 } from "lucide-react";
+import { Building2, Globe, Heart, Briefcase, Users, Calendar,Brain,Eye,Trophy, Share2,BarChart3, GraduationCap, ShoppingBag, Dumbbell, BookOpen } from "lucide-react";
 
 export const projects = [
+  {
+    id: 11,
+    title: "Exceptional IAS Academy – Coaching Institute Website",
+    description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
+    detailedDescription: "A professional website for Exceptional IAS Academy designed to attract and inform aspiring civil services students. The platform highlights course offerings, experienced faculty, success stories, and study programs while making enquiry and admission simple. The design focuses on building trust and credibility with prospective students through clear information architecture and a responsive, fast-loading interface.",
+    image: "/images/projects/exceptional.png",
+    link: "https://exceptionaliasacademy.vercel.app/",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+    category: "Education Website",
+    features: [
+      "Course & Program Showcase",
+      "Faculty Profiles & Expertise",
+      "Student Success Stories",
+      "Admission & Enquiry Forms",
+      "Study Material Sections",
+      "Mobile-Responsive Design",
+      "Fast Loading & SEO Optimized",
+      "Contact & Location Details"
+    ],
+    duration: "15 - 20 days",
+    client: "Exceptional IAS Academy",
+    icon: GraduationCap,
+    color: "bg-blue-500"
+  },
+  {
+    id: 12,
+    title: "ShoesHub Poonch – Footwear E-Commerce Store",
+    description: "A sleek online footwear store with product listings, categories, and a smooth shopping experience across all devices.",
+    detailedDescription: "An attractive e-commerce website for ShoesHub Poonch, designed to showcase and sell footwear online. The store features organized product categories, detailed product pages, and an intuitive browsing experience. Built with a modern, mobile-first design, the platform helps customers easily discover products and place orders while giving the brand a strong online presence.",
+    image: "/images/projects/shoeshub.png",
+    link: "https://shoeshubpoonch.vercel.app/",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-Commerce", "Cart System", "Responsive Design", "SEO Optimization"],
+    category: "E-Commerce Website",
+    features: [
+      "Product Listings & Categories",
+      "Detailed Product Pages",
+      "Shopping Cart Experience",
+      "Search & Filter Options",
+      "Mobile-First Responsive Design",
+      "Fast Loading & SEO Optimized",
+      "Brand Showcase & Offers",
+      "Contact & Order Enquiry"
+    ],
+    duration: "15 - 20 days",
+    client: "ShoesHub Poonch",
+    icon: ShoppingBag,
+    color: "bg-amber-500"
+  },
+  {
+    id: 13,
+    title: "FitSpace Gym – Fitness Center Website",
+    description: "A bold, energetic gym website highlighting programs, trainers, memberships, and schedules with a motivating design.",
+    detailedDescription: "A dynamic and energetic website for FitSpace Gym designed to inspire visitors to start their fitness journey. The platform showcases training programs, expert trainers, membership plans, and class schedules with a bold, motivating visual style. The responsive design ensures members can easily explore offerings and get in touch, helping the gym grow its community and memberships.",
+    image: "/images/projects/fitspacegym.png",
+    link: "https://fitspacegym.vercel.app/",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+    category: "Fitness Website",
+    features: [
+      "Training Programs Showcase",
+      "Trainer Profiles",
+      "Membership Plans & Pricing",
+      "Class Schedules",
+      "Gallery & Facilities",
+      "Mobile-Responsive Design",
+      "Fast Loading & SEO Optimized",
+      "Contact & Join Enquiry Forms"
+    ],
+    duration: "15 - 20 days",
+    client: "FitSpace Gym",
+    icon: Dumbbell,
+    color: "bg-red-500"
+  },
+  {
+    id: 14,
+    title: "Citadel Library – Library & Study Space Website",
+    description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
+    detailedDescription: "A clean and organized website for Citadel Library designed to provide students and readers with information about study spaces, memberships, and available resources. The platform emphasizes a quiet, focused atmosphere through thoughtful design while making it easy to explore facilities, plans, and timings. The responsive interface ensures a smooth experience for visitors looking to reserve or learn about the space.",
+    image: "/images/projects/citadil.png",
+    link: "https://citadellibrary.vercel.app/",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
+    category: "Library Website",
+    features: [
+      "Study Space & Seating Info",
+      "Membership Plans & Pricing",
+      "Facilities & Resources Showcase",
+      "Timings & Availability",
+      "Enquiry & Booking Forms",
+      "Mobile-Responsive Design",
+      "Fast Loading & SEO Optimized",
+      "Contact & Location Details"
+    ],
+    duration: "15 - 20 days",
+    client: "Citadel Library",
+    icon: BookOpen,
+    color: "bg-emerald-500"
+  },
   {
     id: 1,
     title: "Dr. Jibran Bashir – Orthopedic Care Website",
