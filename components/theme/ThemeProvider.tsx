@@ -20,8 +20,9 @@ export default function ThemeProvider({
     <NextThemesProvider
       attribute="class"
       defaultTheme="dark"
+      forcedTheme="dark"
       enableSystem={false}
-      themes={["light", "dark"]}
+      themes={["dark"]}
       storageKey="theme"
       {...props}
     >

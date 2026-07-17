@@ -62,7 +62,7 @@ export default function TermsSectionsPart2() {
         <div className="glass p-4 sm:p-5 lg:p-6 rounded-2xl">
           <p className="mb-2"><strong className="text-white light:text-gray-900">Email:</strong> info@nexgendevelopers.in</p>
           <p className="mb-2"><strong className="text-white light:text-gray-900">Phone:</strong> +91 600-616-1726</p>
-          <p><strong className="text-white light:text-gray-900">Location:</strong> Srinagar, Jammu and Kashmir, India</p>
+          <p><strong className="text-white light:text-gray-900">Location:</strong> Baramulla, Jammu and Kashmir, India</p>
         </div>
       </TermsSection>
     </>

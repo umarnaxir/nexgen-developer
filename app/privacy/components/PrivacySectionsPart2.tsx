@@ -32,7 +32,7 @@ export default function PrivacySectionsPart2() {
           <p className="mb-2 sm:mb-3"><strong className="text-white light:text-gray-900">NexGen</strong></p>
           <p className="mb-2"><strong className="text-white light:text-gray-900">Email:</strong> info@nexgendevelopers.in</p>
           <p className="mb-2"><strong className="text-white light:text-gray-900">Phone:</strong> +91 600-616-1726</p>
-          <p><strong className="text-white light:text-gray-900">Location:</strong> Srinagar, Jammu and Kashmir, India</p>
+          <p><strong className="text-white light:text-gray-900">Location:</strong> Baramulla, Jammu and Kashmir, India</p>
         </div>
         <p className="text-xs sm:text-sm text-silver-dark light:text-gray-500 mt-4 sm:mt-6">For privacy-related requests, please include &quot;Privacy Request&quot; in the subject line of your email for faster processing.</p>
       </PrivacySection>

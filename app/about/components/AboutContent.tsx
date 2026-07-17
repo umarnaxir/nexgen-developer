@@ -44,7 +44,7 @@ export default function AboutContent() {
             NexGen Developers is a collective of engineering professionals united to deliver premium services. We help startups and local brands with AI/ML, chatbots, web & app development, and digital marketing — crafting digital experiences that stand out and deliver results.
           </p>
           <p className="text-base sm:text-lg text-silver light:text-gray-600 leading-relaxed text-start">
-            Based in Srinagar, Jammu and Kashmir, India, we work with clients globally, bringing world-class development expertise to startups and local businesses. Our team combines diverse expertise with a passion for technological innovation, enabling us to tackle complex challenges with precision and creativity.
+            Based in Baramulla, Jammu and Kashmir, India, we work with clients globally, bringing world-class development expertise to startups and local businesses. Our team combines diverse expertise with a passion for technological innovation, enabling us to tackle complex challenges with precision and creativity.
           </p>
         </div>
 

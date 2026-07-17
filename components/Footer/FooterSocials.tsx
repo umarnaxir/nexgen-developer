@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MessageCircle, Facebook, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import XIcon from "@/components/icons/XIcon";
 
 interface SocialLink {
@@ -12,35 +12,30 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   {
-    icon: <MessageCircle className="w-5 h-5" />,
-    href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.",
-    ariaLabel: "WhatsApp"
-  },
-  {
-    icon: <XIcon className="w-4 h-4" />,
-    href: "https://x.com/nexgendv",
-    ariaLabel: "X"
-  },
-  {
-    icon: <Linkedin className="w-5 h-5" />,
-    href: "https://www.linkedin.com/company/105880683/",
-    ariaLabel: "LinkedIn"
-  },
-  {
-    icon: <Instagram className="w-5 h-5" />,
+    icon: <Instagram className="h-4 w-4" />,
     href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==",
-    ariaLabel: "Instagram"
+    ariaLabel: "Instagram",
   },
   {
-    icon: <Facebook className="w-5 h-5" />,
+    icon: <Facebook className="h-4 w-4" />,
     href: "https://www.facebook.com/people/NexGen-Developers/61572910985245/?rdid=4A376FPlbAhNjqn5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1924Qev3Su%2F",
-    ariaLabel: "Facebook"
+    ariaLabel: "Facebook",
+  },
+  {
+    icon: <Linkedin className="h-4 w-4" />,
+    href: "https://www.linkedin.com/company/105880683/",
+    ariaLabel: "LinkedIn",
+  },
+  {
+    icon: <XIcon className="h-3.5 w-3.5" />,
+    href: "https://x.com/nexgendv",
+    ariaLabel: "X",
   },
 ];
 
 export default function FooterSocials() {
   return (
-    <div className="flex flex-nowrap items-center gap-3">
+    <div className="flex flex-nowrap items-center justify-start gap-2.5 sm:justify-end">
       {socialLinks.map((social) => (
         <a
           key={social.ariaLabel}
@@ -48,7 +43,7 @@ export default function FooterSocials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.ariaLabel}
-          className="flex items-center justify-center w-9 h-9 rounded-full border border-white/10 light:border-gray-200 light:bg-gray-100 text-silver light:text-gray-700 transition-all duration-200 hover:border-teal-400/50 hover:text-teal-300 light:hover:border-teal-600/50 light:hover:bg-teal-50 light:hover:text-teal-700 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform duration-200 hover:scale-105 active:scale-95"
         >
           {social.icon}
         </a>

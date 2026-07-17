@@ -590,6 +590,7 @@ body {
   .animate-sphere-pulse,
   .animate-hero-float,
   .animate-marquee,
+  .animate-marquee-reverse,
   .beam-border::after {
     animation: none !important;
   }
@@ -699,3 +700,83 @@ body {
 }
 
 /* Beam border glow — warm teal works on light too, keep as-is */
+
+/* ============================================================
+   PREMIUM HOMEPAGE — alternating black / white sections
+   ============================================================ */
+
+.section-dark {
+  background-color: #000000;
+  color: #ffffff;
+  position: relative;
+  isolation: isolate;
+}
+
+.section-light {
+  background-color: #ffffff;
+  color: #000000;
+  position: relative;
+  isolation: isolate;
+}
+
+.premium-card-light {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.premium-card-dark {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+@keyframes marqueeXReverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-reverse {
+  animation: marqueeXReverse 38s linear infinite;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+.light .section-dark {
+  background-color: #0a0a0a;
+}
+
+.light .section-light {
+  background-color: #fafafa;
+}
+
+/* Fixed nav rail — desktop sidebar + mobile top bar */
+:root {
+  --nav-rail-width: 5vw;
+  --content-width: 95vw;
+  --mobile-nav-height: 4rem;
+}
+
+.page-with-rail {
+  margin-left: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-top: var(--mobile-nav-height);
+}
+
+@media (min-width: 1024px) {
+  .page-with-rail {
+    margin-left: var(--nav-rail-width);
+    width: var(--content-width);
+    max-width: var(--content-width);
+    padding-top: 0;
+  }
+}
+
+.section-padding {
+  @apply px-4 py-16 sm:px-8 sm:py-24 lg:px-16 lg:py-32 xl:px-20 xl:py-40;
+}
