@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import { projects } from "@/app/projects/data";
+
+/** Featured set for the homepage showcase. */
+const HOME_PROJECT_IDS = [11, 12, 13, 14, 1];
 
 function formatTitle(title: string) {
   return title.split(" - ")[0] ?? title;
@@ -48,13 +51,22 @@ export default function ProjectsShowcaseSection() {
   const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const total = projects.length;
+
+  const featured = useMemo(
+    () =>
+      HOME_PROJECT_IDS.map((id) => projects.find((p) => p.id === id)).filter(
+        (p): p is (typeof projects)[number] => Boolean(p)
+      ),
+    []
+  );
+
+  const total = featured.length;
 
   useEffect(() => {
     registerGsapPlugins();
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current || !pinRef.current) return;
+    if (prefersReducedMotion || !sectionRef.current || !pinRef.current || total <= 1) return;
 
     const getScrollDistance = () => (total - 1) * window.innerHeight * 1.38;
     const getPinStart = () =>
@@ -117,6 +129,8 @@ export default function ProjectsShowcaseSection() {
     return () => ctx.revert();
   }, [total]);
 
+  if (total === 0) return null;
+
   return (
     <section
       ref={sectionRef}
@@ -130,25 +144,34 @@ export default function ProjectsShowcaseSection() {
       >
         <div className="flex h-full w-full flex-col">
           <div className="sticky top-[var(--mobile-nav-height)] z-10 mb-4 flex shrink-0 items-end justify-between gap-4 border-b border-black/[0.06] bg-white/95 py-3 backdrop-blur-md lg:static lg:mb-4 lg:border-0 lg:bg-transparent lg:py-0">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-              Selected Work
-            </span>
-            <div className="flex items-center gap-4">
+            <div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+                Selected Work
+              </span>
+            </div>
+            <div className="flex items-center gap-3 sm:gap-4">
               <span className="text-sm tabular-nums text-black/45">
                 {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
               </span>
-              <div className="h-px w-28 overflow-hidden bg-black/10 sm:w-40">
+              <div className="hidden h-px w-28 overflow-hidden bg-black/10 sm:block sm:w-36">
                 <div
                   ref={progressRef}
                   className="h-full origin-left bg-black transition-transform duration-150"
                   style={{ transform: "scaleX(0.015)" }}
                 />
               </div>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 transition-all hover:gap-2.5 hover:text-teal-600"
+              >
+                View projects
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
 
           <div className="relative min-h-0 flex-1">
-            {projects.map((project, index) => {
+            {featured.map((project, index) => {
               const title = formatTitle(project.title);
               return (
                 <div
@@ -183,12 +206,10 @@ export default function ProjectsShowcaseSection() {
 
                       <div className="flex shrink-0 justify-end">
                         <Link
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href="/projects"
                           className="inline-flex items-center gap-2 text-xs font-semibold text-white transition-all hover:gap-3 hover:text-white/90 sm:text-sm lg:text-base"
                         >
-                          View project
+                          View projects
                           <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         </Link>
                       </div>
