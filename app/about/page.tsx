@@ -2,7 +2,7 @@ import AboutHero from "./components/AboutHero";
 import AboutContent from "./components/AboutContent";
 import WhyChooseUsSection from "./components/WhyChooseUsSection";
 import ValuesSection from "./components/ValuesSection";
-import ContactCTA from "./components/ContactCTA";
+import GetStartedCTA from "@/components/GetStartedCTA";
 import StatsBar from "@/components/StatsBar";
 import { getAboutSEO } from "@/lib/seo/page-seo";
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
         <ValuesSection />
       </div>
       <StatsBar />
-      <ContactCTA />
+      <GetStartedCTA />
     </div>
   );
 }

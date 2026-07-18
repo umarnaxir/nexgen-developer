@@ -2,7 +2,7 @@ import ServicesHero from "./components/ServicesHero";
 import ServicesList from "./components/ServicesList";
 import StatsBar from "@/components/StatsBar";
 import FAQSection from "@/app/home/FAQSection";
-import ContactCTA from "@/app/about/components/ContactCTA";
+import GetStartedCTA from "@/components/GetStartedCTA";
 import { getServicesSEO } from "@/lib/seo/page-seo";
 
 export const metadata = getServicesSEO();
@@ -14,7 +14,7 @@ export default function ServicesPage() {
       <ServicesList />
       <StatsBar />
       <FAQSection />
-      <ContactCTA />
+      <GetStartedCTA />
     </main>
   );
 }

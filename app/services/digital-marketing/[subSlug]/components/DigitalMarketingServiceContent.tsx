@@ -37,9 +37,7 @@ export default function DigitalMarketingServiceContent({
         relatedServices={related}
         currentSlug={service.slug}
         image={service.content.image}
-        technologies={service.content.technologies}
         faqs={service.content.faqs}
-        useCases={service.content.useCases}
         expectedResults={service.content.expectedResults}
       />
     </>
