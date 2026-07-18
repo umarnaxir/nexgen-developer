@@ -14,24 +14,35 @@ import {
   Linkedin,
   Instagram,
   Facebook,
+  MessageCircle,
 } from "lucide-react";
 import Select from "@/components/ui/Select";
 import XIcon from "@/components/icons/XIcon";
+import { footerAddress, footerContactEmail, footerContactPhone } from "@/app/home/data";
 
 const socialLinks = [
+  {
+    icon: MessageCircle,
+    href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.",
+    label: "WhatsApp",
+  },
   { icon: XIcon, href: "https://x.com/nexgendv", label: "X" },
   { icon: Linkedin, href: "https://www.linkedin.com/company/105880683/", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==", label: "Instagram" },
-  { icon: Facebook, href: "https://www.facebook.com/people/NexGen-Developers/61572910985245/?rdid=4A376FPlbAhNjqn5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1924Qev3Su%2F", label: "Facebook" },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/people/NexGen-Developers/61572910985245/?rdid=4A376FPlbAhNjqn5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1924Qev3Su%2F",
+    label: "Facebook",
+  },
 ];
 
 const contactInfo = [
-  { icon: Phone, label: "Call Us", value: "+91 600-616-1726", href: "tel:+916006161726" },
-  { icon: Mail, label: "Email Us", value: "info@nexgendevelopers.in", href: "mailto:info@nexgendevelopers.in" },
-  { icon: MapPin, label: "Our Location", value: "India", href: undefined as string | undefined },
+  { icon: Phone, label: "Phone", value: "+91 600-616-1726", href: `tel:${footerContactPhone}` },
+  { icon: Mail, label: "Email", value: footerContactEmail, href: `mailto:${footerContactEmail}` },
+  { icon: MapPin, label: "Location", value: footerAddress.region, detail: footerAddress.line },
 ];
 
-/** Stylized paper-plane illustration for the contact card. */
+/** Stylized paper-plane illustration for the home contact card. */
 function ContactArt() {
   return (
     <svg viewBox="0 0 440 320" className="h-auto w-full" fill="none" aria-hidden>
@@ -46,18 +57,14 @@ function ContactArt() {
           <stop offset="100%" stopColor="#0f172a" />
         </linearGradient>
       </defs>
-      {/* sun glow */}
       <circle cx="318" cy="120" r="96" fill="url(#cs-sun)" />
-      {/* hills */}
       <path d="M0 300 Q 110 250 220 286 T 440 272 L440 320 L0 320Z" fill="#0f172a" opacity="0.06" />
       <path d="M0 306 Q 140 272 270 302 T 440 296 L440 320 L0 320Z" fill="#0f172a" opacity="0.045" />
-      {/* clouds */}
       <g fill="#ffffff">
         <ellipse cx="150" cy="116" rx="36" ry="16" opacity="0.95" />
         <ellipse cx="182" cy="125" rx="26" ry="12" opacity="0.9" />
         <ellipse cx="356" cy="196" rx="30" ry="13" opacity="0.8" />
       </g>
-      {/* dashed trail */}
       <path
         d="M68 252 C 150 236 120 166 202 172 C 252 176 252 120 300 110"
         stroke="#2dd4bf"
@@ -66,13 +73,11 @@ function ContactArt() {
         strokeLinecap="round"
       />
       <circle cx="206" cy="150" r="18" stroke="#2dd4bf" strokeWidth="2" strokeDasharray="1 9" opacity="0.75" />
-      {/* paper plane */}
       <g transform="translate(298 64) rotate(-18)" className="animate-float">
         <polygon points="0,40 80,2 36,46" fill="url(#cs-plane)" />
         <polygon points="36,46 80,2 54,40" fill="#14b8a6" />
         <polygon points="36,46 54,40 42,62" fill="#0f172a" />
       </g>
-      {/* leaves */}
       <g transform="translate(252 252)">
         <path d="M0 0 C -10 -30 6 -52 22 -58 C 18 -34 10 -12 0 0Z" fill="#0f172a" />
         <path d="M6 4 C 18 -22 44 -30 60 -28 C 44 -14 24 -2 6 4Z" fill="#14b8a6" />
@@ -82,17 +87,22 @@ function ContactArt() {
   );
 }
 
-export default function ContactSection() {
+type ContactSectionProps = {
+  variant?: "home" | "page";
+};
+
+export default function ContactSection({ variant = "home" }: ContactSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     service: "",
     message: "",
-    website: "", // Honeypot field
+    website: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isPage = variant === "page";
 
   const serviceOptions = [
     { value: "web-development", label: "Web Development" },
@@ -203,22 +213,267 @@ export default function ContactSection() {
     }
   };
 
-  // Framed light field (icon + label + control)
-  const fieldWrap =
-    "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-teal-500 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(20,184,166,0.12)]";
-  const labelCls = "block text-[13px] font-bold text-gray-800";
-  const inputCls =
-    "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
+  const fieldWrap = isPage
+    ? "rounded-xl border border-black/[0.08] bg-white px-4 py-3.5 transition-all focus-within:border-black/20 focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.04)]"
+    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-teal-500 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(20,184,166,0.12)]";
+
+  const labelCls = isPage
+    ? "block text-[11px] font-medium uppercase tracking-[0.18em] text-black/45"
+    : "block text-[13px] font-bold text-gray-800";
+
+  const inputCls = isPage
+    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-black/35"
+    : "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
+
+  const renderFieldIcon = (Icon: React.ElementType) =>
+    isPage ? null : <Icon className="h-5 w-5 shrink-0 text-teal-600" />;
+
+  const renderLabel = (
+    htmlFor: string,
+    text: string,
+    asLabel = true
+  ) => {
+    if (isPage) return null;
+    if (asLabel) {
+      return (
+        <label htmlFor={htmlFor} className={labelCls}>
+          {text}
+        </label>
+      );
+    }
+    return <span className={labelCls}>{text}</span>;
+  };
+
+  const formContent = (
+    <form onSubmit={handleSubmit} className={isPage ? "space-y-4" : "space-y-3.5"}>
+      <input
+        type="text"
+        name="website"
+        value={formData.website}
+        onChange={handleChange}
+        autoComplete="off"
+        tabIndex={-1}
+        className="hidden"
+      />
+
+      <div className={`grid gap-4 ${isPage ? "sm:grid-cols-2" : "sm:grid-cols-2"}`}>
+        <div className={`${fieldWrap} ${isPage ? "" : "flex items-center gap-3"}`}>
+          {renderFieldIcon(User)}
+          <div className="min-w-0 flex-1">
+            {renderLabel("cf-name", "Your Name")}
+            <input
+              id="cf-name"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              aria-label="Your name"
+              required
+              className={inputCls}
+            />
+          </div>
+        </div>
+
+        <div className={`${fieldWrap} ${isPage ? "" : "flex items-center gap-3"}`}>
+          {renderFieldIcon(Mail)}
+          <div className="min-w-0 flex-1">
+            {renderLabel("cf-email", "Your Email")}
+            <input
+              id="cf-email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your email"
+              aria-label="Your email"
+              required
+              className={inputCls}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className={`${fieldWrap} ${isPage ? "" : "flex items-center gap-3"}`}>
+          {renderFieldIcon(Phone)}
+          <div className="min-w-0 flex-1">
+            {renderLabel("cf-phone", "Phone Number")}
+            <input
+              id="cf-phone"
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone number"
+              aria-label="Phone number"
+              required
+              className={inputCls}
+            />
+          </div>
+        </div>
+
+        <div className={`${fieldWrap} ${isPage ? "" : "flex items-center gap-3"}`}>
+          {renderFieldIcon(LayoutGrid)}
+          <div className="min-w-0 flex-1">
+            {renderLabel("cf-service", "Select a Service", false)}
+            <Select
+              options={serviceOptions}
+              value={formData.service}
+              onChange={(value) => setFormData((prev) => ({ ...prev, service: value }))}
+              placeholder="Choose a service"
+              required
+              className={
+                isPage
+                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-black/35 focus:ring-0 [&>svg]:text-black/40"
+                  : "h-auto border-0 bg-transparent p-0 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
+              }
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={`${fieldWrap} ${isPage ? "" : "flex items-start gap-3"}`}>
+        {isPage ? null : <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" />}
+        <div className="min-w-0 flex-1">
+          {renderLabel("cf-message", "Tell us about your project")}
+          <textarea
+            id="cf-message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your message"
+            aria-label="Your message"
+            rows={isPage ? 5 : 3}
+            required
+            className={`${inputCls} resize-none`}
+          />
+        </div>
+      </div>
+
+      <div
+        className={
+          isPage
+            ? "flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between"
+            : "flex flex-col-reverse items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
+        }
+      >
+        <p className={`flex items-center gap-2 text-xs ${isPage ? "text-black/40" : "text-gray-500"}`}>
+          <Lock className="h-3.5 w-3.5" />
+          Your information is safe with us.
+        </p>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={
+            isPage
+              ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-black/90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+              : "group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(20,184,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          }
+        >
+          {!isPage && (
+            <>
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-teal-400/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 text-white transition-transform duration-300 group-hover:scale-105">
+                <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </>
+          )}
+          {isPage && <Send className="h-4 w-4" />}
+          <span className={isPage ? "" : "relative text-sm font-bold text-white"}>
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </span>
+        </button>
+      </div>
+    </form>
+  );
+
+  if (isPage) {
+    return (
+      <section id="contact" className="section-light pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-14">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+            <div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+                Message
+              </span>
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
+                Send us a note
+              </h2>
+              {formContent}
+            </div>
+
+            <aside className="lg:pt-10">
+              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+                Details
+              </span>
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
+                Reach us
+              </h2>
+
+              <div className="mt-8 space-y-6">
+                {contactInfo.map(({ icon: Icon, label, value, href, detail }) => {
+                  const content = (
+                    <div className="flex items-start gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-black/[0.08] bg-black/[0.03] text-black/70">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/40">
+                          {label}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-black">{value}</p>
+                        {detail && (
+                          <p className="mt-0.5 text-sm leading-relaxed text-black/55">{detail}</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+
+                  return href ? (
+                    <a key={label} href={href} className="block transition-opacity hover:opacity-70">
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={label}>{content}</div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-10 border-t border-black/[0.06] pt-8">
+                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/40">
+                  Social
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2.5">
+                  {socialLinks.map(({ icon: Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.08] text-black/60 transition-all hover:border-black/20 hover:bg-black hover:text-white"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" className="py-6 sm:py-10">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10">
-          {/* metallic top sheen */}
           <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/80" />
 
           <div className="grid gap-8 lg:grid-cols-[1.65fr_1fr] lg:items-center lg:gap-12">
-            {/* ===== LEFT: form (bigger) ===== */}
             <div>
               <div className="mb-6 text-center">
                 <span className="text-xs font-bold uppercase tracking-[0.3em] text-teal-600">
@@ -232,97 +487,9 @@ export default function ContactSection() {
                   Ready to bring your ideas to life? We&apos;re here to help.
                 </p>
               </div>
-
-              <form onSubmit={handleSubmit} className="space-y-3.5">
-                {/* Honeypot */}
-                <input
-                  type="text"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleChange}
-                  autoComplete="off"
-                  tabIndex={-1}
-                  className="hidden"
-                />
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className={fieldWrap}>
-                    <User className="h-5 w-5 shrink-0 text-teal-600" />
-                    <div className="min-w-0 flex-1">
-                      <label htmlFor="cf-name" className={labelCls}>Your Name</label>
-                      <input id="cf-name" type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" required className={inputCls} />
-                    </div>
-                  </div>
-
-                  <div className={fieldWrap}>
-                    <Mail className="h-5 w-5 shrink-0 text-teal-600" />
-                    <div className="min-w-0 flex-1">
-                      <label htmlFor="cf-email" className={labelCls}>Your Email</label>
-                      <input id="cf-email" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" required className={inputCls} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className={fieldWrap}>
-                    <Phone className="h-5 w-5 shrink-0 text-teal-600" />
-                    <div className="min-w-0 flex-1">
-                      <label htmlFor="cf-phone" className={labelCls}>Phone Number</label>
-                      <input id="cf-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Enter your phone number" required className={inputCls} />
-                    </div>
-                  </div>
-
-                  <div className={fieldWrap}>
-                    <LayoutGrid className="h-5 w-5 shrink-0 text-teal-600" />
-                    <div className="min-w-0 flex-1">
-                      <span className={labelCls}>Select a Service</span>
-                      <Select
-                        options={serviceOptions}
-                        value={formData.service}
-                        onChange={(value) =>
-                          setFormData((prev) => ({ ...prev, service: value }))
-                        }
-                        placeholder="Choose a service"
-                        required
-                        className="h-auto border-0 bg-transparent p-0 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`${fieldWrap} items-start`}>
-                  <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" />
-                  <div className="min-w-0 flex-1">
-                    <label htmlFor="cf-message" className={labelCls}>Tell us about your project</label>
-                    <textarea id="cf-message" name="message" value={formData.message} onChange={handleChange} placeholder="Write a few details about your project..." rows={3} required className={`${inputCls} resize-none`} />
-                  </div>
-                </div>
-
-                {/* privacy left · send button right corner */}
-                <div className="flex flex-col-reverse items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="flex items-center gap-2 text-xs text-gray-500">
-                    <Lock className="h-3.5 w-3.5" />
-                    We respect your privacy. Your information is safe with us.
-                  </p>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(20,184,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-teal-400/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                    <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 text-white transition-transform duration-300 group-hover:scale-105">
-                      <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </span>
-                    <span className="relative text-sm font-bold text-white">
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </span>
-                  </button>
-                </div>
-              </form>
+              {formContent}
             </div>
 
-            {/* ===== RIGHT: illustration + contact + socials (smaller) ===== */}
             <div className="flex flex-col justify-center lg:border-l lg:border-black/10 lg:pl-12">
               <div className="relative mx-auto mb-6 hidden w-full max-w-[300px] sm:block lg:mx-0">
                 <ContactArt />
@@ -363,7 +530,7 @@ export default function ContactSection() {
               <div className="mt-6">
                 <h4 className="text-sm font-bold text-gray-900">Follow Us</h4>
                 <div className="mt-3 flex items-center gap-3">
-                  {socialLinks.map(({ icon: Icon, href, label }) => (
+                  {socialLinks.slice(1).map(({ icon: Icon, href, label }) => (
                     <a
                       key={label}
                       href={href}
