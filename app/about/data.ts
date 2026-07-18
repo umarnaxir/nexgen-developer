@@ -173,6 +173,34 @@ export const aboutApproachMetrics = [
  { value: "12+", label: "Countries" },
 ];
 
+export const aboutFaqs = [
+  {
+    question: "Who is NexGen Developers?",
+    answer:
+      "We're a collective of engineers, designers, and marketers helping startups and local brands ship AI, chatbots, web & apps, and growth campaigns, with clear process and craft-focused delivery.",
+  },
+  {
+    question: "Where are you based, and do you work remotely?",
+    answer:
+      "We're based in Baramulla, Jammu and Kashmir, India, and work with clients globally. Collaboration is remote-friendly with regular updates across time zones.",
+  },
+  {
+    question: "What kinds of projects do you take on?",
+    answer:
+      "From landing pages and product builds to AI tools, chatbots, and digital marketing. If it helps you build, launch, or grow, we can scope it and ship it.",
+  },
+  {
+    question: "How do engagements usually start?",
+    answer:
+      "You share goals and constraints, we align on scope and success metrics, then move through discover, design, build, and launch with visible milestones along the way.",
+  },
+  {
+    question: "How can I get in touch?",
+    answer:
+      "Use the contact page or schedule a meeting from the site. We'll reply with next steps, timeline options, and a clear proposal before any work begins.",
+  },
+];
+
 export const pricingOptions = [
  {
  title: "Project-Based",

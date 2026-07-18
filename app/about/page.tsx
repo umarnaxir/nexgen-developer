@@ -4,6 +4,7 @@ import AboutCapabilities from "./components/AboutCapabilities";
 import AboutPillars from "./components/AboutPillars";
 import AboutValues from "./components/AboutValues";
 import AboutApproach from "./components/AboutApproach";
+import AboutFAQ from "./components/AboutFAQ";
 import GetStartedCTA from "@/components/GetStartedCTA";
 import { getAboutSEO } from "@/lib/seo/page-seo";
 
@@ -18,6 +19,7 @@ export default function AboutPage() {
       <AboutPillars />
       <AboutValues />
       <AboutApproach />
+      <AboutFAQ />
       <GetStartedCTA />
     </main>
   );
