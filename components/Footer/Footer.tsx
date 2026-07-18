@@ -27,7 +27,7 @@ export default function Footer() {
 
   return (
     <footer className="section-dark relative flex flex-col border-t border-white/[0.06] bg-black text-white">
-      <div className="container mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-14 lg:py-16">
+      <div className="section-container py-8 sm:py-10 lg:py-12">
         <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <Link
             href="/"
@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="lg:ml-auto lg:max-w-xl lg:text-right">
             <h2 className="text-2xl font-semibold leading-tight tracking-[-0.03em] sm:text-3xl lg:text-[2.35rem]">
               Have an idea?{" "}
-              <span className="text-[#4ade80]">Let&apos;s connect.</span>
+              <span className="text-teal-300">Let&apos;s connect.</span>
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-white/45 sm:text-base">
               Schedule a meeting and make the best decision for your business.

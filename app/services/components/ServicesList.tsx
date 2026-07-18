@@ -89,7 +89,7 @@ export default function ServicesList() {
         ref={pinRef}
         className="relative flex h-auto min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[92vh] lg:px-14 lg:py-10"
       >
-        <div className="container mx-auto mb-8 flex max-w-7xl shrink-0 flex-col gap-6 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mx-auto mb-5 flex w-full max-w-7xl shrink-0 flex-col gap-4 sm:mb-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
               What we offer

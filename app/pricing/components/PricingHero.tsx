@@ -19,7 +19,7 @@ export default function PricingHero({ service }: PricingHeroProps) {
   return (
     <div className="relative hero-grid left-1/2 w-screen -translate-x-1/2 overflow-hidden min-h-[50vh] flex items-center justify-center mb-8 md:mb-10" data-aos="fade-up">
       <HeroDecor />
-      <div className="relative z-10 w-full container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <div className="relative z-10 w-full section-container py-12 text-center">
         <h1 className="text-gradient-light text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4">
           Transparent{" "}
           <span className="text-gradient-teal">Pricing Models</span>

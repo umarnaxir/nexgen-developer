@@ -55,8 +55,8 @@ export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
       ref={sectionRef}
       className={
         isEmbedded
-          ? "relative overflow-hidden rounded-xl border border-black/[0.06] bg-black px-6 py-12 text-white sm:px-10 sm:py-14"
-          : "section-dark relative overflow-hidden py-16 sm:py-20 lg:py-24"
+          ? "relative overflow-hidden rounded-xl border border-black/[0.06] bg-black px-5 py-8 text-white sm:px-8 sm:py-10"
+          : "section-dark relative overflow-hidden section-y"
       }
     >
       <div
@@ -71,7 +71,7 @@ export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
       />
       <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-teal-500/10 blur-3xl" />
 
-      <div className={isEmbedded ? "relative" : "container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-14"}>
+      <div className={isEmbedded ? "relative" : "section-container relative"}>
         <div
           ref={contentRef}
           className="mx-auto flex max-w-3xl flex-col items-center text-center"

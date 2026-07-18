@@ -34,9 +34,9 @@ export default function AboutSection() {
   return (
     <section
       ref={sectionRef}
-      className="section-dark section-padding relative"
+      className="section-dark section-y relative"
     >
-      <div ref={contentRef} className="container mx-auto max-w-7xl">
+      <div ref={contentRef} className="section-container">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div className="relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/[0.08] lg:max-w-none">
             <Image

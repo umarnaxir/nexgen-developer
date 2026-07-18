@@ -57,7 +57,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="section-dark section-padding relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-16 pt-12 sm:pb-20 sm:pt-16 lg:min-h-screen lg:pb-24 lg:pt-36"
+      className="section-dark relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-12 pt-12 sm:pb-16 sm:pt-14 lg:min-h-screen lg:pb-20 lg:pt-28"
     >
       <div
         ref={gridRef}
@@ -74,7 +74,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-7xl">
+      <div className="section-container relative z-10">
         <div className="max-w-5xl">
           <motion.span
             initial={{ opacity: 0 }}

@@ -93,10 +93,10 @@ export default function ServiceLayout({
         <section
           ref={faqRef}
           id="faq"
-          className="section-light border-t border-black/[0.06] py-14 sm:py-16 lg:py-20"
+          className="section-light border-t border-black/[0.06] section-y"
         >
-          <div ref={faqContent} className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
-            <div className="mb-10 max-w-2xl">
+          <div ref={faqContent} className="section-container">
+            <div className="mb-6 max-w-2xl">
               <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
                 FAQ
               </span>

@@ -66,4 +66,14 @@ export const teamMembers = [
     title: "Digital Marketing",
     image: "/images/team/furkan-fareed.png",
   },
+  {
+    name: "Megha",
+    title: "Software Developer",
+    image: "/images/team/employee-no-profile.jpg",
+  },
+  {
+    name: "Faizan",
+    title: "Digital Marketing",
+    image: "/images/team/faizan.png",
+  },
 ];

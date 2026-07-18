@@ -238,7 +238,7 @@ export default function TechStackSection() {
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(20,184,166,0.09),transparent_40%)]" />
 
-      <div className="tech-stack-shell relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col px-4 py-5 sm:px-6 sm:py-6 lg:h-full lg:min-h-0 lg:px-14">
+      <div className="tech-stack-shell section-container relative z-10 flex min-h-[100svh] flex-col py-5 sm:py-6 lg:h-full lg:min-h-0">
         <div className="mb-4 flex shrink-0 flex-wrap items-end justify-between gap-4 sm:mb-5">
           <div className="min-w-0">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">

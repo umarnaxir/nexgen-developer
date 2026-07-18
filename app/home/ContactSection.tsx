@@ -392,7 +392,7 @@ export default function ContactSection({ variant = "home" }: ContactSectionProps
   if (isPage) {
     return (
       <section id="contact" className="section-light pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-14">
+        <div className="section-container">
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
               <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
@@ -469,7 +469,7 @@ export default function ContactSection({ variant = "home" }: ContactSectionProps
 
   return (
     <section id="contact" className="py-6 sm:py-10">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="section-container">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10">
           <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/80" />
 

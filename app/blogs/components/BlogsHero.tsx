@@ -9,7 +9,7 @@ export default function BlogsHero() {
       data-aos="fade-up"
     >
       <HeroDecor />
-      <div className="relative z-10 w-full container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <div className="relative z-10 w-full section-container py-12 text-center">
         <span className="eyebrow">
           <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
           Our Blog

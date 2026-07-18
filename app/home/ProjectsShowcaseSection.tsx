@@ -8,7 +8,7 @@ import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import { projects } from "@/app/projects/data";
 
 function formatTitle(title: string) {
-  return title.split(" – ")[0] ?? title;
+  return title.split(" - ")[0] ?? title;
 }
 
 function slideOpacity(rawIndex: number, index: number) {
@@ -126,10 +126,10 @@ export default function ProjectsShowcaseSection() {
     >
       <div
         ref={pinRef}
-        className="relative flex h-[100svh] flex-col px-4 pb-4 pt-[calc(var(--mobile-nav-height)+0.75rem)] sm:px-6 sm:pb-5 lg:h-[96vh] lg:px-14 lg:py-5"
+        className="section-container relative flex h-[100svh] flex-col pb-4 pt-[calc(var(--mobile-nav-height)+0.75rem)] sm:pb-5 lg:h-[96vh] lg:py-5"
       >
-        <div className="container mx-auto flex h-full max-w-7xl flex-col">
-          <div className="sticky top-[var(--mobile-nav-height)] z-10 -mx-4 mb-4 flex shrink-0 items-end justify-between gap-4 border-b border-black/[0.06] bg-white/95 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:mb-4 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0">
+        <div className="flex h-full w-full flex-col">
+          <div className="sticky top-[var(--mobile-nav-height)] z-10 mb-4 flex shrink-0 items-end justify-between gap-4 border-b border-black/[0.06] bg-white/95 py-3 backdrop-blur-md lg:static lg:mb-4 lg:border-0 lg:bg-transparent lg:py-0">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
               Selected Work
             </span>

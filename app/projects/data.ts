@@ -3,7 +3,7 @@ import { Building2, Globe, Heart, Briefcase, Users, Calendar,Brain,Eye,Trophy, S
 export const projects = [
   {
     id: 11,
-    title: "Exceptional IAS Academy – Coaching Institute Website",
+    title: "Exceptional IAS Academy - Coaching Institute Website",
     description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
     detailedDescription: "A professional website for Exceptional IAS Academy designed to attract and inform aspiring civil services students. The platform highlights course offerings, experienced faculty, success stories, and study programs while making enquiry and admission simple. The design focuses on building trust and credibility with prospective students through clear information architecture and a responsive, fast-loading interface.",
     image: "/images/projects/exceptional.png",
@@ -27,7 +27,7 @@ export const projects = [
   },
   {
     id: 12,
-    title: "ShoesHub Poonch – Footwear E-Commerce Store",
+    title: "ShoesHub Poonch - Footwear E-Commerce Store",
     description: "A sleek online footwear store with product listings, categories, and a smooth shopping experience across all devices.",
     detailedDescription: "An attractive e-commerce website for ShoesHub Poonch, designed to showcase and sell footwear online. The store features organized product categories, detailed product pages, and an intuitive browsing experience. Built with a modern, mobile-first design, the platform helps customers easily discover products and place orders while giving the brand a strong online presence.",
     image: "/images/projects/shoeshub.png",
@@ -51,7 +51,7 @@ export const projects = [
   },
   {
     id: 13,
-    title: "FitSpace Gym – Fitness Center Website",
+    title: "FitSpace Gym - Fitness Center Website",
     description: "A bold, energetic gym website highlighting programs, trainers, memberships, and schedules with a motivating design.",
     detailedDescription: "A dynamic and energetic website for FitSpace Gym designed to inspire visitors to start their fitness journey. The platform showcases training programs, expert trainers, membership plans, and class schedules with a bold, motivating visual style. The responsive design ensures members can easily explore offerings and get in touch, helping the gym grow its community and memberships.",
     image: "/images/projects/fitspacegym.png",
@@ -75,7 +75,7 @@ export const projects = [
   },
   {
     id: 14,
-    title: "Citadel Library – Library & Study Space Website",
+    title: "Citadel Library - Library & Study Space Website",
     description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
     detailedDescription: "A clean and organized website for Citadel Library designed to provide students and readers with information about study spaces, memberships, and available resources. The platform emphasizes a quiet, focused atmosphere through thoughtful design while making it easy to explore facilities, plans, and timings. The responsive interface ensures a smooth experience for visitors looking to reserve or learn about the space.",
     image: "/images/projects/citadil.png",
@@ -99,7 +99,7 @@ export const projects = [
   },
   {
     id: 1,
-    title: "Dr. Jibran Bashir – Orthopedic Care Website",
+    title: "Dr. Jibran Bashir - Orthopedic Care Website",
     description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
     detailedDescription: "A comprehensive medical website designed for Dr. Jibran Bashir's orthopedic practice. The platform features a modern, clean interface that builds trust with patients while providing essential information about services, doctor's expertise, and treatment options. The website includes an integrated appointment booking system, patient testimonials, and detailed service pages.",
     image: "/images/projects/project2.png",
@@ -123,7 +123,7 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Hotel Sea View – Luxury Stay Website",
+    title: "Hotel Sea View - Luxury Stay Website",
     description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
     detailedDescription: "An elegant and luxurious website for Hotel Sea View, designed to showcase the hotel's premium accommodations and services. The website features stunning visual galleries, detailed room descriptions, amenities information, and an easy-to-use booking interface. The design emphasizes the hotel's luxury brand while maintaining excellent user experience across all devices.",
     image: "/images/projects/project3.png",

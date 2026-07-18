@@ -63,11 +63,11 @@ export default function GetStartedCTA({
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-light border-t border-black/[0.06] py-14 sm:py-16 lg:py-20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
+    <section ref={sectionRef} className="section-light border-t border-black/[0.06] section-y">
+      <div className="section-container">
         <div
           ref={contentRef}
-          className="relative overflow-hidden rounded-xl border border-teal-500/20 bg-teal-500/[0.08] px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16"
+          className="relative overflow-hidden rounded-xl border border-teal-500/20 bg-teal-500/[0.08] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
         >
           <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-teal-400/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-teal-500/10 blur-3xl" />

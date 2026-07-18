@@ -80,8 +80,8 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="py-12 sm:py-14 md:py-16 lg:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section id="skills" className="section-y">
+      <div className="section-container">
         <div 
           className="text-center mb-8 sm:mb-10"
         >

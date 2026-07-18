@@ -80,7 +80,7 @@ export default function ServiceDetailHero({ heading, image }: ServiceDetailHeroP
         <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-teal-500/[0.06] blur-[120px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
+      <div className="section-container relative z-10">
         <Link
           href="/services"
           className="mb-8 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/45 transition-colors hover:text-white"

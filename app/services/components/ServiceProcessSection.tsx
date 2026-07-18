@@ -70,9 +70,9 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
   }, [progress]);
 
   return (
-    <section ref={sectionRef} className="section-dark py-14 sm:py-16 lg:py-20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
-        <div ref={headerRef} className="mb-10 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+    <section ref={sectionRef} className="section-dark section-y">
+      <div className="section-container">
+        <div ref={headerRef} className="mb-6 flex flex-col gap-4 lg:mb-7 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
               Process

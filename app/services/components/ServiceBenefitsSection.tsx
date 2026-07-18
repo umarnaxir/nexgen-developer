@@ -178,7 +178,7 @@ export default function ServiceBenefitsSection({
   return (
     <section
       ref={sectionRef}
-      className="section-light relative overflow-hidden border-t border-black/[0.06] py-14 sm:py-16 lg:py-20"
+      className="section-light relative overflow-hidden border-t border-black/[0.06] section-y"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.4]"
@@ -190,8 +190,8 @@ export default function ServiceBenefitsSection({
         }}
       />
 
-      <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
-        <div ref={headerRef} className="mb-10 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+      <div className="section-container relative">
+        <div ref={headerRef} className="mb-6 flex flex-col gap-4 lg:mb-7 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
               Value
@@ -254,12 +254,16 @@ export default function ServiceBenefitsSection({
             ))}
           </div>
 
-          {/* Spotlight panel */}
+          {/* Spotlight panel — black with white content */}
           <div
             ref={spotlightRef}
-            className="relative min-h-[320px] overflow-hidden rounded-xl border border-black/[0.06] bg-white shadow-[0_28px_72px_-40px_rgba(0,0,0,0.16)] lg:min-h-[400px]"
+            className="relative min-h-[360px] overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-950 shadow-[0_28px_72px_-36px_rgba(0,0,0,0.45)] lg:min-h-[440px]"
           >
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-teal-500/[0.08] blur-3xl" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:28px_28px] opacity-50"
+            />
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-teal-400/15 blur-3xl" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -268,10 +272,10 @@ export default function ServiceBenefitsSection({
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -14, filter: "blur(4px)" }}
                 transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                className="flex h-full flex-col p-6 sm:p-8 lg:p-10"
+                className="relative flex h-full flex-col p-6 sm:p-8 lg:p-10"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-teal-700">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-teal-300">
                     {activeTab === "benefits" ? (
                       <>
                         <Zap className="h-3 w-3" /> Benefit
@@ -282,7 +286,7 @@ export default function ServiceBenefitsSection({
                       </>
                     )}
                   </span>
-                  <span className="text-[11px] font-medium tabular-nums tracking-[0.25em] text-black/30">
+                  <span className="text-[11px] font-medium tabular-nums tracking-[0.25em] text-white/35">
                     {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
                   </span>
                 </div>
@@ -291,21 +295,21 @@ export default function ServiceBenefitsSection({
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-6 h-px origin-left bg-gradient-to-r from-teal-500/60 via-teal-400/30 to-transparent"
+                  className="mt-6 h-px origin-left bg-gradient-to-r from-teal-400/70 via-teal-400/25 to-transparent"
                 />
 
-                <p className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-black sm:text-2xl lg:text-[1.65rem]">
+                <p className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl lg:text-[1.65rem]">
                   {spotlightTitle}
                 </p>
 
                 <div className="mt-6 flex-1">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/35">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
                     Key points
                   </span>
                   <ul className="mt-3 space-y-2.5">
                     {keyPoints.map((point, pointIndex) => (
                       <motion.li
-                        key={point}
+                        key={`${point}-${pointIndex}`}
                         initial={{ opacity: 0, x: 12 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{
@@ -313,21 +317,21 @@ export default function ServiceBenefitsSection({
                           duration: 0.35,
                           ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="flex items-start gap-3 text-[14px] leading-relaxed text-black/60"
+                        className="flex items-start gap-3 text-[14px] leading-relaxed text-white/70"
                       >
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400" />
                         {point}
                       </motion.li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between gap-4 border-t border-black/[0.06] pt-6">
+                <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/[0.1] pt-6">
                   <button
                     type="button"
                     onClick={() => setActiveIndex((i) => Math.max(i - 1, 0))}
                     disabled={activeIndex === 0}
-                    className="text-sm font-medium text-black/40 transition-colors hover:text-black disabled:cursor-not-allowed disabled:opacity-30"
+                    className="text-sm font-medium text-white/40 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Previous
                   </button>
@@ -335,13 +339,13 @@ export default function ServiceBenefitsSection({
                     <button
                       type="button"
                       onClick={() => setActiveIndex((i) => Math.min(i + 1, items.length - 1))}
-                      className="group inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-5 py-2.5 text-sm font-semibold text-black transition-all hover:border-teal-500/30 hover:bg-teal-500/[0.06]"
+                      className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-teal-400/40 hover:bg-teal-500/10"
                     >
                       Next
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </button>
                   ) : (
-                    <span className="text-sm font-medium text-teal-700/80">All covered</span>
+                    <span className="text-sm font-medium text-teal-300/90">All covered</span>
                   )}
                 </div>
               </motion.div>

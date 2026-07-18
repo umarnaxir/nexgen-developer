@@ -20,7 +20,7 @@ export default function ClientReviewsSection() {
       image: "/images/team/profile-dp.png",
       rating: 5,
       review: "NexGen Developers created an exceptional medical website for my orthopedic practice. The online appointment booking system has streamlined our patient scheduling, and the professional design perfectly represents our services. The team was responsive, professional, and delivered exactly what we needed. Highly recommended!",
-      project: "Dr. Jibran Bashir – Orthopedic Care Website",
+      project: "Dr. Jibran Bashir - Orthopedic Care Website",
       verified: true
     },
     {
@@ -31,7 +31,7 @@ export default function ClientReviewsSection() {
       image: "/images/team/profile-dp.png",
       rating: 5,
       review: "The luxury hotel website developed by NexGen Developers has significantly enhanced our online presence. The beautiful gallery showcasing our rooms and the smooth navigation have improved our booking rates. Their modern design approach and attention to detail made our hotel stand out in the digital space.",
-      project: "Hotel Sea View – Luxury Stay Website",
+      project: "Hotel Sea View - Luxury Stay Website",
       verified: true
     },
     {
@@ -114,7 +114,7 @@ export default function ClientReviewsSection() {
 
   return (
     <section id="reviews" className="py-8 md:py-10 lg:py-10" data-aos="fade-up">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="section-container">
         <div
           className="text-center mb-8 md:mb-16"
           data-aos="zoom-in"

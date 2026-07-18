@@ -1,15 +1,91 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import { teamMembers } from "../data";
-import TeamCard from "./TeamCard";
 
 export default function TeamGrid() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+        y: 28,
+        opacity: 0,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+
+      gsap.from(gridRef.current?.children ?? [], {
+        scrollTrigger: { trigger: gridRef.current, start: "top 85%" },
+        y: 36,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.06,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="pb-8 sm:pb-10" data-aos="fade-up">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {teamMembers.map((member) => (
-            <TeamCard key={member.name} member={member} />
+    <section ref={sectionRef} className="section-light section-y">
+      <div className="section-container">
+        <div ref={headerRef} className="mb-6 flex flex-col gap-3 sm:mb-7 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+              The collective
+            </span>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
+              Talent across every discipline.
+            </h2>
+          </div>
+          <span className="text-sm tabular-nums text-black/40">
+            {String(teamMembers.length).padStart(2, "0")} members
+          </span>
+        </div>
+
+        <div ref={gridRef} className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          {teamMembers.map((member, index) => (
+            <motion.article
+              key={member.name}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 28 }}
+              className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-black/[0.06] bg-neutral-900 shadow-[0_24px_64px_-40px_rgba(0,0,0,0.2)]"
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, 25vw"
+                priority={index < 4}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+              <span className="absolute left-3 top-3 text-[10px] font-medium uppercase tracking-[0.2em] text-white/55 sm:left-4 sm:top-4">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                <div className="h-px w-8 bg-teal-400/70 transition-all duration-300 group-hover:w-12" />
+                <h3 className="mt-2 text-sm font-semibold tracking-[-0.02em] text-white sm:text-base">
+                  {member.name}
+                </h3>
+                <p className="mt-0.5 text-[11px] leading-snug text-white/60 sm:text-xs">{member.title}</p>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

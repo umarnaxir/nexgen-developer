@@ -5,7 +5,7 @@
 @custom-variant light (&:is(.light *));
 
 :root {
-  /* Tertiary: teal — use sparingly for accents, borders, focus */
+  /* Tertiary: teal. use sparingly for accents, borders, focus */
   --teal-100: #ccfbf1;
   --teal-200: #99f6e4;
   --teal-300: #5eead4;
@@ -377,11 +377,11 @@ body {
   animation: auraDrift 22s ease-in-out infinite;
 }
 
-/* Grid is no longer painted across the whole body — it now lives only
+/* Grid is no longer painted across the whole body. it now lives only
    inside hero sections via the `.hero-grid` helper below. */
 
 /* ============================================================
-   HERO GRID — small-box grid, scoped to hero sections only.
+   HERO GRID. small-box grid, scoped to hero sections only.
    Add `hero-grid` to a hero's (relatively-positioned) wrapper.
    ============================================================ */
 .hero-grid {
@@ -403,7 +403,7 @@ body {
   mask-image: radial-gradient(ellipse 90% 85% at 50% 35%, #000 45%, transparent 85%);
 }
 
-/* Light theme — dark-teal grid lines, clearly visible on the silver canvas */
+/* Light theme. dark-teal grid lines, clearly visible on the silver canvas */
 .light .hero-grid::before {
   background-image:
     linear-gradient(to right, rgba(15, 118, 110, 0.12) 1px, transparent 1px),
@@ -488,7 +488,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
-/* Conic rotating glow border — used sparingly for hero/feature focus */
+/* Conic rotating glow border. used sparingly for hero/feature focus */
 .beam-border {
   position: relative;
   isolation: isolate;
@@ -546,13 +546,13 @@ body {
 .animate-spin-slow { animation: spinSlow 28s linear infinite; }
 .animate-spin-slow-rev { animation: spinSlow 34s linear infinite reverse; }
 
-/* Hero sphere — revolving orbit particles */
+/* Hero sphere. revolving orbit particles */
 @keyframes orbitRevolve { to { transform: rotate(360deg); } }
 .animate-orbit { animation: orbitRevolve 16s linear infinite; }
 .animate-orbit-rev { animation: orbitRevolve 22s linear infinite reverse; }
 .animate-orbit-slow { animation: orbitRevolve 30s linear infinite; }
 
-/* Hero sphere — pulsing teal shadow halo */
+/* Hero sphere. pulsing teal shadow halo */
 @keyframes spherePulse {
   0%, 100% {
     box-shadow: 0 0 55px rgba(20, 184, 166, 0.35), 0 0 110px rgba(20, 184, 166, 0.15);
@@ -563,7 +563,7 @@ body {
 }
 .animate-sphere-pulse { animation: spherePulse 5s ease-in-out infinite; }
 
-/* Hero sphere — gentle vertical float */
+/* Hero sphere. gentle vertical float */
 @keyframes heroFloatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
@@ -626,13 +626,13 @@ body {
    Dark theme is the default and is left completely untouched.
    ============================================================ */
 
-/* Light canvas — silver gradient replacing the black home-bg */
+/* Light canvas. silver gradient replacing the black home-bg */
 .light .home-bg {
   background-color: #f3f4f6 !important;
   background-image: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%) !important;
 }
 
-/* Soft teal aura — kept subtle so it reads as premium, not noisy */
+/* Soft teal aura. kept subtle so it reads as premium, not noisy */
 .light .home-bg::before {
   background:
     radial-gradient(55% 45% at 82% -8%, rgba(20, 184, 166, 0.16), transparent 60%),
@@ -641,7 +641,7 @@ body {
 }
 
 /* Frosted white glass surfaces */
-/* Glass surfaces (FAQ items, stat strips, panels) — solid white cards
+/* Glass surfaces (FAQ items, stat strips, panels). solid white cards
    with a soft shadow so they lift off the silver background */
 .light .glass {
   background: #ffffff;
@@ -677,7 +677,7 @@ body {
   color: transparent;
 }
 
-/* Teal heading gradient — deepen for AA contrast on light */
+/* Teal heading gradient. deepen for AA contrast on light */
 .light .text-gradient-teal {
   background: linear-gradient(110deg, #0d9488, #0f766e 55%, #115e59);
   -webkit-background-clip: text;
@@ -693,16 +693,16 @@ body {
   box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
 }
 
-/* Hero highlight words — darker teal for contrast on light */
+/* Hero highlight words. darker teal for contrast on light */
 .light .hero-highlight-word,
 .light .hero-service-word {
   color: #0f766e;
 }
 
-/* Beam border glow — warm teal works on light too, keep as-is */
+/* Beam border glow. warm teal works on light too, keep as-is */
 
 /* ============================================================
-   PREMIUM HOMEPAGE — alternating black / white sections
+   PREMIUM HOMEPAGE. alternating black / white sections
    ============================================================ */
 
 .section-dark {
@@ -754,7 +754,7 @@ body {
   background-color: #fafafa;
 }
 
-/* Fixed nav rail — desktop sidebar + mobile top bar */
+/* Fixed nav rail. desktop sidebar + mobile top bar */
 :root {
   --nav-rail-width: 5vw;
   --content-width: 95vw;
@@ -777,6 +777,15 @@ body {
   }
 }
 
+/* Shared rhythm: tight vertical gaps + one content width everywhere */
+.section-y {
+  @apply py-8 sm:py-10 lg:py-12;
+}
+
+.section-container {
+  @apply container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14;
+}
+
 .section-padding {
-  @apply px-4 py-16 sm:px-8 sm:py-24 lg:px-16 lg:py-32 xl:px-20 xl:py-40;
+  @apply px-4 py-8 sm:px-6 sm:py-10 lg:px-14 lg:py-12;
 }

@@ -1,31 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import { deriveOverview } from "../lib/derive-overview";
 
 interface ServiceOverviewSectionProps {
   description: string;
 }
 
-function splitDescriptionBlocks(text: string): string[] {
-  const sentences = text.match(/[^.!?]+[.!?]+/g) ?? [text];
-  const blocks: string[] = [];
-
-  for (let i = 0; i < sentences.length; i += 2) {
-    blocks.push(sentences.slice(i, i + 2).join(" ").trim());
-  }
-
-  return blocks.filter(Boolean);
-}
-
+/**
+ * Compact service overview: short lead + three punchy pillars.
+ * Distinct from sticky long-card layout.
+ */
 export default function ServiceOverviewSection({ description }: ServiceOverviewSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const blocksRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  const blocks = useMemo(() => splitDescriptionBlocks(description), [description]);
+  const { lead, points } = useMemo(() => deriveOverview(description), [description]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -34,95 +27,80 @@ export default function ServiceOverviewSection({ description }: ServiceOverviewS
     if (prefersReducedMotion || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(leftRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 78%",
-        },
-        y: 32,
-        opacity: 0,
-        duration: 0.85,
-        ease: "power3.out",
-      });
-
-      gsap.from(blocksRef.current?.children ?? [], {
-        scrollTrigger: {
-          trigger: blocksRef.current,
-          start: "top 85%",
-        },
+      gsap.from(headerRef.current, {
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
         y: 28,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.12,
+        duration: 0.8,
         ease: "power3.out",
+        immediateRender: false,
       });
 
-      gsap.to(progressRef.current, {
-        scaleY: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 40%",
-          scrub: 0.6,
-        },
+      gsap.from(gridRef.current?.children ?? [], {
+        scrollTrigger: { trigger: gridRef.current, start: "top 85%" },
+        y: 32,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.1,
+        ease: "power3.out",
+        immediateRender: false,
       });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [blocks.length]);
+  }, [points.length]);
 
   return (
-    <section ref={sectionRef} className="section-light py-14 sm:py-16 lg:py-20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
-          <div ref={leftRef} className="lg:sticky lg:top-28 lg:self-start">
-            <div className="flex gap-4">
-              <div className="relative hidden w-px shrink-0 bg-black/[0.08] sm:block">
-                <div
-                  ref={progressRef}
-                  className="absolute inset-x-0 top-0 h-full origin-top bg-teal-600"
-                  style={{ transform: "scaleY(0)" }}
-                />
+    <section
+      ref={sectionRef}
+      className="section-light border-t border-black/[0.06] section-y"
+    >
+      <div className="section-container">
+        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+            <span className="h-px w-8 bg-teal-500/50" />
+            Overview
+            <span className="h-px w-8 bg-teal-500/50" />
+          </span>
+          <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
+            What we deliver
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-black/50 sm:text-base">
+            {lead}
+          </p>
+        </div>
+
+        <div
+          ref={gridRef}
+          className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-3 sm:gap-4 lg:mt-14 lg:gap-5"
+        >
+          {points.map((point, index) => (
+            <motion.article
+              key={point.title}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 28 }}
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-neutral-950 p-5 text-left shadow-[0_24px_56px_-36px_rgba(0,0,0,0.35)] sm:p-6"
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-teal-400/15 blur-2xl transition-opacity group-hover:opacity-100"
+              />
+
+              <div className="relative flex items-center justify-between gap-3">
+                <span className="text-[11px] font-semibold tabular-nums tracking-[0.22em] text-teal-300/80">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="h-px flex-1 bg-white/10 transition-colors group-hover:bg-teal-400/30" />
               </div>
 
-              <div>
-                <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-                  Overview
-                </span>
-                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
-                  What we deliver
-                </h2>
-                <p className="mt-4 text-sm leading-relaxed text-black/45">
-                  Scroll to explore how we approach this service end to end.
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
-                  {String(blocks.length).padStart(2, "0")} sections
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div ref={blocksRef} className="space-y-4">
-            {blocks.map((block, index) => (
-              <motion.div
-                key={`${index}-${block.slice(0, 24)}`}
-                whileHover={{ y: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 28 }}
-                className="group rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.12)] transition-colors hover:border-teal-500/25 sm:p-6"
-              >
-                <div className="mb-3 flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-semibold tabular-nums tracking-[0.2em] text-black/30">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="h-px flex-1 bg-black/[0.06] transition-colors group-hover:bg-teal-500/20" />
-                </div>
-                <p className="text-[15px] leading-[1.85] text-black/60 transition-colors group-hover:text-black/75 sm:text-base">
-                  {block}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+              <h3 className="relative mt-5 text-lg font-semibold tracking-[-0.02em] text-white sm:text-xl">
+                {point.title}
+              </h3>
+              <p className="relative mt-2 text-[14px] leading-relaxed text-white/50 sm:text-[15px]">
+                {point.text}
+              </p>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
