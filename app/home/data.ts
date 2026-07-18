@@ -23,6 +23,7 @@ export type HomeService = {
   icon: LucideIcon;
   href: string;
   image: string;
+  highlights: string[];
 };
 
 export const featuredProjects: FeaturedProject[] = [
@@ -68,6 +69,7 @@ export const homeServices: HomeService[] = [
     icon: Globe,
     href: "/services/website-development",
     image: "/images/services/website.png",
+    highlights: ["SEO Ready", "Mobile First", "Fast Loading", "Secure Build"],
   },
   {
     title: "App Development",
@@ -76,6 +78,7 @@ export const homeServices: HomeService[] = [
     icon: Smartphone,
     href: "/services/app-development",
     image: "/images/services/app.png",
+    highlights: ["Cross Platform", "Scalable", "Offline Support", "Push Alerts"],
   },
   {
     title: "AI & ML Solutions",
@@ -84,6 +87,7 @@ export const homeServices: HomeService[] = [
     icon: BrainCircuit,
     href: "/services/ai-ml",
     image: "/images/services/ai.png",
+    highlights: ["Automation", "Smart Insights", "Data Driven", "Custom Models"],
   },
   {
     title: "Chatbot Development",
@@ -92,6 +96,7 @@ export const homeServices: HomeService[] = [
     icon: MessageSquare,
     href: "/services/chatbot-development",
     image: "/images/services/chatbot.png",
+    highlights: ["24/7 Support", "Multi-channel", "NLP Powered", "Easy Integration"],
   },
   {
     title: "Digital Marketing",
@@ -100,6 +105,7 @@ export const homeServices: HomeService[] = [
     icon: TrendingUp,
     href: "/services/digital-marketing",
     image: "/images/services/digital-marketing.png",
+    highlights: ["Lead Growth", "Brand Reach", "Analytics Ready", "Paid Campaigns"],
   },
   {
     title: "Deployment & DevOps",
@@ -108,6 +114,7 @@ export const homeServices: HomeService[] = [
     icon: Infinity,
     href: "/services/deployment-devops",
     image: "/images/services/deployment-and-devOps .png",
+    highlights: ["Zero Downtime", "Cloud Native", "Auto Scaling", "CI/CD Ready"],
   },
 ];
 
