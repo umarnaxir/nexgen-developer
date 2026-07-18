@@ -1,41 +1,110 @@
 "use client";
 
-import { Sparkles, ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 
-export default function ContactCTA() {
+type ContactCTAProps = {
+  variant?: "section" | "embedded";
+};
+
+export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
   const { open: openContactModal } = useContactModal();
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !contentRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(gridRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
+
+      gsap.from(contentRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+        y: 36,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const isEmbedded = variant === "embedded";
 
   return (
-    <div className="pb-12 sm:pb-16" data-aos="fade-up">
-      <div className="relative overflow-hidden rounded-3xl bg-silver light:bg-white border border-teal-700/15 light:border-gray-200 px-6 py-10 sm:px-10 sm:py-14 text-center shadow-xl light:shadow-sm">
-        {/* Subtle teal glow accents */}
-        <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-teal-500/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-teal-600/10 blur-3xl" />
+    <section
+      ref={sectionRef}
+      className={
+        isEmbedded
+          ? "relative overflow-hidden rounded-xl border border-black/[0.06] bg-black px-6 py-12 text-white sm:px-10 sm:py-14"
+          : "section-dark relative overflow-hidden py-16 sm:py-20 lg:py-24"
+      }
+    >
+      <div
+        ref={gridRef}
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        aria-hidden
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.14) 1px, transparent 0)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-teal-500/10 blur-3xl" />
 
-        <div className="relative z-10">
-          {/* Eyebrow badge */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-teal-700/25 light:border-teal-200 bg-teal-700/10 light:bg-teal-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-teal-700 mb-5">
-            <Sparkles className="h-3.5 w-3.5" />
-            Let&apos;s Build Together
+      <div className={isEmbedded ? "relative" : "container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-14"}>
+        <div
+          ref={contentRef}
+          className="mx-auto flex max-w-3xl flex-col items-center text-center"
+        >
+          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+            Let&apos;s build together
           </span>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black light:text-gray-900 mb-3 sm:mb-4 px-2">
-            Ready to Start Your <span className="text-teal-700">Project?</span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
+            Ready to start your project?
           </h2>
-          <p className="text-base sm:text-lg text-black/70 light:text-gray-700 mb-7 sm:mb-9 max-w-2xl mx-auto px-2 leading-relaxed">
-            Get in touch with us today for a free consultation and custom quote. Let&apos;s discuss how we can help bring your digital vision to life.
+
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-white/55 sm:text-base">
+            Get in touch for a free consultation and custom quote. We&apos;ll help you scope, plan,
+            and launch with clarity.
           </p>
 
-          <button
-            onClick={openContactModal}
-            className="group inline-flex items-center gap-2 px-7 sm:px-9 py-3.5 sm:py-4 bg-gradient-to-r from-teal-600 to-teal-700 text-white text-sm sm:text-base font-bold rounded-xl shadow-lg shadow-teal-700/30 hover:from-teal-500 hover:to-teal-600 hover:scale-[1.03] transition-all duration-300 uppercase tracking-wide active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/40"
-          >
-            Contact Us Now
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
+            <MagneticButton onClick={openContactModal} className="!px-7 !py-3.5 sm:!px-9 sm:!py-4">
+              Contact us now
+              <ArrowUpRight className="h-4 w-4" />
+            </MagneticButton>
+
+            <a
+              href="/contact-us"
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-teal-400 transition-all hover:gap-2.5 hover:text-teal-300"
+            >
+              Or visit contact page
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

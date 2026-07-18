@@ -11,14 +11,14 @@ export const metadata = getAboutSEO();
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
-        <div className="container mx-auto py-8 sm:py-10 md:py-10 lg:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <AboutHero />
-          <AboutContent />
-          <WhyChooseUsSection dark />
-          <ValuesSection />
-          <StatsBar />
-          <ContactCTA />
-        </div>
+      <div className="container mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 md:py-10 lg:px-8 lg:py-8">
+        <AboutHero />
+        <AboutContent />
+        <WhyChooseUsSection dark />
+        <ValuesSection />
+      </div>
+      <StatsBar />
+      <ContactCTA />
     </div>
   );
 }

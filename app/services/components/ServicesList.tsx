@@ -1,84 +1,161 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import { servicesForListing } from "../data";
-import type { ServiceListingItem, ServiceCategory } from "../config";
+import type { ServiceCategory } from "../config";
 import ServiceCard from "./ServiceCard";
 
 const CATEGORY_LABELS: Record<ServiceCategory, string> = {
   development: "Development",
   "digital-marketing": "Digital Marketing",
-  support: "Support & Operations",
+  support: "Support",
 };
+
+const CATEGORIES: ServiceCategory[] = ["development", "digital-marketing", "support"];
 
 export default function ServicesList() {
   const [activeTab, setActiveTab] = useState<ServiceCategory>("development");
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const filteredServices = servicesForListing.filter(
-    (s) => s.category === activeTab
-  );
+  const sectionRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  const filteredServices = servicesForListing.filter((s) => s.category === activeTab);
 
   useEffect(() => {
-    setIsTransitioning(true);
-    const timer = setTimeout(() => setIsTransitioning(false), 300);
-    return () => clearTimeout(timer);
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !sectionRef.current || !pinRef.current || !trackRef.current || !viewportRef.current) {
+      return;
+    }
+
+    gsap.set(trackRef.current, { x: 0 });
+    if (progressRef.current) {
+      progressRef.current.style.transform = "scaleX(0.015)";
+    }
+
+    const getScrollAmount = () => {
+      const track = trackRef.current;
+      const viewport = viewportRef.current;
+      if (!track || !viewport) return 0;
+      return Math.max(track.scrollWidth - viewport.offsetWidth, 0);
+    };
+
+    const updateProgress = (progress: number) => {
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${Math.max(progress, 0.015)})`;
+      }
+    };
+
+    const ctx = gsap.context(() => {
+      gsap.to(trackRef.current, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
+          pin: pinRef.current,
+          scrub: 1.1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => updateProgress(self.progress),
+        },
+      });
+    }, sectionRef);
+
+    const handleResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", handleResize);
+    ScrollTrigger.refresh();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ctx.revert();
+    };
   }, [activeTab]);
 
   return (
-    <section aria-labelledby="services-heading" className="space-y-12 md:space-y-16">
-      {/* Enhanced Tabbed Navigation */}
-      <div className="flex justify-center">
-        {/* Background Container with Subtle Shadow */}
-        <div
-          className="glass w-full max-w-xl rounded-2xl p-3 sm:p-2"
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            {(["development", "digital-marketing", "support"] as const).map(
-              (category) => (
+    <section
+      ref={sectionRef}
+      id="services-list"
+      className="section-dark relative overflow-hidden text-white"
+      aria-label="Services listing"
+    >
+      <div
+        ref={pinRef}
+        className="relative flex h-auto min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[92vh] lg:px-14 lg:py-10"
+      >
+        <div className="container mx-auto mb-8 flex max-w-7xl shrink-0 flex-col gap-6 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+              What we offer
+            </span>
+            <h2
+              id="services-list-heading"
+              className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl"
+            >
+              Our services
+            </h2>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:items-end">
+            <div
+              className="flex flex-wrap gap-2"
+              role="tablist"
+              aria-label="Service categories"
+            >
+              {CATEGORIES.map((category) => (
                 <button
                   key={category}
+                  type="button"
                   role="tab"
                   aria-selected={activeTab === category}
                   aria-controls={`tabpanel-${category}`}
                   id={`tab-${category}`}
                   onClick={() => setActiveTab(category)}
-                  className={`
-                    relative w-full sm:w-auto px-5 py-2.5 font-semibold text-sm sm:text-base rounded-xl
-                    transition-all duration-300 ease-out
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40
-                    ${
-                      activeTab === category
-                        ? "bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25"
-                        : "bg-transparent text-silver-light light:text-gray-700 hover:bg-white/[0.06] light:hover:bg-gray-100 hover:text-white light:hover:text-gray-900"
-                    }
-                  `}
+                  className={`rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+                    activeTab === category
+                      ? "bg-white text-black"
+                      : "border border-white/15 bg-white/5 text-white/55 hover:border-white/30 hover:text-white"
+                  }`}
                 >
                   {CATEGORY_LABELS[category]}
                 </button>
-              )
-            )}
+              ))}
+            </div>
+
+            <div className="hidden items-center gap-4 sm:flex">
+              <span className="text-sm tabular-nums text-white/45">
+                {String(filteredServices.length).padStart(2, "0")} services
+              </span>
+              <div className="h-px w-28 overflow-hidden bg-white/10 sm:w-40">
+                <div
+                  ref={progressRef}
+                  className="h-full origin-left bg-white transition-transform duration-150"
+                  style={{ transform: "scaleX(0.015)" }}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Service Cards Grid - Same layout on mobile and desktop */}
-      <div
-        role="tabpanel"
-        id={`tabpanel-${activeTab}`}
-        aria-labelledby={`tab-${activeTab}`}
-        className={`grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 transition-opacity duration-300 ${
-          isTransitioning ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {filteredServices.map((service, index) => (
-          <ServiceCard
-            key={service.slug}
-            service={service}
-            index={index}
-            category={activeTab}
-          />
-        ))}
+        <div
+          ref={viewportRef}
+          className="services-viewport overflow-hidden"
+          role="tabpanel"
+          id={`tabpanel-${activeTab}`}
+          aria-labelledby={`tab-${activeTab}`}
+        >
+          <div ref={trackRef} className="flex w-max gap-5 will-change-transform sm:gap-6 lg:gap-7">
+            {filteredServices.map((service, index) => (
+              <ServiceCard key={service.slug} service={service} index={index} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

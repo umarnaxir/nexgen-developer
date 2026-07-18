@@ -1,29 +1,127 @@
 "use client";
 
-import { Star, Rocket, Smile, Globe } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Rocket, Smile, Star, Globe } from "lucide-react";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 const stats = [
-  { icon: Rocket, value: "50+", label: "Projects Delivered" },
-  { icon: Smile, value: "30+", label: "Happy Clients" },
-  { icon: Star, value: "98%", label: "Client Satisfaction" },
-  { icon: Globe, value: "12+", label: "Countries Served" },
+  { icon: Rocket, value: 50, suffix: "+", label: "Projects Delivered" },
+  { icon: Smile, value: 30, suffix: "+", label: "Happy Clients" },
+  { icon: Star, value: 98, suffix: "%", label: "Client Satisfaction" },
+  { icon: Globe, value: 12, suffix: "+", label: "Countries Served" },
 ];
 
-export default function StatsBar() {
+function StatItem({
+  icon: Icon,
+  value,
+  suffix,
+  label,
+  index,
+}: (typeof stats)[number] & { index: number }) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const valueRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !itemRef.current || !valueRef.current) return;
+
+    const counter = { val: 0 };
+
+    const ctx = gsap.context(() => {
+      gsap.from(itemRef.current, {
+        scrollTrigger: {
+          trigger: itemRef.current,
+          start: "top 88%",
+        },
+        y: 28,
+        opacity: 0,
+        duration: 0.7,
+        delay: index * 0.08,
+        ease: "power3.out",
+      });
+
+      gsap.to(counter, {
+        val: value,
+        duration: 1.4,
+        delay: index * 0.08,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: itemRef.current,
+          start: "top 88%",
+        },
+        onUpdate: () => {
+          if (valueRef.current) {
+            valueRef.current.textContent = `${Math.round(counter.val)}${suffix}`;
+          }
+        },
+      });
+    }, itemRef);
+
+    return () => ctx.revert();
+  }, [index, suffix, value]);
+
   return (
-    <section className="py-10 lg:py-12" data-aos="fade-up">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="glass grid grid-cols-2 gap-x-4 gap-y-5 rounded-2xl px-5 py-5 sm:px-8 lg:grid-cols-4">
-          {stats.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="group flex items-center gap-3 sm:gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-teal-400/20 light:group-hover:bg-teal-100">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-2xl font-extrabold text-white light:text-gray-900">{value}</p>
-                <p className="text-xs text-silver-dark light:text-gray-500 sm:text-sm">{label}</p>
-              </div>
-            </div>
+    <div
+      ref={itemRef}
+      className="group relative overflow-hidden rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_20px_56px_-40px_rgba(0,0,0,0.14)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/20 hover:shadow-[0_28px_64px_-36px_rgba(0,0,0,0.18)] sm:p-6"
+    >
+      <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-teal-500/[0.06] blur-2xl transition-opacity duration-300 group-hover:opacity-100 opacity-0" />
+
+      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600 transition-transform duration-300 group-hover:scale-105">
+        <Icon className="h-5 w-5" />
+      </span>
+
+      <p className="text-3xl font-semibold tabular-nums tracking-[-0.03em] text-black sm:text-4xl">
+        <span ref={valueRef}>0{suffix}</span>
+      </p>
+      <p className="mt-1.5 text-[13px] leading-snug text-black/50">{label}</p>
+    </div>
+  );
+}
+
+export default function StatsBar() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !headerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+        y: 24,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="section-light py-14 sm:py-16 lg:py-20" aria-label="Company stats">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14">
+        <div ref={headerRef} className="mb-10 max-w-xl sm:mb-12">
+          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+            By the numbers
+          </span>
+          <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
+            Results that speak for themselves.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          {stats.map((stat, index) => (
+            <StatItem key={stat.label} {...stat} index={index} />
           ))}
         </div>
       </div>
