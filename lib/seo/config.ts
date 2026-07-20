@@ -14,8 +14,9 @@ export const seoConfig = {
   publisher: "NexGen Developers",
   
   // Default SEO Values
-  defaultTitle: "NexGen Developers - The Team of Freelancers",
-  defaultDescription: "We are freelancers helping startups and local businesses with AI/ML, chatbots, web & app development, Digital Marketing and more.",
+  defaultTitle: "NexGen Developers — Build, Launch & Grow",
+  defaultDescription:
+    "Freelance team helping startups and local businesses with AI/ML, chatbots, web & app development, and digital marketing.",
   defaultKeywords: [
     "NexGen Developers",
     "freelancers",

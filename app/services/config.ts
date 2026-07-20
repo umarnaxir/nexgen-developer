@@ -73,9 +73,9 @@ const WEBSITE_DEVELOPMENT: ServiceDefinition = {
  label: "Website Development",
  icon: "Globe",
  seo: {
- title: "Professional Website Development Services | Custom Web Apps & Enterprise Solutions | NexGen Developers",
+ title: "Website Development Services",
  description:
- "Expert website development services: custom responsive websites, web applications, and enterprise solutions. Built with React, Next.js, Node.js, Python. Full-stack development, SEO optimization, and ongoing support. Get a free quote today.",
+ "Custom responsive websites, web apps, and enterprise solutions with React, Next.js, Node.js, and Python. SEO-ready builds and ongoing support.",
  keywords: [
  "website development",
  "web development services",
@@ -153,9 +153,9 @@ const APP_DEVELOPMENT: ServiceDefinition = {
  label: "App Development",
  icon: "Smartphone",
  seo: {
- title: "Mobile App Development Services | iOS & Android Apps | React Native & Flutter | NexGen Developers",
+ title: "Mobile App Development Services",
  description:
- "Expert mobile app development for iOS and Android. Native and cross-platform apps using React Native and Flutter. From concept to App Store and Play Store deployment. Custom mobile solutions with ongoing support.",
+ "iOS and Android apps with React Native and Flutter — from concept to App Store and Play Store, plus ongoing support.",
  keywords: [
  "mobile app development",
  "iOS app development",
@@ -232,9 +232,9 @@ const AI_ML: ServiceDefinition = {
  label: "AI & ML Solutions",
  icon: "Cpu",
  seo: {
- title: "AI & Machine Learning Solutions | Custom AI Development | NLP & Computer Vision | NexGen Developers",
+ title: "AI & Machine Learning Solutions",
  description:
- "Custom AI and ML solutions: predictive analytics, natural language processing (NLP), computer vision, and automation. Built with Python, TensorFlow, PyTorch. Transform your business operations with intelligent automation and data-driven insights.",
+ "Custom AI/ML for predictive analytics, NLP, computer vision, and automation — designed, trained, and deployed for measurable business results.",
  keywords: [
  "AI solutions",
  "artificial intelligence development",
@@ -313,9 +313,9 @@ const CHATBOT_DEVELOPMENT: ServiceDefinition = {
  label: "Chatbot Development",
  icon: "MessageCircle",
  seo: {
- title: "AI Chatbot Development Services | Customer Support Chatbots | Multi-Platform Integration | NexGen Developers",
+ title: "AI Chatbot Development Services",
  description:
- "AI-powered chatbots for customer support and automation. Natural language processing, multi-platform deployment (website, WhatsApp, Facebook Messenger), CRM integration. 24/7 intelligent customer support solutions.",
+ "AI chatbots for customer support and automation with NLP, multi-channel integration, and continuous optimization after launch.",
  keywords: [
  "chatbot development",
  "AI chatbot",
@@ -392,9 +392,9 @@ const MAINTENANCE_SUPPORT: ServiceDefinition = {
  label: "Maintenance & Support",
  icon: "Wrench",
  seo: {
- title: "Website & App Maintenance Services | 24/7 Technical Support | Bug Fixes & Updates | NexGen Developers",
+ title: "Website & App Maintenance",
  description:
- "Comprehensive maintenance and 24/7 support services for websites and mobile apps. Bug fixes, security updates, performance optimization, regular backups, and ongoing monitoring. Keep your digital products reliable and up-to-date.",
+ "24/7 website and app maintenance — updates, security patches, bug fixes, monitoring, and performance support for peace of mind.",
  keywords: [
  "website maintenance",
  "app maintenance",
@@ -470,9 +470,9 @@ const DEPLOYMENT_DEVOPS: ServiceDefinition = {
  label: "Deployment & DevOps",
  icon: "Server",
  seo: {
- title: "DevOps & Cloud Deployment Services | CI/CD Pipeline Setup | AWS Azure GCP | NexGen Developers",
+ title: "DevOps & Cloud Deployment",
  description:
- "Expert DevOps services: cloud deployment, CI/CD pipeline setup, Docker containerization, Kubernetes orchestration, and infrastructure management. AWS, Azure, GCP, Vercel. Reliable, scalable hosting and automation for your applications.",
+ "CI/CD pipelines, Docker, and cloud deployment on AWS, Azure, or GCP — secure, scalable releases with monitoring and handover.",
  keywords: [
  "DevOps services",
  "cloud deployment",
@@ -551,9 +551,9 @@ const DIGITAL_MARKETING: ServiceDefinition = {
  label: "Digital Marketing",
  icon: "TrendingUp",
  seo: {
- title: "Digital Marketing Services | SEO, Social Media, Google Ads & Meta Ads | NexGen Developers",
+ title: "Digital Marketing Services",
  description:
- "Full-service digital marketing agency: SEO optimization, social media marketing, Google Ads, Meta Ads (Facebook & Instagram), and graphic design. Grow organic traffic, increase conversions, and boost your online presence with data-driven strategies.",
+ "SEO, social media, Google Ads, and Meta Ads — full-funnel digital marketing to grow traffic, leads, and conversions.",
  keywords: [
  "digital marketing",
  "digital marketing agency",
@@ -632,7 +632,7 @@ const SEO_SERVICE: SubServiceDefinition = {
  label: "SEO",
  icon: "Search",
  seo: {
- title: "SEO Services - Search Engine Optimization ",
+ title: "SEO Services",
  description:
  "Professional SEO: on-page, off-page, keyword research, and technical SEO. Rank higher and grow organic traffic.",
  keywords: [
@@ -695,7 +695,7 @@ const SOCIAL_MEDIA_MARKETING: SubServiceDefinition = {
  label: "Social Media Marketing",
  icon: "Share2",
  seo: {
- title: "Social Media Marketing Services ",
+ title: "Social Media Marketing",
  description:
  "Social media strategy, content, and ads for Facebook, Instagram, LinkedIn, and more. Build community and grow engagement.",
  keywords: [
@@ -758,7 +758,7 @@ const GRAPHIC_DESIGNING: SubServiceDefinition = {
  label: "Graphic Designing",
  icon: "Palette",
  seo: {
- title: "Graphic Design Services ",
+ title: "Graphic Design Services",
  description:
  "Logo design, brand identity, social graphics, and marketing materials. Professional design that strengthens your brand.",
  keywords: [
@@ -821,7 +821,7 @@ const GOOGLE_ADS: SubServiceDefinition = {
  label: "Google Ads",
  icon: "MousePointerClick",
  seo: {
- title: "Google Ads Management - PPC Services ",
+ title: "Google Ads Management",
  description:
  "Google Ads setup and management: Search, Display, YouTube. Maximize ROI with expert PPC campaigns.",
  keywords: [
@@ -884,7 +884,7 @@ const META_ADS: SubServiceDefinition = {
  label: "Meta Ads",
  icon: "Facebook",
  seo: {
- title: "Meta Ads Management - Facebook & Instagram Ads ",
+ title: "Meta Ads Management",
  description:
  "Facebook and Instagram ad management. Reach your audience with targeted Meta (Facebook & Instagram) campaigns.",
  keywords: [
