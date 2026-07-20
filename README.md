@@ -1,4 +1,4 @@
-# NexGen Developers — Website
+# NexGen Developers  -  Website
 
 A marketing site and content platform built with Next.js (App Router), TypeScript, and Tailwind CSS. The project includes contact, callback and newsletter forms that send emails through Resend.
 
@@ -65,9 +65,9 @@ npm run typecheck
 
 The app uses a few environment variables for external services. Create a `.env.local` in the project root and set the values you need.
 
-- `RESEND_API_KEY` — Resend API key used to send emails (required for forms)
-- `RESEND_FROM_EMAIL` — Optional override for the `from` address (e.g. "NexGen Developers <forms@nexgendevelopers.in>")
-- `RESEND_TO_EMAIL` or `CONTACT_TO_EMAIL` — The business inbox that receives form submissions (fallbacks are provided in code)
+- `RESEND_API_KEY`  -  Resend API key used to send emails (required for forms)
+- `RESEND_FROM_EMAIL`  -  Optional override for the `from` address (e.g. "NexGen Developers <forms@nexgendevelopers.in>")
+- `RESEND_TO_EMAIL` or `CONTACT_TO_EMAIL`  -  The business inbox that receives form submissions (fallbacks are provided in code)
 
 Notes:
 
@@ -76,18 +76,18 @@ Notes:
 
 ## Project structure (high level)
 
-- `app/` — Next.js App Router pages, route handlers and per-route components
-	- `app/api/` — Serverless API routes (contact, callback, subscribe, etc.)
-	- `app/home`, `app/blogs`, `app/services`, ... — top-level pages and their components
-- `components/` — shared UI components (Navbar, Footer, modals, UI primitives)
-- `lib/` — helper utilities and SEO structured data helpers
-- `public/` — static assets (images, robots, sitemap)
+- `app/`  -  Next.js App Router pages, route handlers and per-route components
+	- `app/api/`  -  Serverless API routes (contact, callback, subscribe, etc.)
+	- `app/home`, `app/blogs`, `app/services`, ...  -  top-level pages and their components
+- `components/`  -  shared UI components (Navbar, Footer, modals, UI primitives)
+- `lib/`  -  helper utilities and SEO structured data helpers
+- `public/`  -  static assets (images, robots, sitemap)
 
 Files to inspect for behavior:
 
-- `app/api/_utils/resend.ts` — Resend integration and email helper functions
-- `app/page.tsx` — root landing page entry
-- `components/Navbar/Navbar.tsx` and `components/Footer/Footer.tsx` — site chrome
+- `app/api/_utils/resend.ts`  -  Resend integration and email helper functions
+- `app/page.tsx`  -  root landing page entry
+- `components/Navbar/Navbar.tsx` and `components/Footer/Footer.tsx`  -  site chrome
 
 ## Deployment
 

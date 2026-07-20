@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "@/components/Navbar/Navbar";
+import SiteNavigation from "@/components/navigation/SiteNavigation";
 import Footer from "@/components/Footer/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
 import ContactModalProvider from "@/components/modals/ContactModalProvider";
@@ -9,18 +9,17 @@ interface LayoutWrapperProps {
   children: React.ReactNode;
 }
 
+const SHOW_WHATSAPP_BUTTON = false;
+
 export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <ContactModalProvider>
-      <div
-        id="layout-root"
-        className="home-bg text-white light:text-gray-800 relative min-h-screen"
-      >
-        <div className="relative z-10">
-          <Navbar isHome />
-          <main className="flex-1 pt-20 lg:pt-0">{children}</main>
+      <SiteNavigation />
+      <div id="layout-root" className="relative min-h-screen bg-black text-white">
+        <div className="page-with-rail relative z-10">
+          <main className="flex-1">{children}</main>
           <Footer />
-          <WhatsAppButton />
+          {SHOW_WHATSAPP_BUTTON && <WhatsAppButton />}
         </div>
       </div>
     </ContactModalProvider>

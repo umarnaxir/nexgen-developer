@@ -1,6 +1,11 @@
 import { Metadata } from "next";
 import { seoConfig } from "./config";
 
+/** Google typically shows ~50–60 chars for titles. */
+export const SEO_TITLE_MAX = 60;
+/** Google typically shows ~150–160 chars for meta descriptions. */
+export const SEO_DESCRIPTION_MAX = 160;
+
 /**
  * SEO Metadata Type
  */
@@ -51,6 +56,52 @@ export interface SEOProps {
   nofollow?: boolean;
 }
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Remove brand suffix/prefix so we never double-append site name. */
+export function stripSiteBrand(title: string): string {
+  const brand = escapeRegExp(seoConfig.siteName);
+  return title
+    .replace(new RegExp(`\\s*[|\\-–—:]\\s*${brand}\\s*$`, "i"), "")
+    .replace(new RegExp(`^${brand}\\s*[.|\\-–—:]\\s*`, "i"), "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function truncateAtWord(value: string, max: number): string {
+  const trimmed = value.trim();
+  if (trimmed.length <= max) return trimmed;
+  const slice = trimmed.slice(0, max - 1);
+  const at = slice.lastIndexOf(" ");
+  const base = (at > Math.floor(max * 0.55) ? slice.slice(0, at) : slice).trimEnd();
+  return `${base}…`;
+}
+
+/**
+ * Build a single title tag: "Page Title | NexGen Developers"
+ * - Never duplicates the brand
+ * - Keeps length within SEO_TITLE_MAX when possible
+ */
+export function buildSeoTitle(title?: string): string {
+  if (!title?.trim()) return seoConfig.defaultTitle;
+
+  const page = stripSiteBrand(title);
+  if (!page || page.toLowerCase() === seoConfig.siteName.toLowerCase()) {
+    return seoConfig.siteName;
+  }
+
+  const suffix = ` | ${seoConfig.siteName}`;
+  const budget = SEO_TITLE_MAX - suffix.length;
+  const pagePart = page.length <= budget ? page : truncateAtWord(page, budget);
+  return `${pagePart}${suffix}`;
+}
+
+export function buildSeoDescription(description?: string): string {
+  return truncateAtWord(description || seoConfig.defaultDescription, SEO_DESCRIPTION_MAX);
+}
+
 /**
  * Generate complete metadata object for Next.js
  */
@@ -68,55 +119,44 @@ export function generateMetadata(seo: SEOProps): Metadata {
     nofollow = false,
   } = seo;
 
-  // Build canonical URL
-  const canonicalUrl = canonical 
-    ? canonical.startsWith("http") 
-      ? canonical 
+  const canonicalUrl = canonical
+    ? canonical.startsWith("http")
+      ? canonical
       : `${seoConfig.siteUrl}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
     : seoConfig.siteUrl;
 
-  // Build title
-  const fullTitle = title 
-    ? `${title} | ${seoConfig.siteName}`
-    : seoConfig.defaultTitle;
+  const fullTitle = buildSeoTitle(title);
+  const metaDescription = buildSeoDescription(description);
 
-  // Build description
-  const metaDescription = description || seoConfig.defaultDescription;
-
-  // Build keywords
-  const metaKeywords = keywords 
+  const metaKeywords = keywords
     ? [...Array.from(seoConfig.defaultKeywords), ...keywords]
     : Array.from(seoConfig.defaultKeywords);
 
-  // Build robots - create a new object to avoid readonly issues
-  const metaRobots = robots 
-    ? { ...robots }
-    : { ...seoConfig.defaultRobots };
-  
-  if (noindex) {
-    metaRobots.index = false;
-  }
-  if (nofollow) {
-    metaRobots.follow = false;
-  }
+  const metaRobots = robots ? { ...robots } : { ...seoConfig.defaultRobots };
 
-  // Build OpenGraph
-  const ogTitle = openGraph?.title || title || seoConfig.defaultTitle;
-  const ogDescription = openGraph?.description || description || seoConfig.defaultDescription;
-  const ogUrl = openGraph?.url || canonicalUrl;
-  const ogImages = openGraph?.images || [{
-    url: seoConfig.defaultOgImage,
-    width: seoConfig.defaultOgImageWidth,
-    height: seoConfig.defaultOgImageHeight,
-    alt: seoConfig.defaultOgImageAlt,
-  }];
+  if (noindex) metaRobots.index = false;
+  if (nofollow) metaRobots.follow = false;
 
-  // Build Twitter
-  const twitterTitle = twitter?.title || title || seoConfig.defaultTitle;
-  const twitterDescription = twitter?.description || description || seoConfig.defaultDescription;
+  const ogTitle = buildSeoTitle(openGraph?.title || title);
+  const ogDescription = buildSeoDescription(openGraph?.description || description);
+  const ogUrl = openGraph?.url
+    ? openGraph.url.startsWith("http")
+      ? openGraph.url
+      : `${seoConfig.siteUrl}${openGraph.url.startsWith("/") ? openGraph.url : `/${openGraph.url}`}`
+    : canonicalUrl;
+  const ogImages = openGraph?.images || [
+    {
+      url: seoConfig.defaultOgImage,
+      width: seoConfig.defaultOgImageWidth,
+      height: seoConfig.defaultOgImageHeight,
+      alt: seoConfig.defaultOgImageAlt,
+    },
+  ];
+
+  const twitterTitle = buildSeoTitle(twitter?.title || title);
+  const twitterDescription = buildSeoDescription(twitter?.description || description);
   const twitterImages = twitter?.images || [seoConfig.defaultOgImage];
 
-  // Build metadata object
   const metadata: Metadata = {
     metadataBase: new URL(seoConfig.siteUrl),
     title: fullTitle,
@@ -135,7 +175,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
       title: ogTitle,
       description: ogDescription,
       siteName: seoConfig.siteName,
-      images: ogImages.map(img => ({
+      images: ogImages.map((img) => ({
         url: img.url.startsWith("http") ? img.url : `${seoConfig.siteUrl}${img.url}`,
         width: img.width || seoConfig.defaultOgImageWidth,
         height: img.height || seoConfig.defaultOgImageHeight,
@@ -153,7 +193,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
       creator: seoConfig.twitterHandle,
       title: twitterTitle,
       description: twitterDescription,
-      images: twitterImages.map(img => 
+      images: twitterImages.map((img) =>
         img.startsWith("http") ? img : `${seoConfig.siteUrl}${img}`
       ),
     },

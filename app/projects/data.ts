@@ -1,12 +1,12 @@
-import { Building2, Globe, Heart, Briefcase, Users, Calendar,Brain,Eye,Trophy, Share2,BarChart3, GraduationCap, ShoppingBag, Dumbbell, BookOpen } from "lucide-react";
+import { Building2, Globe, Heart, Briefcase, Users, Brain, Eye, Trophy, Share2, BarChart3, GraduationCap, ShoppingBag, Dumbbell, BookOpen, MapPin } from "lucide-react";
 
 export const projects = [
   {
     id: 11,
-    title: "Exceptional IAS Academy – Coaching Institute Website",
+    title: "Exceptional IAS Academy - Coaching Institute Website",
     description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
     detailedDescription: "A professional website for Exceptional IAS Academy designed to attract and inform aspiring civil services students. The platform highlights course offerings, experienced faculty, success stories, and study programs while making enquiry and admission simple. The design focuses on building trust and credibility with prospective students through clear information architecture and a responsive, fast-loading interface.",
-    image: "/images/projects/exceptional.png",
+    image: "/images/projects/exceptionalias.png",
     link: "https://exceptionaliasacademy.vercel.app/",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
     category: "Education Website",
@@ -27,7 +27,7 @@ export const projects = [
   },
   {
     id: 12,
-    title: "ShoesHub Poonch – Footwear E-Commerce Store",
+    title: "ShoesHub Poonch - Footwear E-Commerce Store",
     description: "A sleek online footwear store with product listings, categories, and a smooth shopping experience across all devices.",
     detailedDescription: "An attractive e-commerce website for ShoesHub Poonch, designed to showcase and sell footwear online. The store features organized product categories, detailed product pages, and an intuitive browsing experience. Built with a modern, mobile-first design, the platform helps customers easily discover products and place orders while giving the brand a strong online presence.",
     image: "/images/projects/shoeshub.png",
@@ -51,7 +51,7 @@ export const projects = [
   },
   {
     id: 13,
-    title: "FitSpace Gym – Fitness Center Website",
+    title: "FitSpace Gym - Fitness Center Website",
     description: "A bold, energetic gym website highlighting programs, trainers, memberships, and schedules with a motivating design.",
     detailedDescription: "A dynamic and energetic website for FitSpace Gym designed to inspire visitors to start their fitness journey. The platform showcases training programs, expert trainers, membership plans, and class schedules with a bold, motivating visual style. The responsive design ensures members can easily explore offerings and get in touch, helping the gym grow its community and memberships.",
     image: "/images/projects/fitspacegym.png",
@@ -75,10 +75,10 @@ export const projects = [
   },
   {
     id: 14,
-    title: "Citadel Library – Library & Study Space Website",
+    title: "Citadel Library - Library & Study Space Website",
     description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
     detailedDescription: "A clean and organized website for Citadel Library designed to provide students and readers with information about study spaces, memberships, and available resources. The platform emphasizes a quiet, focused atmosphere through thoughtful design while making it easy to explore facilities, plans, and timings. The responsive interface ensures a smooth experience for visitors looking to reserve or learn about the space.",
-    image: "/images/projects/citadil.png",
+    image: "/images/projects/citadel.png",
     link: "https://citadellibrary.vercel.app/",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
     category: "Library Website",
@@ -99,10 +99,10 @@ export const projects = [
   },
   {
     id: 1,
-    title: "Dr. Jibran Bashir – Orthopedic Care Website",
+    title: "Dr. Jibran Bashir - Orthopedic Care Website",
     description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
     detailedDescription: "A comprehensive medical website designed for Dr. Jibran Bashir's orthopedic practice. The platform features a modern, clean interface that builds trust with patients while providing essential information about services, doctor's expertise, and treatment options. The website includes an integrated appointment booking system, patient testimonials, and detailed service pages.",
-    image: "/images/projects/project2.png",
+    image: "/images/projects/drjibran.png",
     link: "https://drjibranbashir.com",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
     category: "Medical Website",
@@ -123,10 +123,10 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Hotel Sea View – Luxury Stay Website",
+    title: "Hotel Sea View - Luxury Stay Website",
     description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
     detailedDescription: "An elegant and luxurious website for Hotel Sea View, designed to showcase the hotel's premium accommodations and services. The website features stunning visual galleries, detailed room descriptions, amenities information, and an easy-to-use booking interface. The design emphasizes the hotel's luxury brand while maintaining excellent user experience across all devices.",
-    image: "/images/projects/project3.png",
+    image: "/images/projects/hotelseaview.png",
     link: "https://thehotelseaview.in",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Image Optimization", "Booking Integration", "Google Maps API"],
     category: "Hospitality Website",
@@ -150,7 +150,7 @@ export const projects = [
     title: "Kindness Towards Humanity Foundation",
     description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
     detailedDescription: "A compassionate and impactful website for the Kindness Towards Humanity Foundation, designed to inspire visitors and facilitate donations. The platform effectively communicates the organization's mission, showcases their humanitarian work through galleries and stories, and provides secure donation options. The design balances emotional connection with clear calls-to-action.",
-    image: "/images/projects/project1.png",
+    image: "/images/projects/kindnesstowordshumanity.png",
     link: "https://kindnesstowardshumanity.in",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
     category: "Nonprofit Website",
@@ -174,7 +174,7 @@ export const projects = [
     title: "Saibbyweb Office Management Dashboard",
     description: "A web-based system for managing employees, attendance, and documents with secure login and clean UI.",
     detailedDescription: "A comprehensive office management dashboard designed for Saibbyweb to streamline internal operations. The system includes employee management, attendance tracking, document storage, and administrative controls. Built with security and efficiency in mind, the dashboard provides a clean, intuitive interface for managing day-to-day office tasks and maintaining organizational records.",
-    image: "/images/projects/project4.png",
+    image: "/images/projects/office-management.png",
     link: "https://sw-office.vercel.app",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Authentication System", "Database Integration", "File Upload System", "Dashboard Analytics"],
     category: "Management System",
@@ -192,6 +192,30 @@ export const projects = [
     client: "Saibbyweb",
     icon: Briefcase,
     color: "bg-purple-500"
+  },
+  {
+    id: 15,
+    title: "PlaceHub - Property Discovery Platform",
+    description: "A trusted real-estate platform to buy, rent, and sell verified properties with confidence across Kashmir.",
+    detailedDescription: "PlaceHub helps people discover places they'll love to live. The platform lists verified homes, apartments, land, shops, offices, and more with trusted agents, secure deals, and a clear search experience by location and property type. Built for buyers and sellers who want zero guesswork — from browsing featured listings to connecting with verified agents and finalizing the right property.",
+    image: "/images/projects/placehub.png",
+    link: "https://findyourperfectplace.vercel.app/",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization", "Property Listings"],
+    category: "Real Estate Platform",
+    features: [
+      "Buy, Rent & Sell Listings",
+      "Verified Property Catalogue",
+      "Category-Based Exploration",
+      "Location & Type Search",
+      "Featured Properties Showcase",
+      "Find Agents Directory",
+      "List Your Property Flow",
+      "Mobile-Responsive Design"
+    ],
+    duration: "1 - 2 months",
+    client: "PlaceHub",
+    icon: MapPin,
+    color: "bg-teal-500"
   },
   {
   id: 5,

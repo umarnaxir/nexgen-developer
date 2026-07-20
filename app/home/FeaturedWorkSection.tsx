@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2, GraduationCap, ShoppingBag, Dumbbell, BookOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2, GraduationCap, ShoppingBag, Dumbbell, BookOpen, MapPin } from "lucide-react";
 import ProjectCarouselCard from "@/components/ProjectCarouselCard";
 
 // Helper function to generate slug from title
@@ -22,9 +22,9 @@ export default function FeaturedWorkSection() {
   const projects = [
     {
       id: 11,
-      title: "Exceptional IAS Academy – Coaching Institute Website",
+      title: "Exceptional IAS Academy - Coaching Institute Website",
       description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
-      image: "/images/projects/exceptional.png",
+      image: "/images/projects/exceptionalias.png",
       link: "https://exceptionaliasacademy.vercel.app/",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Education Website",
@@ -32,11 +32,11 @@ export default function FeaturedWorkSection() {
       client: "Exceptional IAS Academy",
       icon: GraduationCap,
       color: "bg-blue-500",
-      slug: generateSlug("Exceptional IAS Academy – Coaching Institute Website")
+      slug: generateSlug("Exceptional IAS Academy - Coaching Institute Website")
     },
     {
       id: 12,
-      title: "ShoesHub Poonch – Footwear E-Commerce Store",
+      title: "ShoesHub Poonch - Footwear E-Commerce Store",
       description: "A sleek online footwear store with product listings, categories, and a smooth shopping experience across all devices.",
       image: "/images/projects/shoeshub.png",
       link: "https://shoeshubpoonch.vercel.app/",
@@ -46,11 +46,11 @@ export default function FeaturedWorkSection() {
       client: "ShoesHub Poonch",
       icon: ShoppingBag,
       color: "bg-amber-500",
-      slug: generateSlug("ShoesHub Poonch – Footwear E-Commerce Store")
+      slug: generateSlug("ShoesHub Poonch - Footwear E-Commerce Store")
     },
     {
       id: 13,
-      title: "FitSpace Gym – Fitness Center Website",
+      title: "FitSpace Gym - Fitness Center Website",
       description: "A bold, energetic gym website highlighting programs, trainers, memberships, and schedules with a motivating design.",
       image: "/images/projects/fitspacegym.png",
       link: "https://fitspacegym.vercel.app/",
@@ -60,13 +60,13 @@ export default function FeaturedWorkSection() {
       client: "FitSpace Gym",
       icon: Dumbbell,
       color: "bg-red-500",
-      slug: generateSlug("FitSpace Gym – Fitness Center Website")
+      slug: generateSlug("FitSpace Gym - Fitness Center Website")
     },
     {
       id: 14,
-      title: "Citadel Library – Library & Study Space Website",
+      title: "Citadel Library - Library & Study Space Website",
       description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
-      image: "/images/projects/citadil.png",
+      image: "/images/projects/citadel.png",
       link: "https://citadellibrary.vercel.app/",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Library Website",
@@ -74,13 +74,27 @@ export default function FeaturedWorkSection() {
       client: "Citadel Library",
       icon: BookOpen,
       color: "bg-emerald-500",
-      slug: generateSlug("Citadel Library – Library & Study Space Website")
+      slug: generateSlug("Citadel Library - Library & Study Space Website")
+    },
+    {
+      id: 15,
+      title: "PlaceHub - Property Discovery Platform",
+      description: "A trusted real-estate platform to buy, rent, and sell verified properties with confidence across Kashmir.",
+      image: "/images/projects/placehub.png",
+      link: "https://findyourperfectplace.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization", "Property Listings"],
+      category: "Real Estate Platform",
+      duration: "1 - 2 months",
+      client: "PlaceHub",
+      icon: MapPin,
+      color: "bg-teal-500",
+      slug: generateSlug("PlaceHub - Property Discovery Platform")
     },
     {
       id: 1,
-      title: "Dr. Jibran Bashir – Orthopedic Care Website",
+      title: "Dr. Jibran Bashir - Orthopedic Care Website",
       description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
-      image: "/images/projects/project2.png",
+      image: "/images/projects/drjibran.png",
       link: "https://drjibranbashir.com",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Medical Website",
@@ -88,13 +102,13 @@ export default function FeaturedWorkSection() {
       client: "Dr. Jibran Bashir",
       icon: Building2,
       color: "bg-blue-500",
-      slug: generateSlug("Dr. Jibran Bashir – Orthopedic Care Website")
+      slug: generateSlug("Dr. Jibran Bashir - Orthopedic Care Website")
     },
     {
       id: 2,
-      title: "Hotel Sea View – Luxury Stay Website",
+      title: "Hotel Sea View - Luxury Stay Website",
       description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
-      image: "/images/projects/project3.png",
+      image: "/images/projects/hotelseaview.png",
       link: "https://thehotelseaview.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Image Optimization", "Booking Integration", "Google Maps API"],
       category: "Hospitality Website",
@@ -102,13 +116,13 @@ export default function FeaturedWorkSection() {
       client: "Hotel Sea View",
       icon: Globe,
       color: "bg-amber-500",
-      slug: generateSlug("Hotel Sea View – Luxury Stay Website")
+      slug: generateSlug("Hotel Sea View - Luxury Stay Website")
     },
     {
       id: 3,
       title: "Kindness Towards Humanity Foundation",
       description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
-      image: "/images/projects/project1.png",
+      image: "/images/projects/kindnesstowordshumanity.png",
       link: "https://kindnesstowardshumanity.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
       category: "Nonprofit Website",
@@ -122,7 +136,7 @@ export default function FeaturedWorkSection() {
       id: 4,
       title: "Saibbyweb Office Management Dashboard",
       description: "A web-based system for managing employees, attendance, and documents with secure login and clean UI.",
-      image: "/images/projects/project4.png",
+      image: "/images/projects/office-management.png",
       link: "https://sw-office.vercel.app",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Authentication System", "Database Integration", "File Upload System", "Dashboard Analytics"],
       category: "Management System",
@@ -337,7 +351,7 @@ export default function FeaturedWorkSection() {
 
   return (
     <section id="projects" className="py-4 sm:py-6 lg:py-12 flex flex-col min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]" data-aos="fade-up">
-      <div className="container mx-auto px-3 sm:px-6 lg:px-8 max-w-7xl flex flex-col">
+      <div className="section-container flex flex-col">
         <div
           className="text-center mb-6 sm:mb-10"
           data-aos="zoom-in"

@@ -1,15 +1,15 @@
 import { Metadata } from "next";
-import { generateMetadata, SEOProps } from "./utils";
+import { generateMetadata } from "./utils";
 import { seoConfig } from "./config";
 
 /**
  * Home Page SEO
- * Aligned with hero: Team of Freelancers, build/launch/grow, AI/ML, chatbots, web & app, digital marketing.
  */
 export function getHomeSEO(): Metadata {
   return generateMetadata({
-    title: "NexGen Developers — Build, Launch & Grow Your Business",
-    description: "A creative platform to build, launch, and grow your business. We help startups and local brands with AI/ML, chatbots, web & app development, and more",
+    title: "Build, Launch & Grow Your Business",
+    description:
+      "NexGen Developers helps startups and local brands build, launch, and grow with AI/ML, chatbots, web & app development, and digital marketing.",
     keywords: [
       "freelance developers",
       "web development services",
@@ -22,8 +22,9 @@ export function getHomeSEO(): Metadata {
     canonical: "/",
     openGraph: {
       type: "website",
-      title: "NexGen Developers — Build, Launch & Grow Your Business",
-      description: "A creative platform to build, launch, and grow your business. We help startups and local brands with AI/ML, chatbots, web & app development, and digital marketing.",
+      title: "Build, Launch & Grow Your Business",
+      description:
+        "NexGen Developers helps startups and local brands build, launch, and grow with AI/ML, chatbots, web & app development, and digital marketing.",
       url: "/",
     },
   });
@@ -34,8 +35,9 @@ export function getHomeSEO(): Metadata {
  */
 export function getAboutSEO(): Metadata {
   return generateMetadata({
-    title: "About Us - NexGen Developers",
-    description: "Learn about NexGen Developers, a team of skilled freelancers specializing in AI/ML, web development, app development, chatbots, SEO, and other services.",
+    title: "About Us",
+    description:
+      "Learn about NexGen Developers — freelancers specializing in AI/ML, web & app development, chatbots, SEO, and digital marketing for startups and brands.",
     keywords: [
       "about nexgen developers",
       "freelance team",
@@ -46,8 +48,9 @@ export function getAboutSEO(): Metadata {
     canonical: "/about",
     openGraph: {
       type: "website",
-      title: "About Us - NexGen Developers",
-      description: "Learn about NexGen Developers, a team of skilled freelancers specializing in AI/ML, web development, app development, chatbots, SEO, and digital marketing services.",
+      title: "About Us",
+      description:
+        "Learn about NexGen Developers — freelancers specializing in AI/ML, web & app development, chatbots, SEO, and digital marketing.",
       url: "/about",
     },
   });
@@ -58,8 +61,9 @@ export function getAboutSEO(): Metadata {
  */
 export function getServicesSEO(): Metadata {
   return generateMetadata({
-    title: "Our Services - NexGen Developers",
-    description: "Comprehensive services including web development, mobile app development, AI/ML solutions, chatbot development, SEO & digital marketing, and more.",
+    title: "Our Services",
+    description:
+      "Web development, mobile apps, AI/ML, chatbots, SEO, digital marketing, DevOps, and design — full-service solutions from NexGen Developers.",
     keywords: [
       "web development services",
       "mobile app development",
@@ -72,8 +76,9 @@ export function getServicesSEO(): Metadata {
     canonical: "/services",
     openGraph: {
       type: "website",
-      title: "Our Services - NexGen Developers",
-      description: "Comprehensive services including web development, mobile app development, AI/ML solutions, chatbot development, SEO & digital marketing, graphic design, and more.",
+      title: "Our Services",
+      description:
+        "Web development, mobile apps, AI/ML, chatbots, SEO, digital marketing, DevOps, and design from NexGen Developers.",
       url: "/services",
     },
   });
@@ -84,8 +89,9 @@ export function getServicesSEO(): Metadata {
  */
 export function getTeamSEO(): Metadata {
   return generateMetadata({
-    title: "Our Team - NexGen Developers",
-    description: "Meet the talented team of freelancers at NexGen Developers. Skilled professionals in web development, AI/ML, app development, and digital marketing.",
+    title: "Our Team",
+    description:
+      "Meet the NexGen Developers team — skilled freelancers in web development, AI/ML, app development, SEO, and digital marketing.",
     keywords: [
       "nexgen developers team",
       "freelance developers",
@@ -96,8 +102,9 @@ export function getTeamSEO(): Metadata {
     canonical: "/team",
     openGraph: {
       type: "website",
-      title: "Our Team - NexGen Developers",
-      description: "Meet the talented team of freelancers at NexGen Developers. Skilled professionals in web development, AI/ML, app development, and digital marketing.",
+      title: "Our Team",
+      description:
+        "Meet the NexGen Developers team — skilled freelancers in web development, AI/ML, app development, and digital marketing.",
       url: "/team",
     },
   });
@@ -108,8 +115,9 @@ export function getTeamSEO(): Metadata {
  */
 export function getProjectsSEO(): Metadata {
   return generateMetadata({
-    title: "Our Projects - NexGen Developers",
-    description: "Explore our portfolio of successful projects including web applications, mobile apps, AI/ML solutions, chatbots, and digital marketing campaigns.",
+    title: "Our Projects",
+    description:
+      "Explore NexGen Developers’ portfolio — websites, mobile apps, AI/ML solutions, chatbots, and digital marketing work for real clients.",
     keywords: [
       "nexgen developers portfolio",
       "web development projects",
@@ -120,8 +128,9 @@ export function getProjectsSEO(): Metadata {
     canonical: "/projects",
     openGraph: {
       type: "website",
-      title: "Our Projects - NexGen Developers",
-      description: "Explore our portfolio of successful projects including web applications, mobile apps, AI/ML solutions, chatbots, and digital marketing campaigns.",
+      title: "Our Projects",
+      description:
+        "Explore NexGen Developers’ portfolio — websites, mobile apps, AI/ML solutions, chatbots, and digital marketing campaigns.",
       url: "/projects",
     },
   });
@@ -132,8 +141,9 @@ export function getProjectsSEO(): Metadata {
  */
 export function getBlogsSEO(): Metadata {
   return generateMetadata({
-    title: "Blog - NexGen Developers",
-    description: "Read our latest articles on web development, AI/ML, chatbots, SEO, app development, and digital marketing trends and best practices.",
+    title: "Blog",
+    description:
+      "Articles on web development, AI/ML, chatbots, SEO, apps, and digital marketing — practical tips from NexGen Developers.",
     keywords: [
       "web development blog",
       "AI ML blog",
@@ -144,8 +154,9 @@ export function getBlogsSEO(): Metadata {
     canonical: "/blogs",
     openGraph: {
       type: "website",
-      title: "Blog - NexGen Developers",
-      description: "Read our latest articles on web development, AI/ML, chatbots, SEO, app development, and digital marketing trends and best practices.",
+      title: "Blog",
+      description:
+        "Articles on web development, AI/ML, chatbots, SEO, apps, and digital marketing from NexGen Developers.",
       url: "/blogs",
     },
   });
@@ -176,8 +187,10 @@ export function getBlogPostSEO({
   keywords?: string[];
 }): Metadata {
   const url = `/blogs/${slug}`;
-  const ogImage = image 
-    ? (image.startsWith("http") ? image : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`)
+  const ogImage = image
+    ? image.startsWith("http")
+      ? image
+      : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`
     : seoConfig.defaultOgImage;
 
   const keywords = [
@@ -188,21 +201,23 @@ export function getBlogPostSEO({
   ];
 
   return generateMetadata({
-    title: title,
-    description: description,
+    title,
+    description,
     keywords,
     canonical: url,
     openGraph: {
       type: "article",
-      title: title,
-      description: description,
-      url: url,
-      images: [{
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: title,
-      }],
+      title,
+      description,
+      url,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
       publishedTime: publishedDate,
       ...(modifiedDate && { modifiedTime: modifiedDate }),
       ...(author && { authors: [author] }),
@@ -210,8 +225,8 @@ export function getBlogPostSEO({
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: description,
+      title,
+      description,
       images: [ogImage],
     },
   });
@@ -222,8 +237,9 @@ export function getBlogPostSEO({
  */
 export function getPricingSEO(): Metadata {
   return generateMetadata({
-    title: "Transparent Pricing Models - NexGen Developers",
-    description: "Choose the perfect plan for your business: Essential, Growth, Premium, or Enterprise. from entry-level to custom solutions.",
+    title: "Transparent Pricing",
+    description:
+      "Clear pricing for Essential, Growth, Premium, and Enterprise plans — choose the right package for your website or product.",
     keywords: [
       "pricing",
       "web development pricing",
@@ -236,8 +252,9 @@ export function getPricingSEO(): Metadata {
     canonical: "/pricing",
     openGraph: {
       type: "website",
-      title: "Transparent Pricing Models - NexGen Developers",
-      description: "Choose the perfect plan for your business. From essential presence to scalable digital assets.",
+      title: "Transparent Pricing",
+      description:
+        "Clear pricing for Essential, Growth, Premium, and Enterprise plans from NexGen Developers.",
       url: "/pricing",
     },
   });
@@ -248,13 +265,10 @@ export function getPricingSEO(): Metadata {
  */
 export function getPrivacySEO(): Metadata {
   return generateMetadata({
-    title: "Privacy Policy - NexGen",
-    description: "Read our privacy policy to understand how NexGen collects, uses, and protects your personal information when you use our services, browse our website, or read our blog.",
-    keywords: [
-      "privacy policy",
-      "data protection",
-      "privacy",
-    ],
+    title: "Privacy Policy",
+    description:
+      "How NexGen Developers collects, uses, and protects your personal information when you use our website and services.",
+    keywords: ["privacy policy", "data protection", "privacy"],
     canonical: "/privacy",
     robots: {
       index: true,
@@ -262,8 +276,9 @@ export function getPrivacySEO(): Metadata {
     },
     openGraph: {
       type: "website",
-      title: "Privacy Policy - NexGen",
-      description: "Read our privacy policy to understand how NexGen collects, uses, and protects your personal information when you use our services, browse our website, or read our blog.",
+      title: "Privacy Policy",
+      description:
+        "How NexGen Developers collects, uses, and protects your personal information.",
       url: "/privacy",
     },
   });
@@ -274,13 +289,10 @@ export function getPrivacySEO(): Metadata {
  */
 export function getTermsSEO(): Metadata {
   return generateMetadata({
-    title: "Terms of Service - NexGen",
-    description: "Read our terms of service for using NexGen — a service-based team of freelance developers and designers helping startups and local brands build, launch, and grow.",
-    keywords: [
-      "terms of service",
-      "terms and conditions",
-      "legal",
-    ],
+    title: "Terms of Service",
+    description:
+      "Terms of service for using NexGen Developers — freelancers helping startups and brands build, launch, and grow online.",
+    keywords: ["terms of service", "terms and conditions", "legal"],
     canonical: "/terms",
     robots: {
       index: true,
@@ -288,8 +300,9 @@ export function getTermsSEO(): Metadata {
     },
     openGraph: {
       type: "website",
-      title: "Terms of Service - NexGen",
-      description: "Read our terms of service for using NexGen — a service-based team of freelance developers and designers helping startups and local brands build, launch, and grow.",
+      title: "Terms of Service",
+      description:
+        "Terms of service for using NexGen Developers’ website and client services.",
       url: "/terms",
     },
   });
@@ -300,8 +313,9 @@ export function getTermsSEO(): Metadata {
  */
 export function getContactUsSEO(): Metadata {
   return generateMetadata({
-    title: "Contact Us - NexGen Developers",
-    description: "Get in touch with NexGen Developers. We work remotely with a team of freelancers. Send a message or connect on social media.",
+    title: "Contact Us",
+    description:
+      "Contact NexGen Developers — a remote freelance team. Send a message or connect on social to discuss your next project.",
     keywords: [
       "contact nexgen developers",
       "freelance contact",
@@ -311,8 +325,9 @@ export function getContactUsSEO(): Metadata {
     canonical: "/contact-us",
     openGraph: {
       type: "website",
-      title: "Contact Us - NexGen Developers",
-      description: "Get in touch with NexGen Developers. We work remotely with a team of freelancers.",
+      title: "Contact Us",
+      description:
+        "Contact NexGen Developers — a remote freelance team ready to discuss your next project.",
       url: "/contact-us",
     },
   });
@@ -320,7 +335,6 @@ export function getContactUsSEO(): Metadata {
 
 /**
  * Service Page SEO (dynamic: top-level or digital-marketing sub)
- * Includes canonical, OpenGraph, Twitter, and OG image.
  */
 export function getServiceSEO(
   canonicalPath: string,

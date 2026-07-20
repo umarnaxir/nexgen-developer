@@ -1,163 +1,121 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, LayoutGrid, Star, Rocket, Smile, Globe } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
-import HeroOrbit, { HeroSphereMobile, HeroCardsMobile } from "./HeroOrbit";
-
-const stats = [
-  { icon: Rocket, value: "50+", label: "Projects Delivered" },
-  { icon: Smile, value: "30+", label: "Happy Clients" },
-  { icon: Star, value: "98%", label: "Client Satisfaction" },
-  { icon: Globe, value: "12+", label: "Countries Served" },
-];
-
-// Dummy client avatars (professional men) for the "trusted by" social proof
-const trustedAvatars = [
-  "https://randomuser.me/api/portraits/men/52.jpg",
-  "https://randomuser.me/api/portraits/men/76.jpg",
-  "https://randomuser.me/api/portraits/men/85.jpg",
-  "https://randomuser.me/api/portraits/men/46.jpg",
-];
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const { open: openContactModal } = useContactModal();
 
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(gridRef.current, { opacity: 0, duration: 1.2 })
+        .from(
+          headlineRef.current?.querySelectorAll(".hero-line") ?? [],
+          { y: 80, opacity: 0, duration: 1, stagger: 0.12 },
+          "-=0.8"
+        )
+        .from(sublineRef.current, { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+        .from(ctaRef.current, { y: 24, opacity: 0, duration: 0.7 }, "-=0.4");
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const grid = gridRef.current;
+    if (!section || !grid) return;
+
+    const handleMove = (event: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 30;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 30;
+      grid.style.transform = `translate(${x}px, ${y}px)`;
+    };
+
+    section.addEventListener("mousemove", handleMove);
+    return () => section.removeEventListener("mousemove", handleMove);
+  }, []);
+
   return (
-    <section className="relative hero-grid flex min-h-screen flex-col justify-center overflow-hidden pt-24 pb-10 sm:pt-28 lg:min-h-[calc(100vh-5rem)] lg:pt-0 lg:pb-6">
-      {/* Ambient hero glows */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute right-0 top-1/4 h-[460px] w-[460px] rounded-full bg-teal-500/[0.08] blur-[120px] animate-glow-pulse" />
-        <div className="absolute -left-32 bottom-0 h-[380px] w-[380px] rounded-full bg-teal-700/[0.07] blur-[120px]" />
-        <div
-          className="absolute right-10 top-6 h-40 w-40 opacity-40"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(45,212,191,0.5) 1.5px, transparent 1.5px)",
-            backgroundSize: "18px 18px",
-          }}
+    <section
+      ref={sectionRef}
+      className="section-dark relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-12 pt-12 sm:pb-16 sm:pt-14 lg:min-h-screen lg:pb-20 lg:pt-28"
+    >
+      <div
+        ref={gridRef}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 transition-transform duration-700 ease-out will-change-transform"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:48px_48px]" />
+        <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
+        <div className="absolute -right-1/4 bottom-0 h-[420px] w-[420px] rounded-full bg-white/[0.02] blur-[100px]" />
+        <motion.div
+          className="absolute left-1/2 top-1/2 h-[1px] w-[60vw] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          animate={{ opacity: [0.2, 0.5, 0.2], scaleX: [0.8, 1, 0.8] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-8">
-          {/* LEFT */}
-          <div className="text-left" data-aos="fade-right">
-            {/* Badge */}
-            <span className="eyebrow">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-400" />
-              </span>
-              Team of Freelancers
-            </span>
+      <div className="section-container relative z-10">
+        <div className="max-w-5xl">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mb-8 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/50"
+          >
+            <span className="h-px w-8 bg-white/30" />
+            NexGen Developers
+          </motion.span>
 
-            {/* Heading */}
-            <h1 className="mt-5 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white light:text-gray-900 sm:text-5xl lg:text-6xl">
-              We build digital products that{" "}
-              <span className="relative whitespace-nowrap text-gradient-teal">
-                drive growth
-                <svg
-                  className="absolute -bottom-2 left-0 w-full text-teal-400/80"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <path d="M2 8 C50 2 150 2 198 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-                </svg>
-              </span>
-              .
-            </h1>
+          <h1
+            ref={headlineRef}
+            className="text-[clamp(2.25rem,10vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-white"
+          >
+            <span className="hero-line block">We build</span>
+            <span className="hero-line block text-white/90">premium digital</span>
+            <span className="hero-line block italic text-white/70">products.</span>
+          </h1>
 
-            {/* Description */}
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-silver light:text-gray-600 sm:text-lg lg:text-xl">
-              We help startups and local brands with{" "}
-              <span className="font-semibold text-white light:text-gray-900">AI/ML</span>,{" "}
-              <span className="font-semibold text-white light:text-gray-900">chatbots</span>,{" "}
-              <span className="font-semibold text-white light:text-gray-900">web &amp; app development</span>, and{" "}
-              <span className="font-semibold text-white light:text-gray-900">digital marketing</span> — crafting
-              digital experiences that stand out and deliver results.
-            </p>
+          <p
+            ref={sublineRef}
+            className="mt-8 max-w-2xl text-base leading-relaxed text-white/50 sm:max-w-3xl sm:text-lg lg:max-w-4xl"
+          >
+            We help startups and local brands with AI/ML, chatbots, web &amp; app development,
+            and digital marketing, crafting digital experiences that stand out and deliver results.
+          </p>
 
-            {/* Buttons */}
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-start">
-              <button
-                onClick={openContactModal}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 px-7 py-3.5 text-sm font-bold text-white shadow-[0_10px_40px_-10px_rgba(20,184,166,0.6)] transition-all duration-300 hover:from-teal-400 hover:to-teal-500 hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-teal-400/50 sm:w-auto"
-              >
-                Get Started
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-              <Link
-                href="/services"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm px-7 py-3.5 text-sm font-bold text-white light:text-gray-900 backdrop-blur transition-all duration-300 hover:border-teal-400/50 hover:bg-white/[0.07] light:hover:bg-gray-100 hover:scale-[1.03] active:scale-[0.98] sm:w-auto"
-              >
-                <LayoutGrid className="h-4 w-4 text-teal-400" />
-                Explore Services
-              </Link>
-            </div>
-
-            {/* Social proof */}
-            <div className="mt-7 flex items-center justify-start gap-4">
-              <div className="flex -space-x-3">
-                {trustedAvatars.map((src, i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={i}
-                    src={src}
-                    alt={`Client ${i + 1}`}
-                    loading="lazy"
-                    className="h-10 w-10 rounded-full object-cover ring-2 ring-black light:ring-white"
-                  />
-                ))}
-              </div>
-              <div className="text-left">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-teal-400" fill="currentColor" />
-                  ))}
-                </div>
-                <p className="mt-0.5 text-sm font-medium text-silver light:text-gray-600">
-                  Trusted by 30+ clients worldwide
-                </p>
-              </div>
-            </div>
-
-            {/* Mobile: animated "N" graphic below the trusted-by block */}
-            <div className="mt-12 lg:hidden">
-              <HeroSphereMobile />
-            </div>
+          <div ref={ctaRef} className="mt-8 flex flex-row flex-wrap items-center gap-3 sm:mt-12 sm:gap-4">
+            <MagneticButton onClick={openContactModal} className="!px-5 !py-3.5 text-xs sm:!px-8 sm:!py-4 sm:text-sm">
+              Start a Project
+              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            </MagneticButton>
+            <Link
+              href="/projects"
+              className="group inline-flex shrink-0 items-center gap-1.5 px-1 text-xs font-medium text-white/60 transition-colors hover:text-white sm:gap-2 sm:px-2 sm:text-sm"
+            >
+              View our work
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4" />
+            </Link>
           </div>
-
-          {/* RIGHT (desktop orbit only) */}
-          <div className="hidden lg:block">
-            <HeroOrbit />
-          </div>
-        </div>
-
-        {/* Mobile: service cards below the text */}
-        <div className="mt-12 lg:hidden">
-          <HeroCardsMobile />
-        </div>
-
-        {/* Stats bar */}
-        <div
-          className="glass mt-12 grid grid-cols-2 gap-x-4 gap-y-5 rounded-2xl px-5 py-5 sm:px-8 lg:mt-10 lg:grid-cols-4"
-          data-aos="fade-up"
-        >
-          {stats.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="group flex items-center gap-3 sm:gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-teal-400/20 light:group-hover:bg-teal-100">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-2xl font-extrabold text-white light:text-gray-900">{value}</p>
-                <p className="text-xs text-silver-dark light:text-gray-500 sm:text-sm">{label}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

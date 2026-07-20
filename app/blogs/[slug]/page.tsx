@@ -40,8 +40,8 @@ export default function BlogPostPage() {
         publisher={seoConfig.publisher}
       />
       <div className="min-h-screen">
-        <article className="py-20 lg:py-28">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <article className="section-y">
+          <div className="section-container">
             <BlogPostHero blog={blog} />
             <BlogPostContent blog={blog} />
             <RelatedBlogs relatedBlogs={relatedBlogs} />

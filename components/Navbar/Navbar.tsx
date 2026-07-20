@@ -59,12 +59,11 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
     setIsMobileMenuOpen(false);
   };
 
-  // Home uses a premium dark-glass bar; other routes keep the light theme.
   const headerClass = isHome
-    ? `fixed top-0 left-0 right-0 z-[100] backdrop-blur-xl transition-all duration-300 lg:sticky lg:z-50 ${
+    ? `fixed top-0 left-0 right-0 z-[100] backdrop-blur-md transition-all duration-500 lg:sticky lg:z-50 ${
         isScrolled
-          ? "bg-black/70 border-b border-white/[0.06] shadow-[0_8px_30px_-12px_rgba(0,0,0,0.7)] light:bg-white/85 light:border-gray-200 light:shadow-[0_8px_30px_-12px_rgba(15,118,110,0.25)]"
-          : "bg-black/40 border-b border-transparent lg:bg-transparent lg:backdrop-blur-0 light:bg-white/70 lg:light:bg-transparent"
+          ? "border-b border-white/[0.08] bg-black/75"
+          : "border-b border-transparent bg-transparent"
       }`
     : `fixed top-0 left-0 right-0 z-[100] bg-white transition-all duration-300 lg:sticky lg:z-50 ${
         isScrolled
@@ -88,16 +87,14 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
               onClick={openContactModal}
               className={
                 isHome
-                  ? "group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] py-1.5 pl-6 pr-1.5 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:border-teal-400/60 hover:bg-white/[0.07] hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-teal-400/40 light:border-gray-200 light:bg-white light:text-gray-900 light:shadow-sm light:hover:border-teal-500"
-                  : "group inline-flex items-center gap-2.5 rounded-full border-2 border-gray-200 bg-white py-1.5 pl-6 pr-1.5 text-sm font-bold text-gray-900 transition-all duration-300 hover:border-teal-400 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-teal-400/40"
+                  ? "group inline-flex items-center gap-2.5 rounded-full border border-white/30 bg-white py-1.5 pl-6 pr-1.5 text-sm font-semibold text-black transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/40"
+                  : "group inline-flex items-center gap-2.5 rounded-full border-2 border-gray-200 bg-white py-1.5 pl-6 pr-1.5 text-sm font-bold text-gray-900 transition-all duration-300 hover:border-black hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-black/20"
               }
             >
               Let&apos;s Talk
               <span
                 className={`flex h-9 w-9 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:translate-x-0.5 ${
-                  isHome
-                    ? "bg-gradient-to-br from-teal-500 to-teal-700 shadow-lg shadow-teal-500/30"
-                    : "bg-black"
+                  isHome ? "bg-black" : "bg-black"
                 }`}
               >
                 <ArrowRight className="h-4 w-4" />

@@ -8,7 +8,7 @@ export default function TermsSectionsPart2() {
     <>
       <TermsSection icon={CheckCircle} title="6. Acceptable Use" delay={0.6} altBg>
         <p className="mb-3 sm:mb-4">When you access or use our website and services, you must follow these rules. You agree not to:</p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-300 light:marker:text-teal-700">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
           <li>Use the Service for any unlawful purpose or in violation of any applicable local, state, national, or international law</li>
           <li>Impersonate any person or entity or falsely state or misrepresent your affiliation with a person or entity</li>
           <li>Infringe any patent, trademark, trade secret, copyright, or other proprietary rights</li>
@@ -24,7 +24,7 @@ export default function TermsSectionsPart2() {
         <p className="mb-3 sm:mb-4">
           In no event shall NexGen, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:
         </p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-300 light:marker:text-teal-700">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
           <li>Your use or inability to use the Service</li>
           <li>Any conduct or content of third parties on the Service</li>
           <li>Any unauthorized access to or use of our servers and/or any personal information stored therein</li>
@@ -59,10 +59,10 @@ export default function TermsSectionsPart2() {
 
       <TermsSection icon={Users} title="11. Contact Information" delay={1.1} dark>
         <p className="mb-4 sm:mb-6">If you have any questions about these Terms of Service, please contact us:</p>
-        <div className="glass p-4 sm:p-5 lg:p-6 rounded-2xl">
-          <p className="mb-2"><strong className="text-white light:text-gray-900">Email:</strong> info@nexgendevelopers.in</p>
-          <p className="mb-2"><strong className="text-white light:text-gray-900">Phone:</strong> +91 600-616-1726</p>
-          <p><strong className="text-white light:text-gray-900">Location:</strong> Srinagar, Jammu and Kashmir, India</p>
+        <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
+          <p className="mb-2"><strong className="text-black">Email:</strong> info@nexgendevelopers.in</p>
+          <p className="mb-2"><strong className="text-black">Phone:</strong> +91 600-616-1726</p>
+          <p><strong className="text-black">Location:</strong> Baramulla, Jammu and Kashmir, India</p>
         </div>
       </TermsSection>
     </>

@@ -7,21 +7,19 @@ import ProjectCard from "./ProjectCard";
 export default function ProjectsList() {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
-  const toggleExpand = (id: number) => {
-    setExpandedProject(expandedProject === id ? null : id);
-  };
-
   return (
-    <section className="py-8 lg:py-12" data-aos="fade-up">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="space-y-12">
+    <section className="section-light section-y relative overflow-hidden border-t border-black/[0.06]">
+      <div className="section-container relative">
+        <div className="flex flex-col gap-5 sm:gap-6 lg:gap-7">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
               index={index}
               isExpanded={expandedProject === project.id}
-              onToggleExpand={() => toggleExpand(project.id)}
+              onToggleExpand={() =>
+                setExpandedProject(expandedProject === project.id ? null : project.id)
+              }
             />
           ))}
         </div>

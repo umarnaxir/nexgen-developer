@@ -1,124 +1,99 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import ServiceIcon from "./ServiceIcon";
-import type { ServiceListingItem, ServiceCategory } from "../config";
+import type { ServiceListingItem } from "../config";
 
 interface ServiceCardProps {
   service: ServiceListingItem;
   index: number;
-  category?: ServiceCategory;
 }
 
-export default function ServiceCard({ service, index, category }: ServiceCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function ServiceCardContentDesktop({ service, index }: ServiceCardProps) {
+  const highlights = service.features.slice(0, 4);
 
   return (
-    <article
-      className="glass-card beam-border group relative rounded-2xl overflow-hidden"
-      data-aos="fade-up"
-      data-aos-delay={index * 60}
-    >
-      {/* Split Layout: Image Left, Content Right - Works on Mobile and Desktop */}
-      <div className="flex flex-col sm:flex-row h-full sm:min-h-[300px]">
-        {/* Image Section - Takes 40% on desktop, full width on mobile */}
-        <div className="relative h-72 sm:h-auto sm:min-h-[280px] sm:w-2/5 overflow-hidden bg-black">
-          <Image
-            src={service.image}
-            alt={`${service.title} - NexGen Developers`}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-            sizes="(max-width: 640px) 100vw, 40vw"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-black/60" />
+    <div className="flex h-full min-h-0 flex-col bg-white p-5">
+      <div className="flex items-start justify-between gap-2">
+        {service.icon ? (
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600">
+            <ServiceIcon name={service.icon} className="h-4 w-4 text-teal-600" />
+          </span>
+        ) : (
+          <span />
+        )}
+        <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-black/30">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
 
-          {/* Icon Badge - Top Right: subtle teal tint, brighter on hover */}
-          {service.icon && (
-            <div className="absolute top-4 right-4 w-12 h-12 rounded-lg border border-teal-400/20 bg-teal-400/10 text-teal-300 backdrop-blur flex items-center justify-center shadow-lg group-hover:border-teal-400/40 group-hover:bg-teal-400/20 group-hover:scale-110 transition-all duration-300">
-              <ServiceIcon name={service.icon} className="w-6 h-6 text-teal-300 group-hover:text-teal-200 transition-colors" />
-            </div>
-          )}
-        </div>
+      <h3 className="mt-3 text-[1.05rem] font-semibold leading-tight tracking-[-0.02em] text-black">
+        {service.title}
+      </h3>
+      <p className="mt-2 line-clamp-5 text-[13px] leading-relaxed text-black/60">
+        {service.shortDescription}
+      </p>
 
-        {/* Content Section - Takes 60% on desktop, full width on mobile */}
-        <div className="flex-1 p-6 sm:p-8 flex flex-col min-h-[280px] sm:min-h-0">
-          {/* Title */}
-          <h2
-            className="text-xl sm:text-2xl font-bold text-white light:text-gray-900 mb-3 group-hover:text-silver-light light:group-hover:text-teal-700 transition-colors"
-          >
-            <Link
-              href={service.href}
-              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 rounded"
-            >
-              {service.title}
-            </Link>
-          </h2>
+      <ul className="mt-4 flex flex-col gap-1.5">
+        {highlights.map((feature) => (
+          <li key={feature}>
+            <span className="inline-flex max-w-full items-center gap-1 rounded-full border border-teal-500/15 bg-teal-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.06em] text-teal-700">
+              <Sparkles className="h-2.5 w-2.5 shrink-0" />
+              <span className="truncate">{feature}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
 
-          {/* Description */}
-          <p
-            className="text-silver light:text-gray-600 text-sm sm:text-base leading-relaxed mb-5 flex-grow"
-          >
-            {service.shortDescription}
-          </p>
+      <Link
+        href={service.href}
+        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-teal-600 transition-all hover:gap-2.5 hover:text-teal-700"
+      >
+        Explore service
+        <ArrowUpRight className="h-3.5 w-3.5" />
+      </Link>
+    </div>
+  );
+}
 
-          {/* Expandable Features */}
-          <div className="space-y-3 mb-5">
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsExpanded(!isExpanded);
-              }}
-              className="flex items-center gap-2 text-sm font-semibold text-teal-300 light:text-teal-700 hover:text-teal-200 light:hover:text-teal-800 transition-colors"
-              aria-expanded={isExpanded}
-            >
-              <span>{isExpanded ? "Hide features" : "View key features"}</span>
-              {isExpanded ? (
-                <ChevronUp className="w-4 h-4 transition-transform duration-300" />
-              ) : (
-                <ChevronDown className="w-4 h-4 transition-transform duration-300" />
-              )}
-            </button>
-            
-            {/* Features List */}
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <ul
-                className="space-y-2 pt-2"
-                role="region"
-                aria-label="Key features"
-              >
-                {service.features.slice(0, 5).map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start text-silver light:text-gray-600 text-sm"
-                  >
-                    <span className="text-teal-300 light:text-teal-700 mr-2 font-bold mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+export default function ServiceCard({ service, index }: ServiceCardProps) {
+  return (
+    <article className="premium-card-dark flex h-[min(58vh,460px)] w-[82vw] min-w-[260px] max-w-[560px] shrink-0 flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-white shadow-[0_32px_80px_-40px_rgba(0,0,0,0.65)] sm:w-[60vw] lg:h-[min(64vh,660px)] lg:w-[calc(58vw-2rem)] lg:max-w-[920px] lg:flex-row">
+      <div className="relative min-h-0 flex-[1.45] overflow-hidden bg-neutral-900 lg:h-full lg:w-[75%] lg:flex-none">
+        <Image
+          src={service.image}
+          alt={`${service.title} - NexGen Developers`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 82vw, 42vw"
+          priority={index < 2}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent lg:hidden" />
+        <span className="absolute left-4 top-4 text-[11px] font-medium uppercase tracking-[0.25em] text-white/70 lg:hidden">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
 
-          {/* CTA Button */}
-          <div className="pt-4 mt-auto">
-            <Link
-              href={service.href}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-bold rounded-lg shadow-lg shadow-teal-500/25 hover:from-teal-400 hover:to-teal-500 transition-all duration-300 group/btn"
-            >
-              <span>Learn More</span>
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
+      <div className="flex shrink-0 flex-col bg-white px-4 py-3 lg:hidden">
+        <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-black">
+          {service.title}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-black/60">
+          {service.shortDescription}
+        </p>
+        <Link
+          href={service.href}
+          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-600 transition-all hover:gap-2 hover:text-teal-700"
+        >
+          Explore service
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+
+      <div className="hidden w-[25%] shrink-0 lg:block">
+        <ServiceCardContentDesktop service={service} index={index} />
       </div>
     </article>
   );

@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { LucideIcon } from "lucide-react";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 interface PrivacySectionProps {
   icon: LucideIcon;
@@ -9,28 +11,60 @@ interface PrivacySectionProps {
   delay?: number;
   dark?: boolean;
   altBg?: boolean;
+  id?: string;
 }
 
-export default function PrivacySection({ icon: Icon, title, children, delay = 0, dark = false, altBg = false }: PrivacySectionProps) {
-  const bgClass = "glass p-4 sm:p-6 lg:p-8 rounded-2xl transition-all duration-300";
-  // dark and altBg retained for compatibility; all variants now use the same premium glass surface.
-  void dark;
-  void altBg;
+export default function PrivacySection({
+  icon: Icon,
+  title,
+  children,
+  delay = 0,
+  id,
+}: PrivacySectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(sectionRef.current, {
+        scrollTrigger: { trigger: sectionRef.current, start: "top 88%" },
+        y: 24,
+        opacity: 0,
+        duration: 0.65,
+        delay: Math.min(delay, 0.2),
+        ease: "power3.out",
+        immediateRender: false,
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [delay]);
+
+  const sectionId =
+    id ??
+    title
+      .toLowerCase()
+      .replace(/^\d+\.\s*/, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
   return (
     <section
-      className={bgClass}
-      data-aos="zoom-in"
-      data-aos-delay={delay * 100}
+      ref={sectionRef}
+      id={sectionId}
+      className="scroll-mt-28 rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.1)] transition-colors hover:border-teal-500/20 sm:p-6 lg:p-8"
     >
-      <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-4">
-        <div className="flex-shrink-0 rounded-lg border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 p-2 sm:p-3">
-          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-teal-300 light:text-teal-700" />
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600">
+          <Icon className="h-5 w-5" />
         </div>
-        <div className="flex-1 w-full">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 text-white light:text-gray-900">
-            {title}
-          </h2>
-          <div className="text-sm sm:text-base leading-relaxed text-silver-light light:text-gray-700">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl font-semibold tracking-[-0.02em] text-black sm:text-2xl">{title}</h2>
+          <div className="mt-3 space-y-3 text-[15px] leading-relaxed text-black/60 sm:text-base [&_strong]:font-semibold [&_strong]:text-black">
             {children}
           </div>
         </div>

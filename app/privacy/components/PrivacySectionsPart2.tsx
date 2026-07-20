@@ -28,13 +28,13 @@ export default function PrivacySectionsPart2() {
 
       <PrivacySection icon={Mail} title="11. Contact Us" delay={1.0} dark>
         <p className="mb-4 sm:mb-6">If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
-        <div className="glass p-4 sm:p-5 lg:p-6 rounded-2xl">
-          <p className="mb-2 sm:mb-3"><strong className="text-white light:text-gray-900">NexGen</strong></p>
-          <p className="mb-2"><strong className="text-white light:text-gray-900">Email:</strong> info@nexgendevelopers.in</p>
-          <p className="mb-2"><strong className="text-white light:text-gray-900">Phone:</strong> +91 600-616-1726</p>
-          <p><strong className="text-white light:text-gray-900">Location:</strong> Srinagar, Jammu and Kashmir, India</p>
+        <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
+          <p className="mb-2 sm:mb-3"><strong className="text-black">NexGen</strong></p>
+          <p className="mb-2"><strong className="text-black">Email:</strong> info@nexgendevelopers.in</p>
+          <p className="mb-2"><strong className="text-black">Phone:</strong> +91 600-616-1726</p>
+          <p><strong className="text-black">Location:</strong> Baramulla, Jammu and Kashmir, India</p>
         </div>
-        <p className="text-xs sm:text-sm text-silver-dark light:text-gray-500 mt-4 sm:mt-6">For privacy-related requests, please include &quot;Privacy Request&quot; in the subject line of your email for faster processing.</p>
+        <p className="text-xs sm:text-sm text-black/45 mt-4 sm:mt-6">For privacy-related requests, please include &quot;Privacy Request&quot; in the subject line of your email for faster processing.</p>
       </PrivacySection>
     </>
   );

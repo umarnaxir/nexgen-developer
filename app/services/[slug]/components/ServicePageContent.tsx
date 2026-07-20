@@ -35,9 +35,7 @@ export default function ServicePageContent({ slug }: ServicePageContentProps) {
         relatedServices={related}
         currentSlug={service.slug}
         image={service.content.image}
-        technologies={service.content.technologies}
         faqs={service.content.faqs}
-        useCases={service.content.useCases}
         expectedResults={service.content.expectedResults}
       />
     </>
