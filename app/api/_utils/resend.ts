@@ -1,20 +1,13 @@
 const RESEND_API_URL = "https://api.resend.com/emails";
 
-/** Public-facing email shown on the website (never the private inbox). */
-export const PUBLIC_CONTACT_EMAIL = "info@nexgendevelopers.in";
-
-/**
- * Private inbox that receives contact / callback / subscribe form emails.
- * Override with RESEND_TO_EMAIL or CONTACT_TO_EMAIL in env.
- */
 export const BUSINESS_EMAIL =
   process.env.RESEND_TO_EMAIL ||
   process.env.CONTACT_TO_EMAIL ||
-  "nexgendevelopers11@gmail.com";
+  "info@nexgendevelopers.in";
 
 const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ||
-  `NexGen Developers <${PUBLIC_CONTACT_EMAIL}>`;
+  "NexGen Developers <info@nexgendevelopers.in>";
 
 export function escapeHtml(value: unknown) {
   return String(value ?? "")
@@ -71,7 +64,7 @@ export async function sendResendEmail({
         html,
         text,
 
-        reply_to: replyTo || PUBLIC_CONTACT_EMAIL,
+        reply_to: replyTo || "info@nexgendevelopers.in",
 
         tags: [
           {
@@ -84,7 +77,8 @@ export async function sendResendEmail({
           "X-Entity-Ref-ID": messageId,
           "X-Mailer": "NexGen Developers Website",
           "Message-ID": `<${messageId}@nexgendevelopers.in>`,
-          "List-Unsubscribe": `<mailto:${PUBLIC_CONTACT_EMAIL}?subject=unsubscribe>`,
+          "List-Unsubscribe":
+            "<mailto:info@nexgendevelopers.in?subject=unsubscribe>",
         },
       }),
     });
