@@ -31,18 +31,6 @@ function StatItem({
     const counter = { val: 0 };
 
     const ctx = gsap.context(() => {
-      gsap.from(itemRef.current, {
-        scrollTrigger: {
-          trigger: itemRef.current,
-          start: "top 88%",
-        },
-        y: 28,
-        opacity: 0,
-        duration: 0.7,
-        delay: index * 0.08,
-        ease: "power3.out",
-      });
-
       gsap.to(counter, {
         val: value,
         duration: 1.4,
@@ -66,6 +54,8 @@ function StatItem({
   return (
     <div
       ref={itemRef}
+      data-aos="fade-up"
+      data-aos-delay={index * 60}
       className={`group relative overflow-hidden rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6 ${
         dark
           ? "border border-white/[0.08] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.5)] hover:border-teal-500/25"
@@ -92,49 +82,17 @@ type StatsBarProps = {
 };
 
 export default function StatsBar({ tone = "light" }: StatsBarProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const dark = tone === "dark";
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !headerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section
-      ref={sectionRef}
       className={`${dark ? "section-dark" : "section-light"} section-y`}
       aria-label="Company stats"
     >
       <div className="section-container">
-        <div ref={headerRef} className="mb-10 max-w-xl sm:mb-12">
-          <span
-            className={`text-[11px] font-medium uppercase tracking-[0.35em] ${
-              dark ? "text-white/40" : "text-black/40"
-            }`}
-          >
-            By the numbers
-          </span>
+        <div className="mb-10 max-w-xl sm:mb-12" data-aos="fade-up">
           <h2
-            className={`mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl lg:text-4xl ${
+            className={`text-2xl font-semibold tracking-[-0.03em] sm:text-3xl lg:text-4xl ${
               dark ? "text-white" : "text-black"
             }`}
           >

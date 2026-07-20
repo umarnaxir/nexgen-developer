@@ -193,10 +193,7 @@ export default function ServiceBenefitsSection({
       <div className="section-container relative">
         <div ref={headerRef} className="mb-6 flex flex-col gap-4 lg:mb-7 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-xl">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-              Value
-            </span>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
               Benefits & outcomes
             </h2>
           </div>

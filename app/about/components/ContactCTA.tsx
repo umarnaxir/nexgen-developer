@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 
@@ -12,47 +10,10 @@ type ContactCTAProps = {
 
 export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
   const { open: openContactModal } = useContactModal();
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !contentRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(gridRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-        },
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-      });
-
-      gsap.from(contentRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-        y: 36,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const isEmbedded = variant === "embedded";
 
   return (
     <section
-      ref={sectionRef}
       className={
         isEmbedded
           ? "relative overflow-hidden rounded-xl border border-black/[0.06] bg-black px-5 py-8 text-white sm:px-8 sm:py-10"
@@ -60,7 +21,6 @@ export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
       }
     >
       <div
-        ref={gridRef}
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         aria-hidden
         style={{
@@ -73,14 +33,10 @@ export default function ContactCTA({ variant = "section" }: ContactCTAProps) {
 
       <div className={isEmbedded ? "relative" : "section-container relative"}>
         <div
-          ref={contentRef}
           className="mx-auto flex max-w-3xl flex-col items-center text-center"
+          data-aos="fade-up"
         >
-          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
-            Let&apos;s build together
-          </span>
-
-          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
             Ready to start your project?
           </h2>
 

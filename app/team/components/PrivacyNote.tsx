@@ -1,37 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { Lock } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 export default function PrivacyNote() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !cardRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(cardRef.current, {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.75,
-        ease: "power3.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="section-light section-y border-t border-black/[0.06]">
+    <section className="section-light section-y border-t border-black/[0.06]">
       <div className="section-container">
         <div
-          ref={cardRef}
+          data-aos="fade-up"
           className="relative overflow-hidden rounded-xl border border-teal-500/20 bg-teal-500/[0.08] p-6 sm:p-8"
         >
           <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-teal-400/15 blur-3xl" />

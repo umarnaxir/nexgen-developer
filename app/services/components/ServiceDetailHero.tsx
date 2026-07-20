@@ -54,7 +54,7 @@ export default function ServiceDetailHero({ heading, image }: ServiceDetailHeroP
   return (
     <header
       ref={sectionRef}
-      className="section-dark relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-14 pt-[calc(var(--mobile-nav-height)+2rem)] sm:pb-16 sm:pt-28 lg:min-h-screen lg:pb-20 lg:pt-36"
+      className="section-dark relative flex h-[70svh] min-h-[70svh] flex-col justify-end overflow-hidden pb-14 pt-[calc(var(--mobile-nav-height)+2rem)] sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-36"
     >
       {image ? (
         <>

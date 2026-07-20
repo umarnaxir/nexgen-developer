@@ -107,7 +107,7 @@ export default function ServicesList() {
 
           <div className="flex flex-col gap-4 sm:items-end">
             <div
-              className="flex flex-wrap gap-2"
+              className="flex max-w-full flex-nowrap gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               role="tablist"
               aria-label="Service categories"
             >
@@ -120,7 +120,7 @@ export default function ServicesList() {
                   aria-controls={`tabpanel-${category}`}
                   id={`tab-${category}`}
                   onClick={() => setActiveTab(category)}
-                  className={`rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
                     activeTab === category
                       ? "bg-white text-black"
                       : "border border-white/15 bg-white/5 text-white/55 hover:border-white/30 hover:text-white"

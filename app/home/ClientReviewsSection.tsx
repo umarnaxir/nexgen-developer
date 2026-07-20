@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 const reviews = [
   {
@@ -62,8 +61,6 @@ export default function ClientReviewsSection() {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -75,25 +72,6 @@ export default function ClientReviewsSection() {
   useEffect(() => {
     setCurrentPage(0);
   }, [isMobile]);
-
-  useEffect(() => {
-    registerGsapPlugins();
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 82%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.75,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const reviewsPerPage = isMobile ? 1 : 2;
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
@@ -126,7 +104,6 @@ export default function ClientReviewsSection() {
 
   return (
     <section
-      ref={sectionRef}
       id="reviews"
       className="section-dark section-y relative overflow-hidden"
     >
@@ -136,12 +113,8 @@ export default function ClientReviewsSection() {
       />
 
       <div className="section-container relative">
-        <div ref={headerRef} className="mb-6 max-w-2xl sm:mb-8">
-          <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/50">
-            <span className="h-px w-8 bg-white/30" />
-            Testimonials
-          </span>
-          <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl lg:text-4xl">
+        <div className="mb-6 max-w-2xl sm:mb-8" data-aos="fade-up">
+          <h2 className="text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl lg:text-4xl">
             Client Reviews
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-white/45">
@@ -151,6 +124,8 @@ export default function ClientReviewsSection() {
 
         <div
           className="relative"
+          data-aos="fade-up"
+          data-aos-delay="80"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}

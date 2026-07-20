@@ -28,7 +28,7 @@ export default function RelatedBlogs({ relatedBlogs }: RelatedBlogsProps) {
           <div
             key={relatedBlog.slug}
             className="glass-card group p-0 rounded-2xl overflow-hidden"
-            data-aos="zoom-in"
+            data-aos="fade-up"
             data-aos-delay={index * 80}
           >
             <Link href={`/blogs/${relatedBlog.slug}`}>

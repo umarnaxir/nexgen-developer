@@ -192,6 +192,9 @@ const EXTERNAL_ICON_URLS: Record<
   "microsoft excel (advanced + ai)": {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows11/windows11-original.svg",
   },
+  java: {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+  },
   "power bi": {
     src: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg",
     color: "#F2C811",
@@ -279,4 +282,24 @@ export function getTechBrandIcon(label: string): BrandIcon {
   }
 
   return { type: "svg", icon: bySlug.get("simpleicons")! };
+}
+
+/** Dark brand marks (Next, Express, Apple, etc.) need white fill on black UI. */
+export function brandFillOnDark(hex: string): string {
+  const raw = hex.replace(/^#/, "").toLowerCase();
+  const full =
+    raw.length === 3
+      ? raw
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : raw;
+  if (full.length !== 6 || Number.isNaN(Number.parseInt(full, 16))) {
+    return "#ffffff";
+  }
+  const r = Number.parseInt(full.slice(0, 2), 16);
+  const g = Number.parseInt(full.slice(2, 4), 16);
+  const b = Number.parseInt(full.slice(4, 6), 16);
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance < 80 ? "#ffffff" : `#${full}`;
 }

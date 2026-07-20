@@ -10,16 +10,7 @@ import {
   totalTechStackItems,
   type TechStackCategory,
 } from "./tech-stack-data";
-import { getTechBrandIcon } from "./tech-brand-icons";
-
-const BOOK_TONES = [
-  "from-teal-700 to-teal-500",
-  "from-emerald-800 to-teal-600",
-  "from-cyan-800 to-teal-500",
-  "from-slate-800 to-teal-700",
-  "from-teal-900 to-emerald-600",
-  "from-stone-800 to-teal-600",
-];
+import { getTechBrandIcon, brandFillOnDark } from "./tech-brand-icons";
 
 export default function TechStackSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -107,19 +98,27 @@ export default function TechStackSection() {
     const activeBook = shelf.querySelector<HTMLElement>(
       `[data-category-id="${activeCategoryId}"]`
     );
-    activeBook?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    if (!activeBook) return;
+
+    const left =
+      activeBook.offsetLeft - shelf.clientWidth / 2 + activeBook.clientWidth / 2;
+    shelf.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [activeCategoryId]);
 
   return (
     <section
       ref={sectionRef}
       id="tech-stack"
-      className="section-light relative overflow-hidden bg-white text-black section-y"
+      className="section-dark relative overflow-hidden bg-black text-white section-y"
       aria-label="Technology stack"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_10%_0%,rgba(20,184,166,0.13),transparent_40%),radial-gradient(ellipse_at_90%_100%,rgba(13,148,136,0.08),transparent_42%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[length:48px_48px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-teal-500/[0.08] blur-[130px]"
       />
 
       <div className="section-container relative z-10">
@@ -127,25 +126,21 @@ export default function TechStackSection() {
           ref={headerRef}
           className="mb-6 flex items-end justify-between gap-3 sm:mb-8 sm:gap-4"
         >
-          <div className="min-w-0 max-w-xl">
-            <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-teal-700/55">
-              <span className="h-px w-8 bg-teal-500/50" />
-              Technology
-            </span>
-            <h2 className="mt-3 text-[clamp(1.7rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
+          <div className="min-w-0 max-w-3xl">
+            <h2 className="text-[clamp(1.7rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-white">
               Stack we ship with.
             </h2>
-            <p className="mt-2.5 max-w-md text-[15px] leading-relaxed text-black/45">
-              {totalTechStackItems}+ tools across {techStackCategories.length} disciplines —
+            <p className="mt-2.5 text-[15px] leading-relaxed text-white/50 sm:whitespace-nowrap">
+              {totalTechStackItems}+ tools across {techStackCategories.length} disciplines,
               browse the shelf or search anything.
             </p>
           </div>
 
-          <div className="flex shrink-0 flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-2.5">
-            <span className="hidden rounded-full border border-teal-500/20 bg-teal-50 px-3 py-1.5 text-xs font-medium tabular-nums text-teal-800 sm:inline-flex">
+          <div className="hidden shrink-0 flex-col items-end gap-2 sm:flex sm:flex-row sm:items-center sm:gap-2.5">
+            <span className="rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1.5 text-xs font-medium tabular-nums text-teal-300">
               {totalTechStackItems}+ skills
             </span>
-            <span className="text-xs tabular-nums text-black/35 sm:text-sm">
+            <span className="text-xs tabular-nums text-white/40 sm:text-sm">
               {String(activeIndex + 1).padStart(2, "0")} /{" "}
               {String(Math.max(categories.length, 1)).padStart(2, "0")}
             </span>
@@ -161,29 +156,28 @@ export default function TechStackSection() {
         </div>
 
         <label className="relative mb-5 block sm:mb-6">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-teal-700/40" />
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-teal-300/50" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search technologies, tools, or skills..."
-            className="w-full rounded-2xl border border-teal-900/[0.08] bg-white/95 py-3.5 pl-11 pr-11 text-sm text-black shadow-[0_12px_40px_-28px_rgba(13,148,136,0.35)] outline-none transition-all placeholder:text-black/35 focus:border-teal-500/40 focus:shadow-[0_0_0_4px_rgba(20,184,166,0.12)]"
+            className="w-full rounded-2xl border border-white/[0.1] bg-white/[0.04] py-3.5 pl-11 pr-11 text-sm text-white outline-none transition-all placeholder:text-white/35 focus:border-teal-400/40 focus:bg-white/[0.06]"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
               aria-label="Clear search"
-              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-black/35 transition-colors hover:bg-teal-50 hover:text-teal-800"
+              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-white/35 transition-colors hover:bg-white/10 hover:text-teal-300"
             >
               <X className="h-4 w-4" />
             </button>
           )}
         </label>
 
-        {/* Icon bookshelf — categories */}
         <div ref={shelfRef} className="relative mb-5 sm:mb-6">
-          <div className="flex gap-2.5 overflow-x-auto px-0.5 pb-3 pt-1 [scrollbar-width:none] sm:gap-3 [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-2.5 overflow-x-auto px-0.5 pb-3 pt-4 [scrollbar-width:none] sm:gap-3 sm:pt-5 [&::-webkit-scrollbar]:hidden">
             {categories.map((category, index) => (
               <CategoryBook
                 key={category.id}
@@ -194,39 +188,32 @@ export default function TechStackSection() {
               />
             ))}
           </div>
-          <div
-            aria-hidden
-            className="h-2 rounded-full bg-gradient-to-b from-teal-900/10 to-teal-900/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
-          />
+          <div aria-hidden className="h-2 rounded-full bg-white/[0.08]" />
         </div>
 
-        {/* Open book — skill tags with icons */}
         <div
           ref={stageRef}
-          className="relative overflow-hidden rounded-[1.5rem] border border-teal-900/[0.07] bg-white/90 shadow-[0_28px_70px_-42px_rgba(13,148,136,0.32)] sm:rounded-[1.75rem]"
+          className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.1] bg-white/[0.03] sm:rounded-[1.75rem]"
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-1 top-0 select-none text-[6.5rem] font-semibold leading-none text-teal-600/[0.05] sm:text-[9rem] lg:text-[11rem]"
+            className="pointer-events-none absolute -right-1 top-0 select-none text-[6.5rem] font-semibold leading-none text-white/[0.04] sm:text-[9rem] lg:text-[11rem]"
           >
             {String(activeIndex + 1).padStart(2, "0")}
           </div>
 
-          <div className="relative z-[1] flex flex-col gap-3 border-b border-teal-900/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
+          <div className="relative z-[1] flex flex-col gap-3 border-b border-white/[0.08] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
             <div className="flex items-center gap-3">
               <motion.span
                 key={activeCategory.id}
-                initial={{ scale: 0.86, opacity: 0, rotate: -6 }}
-                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                initial={{ scale: 0.86, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-teal-500/25 bg-teal-500/10 text-teal-700 sm:h-12 sm:w-12"
+                className="flex items-center justify-center text-teal-300"
               >
-                <ActiveIcon className="h-5 w-5" />
+                <ActiveIcon className="h-8 w-8 sm:h-9 sm:w-9" />
               </motion.span>
               <div className="min-w-0">
-                <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-teal-700/45">
-                  {query.trim() ? "Search results" : "Active category"}
-                </span>
                 <AnimatePresence mode="wait">
                   <motion.h3
                     key={activeCategory.id}
@@ -234,14 +221,14 @@ export default function TechStackSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.25 }}
-                    className="mt-0.5 truncate text-lg font-semibold tracking-[-0.02em] text-black sm:text-2xl"
+                    className="truncate text-lg font-semibold tracking-[-0.02em] text-white sm:text-2xl"
                   >
-                    {activeCategory.title}
+                    {query.trim() ? "Search results" : activeCategory.title}
                   </motion.h3>
                 </AnimatePresence>
               </div>
             </div>
-            <span className="w-fit rounded-full border border-teal-500/20 bg-teal-50 px-3 py-1 text-xs font-medium tabular-nums text-teal-800">
+            <span className="w-fit rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1 text-xs font-medium tabular-nums text-teal-300">
               {activeCategory.items.length} skills
             </span>
           </div>
@@ -265,7 +252,7 @@ export default function TechStackSection() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="flex min-h-[180px] items-center justify-center px-6 text-sm text-black/40"
+                  className="flex min-h-[180px] items-center justify-center px-6 text-sm text-white/40"
                 >
                   No matches. Try another keyword or clear search.
                 </motion.p>
@@ -292,14 +279,13 @@ function NavButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black/50 transition-all hover:border-teal-500/40 hover:bg-teal-50 hover:text-teal-800"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/60 transition-all hover:border-teal-400/40 hover:bg-teal-500/15 hover:text-teal-300"
     >
       {children}
     </button>
   );
 }
 
-/** Category as an icon-forward book on the shelf */
 function CategoryBook({
   category,
   index,
@@ -312,7 +298,6 @@ function CategoryBook({
   onClick: () => void;
 }) {
   const Icon = category.icon;
-  const tone = BOOK_TONES[index % BOOK_TONES.length];
 
   return (
     <button
@@ -322,35 +307,31 @@ function CategoryBook({
       aria-pressed={isActive}
       aria-label={category.title}
       title={category.title}
-      className={`group relative flex h-[7.25rem] w-[3.35rem] shrink-0 flex-col items-center justify-between overflow-hidden rounded-md border px-1.5 py-2.5 transition-all duration-300 sm:h-[8.5rem] sm:w-16 sm:rounded-lg ${
+      className={`group relative flex h-[7.75rem] w-[5.5rem] shrink-0 flex-col items-center justify-between overflow-hidden rounded-lg border px-2 py-2.5 transition-all duration-300 sm:h-[9rem] sm:w-[6.25rem] sm:rounded-xl sm:px-2.5 sm:py-3 ${
         isActive
-          ? `-translate-y-2 border-teal-400/50 bg-gradient-to-b ${tone} text-white shadow-[0_18px_36px_-16px_rgba(13,148,136,0.65)]`
-          : "border-teal-900/10 bg-gradient-to-b from-white to-teal-50/80 text-teal-800 shadow-[0_8px_20px_-14px_rgba(0,0,0,0.25)] hover:-translate-y-1.5 hover:border-teal-500/30 hover:shadow-[0_14px_28px_-16px_rgba(13,148,136,0.35)]"
+          ? "-translate-y-2 border-teal-400/50 bg-teal-500/15 text-white"
+          : "border-white/[0.1] bg-white/[0.04] text-white hover:-translate-y-1.5 hover:border-teal-400/40 hover:bg-teal-500/10"
       }`}
     >
       <span
-        aria-hidden
-        className={`absolute left-0 top-0 h-full w-[3px] ${
-          isActive ? "bg-white/25" : "bg-teal-900/10"
-        }`}
-      />
-      <span
-        className={`text-[9px] font-semibold tabular-nums tracking-[0.12em] ${
-          isActive ? "text-white/60" : "text-teal-700/40"
+        className={`text-[9px] font-semibold tabular-nums tracking-[0.12em] transition-colors ${
+          isActive ? "text-teal-300/80" : "text-white/35 group-hover:text-teal-300/70"
         }`}
       >
         {String(index + 1).padStart(2, "0")}
       </span>
       <span
-        className={`flex h-9 w-9 items-center justify-center rounded-xl sm:h-10 sm:w-10 ${
-          isActive ? "bg-white/15 text-white" : "bg-teal-500/10 text-teal-700"
+        className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors sm:h-11 sm:w-11 ${
+          isActive
+            ? "bg-teal-500/20 text-teal-300"
+            : "bg-white/10 text-white/70 group-hover:bg-teal-500/20 group-hover:text-teal-300"
         }`}
       >
         <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
       </span>
       <span
-        className={`w-full truncate text-center text-[9px] font-semibold leading-tight tracking-tight sm:text-[10px] ${
-          isActive ? "text-white/90" : "text-black/55"
+        className={`w-full text-center text-[10px] font-semibold leading-tight tracking-tight transition-colors sm:text-[11px] ${
+          isActive ? "text-white" : "text-white/60 group-hover:text-white"
         }`}
       >
         {category.shortTitle}
@@ -359,7 +340,6 @@ function CategoryBook({
   );
 }
 
-/** Skill as a compact icon book + real brand SVG */
 function SkillBook({ label, index }: { label: string; index: number }) {
   const brand = getTechBrandIcon(label);
   const [failed, setFailed] = useState(false);
@@ -369,29 +349,25 @@ function SkillBook({ label, index }: { label: string; index: number }) {
       initial={{ opacity: 0, y: 12, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ delay: Math.min(index * 0.018, 0.35), duration: 0.28 }}
-      className="group relative flex min-h-[88px] flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border border-teal-900/[0.06] bg-white px-2 py-3 text-center shadow-[0_10px_28px_-22px_rgba(0,0,0,0.28)] transition-all hover:-translate-y-0.5 hover:border-teal-500/30 hover:bg-teal-50/40 hover:shadow-[0_16px_32px_-20px_rgba(13,148,136,0.28)] sm:min-h-[100px] sm:px-2.5 sm:py-3.5"
+      className="group flex min-h-[88px] flex-col items-center justify-center gap-2.5 px-2 py-3 text-center sm:min-h-[100px] sm:px-2.5 sm:py-3.5"
     >
-      <span
-        aria-hidden
-        className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-teal-500/40 to-teal-500/5 opacity-0 transition-opacity group-hover:opacity-100"
-      />
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/[0.06] bg-white shadow-sm transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10">
+      <span className="flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
         {brand.type === "svg" && !failed ? (
           <svg
             role="img"
             viewBox="0 0 24 24"
             aria-hidden
-            className="h-[18px] w-[18px] sm:h-5 sm:w-5"
+            className="h-8 w-8 sm:h-9 sm:w-9"
           >
-            <path fill={`#${brand.icon.hex}`} d={brand.icon.path} />
+            <path fill={brandFillOnDark(brand.icon.hex)} d={brand.icon.path} />
           </svg>
         ) : brand.type === "url" && !failed ? (
-          brand.mono && brand.color ? (
+          brand.mono ? (
             <span
               aria-hidden
-              className="h-[18px] w-[18px] sm:h-5 sm:w-5"
+              className="h-8 w-8 sm:h-9 sm:w-9"
               style={{
-                backgroundColor: brand.color,
+                backgroundColor: brandFillOnDark(brand.color ?? "000000"),
                 WebkitMaskImage: `url(${brand.src})`,
                 maskImage: `url(${brand.src})`,
                 WebkitMaskSize: "contain",
@@ -406,20 +382,20 @@ function SkillBook({ label, index }: { label: string; index: number }) {
             <Image
               src={brand.src}
               alt=""
-              width={22}
-              height={22}
-              className="h-[18px] w-[18px] object-contain sm:h-5 sm:w-5"
+              width={36}
+              height={36}
+              className="h-8 w-8 object-contain sm:h-9 sm:w-9"
               unoptimized
               onError={() => setFailed(true)}
             />
           )
         ) : (
-          <span className="text-[10px] font-bold uppercase tracking-wide text-teal-700/50">
+          <span className="text-sm font-bold uppercase tracking-wide text-white/70">
             {label.slice(0, 2)}
           </span>
         )}
       </span>
-      <span className="line-clamp-2 text-[11px] font-semibold leading-snug tracking-[-0.01em] text-black/75 sm:text-xs">
+      <span className="line-clamp-2 text-[11px] font-semibold leading-snug tracking-[-0.01em] text-white/75 sm:text-xs">
         {label}
       </span>
     </motion.li>

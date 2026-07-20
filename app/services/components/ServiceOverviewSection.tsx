@@ -112,12 +112,7 @@ export default function ServiceOverviewSection({ description }: ServiceOverviewS
     >
       <div className="section-container">
         <div ref={headerRef} className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-            <span className="h-px w-8 bg-teal-500/50" />
-            Overview
-            <span className="h-px w-8 bg-teal-500/50" />
-          </span>
-          <h2 className="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
+          <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
             What we deliver
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-black/50 sm:text-base">

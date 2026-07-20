@@ -20,7 +20,7 @@ export default function FeaturedBlogCard({ blog }: FeaturedBlogCardProps) {
     <Link
       href={`/blogs/${blog.slug}`}
       className="group glass-card beam-border block focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 focus-visible:ring-offset-4 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
-      data-aos="zoom-in"
+      data-aos="fade-up"
     >
       <article className="relative w-full aspect-[21/9] min-h-[280px] sm:min-h-[320px] overflow-hidden rounded-2xl">
         <Image

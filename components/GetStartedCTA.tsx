@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 
@@ -29,54 +27,24 @@ const DEFAULTS = {
 } as const;
 
 export default function GetStartedCTA({
-  eyebrow = DEFAULTS.eyebrow,
   heading = DEFAULTS.heading,
   description = DEFAULTS.description,
   secondaryLink = DEFAULTS.secondaryLink,
 }: GetStartedCTAProps) {
   const { open: openContactModal } = useContactModal();
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !contentRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(contentRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-        y: 28,
-        opacity: 0,
-        duration: 0.85,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <section ref={sectionRef} className="section-light border-t border-black/[0.06] section-y">
+    <section className="section-light border-t border-black/[0.06] section-y">
       <div className="section-container">
         <div
-          ref={contentRef}
+          data-aos="fade-up"
           className="relative overflow-hidden rounded-xl border border-teal-500/20 bg-teal-500/[0.08] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
         >
           <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-teal-400/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-teal-500/10 blur-3xl" />
 
           <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-              {eyebrow}
-            </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-black sm:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-black sm:text-4xl">
               {heading}
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-black/60 sm:text-base">

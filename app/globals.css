@@ -748,11 +748,11 @@ body {
 }
 
 .light .section-dark {
-  background-color: #0a0a0a;
+  background-color: #000000;
 }
 
 .light .section-light {
-  background-color: #fafafa;
+  background-color: #ffffff;
 }
 
 /* Fixed nav rail. desktop sidebar + mobile top bar */

@@ -21,7 +21,7 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
     <Link
       href={`/blogs/${blog.slug}`}
       className="group glass-card flex min-h-[200px] sm:min-h-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
-      data-aos="zoom-in"
+      data-aos="fade-up"
       data-aos-delay={index * 80}
     >
       {/* Left: image */}

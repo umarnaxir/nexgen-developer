@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import type { ServiceDefinition } from "../config";
 import { getServiceHref } from "../config";
 
@@ -54,36 +53,12 @@ function RelatedServiceCard({
 }
 
 export default function RelatedServicesSection({ services }: RelatedServicesSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
-
   const items = services.slice(0, 6);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [items.length]);
 
   const scrollByDir = (dir: -1 | 1) => {
     const el = scrollerRef.current;
     if (!el) return;
-    // Advance roughly one viewport of 3 cards
     const amount = el.clientWidth * 0.95;
     el.scrollBy({ left: dir * amount, behavior: "smooth" });
   };
@@ -92,20 +67,16 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
 
   return (
     <section
-      ref={sectionRef}
       className="section-light relative overflow-hidden border-t border-black/[0.06] section-y"
       aria-label="Related services"
     >
       <div className="section-container">
         <div
-          ref={headerRef}
           className="mb-5 flex items-end justify-between gap-4 sm:mb-6"
+          data-aos="fade-up"
         >
           <div>
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-              Explore more
-            </span>
-            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
               Related services
             </h2>
           </div>
@@ -122,6 +93,8 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
         <div
           ref={scrollerRef}
           className="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden"
+          data-aos="fade-up"
+          data-aos-delay="80"
         >
           {items.map((service, index) => (
             <RelatedServiceCard key={service.slug} service={service} index={index} />

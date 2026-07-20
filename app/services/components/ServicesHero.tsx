@@ -50,7 +50,7 @@ export default function ServicesHero() {
  return (
  <header
  ref={sectionRef}
- className="section-dark relative flex min-h-[72svh] flex-col justify-center overflow-hidden pb-14 pt-[calc(var(--mobile-nav-height)+2rem)] sm:min-h-[68vh] sm:pb-16 sm:pt-28 lg:min-h-[75vh] lg:pb-20 lg:pt-36"
+ className="section-dark relative flex h-[100svh] min-h-[100svh] flex-col justify-center overflow-hidden pb-14 pt-[calc(var(--mobile-nav-height)+2rem)] sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-36"
  >
  <div
  ref={gridRef}

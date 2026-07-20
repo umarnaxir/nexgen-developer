@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { LucideIcon } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 interface PrivacySectionProps {
   icon: LucideIcon;
@@ -21,29 +19,6 @@ export default function PrivacySection({
   delay = 0,
   id,
 }: PrivacySectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(sectionRef.current, {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 88%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.65,
-        delay: Math.min(delay, 0.2),
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [delay]);
-
   const sectionId =
     id ??
     title
@@ -54,8 +29,9 @@ export default function PrivacySection({
 
   return (
     <section
-      ref={sectionRef}
       id={sectionId}
+      data-aos="fade-up"
+      data-aos-delay={Math.min(Math.round(delay * 1000), 200)}
       className="scroll-mt-28 rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.1)] transition-colors hover:border-teal-500/20 sm:p-6 lg:p-8"
     >
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:gap-4">

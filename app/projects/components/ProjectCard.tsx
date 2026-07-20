@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -14,7 +14,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { createPortal } from "react-dom";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 export type ProjectData = {
   id: number;
@@ -45,33 +44,12 @@ export default function ProjectCard({
   isExpanded,
   onToggleExpand,
 }: ProjectCardProps) {
-  const cardRef = useRef<HTMLElement>(null);
   const IconComponent = project.icon;
   const imageLeft = index % 2 === 0;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !cardRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(cardRef.current, {
-        scrollTrigger: { trigger: cardRef.current, start: "top 88%" },
-        y: 36,
-        opacity: 0,
-        duration: 0.75,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, cardRef);
-
-    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
@@ -96,7 +74,7 @@ export default function ProjectCard({
       {isExpanded ? (
         <motion.div
           key={`overlay-${project.id}`}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-5 lg:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -120,7 +98,7 @@ export default function ProjectCard({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 24 }}
             transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 flex h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/[0.1] bg-neutral-950 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]"
+            className="relative z-10 mx-auto flex h-[70vh] max-h-[70vh] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/[0.1] bg-neutral-950 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] sm:w-full"
           >
             <div
               aria-hidden
@@ -151,7 +129,7 @@ export default function ProjectCard({
               </div>
             </div>
 
-            <div className="relative flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6">
+            <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6">
               <h2
                 id={`project-modal-title-${project.id}`}
                 className="text-xl font-semibold leading-snug tracking-[-0.03em] text-white sm:text-2xl lg:text-[1.75rem]"
@@ -247,8 +225,9 @@ export default function ProjectCard({
   return (
     <>
       <motion.article
-        ref={cardRef}
         layout
+        data-aos="fade-up"
+        data-aos-delay={Math.min(index * 60, 180)}
         className="group overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_24px_64px_-40px_rgba(0,0,0,0.18)]"
       >
         <div className={`flex flex-col ${imageLeft ? "lg:flex-row" : "lg:flex-row-reverse"}`}>

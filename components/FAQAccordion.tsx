@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 
 export type FAQItem = {
   question: string;
@@ -20,52 +19,12 @@ type FAQAccordionProps = {
 
 export default function FAQAccordion({
   faqs,
-  eyebrow = "FAQ",
   title = "Frequently asked questions",
   description,
   id = "faq",
 }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const desktopListRef = useRef<HTMLDivElement>(null);
-  const mobileListRef = useRef<HTMLDivElement>(null);
   const baseId = useId();
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        y: 24,
-        opacity: 0,
-        duration: 0.75,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-
-      const list =
-        window.matchMedia("(min-width: 1024px)").matches
-          ? desktopListRef.current
-          : mobileListRef.current;
-
-      gsap.from(list?.children ?? [], {
-        scrollTrigger: { trigger: list, start: "top 88%" },
-        y: 22,
-        opacity: 0,
-        duration: 0.55,
-        stagger: 0.06,
-        ease: "power3.out",
-        immediateRender: false,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [faqs.length]);
 
   const toggle = (index: number) => {
     setOpenIndex((current) => (current === index ? null : index));
@@ -75,7 +34,6 @@ export default function FAQAccordion({
 
   return (
     <section
-      ref={sectionRef}
       id={id}
       className="section-light section-y relative overflow-hidden border-t border-black/[0.06]"
     >
@@ -86,15 +44,11 @@ export default function FAQAccordion({
 
       <div className="section-container relative">
         <div
-          ref={headerRef}
           className="mb-6 flex flex-col gap-4 sm:mb-8 lg:flex-row lg:items-end lg:justify-between"
+          data-aos="fade-up"
         >
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-              <span className="h-px w-8 bg-teal-500/50" />
-              {eyebrow}
-            </span>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
+            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
               {title}
             </h2>
             {description ? (
@@ -102,7 +56,7 @@ export default function FAQAccordion({
             ) : null}
           </div>
 
-          <div className="flex items-center gap-3 text-sm tabular-nums text-black/40">
+          <div className="hidden items-center gap-3 text-sm tabular-nums text-black/40 sm:flex">
             <span>{String(faqs.length).padStart(2, "0")} questions</span>
             <div className="h-px w-16 overflow-hidden bg-black/10 sm:w-24">
               <motion.div
@@ -121,9 +75,12 @@ export default function FAQAccordion({
         </div>
 
         {/* Desktop: interactive split stage */}
-        <div className="hidden gap-6 lg:grid lg:grid-cols-[0.95fr_1.15fr] lg:gap-8">
+        <div
+          className="hidden gap-6 lg:grid lg:grid-cols-[0.95fr_1.15fr] lg:gap-8"
+          data-aos="fade-up"
+          data-aos-delay="80"
+        >
           <div
-            ref={desktopListRef}
             className="flex flex-col gap-2"
             role="tablist"
             aria-label="FAQ questions"
@@ -279,7 +236,11 @@ export default function FAQAccordion({
         </div>
 
         {/* Mobile / tablet: animated accordion */}
-        <div ref={mobileListRef} className="flex flex-col gap-2.5 lg:hidden">
+        <div
+          className="flex flex-col gap-2.5 lg:hidden"
+          data-aos="fade-up"
+          data-aos-delay="80"
+        >
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             const panelId = `${baseId}-m-panel-${index}`;
