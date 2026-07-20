@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2, GraduationCap, ShoppingBag, Dumbbell, BookOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause, Building2, Globe, Heart, Briefcase, Brain, Eye, Users, BarChart3, Share2, GraduationCap, ShoppingBag, Dumbbell, BookOpen, MapPin } from "lucide-react";
 import ProjectCarouselCard from "@/components/ProjectCarouselCard";
 
 // Helper function to generate slug from title
@@ -24,7 +24,7 @@ export default function FeaturedWorkSection() {
       id: 11,
       title: "Exceptional IAS Academy - Coaching Institute Website",
       description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
-      image: "/images/projects/exceptional.png",
+      image: "/images/projects/exceptionalias.png",
       link: "https://exceptionaliasacademy.vercel.app/",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Education Website",
@@ -66,7 +66,7 @@ export default function FeaturedWorkSection() {
       id: 14,
       title: "Citadel Library - Library & Study Space Website",
       description: "A calm, well-structured website for a library and study space featuring memberships, seating, and resources.",
-      image: "/images/projects/citadil.png",
+      image: "/images/projects/citadel.png",
       link: "https://citadellibrary.vercel.app/",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Library Website",
@@ -77,10 +77,24 @@ export default function FeaturedWorkSection() {
       slug: generateSlug("Citadel Library - Library & Study Space Website")
     },
     {
+      id: 15,
+      title: "PlaceHub - Property Discovery Platform",
+      description: "A trusted real-estate platform to buy, rent, and sell verified properties with confidence across Kashmir.",
+      image: "/images/projects/placehub.png",
+      link: "https://findyourperfectplace.vercel.app/",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization", "Property Listings"],
+      category: "Real Estate Platform",
+      duration: "1 - 2 months",
+      client: "PlaceHub",
+      icon: MapPin,
+      color: "bg-teal-500",
+      slug: generateSlug("PlaceHub - Property Discovery Platform")
+    },
+    {
       id: 1,
       title: "Dr. Jibran Bashir - Orthopedic Care Website",
       description: "A professional medical website showcasing services, expertise, and online appointment booking with a clean and responsive UI.",
-      image: "/images/projects/project2.png",
+      image: "/images/projects/drjibran.png",
       link: "https://drjibranbashir.com",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
       category: "Medical Website",
@@ -94,7 +108,7 @@ export default function FeaturedWorkSection() {
       id: 2,
       title: "Hotel Sea View - Luxury Stay Website",
       description: "A modern hotel website displaying rooms, gallery, and contact details with an attractive landing section and smooth navigation.",
-      image: "/images/projects/project3.png",
+      image: "/images/projects/hotelseaview.png",
       link: "https://thehotelseaview.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Image Optimization", "Booking Integration", "Google Maps API"],
       category: "Hospitality Website",
@@ -108,7 +122,7 @@ export default function FeaturedWorkSection() {
       id: 3,
       title: "Kindness Towards Humanity Foundation",
       description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
-      image: "/images/projects/project1.png",
+      image: "/images/projects/kindnesstowordshumanity.png",
       link: "https://kindnesstowardshumanity.in",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
       category: "Nonprofit Website",
@@ -122,7 +136,7 @@ export default function FeaturedWorkSection() {
       id: 4,
       title: "Saibbyweb Office Management Dashboard",
       description: "A web-based system for managing employees, attendance, and documents with secure login and clean UI.",
-      image: "/images/projects/project4.png",
+      image: "/images/projects/office-management.png",
       link: "https://sw-office.vercel.app",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Authentication System", "Database Integration", "File Upload System", "Dashboard Analytics"],
       category: "Management System",

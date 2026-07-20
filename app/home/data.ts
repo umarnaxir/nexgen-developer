@@ -31,7 +31,7 @@ export const featuredProjects: FeaturedProject[] = [
     id: 11,
     title: "Exceptional IAS Academy",
     tagline: "A coaching platform built to convert visitors into enrolled students.",
-    image: "/images/projects/exceptional.png",
+    image: "/images/projects/exceptionalias.png",
     link: "https://exceptionaliasacademy.vercel.app/",
     category: "Education",
   },
@@ -55,9 +55,17 @@ export const featuredProjects: FeaturedProject[] = [
     id: 14,
     title: "Citadel Library",
     tagline: "A calm, structured website for a premium study space.",
-    image: "/images/projects/citadil.png",
+    image: "/images/projects/citadel.png",
     link: "https://citadellibrary.vercel.app/",
     category: "Library",
+  },
+  {
+    id: 15,
+    title: "PlaceHub",
+    tagline: "Buy, rent, and sell verified properties with confidence.",
+    image: "/images/projects/placehub.png",
+    link: "https://findyourperfectplace.vercel.app/",
+    category: "Real Estate",
   },
 ];
 

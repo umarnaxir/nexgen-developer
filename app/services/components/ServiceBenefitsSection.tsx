@@ -84,7 +84,7 @@ function BenefitListItem({
         {label}
       </span>
       <ArrowRight
-        className={`mt-1 h-3.5 w-3.5 shrink-0 transition-all duration-300 ${
+        className={`mt-1 hidden h-3.5 w-3.5 shrink-0 transition-all duration-300 lg:block ${
           isActive
             ? "translate-x-0 text-teal-600 opacity-100"
             : "translate-x-[-4px] text-black/20 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
@@ -239,9 +239,9 @@ export default function ServiceBenefitsSection({
           </div>
         ) : null}
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr] lg:gap-10">
-          {/* List */}
-          <div ref={listRef} className="flex flex-col gap-2.5">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:gap-10">
+          {/* List — full width on mobile */}
+          <div ref={listRef} className="flex w-full flex-col gap-2.5">
             {items.map((item, index) => (
               <BenefitListItem
                 key={`${activeTab}-${item}`}
@@ -254,10 +254,10 @@ export default function ServiceBenefitsSection({
             ))}
           </div>
 
-          {/* Spotlight panel — black with white content */}
+          {/* Spotlight panel — desktop only */}
           <div
             ref={spotlightRef}
-            className="relative min-h-[360px] overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-950 shadow-[0_28px_72px_-36px_rgba(0,0,0,0.45)] lg:min-h-[440px]"
+            className="relative hidden min-h-[360px] overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-950 shadow-[0_28px_72px_-36px_rgba(0,0,0,0.45)] lg:block lg:min-h-[440px]"
           >
             <div
               aria-hidden

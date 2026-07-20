@@ -60,20 +60,23 @@ export default function ServicesList() {
           start: "top top",
           end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
           pin: pinRef.current,
-          scrub: 1.1,
-          anticipatePin: 1,
+          scrub: true,
+          pinSpacing: true,
           invalidateOnRefresh: true,
+          fastScrollEnd: true,
           onUpdate: (self) => updateProgress(self.progress),
         },
       });
     }, sectionRef);
 
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", handleResize);
-    ScrollTrigger.refresh();
+    let nestedRaf = 0;
+    const refreshRaf = requestAnimationFrame(() => {
+      nestedRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(refreshRaf);
+      cancelAnimationFrame(nestedRaf);
       ctx.revert();
     };
   }, [activeTab]);
@@ -82,7 +85,7 @@ export default function ServicesList() {
     <section
       ref={sectionRef}
       id="services-list"
-      className="section-dark relative overflow-hidden text-white"
+      className="section-dark relative text-white"
       aria-label="Services listing"
     >
       <div
@@ -135,7 +138,7 @@ export default function ServicesList() {
               <div className="h-px w-28 overflow-hidden bg-white/10 sm:w-40">
                 <div
                   ref={progressRef}
-                  className="h-full origin-left bg-white transition-transform duration-150"
+                  className="h-full origin-left bg-white"
                   style={{ transform: "scaleX(0.015)" }}
                 />
               </div>

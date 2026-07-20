@@ -5,6 +5,7 @@ import AboutPillars from "./components/AboutPillars";
 import AboutValues from "./components/AboutValues";
 import AboutApproach from "./components/AboutApproach";
 import AboutFAQ from "./components/AboutFAQ";
+import TechStackSection from "@/app/home/TechStackSection";
 import GetStartedCTA from "@/components/GetStartedCTA";
 import { getAboutSEO } from "@/lib/seo/page-seo";
 
@@ -16,6 +17,7 @@ export default function AboutPage() {
       <AboutHero />
       <AboutStory />
       <AboutCapabilities />
+      <TechStackSection />
       <AboutPillars />
       <AboutValues />
       <AboutApproach />

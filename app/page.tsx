@@ -1,7 +1,6 @@
 import HeroSection from "./home/HeroSection";
 import ProjectsShowcaseSection from "./home/ProjectsShowcaseSection";
 import ServicesSection from "./home/ServicesSection";
-import TechStackSection from "./home/TechStackSection";
 import AboutValues from "./about/components/AboutValues";
 import AboutApproach from "./about/components/AboutApproach";
 import { getHomeSEO } from "@/lib/seo/page-seo";
@@ -14,7 +13,6 @@ export default function HomePage() {
       <HeroSection />
       <ProjectsShowcaseSection />
       <ServicesSection />
-      <TechStackSection />
       <AboutApproach />
       <AboutValues />
     </>

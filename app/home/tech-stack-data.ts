@@ -21,6 +21,7 @@ import {
 export type TechStackCategory = {
   id: string;
   title: string;
+  shortTitle: string;
   icon: LucideIcon;
   items: string[];
 };
@@ -29,6 +30,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "programming-languages",
     title: "Programming Languages",
+    shortTitle: "Languages",
     icon: Code2,
     items: [
       "JavaScript (ES6+)",
@@ -44,6 +46,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "frontend-development",
     title: "Frontend Development",
+    shortTitle: "Frontend",
     icon: Layers,
     items: [
       "React.js",
@@ -60,6 +63,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "backend-development",
     title: "Backend Development",
+    shortTitle: "Backend",
     icon: Server,
     items: [
       "Node.js",
@@ -77,6 +81,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "mobile-app-development",
     title: "Mobile App Development",
+    shortTitle: "Mobile",
     icon: Smartphone,
     items: [
       "React Native",
@@ -89,6 +94,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "ai-ml",
     title: "Artificial Intelligence & Machine Learning",
+    shortTitle: "AI & ML",
     icon: BrainCircuit,
     items: [
       "Artificial Intelligence (AI)",
@@ -117,6 +123,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "data-science-analytics",
     title: "Data Science & Analytics",
+    shortTitle: "Analytics",
     icon: BarChart3,
     items: [
       "Power BI",
@@ -130,12 +137,14 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "databases",
     title: "Databases",
+    shortTitle: "Databases",
     icon: Database,
     items: ["MongoDB", "MySQL", "PostgreSQL", "Firebase Firestore"],
   },
   {
     id: "cloud-devops",
     title: "Cloud, DevOps & Deployment",
+    shortTitle: "Cloud",
     icon: Cloud,
     items: [
       "AWS (Lambda, S3, EC2)",
@@ -151,6 +160,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "tools-platforms",
     title: "Tools & Development Platforms",
+    shortTitle: "Tools",
     icon: Wrench,
     items: [
       "Visual Studio Code",
@@ -166,6 +176,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "cms-ecommerce",
     title: "CMS & E-Commerce",
+    shortTitle: "CMS",
     icon: Settings,
     items: [
       "WordPress",
@@ -177,6 +188,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "website-development",
     title: "Website Development",
+    shortTitle: "Websites",
     icon: Globe,
     items: [
       "Business Websites",
@@ -195,6 +207,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "app-development",
     title: "App Development",
+    shortTitle: "Apps",
     icon: Smartphone,
     items: [
       "Android Applications",
@@ -208,6 +221,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "digital-marketing",
     title: "Digital Marketing",
+    shortTitle: "Marketing",
     icon: Megaphone,
     items: [
       "Technical SEO",
@@ -233,6 +247,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "ui-ux-design",
     title: "UI/UX Design",
+    shortTitle: "Design",
     icon: Palette,
     items: [
       "UI Design",
@@ -247,6 +262,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "automation-business",
     title: "Automation & Business Solutions",
+    shortTitle: "Automation",
     icon: Bot,
     items: [
       "AI Workflow Automation",
@@ -260,6 +276,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "core-engineering",
     title: "Core Software Engineering",
+    shortTitle: "Engineering",
     icon: Sparkles,
     items: [
       "Full-Stack Development",
@@ -279,6 +296,7 @@ export const techStackCategories: TechStackCategory[] = [
   {
     id: "professional-skills",
     title: "Professional Skills",
+    shortTitle: "Soft Skills",
     icon: Users,
     items: [
       "Problem Solving",

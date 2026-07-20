@@ -51,7 +51,7 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
         y: 24,
         opacity: 0,
         duration: 0.7,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: "power3.out",
       });
     }, sectionRef);
@@ -82,72 +82,44 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
             </h2>
           </div>
 
-          <div className="hidden items-center gap-4 sm:flex">
+          <div className="flex items-center gap-4">
             <span className="text-sm tabular-nums text-white/45">
               Step {String(activeIndex + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
             </span>
-            <div className="h-px w-32 overflow-hidden bg-white/10 lg:w-48">
+            <div className="h-px w-24 overflow-hidden bg-white/10 sm:w-32 lg:w-48">
               <div ref={progressRef} className="h-full bg-teal-400" style={{ width: "0%" }} />
             </div>
           </div>
         </div>
 
-        {/* Step tabs */}
-        <div ref={trackRef} className="relative mb-8 hidden lg:block">
-          <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-white/10" aria-hidden />
-          <div className="relative grid gap-3" style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}>
-            {steps.map((item, index) => {
-              const isActive = activeIndex === index;
-
-              return (
-                <button
-                  key={item.step}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
-                  aria-pressed={isActive}
-                  className={`group relative flex flex-col items-center gap-3 rounded-xl px-3 py-4 text-center transition-all duration-300 ${
-                    isActive ? "bg-white/[0.06]" : "hover:bg-white/[0.03]"
-                  }`}
-                >
-                  <span
-                    className={`relative z-10 flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold tabular-nums transition-all duration-300 ${
-                      isActive
-                        ? "scale-110 border-teal-400/50 bg-teal-500 text-white shadow-[0_0_24px_-4px_rgba(45,212,191,0.55)]"
-                        : "border-white/15 bg-black text-white/55 group-hover:border-white/30 group-hover:text-white"
-                    }`}
-                  >
-                    {String(item.step).padStart(2, "0")}
-                  </span>
-                  <span
-                    className={`text-[13px] font-semibold leading-snug transition-colors ${
-                      isActive ? "text-white" : "text-white/45 group-hover:text-white/75"
-                    }`}
-                  >
-                    {item.title}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile step selector */}
-        <div className="mb-6 flex gap-2 overflow-x-auto pb-1 lg:hidden">
+        {/* 2×2 step grid — click one to update the card below */}
+        <div ref={trackRef} className="mb-6 grid grid-cols-2 gap-2.5 sm:mb-8 sm:gap-3">
           {steps.map((item, index) => {
             const isActive = activeIndex === index;
+
             return (
               <button
                 key={item.step}
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 aria-pressed={isActive}
-                className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.12em] transition-all ${
+                className={`relative flex min-h-[3.25rem] items-center justify-center rounded-full border px-3 py-2.5 text-center transition-all duration-300 sm:min-h-[3.5rem] sm:px-5 sm:py-3 ${
                   isActive
-                    ? "bg-white text-black"
-                    : "border border-white/15 bg-white/5 text-white/55"
+                    ? "border-white bg-white text-black shadow-[0_12px_32px_-18px_rgba(255,255,255,0.45)]"
+                    : "border-white/15 bg-black text-white/55 hover:border-white/30 hover:text-white/85"
                 }`}
               >
-                {String(item.step).padStart(2, "0")} · {item.title}
+                <span className="text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] sm:text-[11px]">
+                  <span className="tabular-nums">{String(item.step).padStart(2, "0")}</span>
+                  <span className="mx-1.5 opacity-50">·</span>
+                  {item.title}
+                </span>
+                {isActive ? (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-6 -bottom-px h-px bg-white/40 sm:inset-x-10"
+                  />
+                ) : null}
               </button>
             );
           })}
@@ -165,16 +137,14 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
           >
             <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-teal-500/10 blur-3xl" />
 
-            <div className="relative grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-12">
-              <div>
-                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-teal-400/80">
-                  Step {String(activeStep.step).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
-                  {activeStep.title}
-                </h3>
-              </div>
-              <p className="text-[15px] leading-relaxed text-white/55 sm:text-base">
+            <div className="relative">
+              <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-teal-400/80">
+                Step {String(activeStep.step).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
+                {activeStep.title}
+              </h3>
+              <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-white/55 sm:text-base">
                 {activeStep.description}
               </p>
             </div>

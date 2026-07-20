@@ -103,7 +103,8 @@ html {
 
 body {
   font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  overflow-x: hidden;
+  /* clip avoids creating a scrollport that breaks ScrollTrigger pin (unlike overflow-x: hidden) */
+  overflow-x: clip;
 }
 
 /* Global champagne beige background (grid pattern removed) */

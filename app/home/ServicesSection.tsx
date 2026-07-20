@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import { homeServices, type HomeService } from "./data";
 
 function ServiceCardContentDesktop({ service, index }: { service: HomeService; index: number }) {
@@ -120,56 +120,31 @@ export default function ServicesSection() {
     };
 
     const ctx = gsap.context(() => {
-      ScrollTrigger.matchMedia({
-        "(min-width: 1024px)": () => {
-          gsap.to(trackRef.current, {
-            x: () => -getScrollAmount(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
-              pin: pinRef.current,
-              scrub: 1.1,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => updateProgress(self.progress),
-            },
-          });
-        },
-        "(max-width: 1023px)": () => {
-          gsap.to(trackRef.current, {
-            x: () => -getScrollAmount(),
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
-              pin: pinRef.current,
-              scrub: 1.1,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => updateProgress(self.progress),
-            },
-          });
+      gsap.to(trackRef.current, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
+          pin: pinRef.current,
+          scrub: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
+          onUpdate: (self) => updateProgress(self.progress),
         },
       });
     }, sectionRef);
 
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="services"
-      className="section-dark relative overflow-hidden text-white"
+      className="section-dark relative text-white"
       aria-label="Services"
     >
       <div
@@ -193,7 +168,7 @@ export default function ServicesSection() {
             <div className="h-px w-28 overflow-hidden bg-white/10 sm:w-40">
               <div
                 ref={progressRef}
-                className="h-full origin-left bg-white transition-transform duration-150"
+                className="h-full origin-left bg-white"
                 style={{ transform: "scaleX(0.015)" }}
               />
             </div>
