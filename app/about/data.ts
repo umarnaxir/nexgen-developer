@@ -116,61 +116,80 @@ export const aboutPillars = [
 ];
 
 export const aboutValues = [
- {
- title: "Innovation",
- description: "We adopt what works and skip the theater, new tech only when it earns its place.",
- icon: Lightbulb,
- },
- {
- title: "Excellence",
- description: "Quality that holds up under real traffic, real users, and real deadlines.",
- icon: Award,
- },
- {
- title: "Collaboration",
- description: "You’re in the room for every important call. No black-box handoffs.",
- icon: Users,
- },
- {
- title: "Growth",
- description: "We build systems that scale with the business, not just the launch week.",
- icon: TrendingUp,
- },
+  {
+    title: "Innovation",
+    description: "We adopt what works and skip the theater, new tech only when it earns its place.",
+    detail: "Practical bets over hype. Tools earn a seat by making the product faster, clearer, or more reliable.",
+    points: ["Right tool, not shiny tool", "Proven patterns first", "Experiment with intent"],
+    icon: Lightbulb,
+  },
+  {
+    title: "Excellence",
+    description: "Quality that holds up under real traffic, real users, and real deadlines.",
+    detail: "Craft shows in the details users feel and the systems that stay calm when load spikes.",
+    points: ["Performance as default", "Accessible by design", "Ship with pride"],
+    icon: Award,
+  },
+  {
+    title: "Collaboration",
+    description: "You’re in the room for every important call. No black-box handoffs.",
+    detail: "Shared context, visible progress, and decisions you can follow without chasing updates.",
+    points: ["Transparent updates", "Shared decisions", "One team mindset"],
+    icon: Users,
+  },
+  {
+    title: "Growth",
+    description: "We build systems that scale with the business, not just the launch week.",
+    detail: "Architecture and UX that leave room for the next feature, market, and milestone.",
+    points: ["Scalable foundations", "Measure what matters", "Iterate after launch"],
+    icon: TrendingUp,
+  },
+  {
+    title: "Clarity",
+    description: "Plain language, honest timelines, and decisions you can see coming.",
+    detail: "No fog between brief and build. You always know where things stand and why.",
+    points: ["Clear scope", "Honest estimates", "Visible milestones"],
+    icon: Layers,
+  },
 ];
 
 export const aboutApproach = [
- {
- step: "01",
- title: "Discover",
- text: "Goals, constraints, and success metrics, aligned before a line of code.",
- detail: "Workshops, audits, and a shared definition of done so the build starts with clarity.",
- },
- {
- step: "02",
- title: "Design",
- text: "Structure, flows, and interfaces shaped for clarity and conversion.",
- detail: "Wireframes to polished UI, reviewed with you before engineering picks up speed.",
- },
- {
- step: "03",
- title: "Build",
- text: "Agile sprints, regular demos, and transparent updates along the way.",
- detail: "Ship in slices you can see and click. Feedback lands while it’s still cheap to change.",
- },
- {
- step: "04",
- title: "Launch & grow",
- text: "Ship, measure, iterate, then keep compounding what works.",
- detail: "Go-live support, analytics, and a plan for the next win, not a one-and-done handoff.",
- },
+  {
+    step: "01",
+    title: "Discover",
+    text: "Goals, constraints, and success metrics, aligned before a line of code.",
+    detail: "Workshops, audits, and a shared definition of done so the build starts with clarity.",
+    outcomes: ["Scope & roadmap", "Success metrics", "Technical audit"],
+  },
+  {
+    step: "02",
+    title: "Design",
+    text: "Structure, flows, and interfaces shaped for clarity and conversion.",
+    detail: "Wireframes to polished UI, reviewed with you before engineering picks up speed.",
+    outcomes: ["UX flows", "UI system", "Prototype review"],
+  },
+  {
+    step: "03",
+    title: "Build",
+    text: "Agile sprints, regular demos, and transparent updates along the way.",
+    detail: "Ship in slices you can see and click. Feedback lands while it’s still cheap to change.",
+    outcomes: ["Working slices", "Weekly demos", "QA & polish"],
+  },
+  {
+    step: "04",
+    title: "Launch & grow",
+    text: "Ship, measure, iterate, then keep compounding what works.",
+    detail: "Go-live support, analytics, and a plan for the next win, not a one-and-done handoff.",
+    outcomes: ["Production launch", "Analytics setup", "Growth plan"],
+  },
 ];
 
 /** Quiet metrics shown inside Approach, not a separate section. */
 export const aboutApproachMetrics = [
- { value: "50+", label: "Projects delivered" },
- { value: "30+", label: "Happy clients" },
- { value: "98%", label: "Satisfaction" },
- { value: "12+", label: "Countries" },
+  { value: "50+", label: "Projects delivered" },
+  { value: "30+", label: "Happy clients" },
+  { value: "98%", label: "Satisfaction" },
+  { value: "12+", label: "Countries" },
 ];
 
 export const aboutFaqs = [
