@@ -9,7 +9,7 @@ export function OrganizationSchema() {
     "@type": "Organization",
     name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    logo: `${seoConfig.siteUrl}/logo/company-logo.jpeg`,
+    logo: seoConfig.defaultOgImage,
     description: seoConfig.defaultDescription,
     sameAs: [
       // Add your social media profiles here
@@ -128,7 +128,7 @@ export function ArticleSchema({
       name: publisher || seoConfig.publisher,
       logo: {
         "@type": "ImageObject",
-        url: `${seoConfig.siteUrl}/logo/company-logo.jpeg`,
+        url: seoConfig.defaultOgImage,
       },
     },
     mainEntityOfPage: {

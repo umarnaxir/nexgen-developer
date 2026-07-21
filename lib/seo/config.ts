@@ -30,10 +30,10 @@ export const seoConfig = {
     "Other services",
   ],
   
-  // Default OG Image - Using logo
-  defaultOgImage: "https://www.nexgendevelopers.in/logo/company-logo.jpeg",
-  defaultOgImageWidth: 1200,
-  defaultOgImageHeight: 1200, // Logo is typically square, adjust if needed
+  // Default OG Image - brand mark shown when links are shared
+  defaultOgImage: "https://www.nexgendevelopers.in/logo/logo.png",
+  defaultOgImageWidth: 1024,
+  defaultOgImageHeight: 1024,
   defaultOgImageAlt: "NexGen Developers Logo",
   
   // Social Media
