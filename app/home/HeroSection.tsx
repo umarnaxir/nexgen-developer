@@ -57,7 +57,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="section-dark relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-12 pt-12 sm:pb-16 sm:pt-14 lg:min-h-screen lg:pb-20 lg:pt-28"
+      className="section-dark relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-12 pt-12 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-28"
     >
       <div
         ref={gridRef}

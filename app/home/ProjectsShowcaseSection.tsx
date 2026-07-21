@@ -20,21 +20,36 @@ function progressToRawIndex(progress: number, total: number) {
   return Math.min(Math.max(progress, 0), 1) * (total - 1);
 }
 
+/** Horizontal clip-path wipe + parallax — replaces the old opacity/scale crossfade. */
 function slideVisual(rawIndex: number, index: number) {
-  const distance = Math.abs(rawIndex - index);
+  const delta = rawIndex - index;
+  const distance = Math.abs(delta);
 
   if (distance >= 1) {
-    return { opacity: 0, scale: 1.04, zIndex: 1 };
+    const past = delta > 0;
+    return {
+      opacity: 0,
+      xPercent: past ? -10 : 10,
+      yPercent: past ? -4 : 4,
+      clipPath: past ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
+      filter: "blur(10px)",
+      zIndex: 1,
+    };
   }
 
   const t = 1 - distance;
-  const opacity = t * t * (3 - 2 * t);
-  const scale = 1.04 - opacity * 0.04;
+  const smooth = t * t * (3 - 2 * t);
+  const past = delta >= 0;
+  const left = past ? (1 - smooth) * 100 : 0;
+  const right = past ? 0 : (1 - smooth) * 100;
 
   return {
-    opacity,
-    scale,
-    zIndex: opacity > 0.5 ? 3 : opacity > 0.05 ? 2 : 1,
+    opacity: 1,
+    xPercent: (1 - smooth) * (past ? -8 : 8),
+    yPercent: (1 - smooth) * (past ? -3 : 3),
+    clipPath: `inset(0 ${right}% 0 ${left}%)`,
+    filter: `blur(${(1 - smooth) * 8}px)`,
+    zIndex: smooth > 0.5 ? 3 : smooth > 0.05 ? 2 : 1,
   };
 }
 
@@ -170,18 +185,16 @@ export default function ProjectsShowcaseSection() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion || !sectionRef.current || total <= 1) return;
 
-    const applySlides = (
-      slides: (HTMLDivElement | null)[],
-      rawIndex: number,
-      mode: "mobile" | "desktop"
-    ) => {
+    const applySlides = (slides: (HTMLDivElement | null)[], rawIndex: number) => {
       slides.forEach((slide, i) => {
         if (!slide) return;
-        const { opacity, scale, zIndex } = slideVisual(rawIndex, i);
+        const { opacity, xPercent, yPercent, clipPath, filter, zIndex } = slideVisual(rawIndex, i);
         gsap.set(slide, {
           opacity,
-          scale: mode === "desktop" ? scale : 0.965 + opacity * 0.035,
-          y: mode === "desktop" ? 0 : (1 - opacity) * 20,
+          xPercent,
+          yPercent,
+          clipPath,
+          filter,
           zIndex,
         });
       });
@@ -210,7 +223,10 @@ export default function ProjectsShowcaseSection() {
             if (!slide) return;
             gsap.set(slide, {
               opacity: index === 0 ? 1 : 0,
-              scale: index === 0 ? 1 : 0.97,
+              xPercent: 0,
+              yPercent: 0,
+              clipPath: index === 0 ? "inset(0 0% 0 0%)" : "inset(0 0 0 100%)",
+              filter: "blur(0px)",
               zIndex: index === 0 ? 3 : 1,
             });
           });
@@ -226,7 +242,7 @@ export default function ProjectsShowcaseSection() {
             fastScrollEnd: true,
             onUpdate: (self) => {
               const rawIndex = syncIndex(self.progress, mobileProgressRef.current);
-              applySlides(mobileSlidesRef.current, rawIndex, "mobile");
+              applySlides(mobileSlidesRef.current, rawIndex);
             },
           });
         },
@@ -235,7 +251,10 @@ export default function ProjectsShowcaseSection() {
             if (!slide) return;
             gsap.set(slide, {
               opacity: index === 0 ? 1 : 0,
-              scale: 1,
+              xPercent: 0,
+              yPercent: 0,
+              clipPath: index === 0 ? "inset(0 0% 0 0%)" : "inset(0 0 0 100%)",
+              filter: "blur(0px)",
               zIndex: index === 0 ? 3 : 1,
             });
           });
@@ -251,7 +270,7 @@ export default function ProjectsShowcaseSection() {
             fastScrollEnd: true,
             onUpdate: (self) => {
               const rawIndex = syncIndex(self.progress, desktopProgressRef.current);
-              applySlides(desktopSlidesRef.current, rawIndex, "desktop");
+              applySlides(desktopSlidesRef.current, rawIndex);
             },
           });
         },
@@ -327,11 +346,11 @@ export default function ProjectsShowcaseSection() {
                       {/* Black shadow layer over image */}
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/70 to-black/20"
+                        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/80 to-black/35"
                       />
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-0 z-[2] bg-black/25"
+                        className="pointer-events-none absolute inset-0 z-[2] bg-black/40"
                       />
 
                       {/* Top meta */}
@@ -419,11 +438,15 @@ export default function ProjectsShowcaseSection() {
 
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-[4] bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,transparent_26%,transparent_58%,rgba(0,0,0,0.78)_100%)]"
+            className="pointer-events-none absolute inset-0 z-[4] bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.28)_28%,rgba(0,0,0,0.35)_55%,rgba(0,0,0,0.88)_100%)]"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-[4] bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.4)_100%)]"
+            className="pointer-events-none absolute inset-0 z-[4] bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(0,0,0,0.55)_100%)]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[4] bg-black/25"
           />
 
           <div className="absolute inset-x-0 top-0 z-30 h-[2px] bg-white/10">
