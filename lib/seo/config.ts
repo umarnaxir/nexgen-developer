@@ -30,11 +30,11 @@ export const seoConfig = {
     "Other services",
   ],
   
-  // Default OG Image - brand mark shown when links are shared
-  defaultOgImage: "https://www.nexgendevelopers.in/logo/logo.png",
-  defaultOgImageWidth: 1024,
-  defaultOgImageHeight: 1024,
-  defaultOgImageAlt: "NexGen Developers Logo",
+  // Default OG Image - solid black + white N (logo.png is transparent white-on-clear)
+  defaultOgImage: "https://www.nexgendevelopers.in/logo/og-image.png",
+  defaultOgImageWidth: 1200,
+  defaultOgImageHeight: 630,
+  defaultOgImageAlt: "NexGen Developers — Build, Launch & Grow",
   
   // Social Media
   twitterHandle: "@nexgendevelopers",
