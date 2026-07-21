@@ -7,85 +7,60 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import { homeServices, type HomeService } from "./data";
 
-function ServiceCardContentDesktop({ service, index }: { service: HomeService; index: number }) {
+function ServiceCard({ service, index }: { service: HomeService; index: number }) {
   const ServiceIcon = service.icon;
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-black p-5">
-      <div className="flex items-start justify-between gap-2">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-teal-400/25 bg-teal-400/10 text-teal-300">
-          <ServiceIcon className="h-4 w-4" />
-        </span>
-        <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-white/30">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
+    <article className="group relative h-[min(52vh,390px)] w-[90vw] min-w-[280px] max-w-[640px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] transition-[transform,box-shadow] duration-500 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_28px_60px_-24px_rgba(0,0,0,0.5)] sm:h-[min(56vh,480px)] sm:w-[70vw] sm:max-w-[720px] lg:h-[min(64vh,660px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]">
+      <Image
+        src={service.image}
+        alt={service.title}
+        fill
+        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 54vw"
+        priority={index < 2}
+      />
 
-      <h3 className="mt-3 text-[1.05rem] font-semibold leading-tight tracking-[-0.02em] text-white">
-        {service.title}
-      </h3>
-      <p className="mt-2 line-clamp-5 text-[13px] leading-relaxed text-white/60">
-        {service.description}
-      </p>
+      {/* Readability gradient — softens on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10 transition-opacity duration-500 group-hover:opacity-90" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
-      <ul className="mt-4 flex flex-col gap-1.5">
-        {service.highlights.map((highlight) => (
-          <li key={highlight}>
-            <span className="inline-flex items-center gap-1 rounded-full border border-teal-400/20 bg-teal-400/[0.1] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-teal-300">
-              <Sparkles className="h-2.5 w-2.5" />
-              {highlight}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {/* Content pinned to bottom */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 sm:p-6 lg:p-8">
+        <div className="flex items-start justify-between gap-3">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-110 sm:h-9 sm:w-9">
+            <ServiceIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          </span>
+          <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-white/45">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
 
-      <Link
-        href={service.href}
-        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-teal-300 transition-all hover:gap-2.5 hover:text-teal-200"
-      >
-        Explore service
-        <ArrowUpRight className="h-3.5 w-3.5" />
-      </Link>
-    </div>
-  );
-}
-
-function ServiceCard({ service, index }: { service: HomeService; index: number }) {
-  return (
-    <article className="premium-card-dark flex h-[min(58vh,460px)] w-[82vw] min-w-[260px] max-w-[560px] shrink-0 flex-col overflow-hidden rounded-xl border border-black/10 bg-black shadow-[0_24px_60px_-36px_rgba(0,0,0,0.45)] sm:w-[60vw] lg:h-[min(64vh,660px)] lg:w-[calc(58vw-2rem)] lg:max-w-[920px] lg:flex-row">
-      <div className="relative min-h-0 flex-[1.45] overflow-hidden bg-neutral-900 lg:h-full lg:w-[65%] lg:flex-none">
-        <Image
-          src={service.image}
-          alt={service.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 82vw, 42vw"
-          priority={index < 2}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent lg:hidden" />
-        <span className="absolute left-4 top-4 text-[11px] font-medium uppercase tracking-[0.25em] text-white/70 lg:hidden">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div className="flex shrink-0 flex-col bg-black px-4 py-3 lg:hidden">
-        <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-white">
+        <h3 className="mt-3 text-lg font-semibold leading-tight tracking-[-0.02em] text-white transition-transform duration-500 ease-out group-hover:translate-y-[-2px] sm:mt-4 sm:text-2xl lg:text-[1.75rem]">
           {service.title}
         </h3>
-        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-white/60">
+        <p className="mt-1.5 line-clamp-2 max-w-lg text-[12px] leading-relaxed text-white/65 sm:mt-2 sm:line-clamp-3 sm:text-sm">
           {service.description}
         </p>
+
+        <ul className="mt-3 hidden flex-wrap gap-1.5 sm:mt-4 sm:flex">
+          {service.highlights.map((highlight) => (
+            <li key={highlight}>
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-white/85 backdrop-blur-sm">
+                <Sparkles className="h-2.5 w-2.5" />
+                {highlight}
+              </span>
+            </li>
+          ))}
+        </ul>
+
         <Link
           href={service.href}
-          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-300 transition-all hover:gap-2 hover:text-teal-200"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-all duration-300 hover:gap-2.5 sm:mt-5"
         >
           Explore service
-          <ArrowUpRight className="h-3.5 w-3.5" />
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
-      </div>
-
-      <div className="hidden w-[35%] shrink-0 lg:block">
-        <ServiceCardContentDesktop service={service} index={index} />
       </div>
     </article>
   );
@@ -149,7 +124,7 @@ export default function ServicesSection() {
     >
       <div
         ref={pinRef}
-        className="relative flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[100svh] lg:px-14 lg:py-10"
+        className="relative flex min-h-[100svh] flex-col justify-center px-4 pb-8 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:px-6 sm:pb-10 sm:pt-[calc(var(--mobile-nav-height)+1.75rem)] lg:h-[100svh] lg:px-14 lg:pb-10 lg:pt-14"
       >
         <div className="mx-auto mb-5 flex w-full max-w-7xl shrink-0 items-end justify-between gap-6 sm:mb-6">
           <div className="max-w-2xl">
@@ -176,11 +151,20 @@ export default function ServicesSection() {
         </div>
 
         <div ref={viewportRef} className="services-viewport overflow-hidden">
-          <div ref={trackRef} className="flex w-max gap-5 will-change-transform sm:gap-6 lg:gap-7">
+          <div ref={trackRef} className="flex w-max gap-2.5 will-change-transform sm:gap-3 lg:gap-4">
             {homeServices.map((service, index) => (
               <ServiceCard key={service.title} service={service} index={index} />
             ))}
           </div>
+        </div>
+
+        <div className="mx-auto mt-5 flex w-full max-w-7xl shrink-0 justify-end sm:mt-6">
+          <Link
+            href="/services"
+            className="text-sm font-semibold text-teal-600 underline decoration-teal-500/80 decoration-2 underline-offset-[6px] transition-colors hover:text-teal-700 hover:decoration-teal-600 sm:text-[15px]"
+          >
+            View all services
+          </Link>
         </div>
       </div>
     </section>

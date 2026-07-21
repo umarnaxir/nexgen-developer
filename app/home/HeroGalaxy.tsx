@@ -132,16 +132,12 @@ export default function HeroGalaxy() {
       const tiltX = m.y * 0.15;
       const tiltY = m.x * 0.2;
 
-      // soft depth haze
       const haze = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
       haze.addColorStop(0, "rgba(255,255,255,0.035)");
       haze.addColorStop(0.55, "rgba(255,255,255,0.01)");
       haze.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = haze;
       ctx.fillRect(0, 0, w, h);
-
-      // constellation lines between nearby projected stars
-      const projected: { x: number; y: number; z: number; k: number; star: Star }[] = [];
 
       for (const star of starsRef.current) {
         star.z -= 0.35 + (1 - star.z / DEPTH) * 0.55;
@@ -155,7 +151,6 @@ export default function HeroGalaxy() {
         const k = DEPTH / (DEPTH + star.z);
         let sx = star.x * k;
         let sy = star.y * k;
-        // light 3D tilt from mouse
         const rx = sx;
         const ry = sy * Math.cos(tiltX) - star.z * 0.02 * Math.sin(tiltX);
         const rz = sy * Math.sin(tiltX) + star.z * Math.cos(tiltX);
@@ -164,57 +159,26 @@ export default function HeroGalaxy() {
 
         const px = cx + sx;
         const py = cy + sy;
-        projected.push({ x: px, y: py, z: star.z, k, star });
-      }
-
-      // draw faint links for depth
-      ctx.lineWidth = 0.6;
-      for (let i = 0; i < projected.length; i++) {
-        const a = projected[i];
-        if (a.k < 0.55) continue;
-        let links = 0;
-        for (let j = i + 1; j < projected.length && links < 2; j++) {
-          const b = projected[j];
-          if (b.k < 0.55) continue;
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 90 && Math.abs(a.z - b.z) < 180) {
-            const alpha = (1 - dist / 90) * 0.08 * Math.min(a.k, b.k);
-            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-            links++;
-          }
-        }
-      }
-
-      for (const p of projected) {
-        const { star, k } = p;
         const twinkle = 0.55 + 0.45 * Math.sin(star.twinkle);
         const alpha = star.brightness * twinkle * (0.25 + k * 0.75);
         const r = Math.max(0.35, star.size * k * (0.85 + twinkle * 0.25));
 
-        // glow for nearer / brighter stars
         if (k > 0.7 && star.brightness > 0.7) {
-          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 6);
+          const glow = ctx.createRadialGradient(px, py, 0, px, py, r * 6);
           glow.addColorStop(0, `rgba(255,255,255,${alpha * 0.35})`);
           glow.addColorStop(1, "rgba(255,255,255,0)");
           ctx.fillStyle = glow;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, r * 6, 0, Math.PI * 2);
+          ctx.arc(px, py, r * 6, 0, Math.PI * 2);
           ctx.fill();
         }
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(255,255,255,${Math.min(1, alpha)})`;
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.arc(px, py, r, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // shooting stars
       spawnTimer++;
       if (spawnTimer > 180 + Math.random() * 220) {
         spawnShootingStar();

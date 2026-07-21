@@ -153,7 +153,7 @@ export default function ServicesList() {
           id={`tabpanel-${activeTab}`}
           aria-labelledby={`tab-${activeTab}`}
         >
-          <div ref={trackRef} className="flex w-max gap-5 will-change-transform sm:gap-6 lg:gap-7">
+          <div ref={trackRef} className="flex w-max gap-2.5 will-change-transform sm:gap-3 lg:gap-4">
             {filteredServices.map((service, index) => (
               <ServiceCard key={service.slug} service={service} index={index} />
             ))}
