@@ -22,7 +22,7 @@ export default function AboutValues() {
   const current = aboutValues[active] ?? aboutValues[0];
 
   return (
-    <section className="section-light relative overflow-hidden border-t border-black/[0.06] bg-white text-black section-y">
+    <section className="section-light relative flex min-h-[100svh] flex-col justify-center overflow-hidden border-t border-black/[0.06] bg-white py-10 text-black sm:py-12 lg:py-14">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden px-4"
@@ -41,7 +41,7 @@ export default function AboutValues() {
         </AnimatePresence>
       </div>
 
-      <div className="section-container relative z-10">
+      <div className="section-container relative z-10 w-full">
         <div className="mb-6 max-w-xl sm:mb-8" data-aos="fade-up">
           <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
             How we decide.

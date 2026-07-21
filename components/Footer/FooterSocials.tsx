@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react";
 import XIcon from "@/components/icons/XIcon";
+import { cn } from "@/lib/utils";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -12,30 +13,31 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   {
-    icon: <Instagram className="h-4 w-4" />,
+    icon: <Instagram className="h-3.5 w-3.5" />,
     href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==",
     ariaLabel: "Instagram",
   },
   {
-    icon: <Facebook className="h-4 w-4" />,
-    href: "https://www.facebook.com/people/NexGen-Developers/61572910985245/?rdid=4A376FPlbAhNjqn5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1924Qev3Su%2F",
-    ariaLabel: "Facebook",
-  },
-  {
-    icon: <Linkedin className="h-4 w-4" />,
+    icon: <Linkedin className="h-3.5 w-3.5" />,
     href: "https://www.linkedin.com/company/105880683/",
     ariaLabel: "LinkedIn",
   },
   {
-    icon: <XIcon className="h-3.5 w-3.5" />,
+    icon: <XIcon className="h-3 w-3" />,
     href: "https://x.com/nexgendv",
     ariaLabel: "X",
   },
 ];
 
-export default function FooterSocials() {
+type FooterSocialsProps = {
+  variant?: "dark" | "light";
+};
+
+export default function FooterSocials({ variant = "dark" }: FooterSocialsProps) {
+  const isLight = variant === "light";
+
   return (
-    <div className="flex flex-nowrap items-center justify-start gap-2.5 sm:justify-end">
+    <div className="flex flex-nowrap items-center gap-2">
       {socialLinks.map((social) => (
         <a
           key={social.ariaLabel}
@@ -43,7 +45,12 @@ export default function FooterSocials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.ariaLabel}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform duration-200 hover:scale-105 active:scale-95"
+          className={cn(
+            "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-0.5 active:scale-95",
+            isLight
+              ? "border border-neutral-300 bg-white/60 text-neutral-700 hover:border-teal-600/50 hover:bg-white hover:text-teal-700 hover:shadow-md"
+              : "bg-white text-black hover:scale-105"
+          )}
         >
           {social.icon}
         </a>

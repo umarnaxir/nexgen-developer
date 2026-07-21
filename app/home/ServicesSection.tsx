@@ -11,27 +11,27 @@ function ServiceCardContentDesktop({ service, index }: { service: HomeService; i
   const ServiceIcon = service.icon;
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-white p-5">
+    <div className="flex h-full min-h-0 flex-col bg-black p-5">
       <div className="flex items-start justify-between gap-2">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-teal-400/25 bg-teal-400/10 text-teal-300">
           <ServiceIcon className="h-4 w-4" />
         </span>
-        <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-black/30">
+        <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-white/30">
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
 
-      <h3 className="mt-3 text-[1.05rem] font-semibold leading-tight tracking-[-0.02em] text-black">
+      <h3 className="mt-3 text-[1.05rem] font-semibold leading-tight tracking-[-0.02em] text-white">
         {service.title}
       </h3>
-      <p className="mt-2 line-clamp-5 text-[13px] leading-relaxed text-black/60">
+      <p className="mt-2 line-clamp-5 text-[13px] leading-relaxed text-white/60">
         {service.description}
       </p>
 
       <ul className="mt-4 flex flex-col gap-1.5">
         {service.highlights.map((highlight) => (
           <li key={highlight}>
-            <span className="inline-flex items-center gap-1 rounded-full border border-teal-500/15 bg-teal-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-teal-700">
+            <span className="inline-flex items-center gap-1 rounded-full border border-teal-400/20 bg-teal-400/[0.1] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-teal-300">
               <Sparkles className="h-2.5 w-2.5" />
               {highlight}
             </span>
@@ -41,7 +41,7 @@ function ServiceCardContentDesktop({ service, index }: { service: HomeService; i
 
       <Link
         href={service.href}
-        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-teal-600 transition-all hover:gap-2.5 hover:text-teal-700"
+        className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-teal-300 transition-all hover:gap-2.5 hover:text-teal-200"
       >
         Explore service
         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -52,8 +52,8 @@ function ServiceCardContentDesktop({ service, index }: { service: HomeService; i
 
 function ServiceCard({ service, index }: { service: HomeService; index: number }) {
   return (
-    <article className="premium-card-dark flex h-[min(58vh,460px)] w-[82vw] min-w-[260px] max-w-[560px] shrink-0 flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-white shadow-[0_32px_80px_-40px_rgba(0,0,0,0.65)] sm:w-[60vw] lg:h-[min(64vh,660px)] lg:w-[calc(58vw-2rem)] lg:max-w-[920px] lg:flex-row">
-      <div className="relative min-h-0 flex-[1.45] overflow-hidden bg-neutral-900 lg:h-full lg:w-[75%] lg:flex-none">
+    <article className="premium-card-dark flex h-[min(58vh,460px)] w-[82vw] min-w-[260px] max-w-[560px] shrink-0 flex-col overflow-hidden rounded-xl border border-black/10 bg-black shadow-[0_24px_60px_-36px_rgba(0,0,0,0.45)] sm:w-[60vw] lg:h-[min(64vh,660px)] lg:w-[calc(58vw-2rem)] lg:max-w-[920px] lg:flex-row">
+      <div className="relative min-h-0 flex-[1.45] overflow-hidden bg-neutral-900 lg:h-full lg:w-[65%] lg:flex-none">
         <Image
           src={service.image}
           alt={service.title}
@@ -68,23 +68,23 @@ function ServiceCard({ service, index }: { service: HomeService; index: number }
         </span>
       </div>
 
-      <div className="flex shrink-0 flex-col bg-white px-4 py-3 lg:hidden">
-        <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-black">
+      <div className="flex shrink-0 flex-col bg-black px-4 py-3 lg:hidden">
+        <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-white">
           {service.title}
         </h3>
-        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-black/60">
+        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-white/60">
           {service.description}
         </p>
         <Link
           href={service.href}
-          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-600 transition-all hover:gap-2 hover:text-teal-700"
+          className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-300 transition-all hover:gap-2 hover:text-teal-200"
         >
           Explore service
           <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
-      <div className="hidden w-[25%] shrink-0 lg:block">
+      <div className="hidden w-[35%] shrink-0 lg:block">
         <ServiceCardContentDesktop service={service} index={index} />
       </div>
     </article>
@@ -144,31 +144,31 @@ export default function ServicesSection() {
     <section
       ref={sectionRef}
       id="services"
-      className="section-dark relative text-white"
+      className="section-light relative text-black"
       aria-label="Services"
     >
       <div
         ref={pinRef}
-        className="relative flex h-auto min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[92vh] lg:px-14 lg:py-10"
+        className="relative flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[100svh] lg:px-14 lg:py-10"
       >
         <div className="mx-auto mb-5 flex w-full max-w-7xl shrink-0 items-end justify-between gap-6 sm:mb-6">
           <div className="max-w-2xl">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
               Services
             </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-black sm:text-4xl lg:text-5xl">
               Everything you need to launch and scale.
             </h2>
           </div>
 
           <div className="hidden items-center gap-4 sm:flex">
-            <span className="text-sm tabular-nums text-white/45">
+            <span className="text-sm tabular-nums text-black/45">
               {String(homeServices.length).padStart(2, "0")} services
             </span>
-            <div className="h-px w-28 overflow-hidden bg-white/10 sm:w-40">
+            <div className="h-px w-28 overflow-hidden bg-black/10 sm:w-40">
               <div
                 ref={progressRef}
-                className="h-full origin-left bg-white"
+                className="h-full origin-left bg-black"
                 style={{ transform: "scaleX(0.015)" }}
               />
             </div>

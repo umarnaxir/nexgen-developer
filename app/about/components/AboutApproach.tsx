@@ -20,7 +20,7 @@ export default function AboutApproach() {
   };
 
   return (
-    <section className="section-dark relative overflow-hidden section-y">
+    <section className="section-dark relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-10 sm:py-12 lg:py-14">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[length:48px_48px]"
@@ -30,7 +30,7 @@ export default function AboutApproach() {
         className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-teal-500/[0.08] blur-[130px]"
       />
 
-      <div className="section-container relative z-10">
+      <div className="section-container relative z-10 w-full">
         <div
           className="mb-6 flex items-end justify-between gap-3 sm:mb-7 sm:gap-4"
           data-aos="fade-up"
