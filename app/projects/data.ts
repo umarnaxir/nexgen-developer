@@ -8,7 +8,7 @@ export const projects = [
     detailedDescription: "A professional website for Exceptional IAS Academy designed to attract and inform aspiring civil services students. The platform highlights course offerings, experienced faculty, success stories, and study programs while making enquiry and admission simple. The design focuses on building trust and credibility with prospective students through clear information architecture and a responsive, fast-loading interface.",
     image: "/images/projects/exceptionalias.png",
     link: "https://exceptionaliasacademy.vercel.app/",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+    technologies: ["Next.js", "TypeScript", "Style System", "NestJS", "MongoDB"],
     category: "Education Website",
     features: [
       "Course & Program Showcase",
@@ -32,7 +32,7 @@ export const projects = [
     detailedDescription: "An attractive e-commerce website for ShoesHub Poonch, designed to showcase and sell footwear online. The store features organized product categories, detailed product pages, and an intuitive browsing experience. Built with a modern, mobile-first design, the platform helps customers easily discover products and place orders while giving the brand a strong online presence.",
     image: "/images/projects/shoeshub.png",
     link: "https://shoeshubpoonch.vercel.app/",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-Commerce", "Cart System", "Responsive Design", "SEO Optimization"],
+    technologies: ["Next.js", "TypeScript", "Style System", "NestJS", "PostgreSQL"],
     category: "E-Commerce Website",
     features: [
       "Product Listings & Categories",
@@ -56,7 +56,7 @@ export const projects = [
     detailedDescription: "A dynamic and energetic website for FitSpace Gym designed to inspire visitors to start their fitness journey. The platform showcases training programs, expert trainers, membership plans, and class schedules with a bold, motivating visual style. The responsive design ensures members can easily explore offerings and get in touch, helping the gym grow its community and memberships.",
     image: "/images/projects/fitspacegym.png",
     link: "https://fitspacegym.vercel.app/",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Responsive Design", "SEO Optimization"],
+    technologies: ["Next.js", "TypeScript", "Style System", "Java", "MongoDB"],
     category: "Fitness Website",
     features: [
       "Training Programs Showcase",
@@ -80,7 +80,7 @@ export const projects = [
     detailedDescription: "A clean and organized website for Citadel Library designed to provide students and readers with information about study spaces, memberships, and available resources. The platform emphasizes a quiet, focused atmosphere through thoughtful design while making it easy to explore facilities, plans, and timings. The responsive interface ensures a smooth experience for visitors looking to reserve or learn about the space.",
     image: "/images/projects/citadel.png",
     link: "https://citadellibrary.vercel.app/",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization"],
+    technologies: ["Next.js", "TypeScript", "Style System", "Node.js", "PostgreSQL"],
     category: "Library Website",
     features: [
       "Study Space & Seating Info",
@@ -200,7 +200,7 @@ export const projects = [
     detailedDescription: "PlaceHub helps people discover places they'll love to live. The platform lists verified homes, apartments, land, shops, offices, and more with trusted agents, secure deals, and a clear search experience by location and property type. Built for buyers and sellers who want zero guesswork — from browsing featured listings to connecting with verified agents and finalizing the right property.",
     image: "/images/projects/placehub.png",
     link: "https://findyourperfectplace.vercel.app/",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO Optimization", "Property Listings"],
+    technologies: ["Next.js", "TypeScript", "Style System", "NestJS", "MongoDB"],
     category: "Real Estate Platform",
     features: [
       "Buy, Rent & Sell Listings",

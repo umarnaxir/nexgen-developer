@@ -115,7 +115,7 @@ export default function HeroSection() {
           >
             <span className="hero-line block whitespace-nowrap">We build</span>
             <span className="hero-line block whitespace-nowrap text-white/90">premium digital</span>
-            <span className="hero-line block whitespace-nowrap italic text-white/70">products.</span>
+            <span className="hero-line block whitespace-nowrap text-white/70">products.</span>
           </h1>
 
           <p
