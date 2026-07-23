@@ -38,7 +38,7 @@ function createStars(count: number, w: number, h: number): Star[] {
   }));
 }
 
-export default function HeroGalaxy() {
+export default function GalaxyBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
   const starsRef = useRef<Star[]>([]);

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
-import HeroGalaxy from "./HeroGalaxy";
+import GalaxyBackground from "@/components/GalaxyBackground";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -65,7 +65,7 @@ export default function HeroSection() {
     >
       {/* Galaxy starfield */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <HeroGalaxy />
+        <GalaxyBackground />
       </div>
 
       <div

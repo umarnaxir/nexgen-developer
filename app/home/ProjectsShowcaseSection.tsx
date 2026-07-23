@@ -116,28 +116,39 @@ export default function ProjectsShowcaseSection() {
 
         {/* Stage */}
         <div className="relative mx-auto mt-4 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-5 sm:gap-4 lg:mt-8 lg:flex-row lg:gap-10 lg:pr-14">
-          {/* Image — taller/fuller on mobile; desktop unchanged */}
+          {/* Image stage — stacked cards so scroll never flashes empty */}
           <div className="relative h-[52vh] min-h-[300px] w-full flex-none overflow-hidden rounded-2xl bg-neutral-900 sm:h-[54vh] sm:min-h-[340px] lg:h-auto lg:min-h-0 lg:flex-[1.63]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active.id}
-                initial={{ opacity: 0, scale: 1.03 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: 0.55, ease }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={active.image}
-                  alt={title}
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 65vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-              </motion.div>
-            </AnimatePresence>
+            {featured.map((project, index) => {
+              const isActive = index === activeIndex;
+              const offset = index - activeIndex;
+
+              return (
+                <motion.div
+                  key={project.id}
+                  className="absolute inset-0"
+                  initial={false}
+                  animate={{
+                    opacity: isActive ? 1 : 0,
+                    y: isActive ? "0%" : offset < 0 ? "-8%" : "8%",
+                    scale: isActive ? 1 : 1.02,
+                    zIndex: isActive ? 2 : 1,
+                  }}
+                  transition={{ duration: 0.5, ease }}
+                  style={{ pointerEvents: isActive ? "auto" : "none" }}
+                  aria-hidden={!isActive}
+                >
+                  <Image
+                    src={project.image}
+                    alt={formatTitle(project.title)}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 65vw"
+                    priority={index <= 1}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+                </motion.div>
+              );
+            })}
 
             <span className="absolute left-4 top-4 z-10 rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm sm:left-5 sm:top-5">
               {active.category}

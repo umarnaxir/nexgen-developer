@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
+import GalaxyBackground from "@/components/GalaxyBackground";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 import {
   footerAddress,
@@ -92,12 +93,16 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden rounded-t-[1.75rem] border border-b-0 border-white/10 bg-black text-white sm:rounded-t-[2rem]">
+      {/* Galaxy starfield — same as hero */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <GalaxyBackground />
+      </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white/[0.04] to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-white/[0.04] to-transparent"
       />
 
-      <div className="relative mx-auto grid max-w-[1400px] lg:grid-cols-[1.15fr_1.2fr_1.05fr]">
+      <div className="relative z-10 mx-auto grid max-w-[1400px] lg:grid-cols-[1.15fr_1.2fr_1.05fr]">
         {/* Brand + Get Started */}
         <div className="flex flex-col justify-between gap-8 border-b border-white/10 px-5 py-9 sm:px-8 sm:py-11 lg:border-b-0 lg:border-r lg:px-10 lg:py-12 xl:px-12">
           <div>
@@ -268,7 +273,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="relative z-10 border-t border-white/10">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-5 py-3.5 text-[12px] text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10 xl:px-12">
           <p>© {currentYear} NexGen Developers</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:justify-center">

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import GalaxyBackground from "@/components/GalaxyBackground";
 import { aboutApproach, aboutApproachMetrics } from "../data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -42,18 +43,21 @@ export default function AboutApproach() {
       className="section-dark relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden"
       aria-label="How a project moves"
     >
-      {/* Atmosphere */}
+      {/* Galaxy starfield — same as hero */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <GalaxyBackground />
+      </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:40px_40px] opacity-70"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:40px_40px] opacity-70"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-1/4 top-1/3 h-[50vh] w-[50vh] rounded-full bg-white/[0.03] blur-[120px]"
+        className="pointer-events-none absolute -left-1/4 top-1/3 z-[1] h-[50vh] w-[50vh] rounded-full bg-white/[0.03] blur-[120px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-1/4 bottom-0 h-[45vh] w-[45vh] rounded-full bg-white/[0.025] blur-[110px]"
+        className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[45vh] w-[45vh] rounded-full bg-white/[0.025] blur-[110px]"
       />
 
       <div className="relative z-10 flex h-full w-full flex-col px-4 pb-5 pt-[calc(var(--mobile-nav-height)+0.75rem)] sm:px-8 sm:pb-7 sm:pt-10 lg:px-12 lg:pb-8 lg:pt-12 xl:px-16">
