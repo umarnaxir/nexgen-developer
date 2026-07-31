@@ -45,6 +45,7 @@ export function WebsiteSchema() {
     publisher: {
       "@type": "Organization",
       name: seoConfig.publisher,
+      logo: seoConfig.defaultOgImage,
     },
     potentialAction: {
       "@type": "SearchAction",

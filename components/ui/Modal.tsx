@@ -69,7 +69,7 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
               <div className="hidden lg:flex w-1/2 bg-white/[0.03] light:bg-gray-100 items-center justify-center p-8 border-r border-white/[0.08] light:border-gray-200">
                 <div className="text-center w-full max-w-xs">
                   <Image
-                    src="/logo/company-logo.jpeg"
+                    src="/logo/logo.png"
                     alt="NexGen Developers Logo"
                     width={520}
                     height={170}

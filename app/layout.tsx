@@ -46,9 +46,9 @@ export const metadata = {
     google: "K5WPaPu_n40Lp7BlSC2vph3oTrM3QzSlCbkCSZpA2iE",
   },
   icons: {
-    icon: "/ndlogo.png",
-    shortcut: "/ndlogo.png",
-    apple: "/ndlogo.png",
+    icon: "/logo/logo.png",
+    shortcut: "/logo/logo.png",
+    apple: "/logo/logo.png",
   },
 };
 

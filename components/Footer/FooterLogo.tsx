@@ -9,7 +9,7 @@ export default function FooterLogo() {
     <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
       <Link href="/" className="block w-full hover:scale-[1.03] transition-transform duration-300">
         <Image
-          src="/logo/ndlogo.png"
+          src="/logo/logo.png"
           alt="ND logo"
           width={520}
           height={170}

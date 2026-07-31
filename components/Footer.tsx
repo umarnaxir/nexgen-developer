@@ -61,7 +61,7 @@ export default function Footer() {
           <div className="md:col-span-1 flex flex-col items-center md:items-end gap-6">
             <div className="w-full md:w-[360px]">
               <a href="/" className="block w-full">
-                <Image src="/logo/company-logo.jpeg" alt="ND logo" width={520} height={170} className="w-full h-auto object-contain" />
+                <Image src="/logo/logo.png" alt="ND logo" width={520} height={520} className="w-full h-auto object-contain" />
               </a>
             </div>
 
