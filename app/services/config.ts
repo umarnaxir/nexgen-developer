@@ -49,11 +49,11 @@ export interface SubServiceDefinition extends ServiceDefinition {
 const TOP_LEVEL_SLUG_LIST = [
  "website-development",
  "app-development",
- "digital-marketing",
  "ai-ml",
  "chatbot-development",
  "maintenance-support",
  "deployment-devops",
+ "digital-marketing",
 ] as const;
 
 /** Digital marketing sub-service slugs */
@@ -1004,7 +1004,10 @@ export function getServicesNavItems(): NavServiceItem[] {
  if (slug === "digital-marketing") {
  const children = DIGITAL_MARKETING_SUB_SLUG_LIST.map((subSlug) => {
  const sub = DIGITAL_MARKETING_SERVICES[subSlug];
- return { label: sub.label, href: `/services/digital-marketing/${subSlug}` };
+ return {
+  label: subSlug === "seo" ? "Search Engine Optimization" : sub.label,
+  href: `/services/digital-marketing/${subSlug}`,
+ };
  });
  return { label: def.label, href: `/services/${slug}`, children };
  }

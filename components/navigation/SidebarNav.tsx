@@ -4,15 +4,17 @@ import React, { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ChevronRight, X, ArrowUpRight } from "lucide-react";
+import { ChevronDown, ChevronRight, X, ArrowUpRight } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { sidebarLinks, SIDEBAR_PANEL_WIDTH } from "./nav-config";
+import { getServicesNavItems } from "@/app/services/config";
 
 export default function SidebarNav() {
   const pathname = usePathname();
   const { open: openContactModal } = useContactModal();
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isServicesOpen, setIsServicesOpen] = React.useState(pathname.startsWith("/services"));
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -172,8 +174,14 @@ export default function SidebarNav() {
   useEffect(() => {
     if (previousPathname.current === pathname) return;
     previousPathname.current = pathname;
+    setIsServicesOpen(pathname.startsWith("/services"));
     closeMenu(true);
   }, [pathname, closeMenu]);
+
+  const serviceItems = getServicesNavItems().flatMap((service) => [
+    { label: service.label, href: service.href },
+    ...(service.children || []),
+  ]);
 
   return (
     <>
@@ -267,8 +275,90 @@ export default function SidebarNav() {
 
             <nav
               aria-label="Primary"
-              className="flex min-h-0 flex-col justify-center overflow-hidden py-4 sm:py-5"
+              className="relative min-h-0 overflow-y-auto py-4 sm:py-5"
             >
+              <div className="pb-2">
+                <Link
+                  ref={(el) => {
+                    linksRef.current[0] = el;
+                  }}
+                  href="/"
+                  onClick={() => closeMenu(true)}
+                  className={`group flex min-w-0 items-center gap-3 rounded-lg py-2.5 transition-all duration-300 sm:gap-3.5 sm:py-3 ${
+                    pathname === "/"
+                      ? "text-white"
+                      : "text-white/40 hover:bg-white/[0.04] hover:text-white"
+                  }`}
+                >
+                  <span className="w-6 shrink-0 text-[10px] font-medium tabular-nums tracking-widest text-white/25">
+                    01
+                  </span>
+                  <span className="min-w-0 truncate text-[1.45rem] font-semibold leading-none tracking-[-0.03em] sm:text-[1.6rem] lg:text-[1.75rem]">
+                    Home
+                  </span>
+                </Link>
+                <div
+                  className={`group flex min-w-0 items-center gap-3 rounded-lg transition-all duration-300 sm:gap-3.5 ${
+                    pathname === "/services" || pathname.startsWith("/services/")
+                      ? "text-white"
+                      : "text-white/40 hover:bg-white/[0.04] hover:text-white"
+                  }`}
+                >
+                  <Link
+                    ref={(el) => {
+                      linksRef.current[1] = el;
+                    }}
+                    href="/services"
+                    onClick={() => closeMenu(true)}
+                    className="flex min-w-0 flex-1 items-center gap-3 py-2.5 sm:gap-3.5 sm:py-3"
+                  >
+                    <span className="w-6 shrink-0 text-[10px] font-medium tabular-nums tracking-widest text-white/25">
+                      02
+                    </span>
+                    <span className="min-w-0 truncate text-[1.45rem] font-semibold leading-none tracking-[-0.03em] sm:text-[1.6rem] lg:text-[1.75rem]">
+                      Services
+                    </span>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setIsServicesOpen((open) => !open)}
+                    aria-label={`${isServicesOpen ? "Collapse" : "Expand"} services menu`}
+                    aria-expanded={isServicesOpen}
+                    className="mr-2 flex h-9 w-9 shrink-0 items-center justify-center text-white/50 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  >
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </button>
+                </div>
+                <div
+                  className={`ml-9 grid transition-[grid-template-rows,opacity] duration-300 sm:ml-10 ${
+                    isServicesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden border-l border-white/10 pl-4">
+                    <ul className="space-y-0.5 py-1.5">
+                      {serviceItems.map((service) => (
+                        <li key={service.href}>
+                          <Link
+                            href={service.href}
+                            onClick={() => closeMenu(true)}
+                            className={`block rounded-md px-2 py-2 text-sm font-medium transition-colors sm:text-[0.95rem] ${
+                              pathname === service.href
+                                ? "bg-white/[0.08] text-white"
+                                : "text-white/45 hover:bg-white/[0.04] hover:text-white"
+                            }`}
+                          >
+                            {service.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <ul className="relative space-y-0.5 sm:space-y-1">
                 <div
                   ref={lineRef}
@@ -276,6 +366,10 @@ export default function SidebarNav() {
                 />
                 {sidebarLinks.map((link, index) => {
                   const isActive = pathname === link.href;
+                  const isServices = link.href === "/services";
+
+                  if (isServices || link.href === "/") return null;
+
                   return (
                     <li key={link.href}>
                       <Link

@@ -4,15 +4,22 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, X } from "lucide-react";
 import Hamburger from "@/components/Navbar/Hamburger";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { sidebarLinks } from "./nav-config";
+import { getServicesNavItems } from "@/app/services/config";
 
 export default function MobileNavbar() {
   const pathname = usePathname();
   const { open: openContactModal } = useContactModal();
   const [isOpen, setIsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(pathname.startsWith("/services"));
+
+  const serviceItems = getServicesNavItems().flatMap((service) => [
+    { label: service.label, href: service.href },
+    ...(service.children || []),
+  ]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -22,6 +29,7 @@ export default function MobileNavbar() {
   }, [isOpen]);
 
   useEffect(() => {
+    setIsServicesOpen(pathname.startsWith("/services"));
     setIsOpen(false);
   }, [pathname]);
 
@@ -81,6 +89,71 @@ export default function MobileNavbar() {
             <ul className="space-y-1">
               {sidebarLinks.map((link, index) => {
                 const isActive = pathname === link.href;
+
+                if (link.href === "/services") {
+                  return (
+                    <li key={link.href}>
+                      <div
+                        className={`flex min-w-0 items-center gap-3.5 transition-colors ${
+                          isActive || pathname.startsWith("/services/")
+                            ? "text-white"
+                            : "text-white/40"
+                        }`}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className="flex min-w-0 flex-1 items-center gap-3.5 py-3"
+                        >
+                          <span className="w-7 shrink-0 text-[11px] font-medium tabular-nums tracking-widest text-white/25">
+                            02
+                          </span>
+                          <span className="text-[1.65rem] font-semibold leading-none tracking-[-0.03em] sm:text-[1.85rem]">
+                            {link.label}
+                          </span>
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => setIsServicesOpen((open) => !open)}
+                          aria-label={`${isServicesOpen ? "Collapse" : "Expand"} services menu`}
+                          aria-expanded={isServicesOpen}
+                          className="flex h-10 w-10 shrink-0 items-center justify-center text-white/50 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                        >
+                          <ChevronDown
+                            className={`h-5 w-5 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
+                            aria-hidden
+                          />
+                        </button>
+                      </div>
+                      <div
+                        className={`grid transition-[grid-template-rows,opacity] duration-300 ${
+                          isServicesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        }`}
+                      >
+                        <div className="min-h-0 overflow-hidden border-l border-white/10 ml-10 pl-4">
+                          <ul className="space-y-0.5 py-1.5">
+                            {serviceItems.map((service) => (
+                              <li key={service.href}>
+                                <Link
+                                  href={service.href}
+                                  onClick={() => setIsOpen(false)}
+                                  className={`block rounded-md px-2 py-2 text-sm font-medium transition-colors sm:text-[0.95rem] ${
+                                    pathname === service.href
+                                      ? "bg-white/[0.08] text-white"
+                                      : "text-white/45 hover:bg-white/[0.04] hover:text-white"
+                                  }`}
+                                >
+                                  {service.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={link.href}>
                     <Link
