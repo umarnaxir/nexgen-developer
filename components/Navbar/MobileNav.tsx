@@ -26,7 +26,7 @@ interface MobileNavProps {
 }
 
 const contactItems = [
-  { icon: Mail, href: "mailto:info@nexgendevelopers.in", label: "info@nexgendevelopers.in" },
+  { icon: Mail, href: "mailto:workwithnexgen@gmail.com", label: "workwithnexgen@gmail.com" },
   { icon: Phone, href: "tel:+916006161726", label: "+91 600-616-1726" },
 ];
 

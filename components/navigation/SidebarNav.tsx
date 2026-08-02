@@ -402,10 +402,10 @@ export default function SidebarNav() {
                 Get in touch
               </p>
               <a
-                href="mailto:info@nexgendevelopers.in"
+                href="mailto:workwithnexgen@gmail.com"
                 className="mt-2.5 block text-sm font-medium text-white/60 transition-colors hover:text-white"
               >
-                info@nexgendevelopers.in
+                workwithnexgen@gmail.com
               </a>
               <button
                 type="button"
