@@ -23,7 +23,7 @@ interface GetInTouchModalProps {
 
 const PHONE_DISPLAY = "+91 600-616-1726";
 const PHONE_TEL = "+916006161726";
-const EMAIL = "info@nexgendevelopers.in";
+const EMAIL = "workwithnexgen@gmail.com";
 
 const socials = [
  { icon: MessageCircle, href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.", label: "WhatsApp" },

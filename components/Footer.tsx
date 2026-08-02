@@ -68,7 +68,7 @@ export default function Footer() {
             <div className="w-full md:w-[360px] text-right md:text-right space-y-1">
               <h4 className="text-sm font-extrabold uppercase text-gray-900 mb-2">Contact</h4>
               <div className="text-base font-medium text-gray-900">Phone: <a href="tel:6006161726" className="underline-offset-2">6006161726</a></div>
-              <div className="text-base font-medium text-gray-900">Email: <a href="mailto:info@nexgendevelopers.in" className="underline-offset-2">info@nexgendevelopers.in</a></div>
+              <div className="text-base font-medium text-gray-900">Email: <a href="mailto:workwithnexgen@gmail.com" className="underline-offset-2">workwithnexgen@gmail.com</a></div>
             </div>
           </div>
 

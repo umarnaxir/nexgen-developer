@@ -181,10 +181,10 @@ export default function MobileNavbar() {
               Get in touch
             </p>
             <a
-              href="mailto:info@nexgendevelopers.in"
+              href="mailto:workwithnexgen@gmail.com"
               className="mt-2.5 block text-sm font-medium text-white/80 transition-colors hover:text-white"
             >
-              info@nexgendevelopers.in
+              workwithnexgen@gmail.com
             </a>
             <button
               type="button"

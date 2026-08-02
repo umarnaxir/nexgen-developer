@@ -240,6 +240,13 @@ export default function Footer() {
               </span>
             </label>
 
+            <button
+              type="submit"
+              className="inline-flex w-fit items-center justify-center rounded-md border border-teal-400/30 bg-teal-400/10 px-5 py-2.5 text-[13px] font-semibold text-teal-200 transition-colors hover:border-teal-300 hover:bg-teal-400/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Subscribe
+            </button>
+
             {status === "success" && (
               <p className="text-[12px] font-medium text-teal-300" role="status">
                 Thanks — you&apos;re on the list.

@@ -60,7 +60,7 @@ export default function TermsSectionsPart2() {
       <TermsSection icon={Users} title="11. Contact Information" delay={1.1} dark>
         <p className="mb-4 sm:mb-6">If you have any questions about these Terms of Service, please contact us:</p>
         <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
-          <p className="mb-2"><strong className="text-black">Email:</strong> info@nexgendevelopers.in</p>
+          <p className="mb-2"><strong className="text-black">Email:</strong> workwithnexgen@gmail.com</p>
           <p className="mb-2"><strong className="text-black">Phone:</strong> +91 600-616-1726</p>
           <p><strong className="text-black">Location:</strong> Baramulla, Jammu and Kashmir, India</p>
         </div>

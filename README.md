@@ -66,12 +66,12 @@ npm run typecheck
 The app uses a few environment variables for external services. Create a `.env.local` in the project root and set the values you need.
 
 - `RESEND_API_KEY`  -  Resend API key used to send emails (required for forms)
-- `RESEND_FROM_EMAIL`  -  Optional override for the `from` address (e.g. "NexGen Developers <forms@nexgendevelopers.in>")
+- `RESEND_FROM_EMAIL`  -  Optional override for the `from` address. This must use a domain you have verified in Resend (for example, "NexGen Developers <no-reply@nexgendevelopers.in>")
 - `RESEND_TO_EMAIL` or `CONTACT_TO_EMAIL`  -  The business inbox that receives form submissions (fallbacks are provided in code)
 
 Notes:
 
-- Verify your sending domain in Resend and add recommended DNS records (SPF/DKIM/DMARC) to prevent deliverability issues.
+- Verify your sending domain in Resend and add recommended DNS records (SPF/DKIM/DMARC) to prevent deliverability issues. Gmail addresses can be used as `reply_to`, but not as the Resend `from` address unless Gmail itself is verified, which Resend does not support for your account.
 - When running locally without `RESEND_API_KEY`, form endpoints will return a friendly error indicating the email service isn't configured.
 
 ## Project structure (high level)

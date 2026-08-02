@@ -3,11 +3,11 @@ const RESEND_API_URL = "https://api.resend.com/emails";
 export const BUSINESS_EMAIL =
   process.env.RESEND_TO_EMAIL ||
   process.env.CONTACT_TO_EMAIL ||
-  "info@nexgendevelopers.in";
+  "workwithnexgen@gmail.com";
 
 const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ||
-  "NexGen Developers <info@nexgendevelopers.in>";
+  "NexGen Developers <no-reply@nexgendevelopers.in>";
 
 export function escapeHtml(value: unknown) {
   return String(value ?? "")
@@ -64,7 +64,7 @@ export async function sendResendEmail({
         html,
         text,
 
-        reply_to: replyTo || "info@nexgendevelopers.in",
+        reply_to: replyTo || "workwithnexgen@gmail.com",
 
         tags: [
           {
@@ -78,7 +78,7 @@ export async function sendResendEmail({
           "X-Mailer": "NexGen Developers Website",
           "Message-ID": `<${messageId}@nexgendevelopers.in>`,
           "List-Unsubscribe":
-            "<mailto:info@nexgendevelopers.in?subject=unsubscribe>",
+            "<mailto:workwithnexgen@gmail.com?subject=unsubscribe>",
         },
       }),
     });

@@ -1,9 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import SiteNavigation from "@/components/navigation/SiteNavigation";
 import Footer from "@/components/Footer/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
 import ContactModalProvider from "@/components/modals/ContactModalProvider";
+
+// Lazy load chatbot — client-only, no SSR
+const ChatWidget = dynamic(() => import("@/components/chat/ChatWidget"), {
+  ssr: false,
+});
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -22,6 +28,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
           {SHOW_WHATSAPP_BUTTON && <WhatsAppButton />}
         </div>
       </div>
+      <ChatWidget />
     </ContactModalProvider>
   );
 }
