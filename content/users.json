@@ -1,0 +1,12 @@
+[
+  {
+    "id": "fa55dcbf-3198-4b9a-b03f-9ef120bbaa23",
+    "name": "Umar Nazir",
+    "email": "umar@gmail.com",
+    "passwordHash": "$2b$10$sb0TaKCXkpnBWVIQaibqteBFuCcdY47t/7E.xXElPJalAbhGFcoBa",
+    "role": "super_admin",
+    "enabled": true,
+    "createdAt": "2026-08-07T20:39:17.286Z",
+    "updatedAt": "2026-08-07T21:45:55.341Z"
+  }
+]

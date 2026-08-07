@@ -1,6 +1,7 @@
 /**
  * Services configuration: slugs, content, SEO, and navigation.
  * Used for dynamic routes, sitemap, navbar, and internal linking.
+ * Admin-managed overrides live in content/services.json (loaded via services-server).
  */
 
 export interface ServiceSEO {
@@ -961,7 +962,7 @@ export const DIGITAL_MARKETING_SERVICES: Record<string, SubServiceDefinition> = 
  "meta-ads": META_ADS,
 };
 
-/** Get top-level service by slug */
+/** Get top-level service by slug (built-in fallback). Prefer services-server on the server. */
 export function getTopLevelService(slug: string): ServiceDefinition | undefined {
  return TOP_LEVEL_SERVICES[slug];
 }
@@ -1097,97 +1098,95 @@ export function getRelatedServicesUpToSix(
 
 /** Build href for a service (top-level or digital-marketing sub) */
 export function getServiceHref(service: ServiceDefinition): string {
- if ("parentSlug" in service && service.parentSlug === "digital-marketing") {
- return `/services/digital-marketing/${service.slug}`;
- }
- return `/services/${service.slug}`;
+  if ("parentSlug" in service && service.parentSlug === "digital-marketing") {
+    return `/services/digital-marketing/${service.slug}`;
+  }
+  return `/services/${service.slug}`;
 }
 
 /** Category for main Services page tabbed listing */
 export type ServiceCategory = "development" | "digital-marketing" | "support";
 
 export interface ServiceListingItem {
- slug: string;
- title: string;
- shortDescription: string;
- longDescription: string;
- features: string[];
- benefits: string[];
- process: { step: number; title: string; description: string }[];
- tools: string;
- faqs: { question: string; answer: string }[];
- image: string;
- href: string;
- icon?: string;
- category: ServiceCategory;
- useCases?: string[];
- expectedResults?: string[];
+  slug: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  features: string[];
+  benefits: string[];
+  process: { step: number; title: string; description: string }[];
+  tools: string;
+  faqs: { question: string; answer: string }[];
+  image: string;
+  href: string;
+  icon?: string;
+  category: ServiceCategory;
+  useCases?: string[];
+  expectedResults?: string[];
 }
 
 /** Get services for main listing page, grouped by category */
 export function getServicesForListing(): ServiceListingItem[] {
- const categories: Record<string, ServiceCategory> = {
- "website-development": "development",
- "app-development": "development",
- "ai-ml": "development",
- "chatbot-development": "development",
- "digital-marketing": "digital-marketing",
- seo: "digital-marketing",
- "social-media-marketing": "digital-marketing",
- "graphic-designing": "digital-marketing",
- "google-ads": "digital-marketing",
- "meta-ads": "digital-marketing",
- "maintenance-support": "support",
- "deployment-devops": "support",
- };
+  const categories: Record<string, ServiceCategory> = {
+    "website-development": "development",
+    "app-development": "development",
+    "ai-ml": "development",
+    "chatbot-development": "development",
+    "digital-marketing": "digital-marketing",
+    seo: "digital-marketing",
+    "social-media-marketing": "digital-marketing",
+    "graphic-designing": "digital-marketing",
+    "google-ads": "digital-marketing",
+    "meta-ads": "digital-marketing",
+    "maintenance-support": "support",
+    "deployment-devops": "support",
+  };
 
- const items: ServiceListingItem[] = [];
+  const items: ServiceListingItem[] = [];
 
- // Top-level services
- TOP_LEVEL_SLUG_LIST.forEach((slug) => {
- const def = TOP_LEVEL_SERVICES[slug];
- if (!def) return;
- items.push({
- slug: def.slug,
- title: def.label,
- shortDescription: def.content.description.slice(0, 120) + "...",
- longDescription: def.content.description,
- features: def.content.benefits,
- benefits: def.content.benefits,
- process: def.content.process,
- tools: def.content.technologies ?? "",
- faqs: def.content.faqs ?? [],
- image: def.content.image ?? "/images/services/website.png",
- href: getServiceHref(def),
- icon: def.icon,
- category: categories[slug] ?? "development",
- useCases: def.content.useCases,
- expectedResults: def.content.expectedResults,
- });
- });
+  TOP_LEVEL_SLUG_LIST.forEach((slug) => {
+    const def = TOP_LEVEL_SERVICES[slug];
+    if (!def) return;
+    items.push({
+      slug: def.slug,
+      title: def.label,
+      shortDescription: def.content.description.slice(0, 120) + "...",
+      longDescription: def.content.description,
+      features: def.content.benefits,
+      benefits: def.content.benefits,
+      process: def.content.process,
+      tools: def.content.technologies ?? "",
+      faqs: def.content.faqs ?? [],
+      image: def.content.image ?? "/images/services/website.png",
+      href: getServiceHref(def),
+      icon: def.icon,
+      category: categories[slug] ?? "development",
+      useCases: def.content.useCases,
+      expectedResults: def.content.expectedResults,
+    });
+  });
 
- // Digital marketing sub-services (for tabbed view)
- DIGITAL_MARKETING_SUB_SLUG_LIST.forEach((subSlug) => {
- const def = DIGITAL_MARKETING_SERVICES[subSlug];
- if (!def) return;
- items.push({
- slug: def.slug,
- title: def.label,
- shortDescription: def.content.description.slice(0, 120) + "...",
- longDescription: def.content.description,
- features: def.content.benefits,
- benefits: def.content.benefits,
- process: def.content.process,
- tools: def.content.technologies ?? "",
- faqs: def.content.faqs ?? [],
- image: def.content.image ?? "/images/services/website.png",
- href: getServiceHref(def),
- icon: def.icon,
- category: "digital-marketing",
- useCases: def.content.useCases,
- expectedResults: def.content.expectedResults,
- });
- });
+  DIGITAL_MARKETING_SUB_SLUG_LIST.forEach((subSlug) => {
+    const def = DIGITAL_MARKETING_SERVICES[subSlug];
+    if (!def) return;
+    items.push({
+      slug: def.slug,
+      title: def.label,
+      shortDescription: def.content.description.slice(0, 120) + "...",
+      longDescription: def.content.description,
+      features: def.content.benefits,
+      benefits: def.content.benefits,
+      process: def.content.process,
+      tools: def.content.technologies ?? "",
+      faqs: def.content.faqs ?? [],
+      image: def.content.image ?? "/images/services/website.png",
+      href: getServiceHref(def),
+      icon: def.icon,
+      category: "digital-marketing",
+      useCases: def.content.useCases,
+      expectedResults: def.content.expectedResults,
+    });
+  });
 
- return items;
+  return items;
 }

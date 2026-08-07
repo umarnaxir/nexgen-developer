@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "../data";
 import ProjectCard from "./ProjectCard";
+import type { Project } from "@/lib/content/types";
 
-export default function ProjectsList() {
+type ProjectsListProps = {
+  projects: Project[];
+};
+
+export default function ProjectsList({ projects }: ProjectsListProps) {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
   return (
@@ -18,7 +22,9 @@ export default function ProjectsList() {
               index={index}
               isExpanded={expandedProject === project.id}
               onToggleExpand={() =>
-                setExpandedProject(expandedProject === project.id ? null : project.id)
+                setExpandedProject(
+                  expandedProject === project.id ? null : project.id
+                )
               }
             />
           ))}

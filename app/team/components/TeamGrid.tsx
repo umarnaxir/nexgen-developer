@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { teamMembers } from "../data";
+import type { TeamMember } from "@/lib/content/types";
 
-export default function TeamGrid() {
+type TeamGridProps = {
+  teamMembers: TeamMember[];
+};
+
+export default function TeamGrid({ teamMembers }: TeamGridProps) {
   return (
     <section className="section-light section-y">
       <div className="section-container">
@@ -25,7 +29,7 @@ export default function TeamGrid() {
         <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
           {teamMembers.map((member, index) => (
             <motion.article
-              key={member.name}
+              key={member.id || member.name}
               data-aos="fade-up"
               data-aos-delay={Math.min(index * 60, 240)}
               whileHover={{ y: -4 }}
@@ -51,7 +55,9 @@ export default function TeamGrid() {
                 <h3 className="mt-2 text-sm font-semibold tracking-[-0.02em] text-white sm:text-base">
                   {member.name}
                 </h3>
-                <p className="mt-0.5 text-[11px] leading-snug text-white/60 sm:text-xs">{member.title}</p>
+                <p className="mt-0.5 text-[11px] leading-snug text-white/60 sm:text-xs">
+                  {member.designation}
+                </p>
               </div>
             </motion.article>
           ))}

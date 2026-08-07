@@ -348,7 +348,7 @@ export const companyData = {
     address: "Baramulla, Jammu & Kashmir, India",
     social: {
       linkedin: "https://linkedin.com/company/nexgendevelopers",
-      instagram: "https://instagram.com/nexgendevelopers",
+      instagram: "https://www.instagram.com/nexgendv?igsh=MTJiczF6aDNxbjB2eg%3D%3D&utm_source=qr",
       twitter: "https://twitter.com/nexgendevs",
     },
   },

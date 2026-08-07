@@ -1,14 +1,18 @@
 import BlogsGrid from "./components/BlogsGrid";
 import { getBlogsSEO } from "@/lib/seo/page-seo";
+import { getBlogs } from "@/lib/content/store";
 
 export const metadata = getBlogsSEO();
+export const dynamic = "force-dynamic";
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const blogs = await getBlogs();
+
   return (
     <div className="min-h-screen">
       <section className="pb-20 pt-10 lg:pb-28 lg:pt-14">
         <div className="section-container">
-          <BlogsGrid />
+          <BlogsGrid blogs={blogs} />
         </div>
       </section>
     </div>

@@ -128,8 +128,11 @@ export const homeServices: HomeService[] = [
 
 export const footerExtraLinks = [{ label: "Team", href: "/team" }];
 
+/** @deprecated Prefer getContactInfo() from @/lib/content/store */
 export const footerContactPhone = "+916006161726";
+/** @deprecated Prefer getContactInfo() from @/lib/content/store */
 export const footerContactEmail = "workwithnexgen@gmail.com";
+/** @deprecated Prefer getContactInfo() from @/lib/content/store */
 export const footerAddress = {
   region: "Kashmir, India",
   line: "Baramulla, Jammu and Kashmir, India",

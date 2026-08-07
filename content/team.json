@@ -1,0 +1,257 @@
+[
+  {
+    "id": "61c928fb-a8a0-72f7-1f3f-3d0d00e0d790",
+    "name": "Umar Nazir",
+    "designation": "Lead Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/me.JPG",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "8c685755-e772-b887-5692-e02f9a363348",
+    "name": "Waseem Tariq",
+    "designation": "Full Stack Software Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/waseem.jpeg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "5f8dce87-d61f-3d3b-c3a3-2fb8a2771d20",
+    "name": "Ishfaq Nazir",
+    "designation": "Full Stack Software Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/ishfaq.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "fbce3159-2cac-00b4-151a-412f84888162",
+    "name": "Khalid Jan",
+    "designation": "Back-End Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/khalid.jpeg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "377ca44e-7c3e-c3ac-3583-b13ec846304d",
+    "name": "Syed Owais Qadri",
+    "designation": "AI Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/owais.jpg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "41b56d90-86b1-2987-1c70-28771922943a",
+    "name": "Ummar Farooq",
+    "designation": "Software Developer & AI - ML",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/ummar.jpeg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 6
+  },
+  {
+    "id": "1686234c-4c37-6b82-c6fd-74ed81046a0e",
+    "name": "Mohsin Jan",
+    "designation": "Digital Marketing Analyst",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/mohsin-jan.jpeg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 7
+  },
+  {
+    "id": "ad8d3b04-0bba-8fc0-54e5-f3a554e72389",
+    "name": "Zeeshan Bashir",
+    "designation": "Full Stack Software Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/zeeshan.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 8
+  },
+  {
+    "id": "fb9faea6-fa19-b40e-ab25-d3f1b74453c6",
+    "name": "Shokeeb Tariq",
+    "designation": "Software Engineer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/shokeeb-tariq.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 9
+  },
+  {
+    "id": "b554bedc-0014-8c96-9040-2ce006ab9bfc",
+    "name": "Wajid Ahmad",
+    "designation": "Software Developer & SEO Executive",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/wajid.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 10
+  },
+  {
+    "id": "c87492b4-1cb8-9cc5-5c11-66c0daebe740",
+    "name": "Mohammad Ishaq",
+    "designation": "Full Stack Software Developer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/ishaq.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 11
+  },
+  {
+    "id": "a57c92d9-5cfd-ba35-37c9-a4a37dabfe4d",
+    "name": "Amir Nazir",
+    "designation": "Software Developer & Digital Marketing",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/amir.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 12
+  },
+  {
+    "id": "1b2ec746-9a0e-4b92-8481-3d41cc174bd8",
+    "name": "Furkan Fareed",
+    "designation": "Digital Marketing",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/furkan-fareed.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 13
+  },
+  {
+    "id": "eecdb8be-3f33-f118-5809-775958c5c2e7",
+    "name": "Faizan",
+    "designation": "Digital Marketing",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/faizan.png",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": true,
+    "order": 14
+  },
+  {
+    "id": "ad7a90e3-e861-d0a4-5ec5-2daffeeeb38f",
+    "name": "Megha",
+    "designation": "Software Developer",
+    "email": "",
+    "phone": "",
+    "image": "/images/team/employee-no-profile.jpg",
+    "socialLinks": {
+      "linkedin": "",
+      "twitter": "",
+      "github": "",
+      "instagram": ""
+    },
+    "role": "member",
+    "enabled": false,
+    "order": 15
+  }
+]

@@ -1,22 +1,22 @@
 import { notFound } from "next/navigation";
 import { getServiceSEO } from "@/lib/seo/page-seo";
 import {
-  DIGITAL_MARKETING_SUB_SLUGS,
-  getDigitalMarketingService,
-} from "@/app/services/config";
+  getDigitalMarketingServiceServer,
+  getRelatedServicesUpToSixServer,
+} from "@/lib/content/services-server";
 import DigitalMarketingServiceContent from "./components/DigitalMarketingServiceContent";
 
 interface DigitalMarketingServicePageProps {
   params: Promise<{ subSlug: string }>;
 }
 
-export async function generateStaticParams() {
-  return DIGITAL_MARKETING_SUB_SLUGS.map((subSlug) => ({ subSlug }));
-}
+export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: DigitalMarketingServicePageProps) {
+export async function generateMetadata({
+  params,
+}: DigitalMarketingServicePageProps) {
   const { subSlug } = await params;
-  const service = getDigitalMarketingService(subSlug);
+  const service = getDigitalMarketingServiceServer(subSlug);
   if (!service) return {};
   const path = `/services/digital-marketing/${subSlug}`;
   return getServiceSEO(path, service.seo, service.content.image);
@@ -26,7 +26,16 @@ export default async function DigitalMarketingServicePage({
   params,
 }: DigitalMarketingServicePageProps) {
   const { subSlug } = await params;
-  const service = getDigitalMarketingService(subSlug);
+  const service = getDigitalMarketingServiceServer(subSlug);
   if (!service) notFound();
-  return <DigitalMarketingServiceContent subSlug={subSlug} />;
+  const related = getRelatedServicesUpToSixServer(
+    service.relatedSlugs,
+    service.slug
+  );
+  return (
+    <DigitalMarketingServiceContent
+      service={service}
+      relatedServices={related}
+    />
+  );
 }

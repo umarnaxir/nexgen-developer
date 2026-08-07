@@ -2,16 +2,16 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import GalaxyBackground from "@/components/GalaxyBackground";
 
 interface ServiceDetailHeroProps {
   heading: string;
   image?: string;
 }
 
-export default function ServiceDetailHero({ heading, image }: ServiceDetailHeroProps) {
+export default function ServiceDetailHero({ heading }: ServiceDetailHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -54,31 +54,25 @@ export default function ServiceDetailHero({ heading, image }: ServiceDetailHeroP
   return (
     <header
       ref={sectionRef}
-      className="section-dark relative flex h-[70svh] min-h-[70svh] flex-col justify-end overflow-hidden pb-14 pt-[calc(var(--mobile-nav-height)+2rem)] sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-36"
+      className="section-dark relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24"
     >
-      {image ? (
-        <>
-          <Image
-            src={image}
-            alt=""
-            fill
-            className="object-cover opacity-60"
-            sizes="100vw"
-            priority
-            aria-hidden
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/25" aria-hidden />
-        </>
-      ) : null}
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+        <GalaxyBackground />
+      </div>
 
       <div
         ref={gridRef}
         aria-hidden
-        className="pointer-events-none absolute inset-0 transition-transform duration-700 ease-out will-change-transform"
+        className="pointer-events-none absolute inset-0 z-[1] transition-transform duration-700 ease-out will-change-transform"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:48px_48px]" />
-        <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-teal-500/[0.06] blur-[120px]" />
+        <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
+        <div className="absolute -right-1/4 bottom-0 h-[420px] w-[420px] rounded-full bg-white/[0.02] blur-[100px]" />
       </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
+      />
 
       <div className="section-container relative z-10">
         <Link

@@ -4,17 +4,26 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import GalaxyBackground from "@/components/GalaxyBackground";
 
 export type PageHeroProps = {
   eyebrow: string;
   title: string;
   description?: string;
   meta?: string;
+  /** `galaxy` matches the home hero. `image` keeps the photo backdrop (Team). */
+  variant?: "galaxy" | "image";
 };
 
 const HERO_IMAGE = "/images/hero-image.png";
 
-export default function PageHero({ eyebrow, title, description, meta }: PageHeroProps) {
+export default function PageHero({
+  eyebrow,
+  title,
+  description,
+  meta,
+  variant = "galaxy",
+}: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sublineRef = useRef<HTMLDivElement>(null);
@@ -41,20 +50,44 @@ export default function PageHero({ eyebrow, title, description, meta }: PageHero
   return (
     <header
       ref={sectionRef}
-      className="section-dark relative flex min-h-[56svh] flex-col justify-end overflow-hidden pb-12 pt-[calc(var(--mobile-nav-height)+2rem)] sm:min-h-[52vh] sm:pb-14 sm:pt-24 lg:min-h-[58vh] lg:pb-16 lg:pt-32"
+      className="section-dark relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24"
     >
-      <div className="absolute inset-0" aria-hidden>
-        <Image
-          src={HERO_IMAGE}
-          alt=""
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-      </div>
+      {variant === "image" ? (
+        <div className="absolute inset-0" aria-hidden>
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        </div>
+      ) : (
+        <>
+          <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+            <GalaxyBackground />
+          </div>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:48px_48px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[420px] w-[420px] rounded-full bg-white/[0.02] blur-[100px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
+          />
+        </>
+      )}
 
       <div className="section-container relative z-10">
         <div className="w-full max-w-none">

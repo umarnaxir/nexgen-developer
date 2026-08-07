@@ -7,6 +7,8 @@ import { getHomeSEO } from "@/lib/seo/page-seo";
 import { OrganizationSchema, WebsiteSchema } from "@/lib/seo/structured-data";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import ThemeProvider from "@/components/theme/ThemeProvider";
+import { getContactInfo, getFooterSettings } from "@/lib/content/store";
+import { getSession } from "@/lib/admin/auth";
 
 const spaceGrotesk = localFont({
   src: [
@@ -52,11 +54,17 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [contact, footer, session] = await Promise.all([
+    getContactInfo(),
+    getFooterSettings(),
+    getSession(),
+  ]);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -68,7 +76,13 @@ export default function RootLayout({
           <ScrollToTop />
           <AOSInit />
           <Toaster position="top-right" richColors />
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <LayoutWrapper
+            contact={contact}
+            footer={footer}
+            isAdminLoggedIn={Boolean(session)}
+          >
+            {children}
+          </LayoutWrapper>
         </ThemeProvider>
       </body>
     </html>

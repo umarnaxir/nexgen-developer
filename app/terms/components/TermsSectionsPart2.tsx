@@ -51,13 +51,54 @@ export default function TermsSectionsPart2() {
         </p>
       </TermsSection>
 
-      <TermsSection icon={FileText} title="10. Changes to Terms" delay={1.0} altBg>
+      <TermsSection icon={FileText} title="10. Payment Policy" delay={1.0} altBg>
+        <p className="mb-3 sm:mb-4">
+          Unless a written service agreement states otherwise, project fees for client work are billed in{" "}
+          <strong className="text-black">two installments</strong>:
+        </p>
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+          <li>
+            <strong className="text-black">50% advance (first installment):</strong> Due upon acceptance of
+            the proposal or service agreement, before project work begins.
+          </li>
+          <li>
+            <strong className="text-black">50% final (second installment):</strong> Due at the time of
+            deployment, go-live, or delivery of the agreed final deliverables.
+          </li>
+        </ul>
+        <p className="mb-3 sm:mb-4">
+          <strong className="text-black">Non-refundable advance:</strong> Once you accept a proposal (or
+          equivalent written agreement) and the first installment is paid, that advance is{" "}
+          <strong className="text-black">non-refundable</strong>. This covers scheduling, planning, and
+          reserved project capacity. Cancelling, pausing, or delaying the project after acceptance does not
+          entitle you to a refund of the first installment.
+        </p>
+        <p className="mb-3 sm:mb-4">
+          <strong className="text-black">Missed or late payment near deadline:</strong> If the project
+          deadline is approaching and the outstanding installment has not been paid, NexGen may pause work,
+          withhold delivery or deployment, and adjust timelines. Failure to pay by the due date does not make
+          the first installment refundable.
+        </p>
+        <p className="mb-3 sm:mb-4">
+          <strong className="text-black">Payment methods:</strong> We accept payment through the methods
+          stated in your invoice or proposal (such as bank transfer or other agreed channels). Work on the
+          next phase, and final handover or deployment, begins only after the relevant installment has
+          cleared.
+        </p>
+        <p>
+          Full ownership and handover of final deliverables are subject to receipt of{" "}
+          <strong className="text-black">full payment</strong>. Any different payment schedule must be agreed
+          in writing before work starts.
+        </p>
+      </TermsSection>
+
+      <TermsSection icon={FileText} title="11. Changes to Terms" delay={1.05}>
         <p>
           We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.
         </p>
       </TermsSection>
 
-      <TermsSection icon={Users} title="11. Contact Information" delay={1.1} dark>
+      <TermsSection icon={Users} title="12. Contact Information" delay={1.1} dark>
         <p className="mb-4 sm:mb-6">If you have any questions about these Terms of Service, please contact us:</p>
         <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
           <p className="mb-2"><strong className="text-black">Email:</strong> workwithnexgen@gmail.com</p>
