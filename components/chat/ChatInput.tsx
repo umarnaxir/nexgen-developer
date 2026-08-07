@@ -11,22 +11,21 @@ interface ChatInputProps {
 
 export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
   const [value, setValue] = useState("");
+  const [focused, setFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const maxLength = 500;
 
-  // Auto-resize textarea
   const adjustHeight = useCallback(() => {
     const ta = textareaRef.current;
     if (!ta) return;
     ta.style.height = "auto";
-    ta.style.height = `${Math.min(ta.scrollHeight, 96)}px`; // max 4 lines
+    ta.style.height = `${Math.min(ta.scrollHeight, 72)}px`;
   }, []);
 
   useEffect(() => {
     adjustHeight();
   }, [value, adjustHeight]);
 
-  // Focus input on mount
   useEffect(() => {
     textareaRef.current?.focus();
   }, []);
@@ -36,7 +35,6 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
     if (!trimmed || isLoading) return;
     onSend(trimmed);
     setValue("");
-    // Reset height
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
@@ -54,10 +52,24 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
 
   const nearLimit = value.length > maxLength * 0.8;
   const atLimit = value.length >= maxLength;
+  const canSend = Boolean(value.trim()) && !isLoading;
 
   return (
-    <div className="px-3 pb-3 pt-2 border-t border-white/[0.06]">
-      <div className="flex items-end gap-2 rounded-xl bg-white/[0.04] border border-white/[0.08] px-3 py-2 focus-within:border-teal-500/30 transition-colors">
+    <div className="relative px-2.5 pb-2.5 pt-1.5 border-t border-white/[0.06]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
+
+      <motion.div
+        className="relative flex items-end gap-1.5 rounded-xl bg-white/[0.04] border px-2.5 py-1.5 transition-colors"
+        animate={{
+          borderColor: focused
+            ? "rgba(34, 211, 238, 0.35)"
+            : "rgba(255, 255, 255, 0.08)",
+          boxShadow: focused
+            ? "0 0 0 1px rgba(34,211,238,0.1), 0 0 16px rgba(34,211,238,0.06)"
+            : "0 0 0 0 rgba(0,0,0,0)",
+        }}
+        transition={{ duration: 0.2 }}
+      >
         <textarea
           ref={textareaRef}
           value={value}
@@ -67,17 +79,18 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
             }
           }}
           onKeyDown={handleKeyDown}
-          placeholder="Type a message..."
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder="Ask anything about NexGen..."
           rows={1}
           disabled={isLoading}
-          className="flex-1 resize-none bg-transparent text-[13px] text-white/90 placeholder:text-white/25 outline-none leading-relaxed max-h-24 scrollbar-hide disabled:opacity-50"
+          className="flex-1 resize-none bg-transparent text-[11.5px] text-white/90 placeholder:text-white/30 outline-none leading-relaxed max-h-[72px] scrollbar-hide disabled:opacity-50"
           aria-label="Chat message input"
         />
 
-        {/* Character count */}
         {nearLimit && (
           <span
-            className={`text-[9px] font-mono flex-shrink-0 mb-0.5 ${
+            className={`text-[8px] font-mono flex-shrink-0 mb-0.5 ${
               atLimit ? "text-red-400" : "text-white/30"
             }`}
           >
@@ -85,23 +98,39 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
           </span>
         )}
 
-        {/* Send button */}
         <motion.button
           onClick={handleSend}
-          disabled={!value.trim() || isLoading}
-          className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-lg
-            bg-gradient-to-br from-teal-500 to-teal-600 text-white
+          disabled={!canSend}
+          className="relative flex-shrink-0 flex items-center justify-center w-6.5 h-6.5 rounded-lg
+            bg-gradient-to-br from-teal-500 to-cyan-600 text-white
             disabled:opacity-30 disabled:cursor-not-allowed
-            shadow-md shadow-teal-500/20 cursor-pointer"
-          whileHover={value.trim() && !isLoading ? { scale: 1.08 } : {}}
-          whileTap={value.trim() && !isLoading ? { scale: 0.92 } : {}}
+            shadow-md shadow-cyan-500/20 cursor-pointer overflow-hidden"
+          style={{ width: 26, height: 26 }}
+          whileHover={canSend ? { scale: 1.08 } : {}}
+          whileTap={canSend ? { scale: 0.92 } : {}}
+          animate={
+            canSend
+              ? {
+                  boxShadow: [
+                    "0 2px 8px rgba(34,211,238,0.25)",
+                    "0 2px 14px rgba(34,211,238,0.4)",
+                    "0 2px 8px rgba(34,211,238,0.25)",
+                  ],
+                }
+              : {}
+          }
+          transition={
+            canSend
+              ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
+              : undefined
+          }
           aria-label="Send message"
         >
-          <Send className="w-3.5 h-3.5" />
+          <Send className="w-3 h-3 relative z-10" />
         </motion.button>
-      </div>
+      </motion.div>
 
-      <p className="text-[9px] text-white/20 text-center mt-1.5 select-none">
+      <p className="text-[8px] text-white/25 text-center mt-1.5 select-none tracking-wide">
         Shift+Enter for new line · Enter to send
       </p>
     </div>

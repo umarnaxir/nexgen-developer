@@ -15,28 +15,39 @@ interface SuggestedQuestionsProps {
   visible: boolean;
 }
 
-export default function SuggestedQuestions({ onSelect, visible }: SuggestedQuestionsProps) {
+export default function SuggestedQuestions({
+  onSelect,
+  visible,
+}: SuggestedQuestionsProps) {
   if (!visible) return null;
 
   return (
-    <div className="px-4 pb-2 pt-1">
-      <p className="text-[10px] text-white/30 font-medium uppercase tracking-wider mb-2">
+    <div className="px-3.5 pt-2 pb-1">
+      <motion.p
+        className="text-[9px] text-white/30 font-medium uppercase tracking-[0.12em] mb-1.5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
         Suggested
-      </p>
-      <div className="flex flex-wrap gap-1.5">
+      </motion.p>
+
+      <div className="flex flex-col gap-0.5">
         {QUESTIONS.map((q, i) => (
           <motion.button
             key={q}
             onClick={() => onSelect(q)}
-            className="px-3 py-1.5 text-[11px] font-medium rounded-full
-              bg-white/[0.04] border border-white/[0.08] text-white/60
-              hover:bg-teal-500/10 hover:border-teal-500/20 hover:text-teal-300
-              transition-colors cursor-pointer whitespace-nowrap"
-            initial={{ opacity: 0, y: 8 }}
+            className="w-full text-left py-1 text-[11px] font-medium
+              text-white/55 hover:text-cyan-300
+              transition-colors cursor-pointer truncate"
+            initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + i * 0.08, duration: 0.3 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            transition={{
+              delay: 0.25 + i * 0.05,
+              duration: 0.25,
+              ease: [0.23, 1, 0.32, 1],
+            }}
+            whileTap={{ scale: 0.98 }}
           >
             {q}
           </motion.button>

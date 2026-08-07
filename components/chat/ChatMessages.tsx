@@ -4,27 +4,31 @@ import { type Message } from "@/lib/utils";
 import { useAutoScroll } from "@/hooks/useAutoScroll";
 import ChatMessage from "./ChatMessage";
 import TypingIndicator from "./TypingIndicator";
+import SuggestedQuestions from "./SuggestedQuestions";
 
 interface ChatMessagesProps {
   messages: Message[];
   isLoading: boolean;
   isStreaming: boolean;
+  showSuggestions?: boolean;
+  onSelectSuggestion?: (question: string) => void;
 }
 
 export default function ChatMessages({
   messages,
   isLoading,
   isStreaming,
+  showSuggestions = false,
+  onSelectSuggestion,
 }: ChatMessagesProps) {
   const { containerRef } = useAutoScroll<HTMLDivElement>([messages, isLoading]);
 
-  // Show typing indicator when loading but NOT streaming (before first chunk)
   const showTyping = isLoading && !isStreaming;
 
   return (
     <div
       ref={containerRef}
-      className="flex-1 overflow-y-auto py-3 space-y-1 scrollbar-hide"
+      className="flex-1 overflow-y-auto py-2 scrollbar-hide min-h-0"
       role="log"
       aria-label="Chat messages"
       aria-live="polite"
@@ -34,6 +38,10 @@ export default function ChatMessages({
       ))}
 
       {showTyping && <TypingIndicator />}
+
+      {showSuggestions && onSelectSuggestion && (
+        <SuggestedQuestions onSelect={onSelectSuggestion} visible />
+      )}
     </div>
   );
 }
