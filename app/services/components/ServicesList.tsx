@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
-import { servicesForListing } from "../data";
-import type { ServiceCategory } from "../config";
+import type { ServiceCategory, ServiceListingItem } from "../config";
 import ServiceCard from "./ServiceCard";
 
 const CATEGORY_LABELS: Record<ServiceCategory, string> = {
@@ -14,7 +13,11 @@ const CATEGORY_LABELS: Record<ServiceCategory, string> = {
 
 const CATEGORIES: ServiceCategory[] = ["development", "digital-marketing", "support"];
 
-export default function ServicesList() {
+type ServicesListProps = {
+  services: ServiceListingItem[];
+};
+
+export default function ServicesList({ services }: ServicesListProps) {
   const [activeTab, setActiveTab] = useState<ServiceCategory>("development");
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,7 +26,7 @@ export default function ServicesList() {
   const trackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  const filteredServices = servicesForListing.filter((s) => s.category === activeTab);
+  const filteredServices = services.filter((s) => s.category === activeTab);
 
   useEffect(() => {
     registerGsapPlugins();

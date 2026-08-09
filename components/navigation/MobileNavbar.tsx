@@ -10,7 +10,13 @@ import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { sidebarLinks } from "./nav-config";
 import { getServicesNavItems } from "@/app/services/config";
 
-export default function MobileNavbar() {
+type MobileNavbarProps = {
+  isAdminLoggedIn?: boolean;
+};
+
+export default function MobileNavbar({
+  isAdminLoggedIn = false,
+}: MobileNavbarProps) {
   const pathname = usePathname();
   const { open: openContactModal } = useContactModal();
   const [isOpen, setIsOpen] = useState(false);
@@ -186,17 +192,28 @@ export default function MobileNavbar() {
             >
               workwithnexgen@gmail.com
             </a>
-            <button
-              type="button"
-              onClick={() => {
-                setIsOpen(false);
-                openContactModal();
-              }}
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 active:scale-[0.99]"
-            >
-              Start a project
-              <ArrowUpRight className="h-4 w-4" />
-            </button>
+            {isAdminLoggedIn ? (
+              <Link
+                href="/admin/dashboard"
+                onClick={() => setIsOpen(false)}
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 active:scale-[0.99]"
+              >
+                Go to Admin Panel
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  openContactModal();
+                }}
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-opacity hover:opacity-90 active:scale-[0.99]"
+              >
+                Start a project
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
       </div>

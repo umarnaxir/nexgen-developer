@@ -14,7 +14,7 @@ interface SocialLink {
 const socialLinks: SocialLink[] = [
   {
     icon: <Instagram className="h-3.5 w-3.5" />,
-    href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==",
+    href: "https://www.instagram.com/nexgendv?igsh=MTJiczF6aDNxbjB2eg%3D%3D&utm_source=qr",
     ariaLabel: "Instagram",
   },
   {

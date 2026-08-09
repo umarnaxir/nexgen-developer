@@ -2,21 +2,17 @@
 
 import ServiceLayout from "../../components/ServiceLayout";
 import ServicePageSchema from "@/components/seo/ServicePageSchema";
-import {
-  getTopLevelService,
-  getRelatedServicesUpToSix,
-} from "../../config";
+import type { ServiceDefinition } from "../../config";
 
 interface ServicePageContentProps {
-  slug: string;
+  service: ServiceDefinition;
+  relatedServices: ServiceDefinition[];
 }
 
-export default function ServicePageContent({ slug }: ServicePageContentProps) {
-  const service = getTopLevelService(slug);
-  if (!service) return null;
-
-  const related = getRelatedServicesUpToSix(service.relatedSlugs, service.slug);
-
+export default function ServicePageContent({
+  service,
+  relatedServices,
+}: ServicePageContentProps) {
   return (
     <>
       <ServicePageSchema
@@ -32,7 +28,7 @@ export default function ServicePageContent({ slug }: ServicePageContentProps) {
         process={service.content.process}
         ctaHeading={service.content.ctaHeading}
         ctaDescription={service.content.ctaDescription}
-        relatedServices={related}
+        relatedServices={relatedServices}
         currentSlug={service.slug}
         image={service.content.image}
         faqs={service.content.faqs}

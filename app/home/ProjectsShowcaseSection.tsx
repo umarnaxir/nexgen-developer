@@ -6,9 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
-import { projects } from "@/app/projects/data";
-
-const HOME_PROJECT_IDS = [11, 12, 13, 14, 15];
+import type { Project } from "@/lib/content/types";
 
 function formatTitle(title: string) {
   return title.split(" - ")[0] ?? title;
@@ -21,20 +19,20 @@ function progressToIndex(progress: number, total: number) {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export default function ProjectsShowcaseSection() {
+type ProjectsShowcaseSectionProps = {
+  projects: Project[];
+};
+
+export default function ProjectsShowcaseSection({
+  projects,
+}: ProjectsShowcaseSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
   const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const featured = useMemo(
-    () =>
-      HOME_PROJECT_IDS.map((id) => projects.find((p) => p.id === id)).filter(
-        (p): p is (typeof projects)[number] => Boolean(p)
-      ),
-    []
-  );
+  const featured = useMemo(() => projects, [projects]);
 
   const total = featured.length;
   const active = featured[activeIndex];
@@ -252,58 +250,6 @@ export default function ProjectsShowcaseSection() {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
-        </div>
-
-        {/* Vertical scroll indicator — desktop only */}
-        <div
-          className="pointer-events-none absolute right-5 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center lg:flex"
-          aria-label="Project scroll"
-        >
-          <div className="flex flex-col items-center">
-            {/* Tail */}
-            <span className="h-8 w-px bg-gradient-to-b from-transparent to-white/40 sm:h-10" aria-hidden />
-
-            <div className="pointer-events-auto my-3 flex flex-col items-center gap-2.5">
-              {featured.map((project, index) => {
-                const isActive = index === activeIndex;
-                return (
-                  <button
-                    key={project.id}
-                    type="button"
-                    onClick={() => goToIndex(index)}
-                    aria-label={`Go to project ${index + 1}`}
-                    aria-current={isActive ? "true" : undefined}
-                    className="group flex h-3 w-3 items-center justify-center"
-                  >
-                    <span
-                      className={`block rounded-full transition-all duration-300 ${
-                        isActive
-                          ? "h-2 w-2 bg-white"
-                          : "h-1.5 w-1.5 bg-white/30 group-hover:bg-white/55"
-                      }`}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Shaft + head pointing down */}
-            <span className="h-8 w-px bg-gradient-to-b from-white/40 to-white/70 sm:h-10" aria-hidden />
-            <svg
-              viewBox="0 0 12 10"
-              className="mt-0.5 h-2.5 w-3 text-white/80"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M1 1.5 L6 8.5 L11 1.5"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           </div>
         </div>
       </div>

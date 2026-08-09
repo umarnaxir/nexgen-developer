@@ -1,12 +1,18 @@
 import MobileNavbar from "./MobileNavbar";
 import SidebarNav from "./SidebarNav";
 
-export default function SiteNavigation() {
+type SiteNavigationProps = {
+  isAdminLoggedIn?: boolean;
+};
+
+export default function SiteNavigation({
+  isAdminLoggedIn = false,
+}: SiteNavigationProps) {
   return (
     <>
-      <MobileNavbar />
+      <MobileNavbar isAdminLoggedIn={isAdminLoggedIn} />
       <div className="hidden lg:contents">
-        <SidebarNav />
+        <SidebarNav isAdminLoggedIn={isAdminLoggedIn} />
       </div>
     </>
   );

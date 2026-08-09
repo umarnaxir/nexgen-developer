@@ -1,0 +1,448 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Bold,
+  Heading2,
+  ImagePlus,
+  Link2,
+  Type,
+  X,
+} from "lucide-react";
+import { toast } from "sonner";
+import { AdminButton } from "@/components/admin/ui/AdminButton";
+import { AdminInput, AdminSelect, AdminTextarea } from "@/components/admin/ui/AdminInput";
+import { ImageUpload } from "@/components/admin/ui/ImageUpload";
+import type { BlogSection } from "@/lib/content/types";
+import { cn } from "@/lib/utils";
+
+export type EditableSection = BlogSection & { _key: string };
+
+type BlockType = "heading" | "text" | "image";
+
+type BlogBlockModalProps = {
+  open: boolean;
+  initial?: EditableSection | null;
+  onClose: () => void;
+  onSave: (section: EditableSection) => void;
+};
+
+function makeKey() {
+  return `blk_${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function wrapSelection(
+  textarea: HTMLTextAreaElement,
+  before: string,
+  after: string,
+  placeholder: string
+) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const value = textarea.value;
+  const selected = value.slice(start, end) || placeholder;
+  const next = value.slice(0, start) + before + selected + after + value.slice(end);
+  return {
+    next,
+    cursorStart: start + before.length,
+    cursorEnd: start + before.length + selected.length,
+  };
+}
+
+export function BlogBlockModal({
+  open,
+  initial,
+  onClose,
+  onSave,
+}: BlogBlockModalProps) {
+  const isEdit = Boolean(initial);
+  const [step, setStep] = useState<"pick" | "edit">(isEdit ? "edit" : "pick");
+  const [type, setType] = useState<BlockType>(
+    (initial?.type as BlockType) || "text"
+  );
+  const [heading, setHeading] = useState(initial?.heading || "");
+  const [headingLevel, setHeadingLevel] = useState<1 | 2 | 3>(
+    initial?.headingLevel || 2
+  );
+  const [content, setContent] = useState(initial?.content || "");
+  const [image, setImage] = useState(initial?.image || "");
+  const [showGuide, setShowGuide] = useState(true);
+  const textRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    if (initial) {
+      setStep("edit");
+      setType(initial.type as BlockType);
+      setHeading(initial.heading || "");
+      setHeadingLevel(initial.headingLevel || 2);
+      setContent(initial.content || "");
+      setImage(initial.image || "");
+    } else {
+      setStep("pick");
+      setType("text");
+      setHeading("");
+      setHeadingLevel(2);
+      setContent("");
+      setImage("");
+    }
+  }, [open, initial]);
+
+  function chooseType(next: BlockType) {
+    setType(next);
+    setStep("edit");
+  }
+
+  function applyFormat(kind: "bold" | "link") {
+    const el = textRef.current;
+    if (!el) return;
+    if (kind === "bold") {
+      const { next, cursorStart, cursorEnd } = wrapSelection(
+        el,
+        "**",
+        "**",
+        "bold text"
+      );
+      setContent(next);
+      requestAnimationFrame(() => {
+        el.focus();
+        el.setSelectionRange(cursorStart, cursorEnd);
+      });
+      return;
+    }
+
+    const url = window.prompt("Enter URL (https://… or /services)", "https://");
+    if (!url) return;
+    const { next, cursorStart, cursorEnd } = wrapSelection(
+      el,
+      "[",
+      `](${url.trim()})`,
+      "link text"
+    );
+    setContent(next);
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(cursorStart, cursorEnd);
+    });
+  }
+
+  function handleSave() {
+    if (type === "heading") {
+      if (!heading.trim()) {
+        toast.error("Heading text is required");
+        return;
+      }
+      onSave({
+        _key: initial?._key || makeKey(),
+        type: "heading",
+        heading: heading.trim(),
+        headingLevel,
+      });
+      onClose();
+      return;
+    }
+
+    if (type === "image") {
+      if (!image.trim()) {
+        toast.error("Upload or choose an image");
+        return;
+      }
+      onSave({
+        _key: initial?._key || makeKey(),
+        type: "image",
+        image: image.trim(),
+      });
+      onClose();
+      return;
+    }
+
+    if (!content.trim()) {
+      toast.error("Paragraph content is required");
+      return;
+    }
+    onSave({
+      _key: initial?._key || makeKey(),
+      type: "text",
+      content: content.trim(),
+    });
+    onClose();
+  }
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[200] flex items-end justify-center p-0 sm:items-center sm:p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            aria-label="Close"
+            onClick={onClose}
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            className="relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-xl border border-neutral-200 bg-white shadow-xl sm:rounded-md"
+          >
+            <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3 sm:px-5">
+              <div>
+                <h3 className="text-base font-semibold text-neutral-900 sm:text-lg">
+                  {isEdit ? "Edit content block" : "Add content block"}
+                </h3>
+                <p className="text-xs text-neutral-500">
+                  Build SEO-friendly sections: headings, paragraphs, images
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
+              {step === "pick" ? (
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    {
+                      id: "heading" as const,
+                      label: "Heading",
+                      desc: "H2 / H3 for SEO structure",
+                      icon: Heading2,
+                    },
+                    {
+                      id: "text" as const,
+                      label: "Paragraph",
+                      desc: "Body text with bold & links",
+                      icon: Type,
+                    },
+                    {
+                      id: "image" as const,
+                      label: "Image",
+                      desc: "Inline image in the article",
+                      icon: ImagePlus,
+                    },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => chooseType(item.id)}
+                        className="rounded-md border border-neutral-200 p-4 text-left transition hover:border-teal-300 hover:bg-teal-50/40"
+                      >
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-neutral-100 text-neutral-700">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <p className="mt-3 text-sm font-semibold text-neutral-900">
+                          {item.label}
+                        </p>
+                        <p className="mt-1 text-xs text-neutral-500">{item.desc}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {!isEdit && (
+                    <button
+                      type="button"
+                      onClick={() => setStep("pick")}
+                      className="text-xs font-medium text-teal-700 hover:underline"
+                    >
+                      ← Change block type
+                    </button>
+                  )}
+
+                  {type === "heading" && (
+                    <>
+                      <AdminSelect
+                        label="Heading level"
+                        value={String(headingLevel)}
+                        onChange={(e) =>
+                          setHeadingLevel(Number(e.target.value) as 1 | 2 | 3)
+                        }
+                        options={[
+                          { value: "2", label: "H2 — main section (recommended)" },
+                          { value: "3", label: "H3 — subsection" },
+                          { value: "1", label: "H1 — use sparingly (page already has one)" },
+                        ]}
+                      />
+                      <AdminInput
+                        label="Heading text"
+                        value={heading}
+                        onChange={(e) => setHeading(e.target.value)}
+                        placeholder="e.g. Why AI Matters for Small Businesses"
+                        hint="Include your focus keyword naturally when it fits."
+                      />
+                    </>
+                  )}
+
+                  {type === "text" && (
+                    <>
+                      <div className="rounded-md border border-teal-200 bg-teal-50/60 p-3">
+                        <button
+                          type="button"
+                          onClick={() => setShowGuide((v) => !v)}
+                          className="flex w-full items-center justify-between text-left text-sm font-medium text-teal-900"
+                        >
+                          Formatting instructions
+                          <span className="text-xs text-teal-700">
+                            {showGuide ? "Hide" : "Show"}
+                          </span>
+                        </button>
+                        {showGuide && (
+                          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-teal-900/80">
+                            <li>
+                              <strong>Bold:</strong> select text → click Bold, or type{" "}
+                              <code className="rounded bg-white/80 px-1">**your words**</code>
+                            </li>
+                            <li>
+                              <strong>Link:</strong> select text → click Link, or type{" "}
+                              <code className="rounded bg-white/80 px-1">
+                                [label](https://example.com)
+                              </code>
+                            </li>
+                            <li>
+                              <strong>Internal link:</strong> use site paths like{" "}
+                              <code className="rounded bg-white/80 px-1">
+                                [Our services](/services)
+                              </code>
+                            </li>
+                            <li>
+                              Write clear paragraphs (2–4 sentences). One idea per block helps SEO
+                              and readability.
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        <AdminButton
+                          type="button"
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => applyFormat("bold")}
+                        >
+                          <Bold className="h-3.5 w-3.5" />
+                          Bold
+                        </AdminButton>
+                        <AdminButton
+                          type="button"
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => applyFormat("link")}
+                        >
+                          <Link2 className="h-3.5 w-3.5" />
+                          Insert link
+                        </AdminButton>
+                      </div>
+
+                      <div>
+                        <label className="mb-1.5 block text-sm font-medium text-neutral-700">
+                          Paragraph
+                        </label>
+                        <textarea
+                          ref={textRef}
+                          value={content}
+                          onChange={(e) => setContent(e.target.value)}
+                          rows={10}
+                          placeholder="Write your paragraph here. Use **bold** and [links](/path) for emphasis and SEO."
+                          className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2.5 text-sm leading-relaxed text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/15"
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {type === "image" && (
+                    <ImageUpload
+                      label="Block image"
+                      folder="blogs"
+                      value={image}
+                      onChange={setImage}
+                      size="compact"
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+
+            {step === "edit" && (
+              <div className="flex justify-end gap-2 border-t border-neutral-200 px-4 py-3 sm:px-5">
+                <AdminButton type="button" variant="secondary" onClick={onClose}>
+                  Cancel
+                </AdminButton>
+                <AdminButton type="button" onClick={handleSave}>
+                  {isEdit ? "Update block" : "Add block"}
+                </AdminButton>
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export function sectionPreviewLabel(section: EditableSection) {
+  if (section.type === "heading") {
+    return `H${section.headingLevel || 2}: ${section.heading || "Untitled"}`;
+  }
+  if (section.type === "image") return "Image block";
+  const text = section.content || "";
+  return text.length > 80 ? `${text.slice(0, 80)}…` : text || "Empty paragraph";
+}
+
+export function sectionsToContent(sections: EditableSection[]) {
+  return sections
+    .map((s) => {
+      if (s.type === "heading") return s.heading || "";
+      if (s.type === "text") return s.content || "";
+      return "";
+    })
+    .filter(Boolean)
+    .join("\n\n");
+}
+
+export function toEditableSections(sections?: BlogSection[]): EditableSection[] {
+  if (!sections?.length) return [];
+  return sections.map((s) => ({ ...s, _key: makeKey() }));
+}
+
+export function stripSectionKeys(sections: EditableSection[]): BlogSection[] {
+  return sections.map(({ _key: _ignored, ...rest }) => rest);
+}
+
+export function CharCount({
+  value,
+  idealMin,
+  idealMax,
+}: {
+  value: string;
+  idealMin: number;
+  idealMax: number;
+}) {
+  const len = value.length;
+  const ok = len >= idealMin && len <= idealMax;
+  return (
+    <p
+      className={cn(
+        "mt-1 text-[11px]",
+        ok ? "text-teal-700" : len === 0 ? "text-neutral-400" : "text-amber-700"
+      )}
+    >
+      {len} characters · aim {idealMin}–{idealMax} for SEO
+    </p>
+  );
+}

@@ -3,18 +3,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
+import {
+  Check,
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Youtube,
+} from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import GalaxyBackground from "@/components/GalaxyBackground";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
-import {
-  footerAddress,
-  footerContactEmail,
-  footerContactPhone,
-} from "@/app/home/data";
-
-const WHATSAPP_HREF =
-  "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.";
+import XIcon from "@/components/icons/XIcon";
+import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
 const pageLinks = [
   { label: "About", href: "/about" },
@@ -29,7 +32,8 @@ const bottomLinks = [
   { label: "Terms and Conditions", href: "/terms" },
 ];
 
-function formatPhoneDisplay(phone: string) {
+function formatPhoneDisplay(phone: string, fallback?: string) {
+  if (fallback) return fallback;
   if (phone.startsWith("+91") && phone.length >= 13) {
     const rest = phone.slice(3);
     return `+91 ${rest.slice(0, 3)}-${rest.slice(3, 6)}-${rest.slice(6)}`;
@@ -45,12 +49,21 @@ function PartitionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function Footer() {
+type FooterProps = {
+  contact: ContactInfo;
+  footer: FooterSettings;
+};
+
+export default function Footer({ contact, footer }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const { open: openContactModal } = useContactModal();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const copyright = (footer.copyrightText || `© {year} ${footer.companyName}`)
+    .replace("{year}", String(currentYear))
+    .replace("%YEAR%", String(currentYear));
 
   const handleSubscribe = (event: React.FormEvent) => {
     event.preventDefault();
@@ -64,36 +77,68 @@ export default function Footer() {
     window.setTimeout(() => setStatus("idle"), 4000);
   };
 
+  const social = footer.social || {};
   const actionIcons = [
     {
       icon: Mail,
-      href: `mailto:${footerContactEmail}`,
+      href: `mailto:${contact.email}`,
       label: "Email us",
       external: false,
+      show: Boolean(contact.email),
     },
     {
       icon: MessageCircle,
-      href: WHATSAPP_HREF,
+      href: contact.whatsapp,
       label: "WhatsApp",
       external: true,
+      show: Boolean(contact.whatsapp),
     },
     {
       icon: Instagram,
-      href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==",
+      href: social.instagram || "",
       label: "Instagram",
       external: true,
+      show: Boolean(social.instagram),
     },
     {
       icon: Linkedin,
-      href: "https://www.linkedin.com/company/105880683/",
+      href: social.linkedin || "",
       label: "LinkedIn",
       external: true,
+      show: Boolean(social.linkedin),
     },
-  ];
+    {
+      icon: XIcon,
+      href: social.twitter || "",
+      label: "X",
+      external: true,
+      show: Boolean(social.twitter),
+    },
+    {
+      icon: Facebook,
+      href: social.facebook || "",
+      label: "Facebook",
+      external: true,
+      show: Boolean(social.facebook),
+    },
+    {
+      icon: Github,
+      href: social.github || "",
+      label: "GitHub",
+      external: true,
+      show: Boolean(social.github),
+    },
+    {
+      icon: Youtube,
+      href: social.youtube || "",
+      label: "YouTube",
+      external: true,
+      show: Boolean(social.youtube),
+    },
+  ].filter((item) => item.show);
 
   return (
     <footer className="relative overflow-hidden rounded-t-[1.75rem] border border-b-0 border-white/10 bg-black text-white sm:rounded-t-[2rem]">
-      {/* Galaxy starfield — same as hero */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <GalaxyBackground />
       </div>
@@ -103,7 +148,6 @@ export default function Footer() {
       />
 
       <div className="relative z-10 mx-auto grid max-w-[1400px] lg:grid-cols-[1.15fr_1.2fr_1.05fr]">
-        {/* Brand + Get Started */}
         <div className="flex flex-col justify-between gap-8 border-b border-white/10 px-5 py-9 sm:px-8 sm:py-11 lg:border-b-0 lg:border-r lg:px-10 lg:py-12 xl:px-12">
           <div>
             <Link href="/" className="group inline-flex items-center gap-3">
@@ -121,15 +165,19 @@ export default function Footer() {
                 <span aria-hidden>]</span>
               </span>
               <span className="text-[17px] font-semibold tracking-[-0.03em] text-white sm:text-xl">
-                NexGen Developers
+                {footer.companyName || contact.companyName}
               </span>
             </Link>
           </div>
 
           <div className="max-w-sm">
             <h2 className="text-xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-2xl">
-              Have an idea?{" "}
-              <span className="text-teal-300">Let&apos;s connect.</span>
+              {footer.companyInfo || (
+                <>
+                  Have an idea?{" "}
+                  <span className="text-teal-300">Let&apos;s connect.</span>
+                </>
+              )}
             </h2>
             <p className="mt-2.5 text-sm leading-relaxed text-white/45">
               Schedule a meeting and make the best decision for your business.
@@ -145,7 +193,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Pages + Contact */}
         <div className="border-b border-white/10 px-5 py-9 sm:px-8 sm:py-11 lg:border-b-0 lg:border-r lg:px-10 lg:py-12 xl:px-12">
           <div className="grid gap-10 sm:grid-cols-2 sm:gap-8">
             <div>
@@ -167,32 +214,42 @@ export default function Footer() {
               <PartitionHeading>Contact</PartitionHeading>
               <div className="flex flex-col gap-2.5">
                 <a
-                  href={`mailto:${footerContactEmail}`}
+                  href={`mailto:${contact.email}`}
                   className="w-fit text-[14px] text-white/55 transition-colors hover:text-white"
                 >
-                  {footerContactEmail}
+                  {contact.email}
                 </a>
                 <a
-                  href={`tel:${footerContactPhone}`}
+                  href={`tel:${contact.phone}`}
                   className="w-fit text-[14px] text-white/55 transition-colors hover:text-white"
                 >
-                  {formatPhoneDisplay(footerContactPhone)}
+                  {formatPhoneDisplay(contact.phone, contact.phoneDisplay)}
                 </a>
                 <p className="max-w-[14rem] text-[14px] leading-relaxed text-white/55">
-                  {footerAddress.line}
+                  {contact.address}
                 </p>
-                <Link
-                  href="/contact-us"
-                  className="w-fit text-[14px] text-white/55 transition-colors hover:text-white"
-                >
-                  Contact page
-                </Link>
+                {contact.mapsLink ? (
+                  <a
+                    href={contact.mapsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-fit text-[14px] text-white/55 transition-colors hover:text-white"
+                  >
+                    View on Maps
+                  </a>
+                ) : (
+                  <Link
+                    href="/contact-us"
+                    className="w-fit text-[14px] text-white/55 transition-colors hover:text-white"
+                  >
+                    Contact page
+                  </Link>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Subscribe */}
         <div className="flex flex-col px-5 py-9 sm:px-8 sm:py-11 lg:px-10 lg:py-12 xl:px-12">
           <PartitionHeading>Subscribe</PartitionHeading>
 
@@ -224,12 +281,15 @@ export default function Footer() {
                   className="peer absolute inset-0 cursor-pointer opacity-0"
                 />
                 <span className="flex h-4 w-4 items-center justify-center rounded-[2px] border border-white/30 bg-transparent transition-colors peer-checked:border-teal-400 peer-checked:bg-teal-500">
-                  {consent && <Check className="h-2.5 w-2.5 text-black" strokeWidth={3} />}
+                  {consent && (
+                    <Check className="h-2.5 w-2.5 text-black" strokeWidth={3} />
+                  )}
                 </span>
               </span>
               <span className="text-[11px] leading-relaxed text-white/40">
-                I consent to the processing of my email by NexGen Developers to
-                receive informational materials, under the{" "}
+                I consent to the processing of my email by{" "}
+                {footer.companyName || "NexGen Developers"} to receive
+                informational materials, under the{" "}
                 <Link
                   href="/privacy"
                   className="underline decoration-white/30 underline-offset-2 transition-colors hover:text-white hover:decoration-teal-400"
@@ -271,7 +331,7 @@ export default function Footer() {
                   aria-label={action.label}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/[0.06] text-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
                 >
-                  <Icon className="h-4 w-4" strokeWidth={1.75} />
+                  <Icon className="h-4 w-4" />
                 </a>
               );
             })}
@@ -279,10 +339,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="relative z-10 border-t border-white/10">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-5 py-3.5 text-[12px] text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10 xl:px-12">
-          <p>© {currentYear} NexGen Developers</p>
+          <p>{copyright}</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:justify-center">
             {bottomLinks.map((link) => (
               <Link
@@ -294,7 +353,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <p className="sm:text-right">Crafted in Kashmir</p>
+          <p className="sm:text-right">{footer.craftedText || "Crafted in Kashmir"}</p>
         </div>
       </div>
     </footer>

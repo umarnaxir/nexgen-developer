@@ -14,6 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { createPortal } from "react-dom";
+import { resolveProjectIcon } from "@/lib/content/project-icons";
 
 export type ProjectData = {
   id: number;
@@ -27,7 +28,7 @@ export type ProjectData = {
   features: string[];
   duration: string;
   client: string;
-  icon: LucideIcon;
+  icon: LucideIcon | string;
   color: string;
 };
 
@@ -44,7 +45,10 @@ export default function ProjectCard({
   isExpanded,
   onToggleExpand,
 }: ProjectCardProps) {
-  const IconComponent = project.icon;
+  const IconComponent =
+    typeof project.icon === "string"
+      ? resolveProjectIcon(project.icon)
+      : project.icon;
   const imageLeft = index % 2 === 0;
   const [mounted, setMounted] = useState(false);
 

@@ -18,29 +18,7 @@ import {
 } from "lucide-react";
 import Select from "@/components/ui/Select";
 import XIcon from "@/components/icons/XIcon";
-import { footerAddress, footerContactEmail, footerContactPhone } from "@/app/home/data";
-
-const socialLinks = [
-  {
-    icon: MessageCircle,
-    href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.",
-    label: "WhatsApp",
-  },
-  { icon: XIcon, href: "https://x.com/nexgendv", label: "X" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/105880683/", label: "LinkedIn" },
-  { icon: Instagram, href: "https://www.instagram.com/nexgendevelopers_?igsh=MTJiczF6aDNxbjB2eg==", label: "Instagram" },
-  {
-    icon: Facebook,
-    href: "https://www.facebook.com/people/NexGen-Developers/61572910985245/?rdid=4A376FPlbAhNjqn5&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1924Qev3Su%2F",
-    label: "Facebook",
-  },
-];
-
-const contactInfo = [
-  { icon: Phone, label: "Phone", value: "+91 600-616-1726", href: `tel:${footerContactPhone}` },
-  { icon: Mail, label: "Email", value: footerContactEmail, href: `mailto:${footerContactEmail}` },
-  { icon: MapPin, label: "Location", value: footerAddress.region, detail: footerAddress.line },
-];
+import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
 /** Stylized paper-plane illustration for the home contact card. */
 function ContactArt() {
@@ -89,9 +67,15 @@ function ContactArt() {
 
 type ContactSectionProps = {
   variant?: "home" | "page";
+  contact: ContactInfo;
+  footer: FooterSettings;
 };
 
-export default function ContactSection({ variant = "home" }: ContactSectionProps) {
+export default function ContactSection({
+  variant = "home",
+  contact,
+  footer,
+}: ContactSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -103,6 +87,62 @@ export default function ContactSection({ variant = "home" }: ContactSectionProps
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isPage = variant === "page";
+
+  const social = footer.social || {};
+  const socialLinks = [
+    {
+      icon: MessageCircle,
+      href: contact.whatsapp,
+      label: "WhatsApp",
+      show: Boolean(contact.whatsapp),
+    },
+    {
+      icon: XIcon,
+      href: social.twitter || "",
+      label: "X",
+      show: Boolean(social.twitter),
+    },
+    {
+      icon: Linkedin,
+      href: social.linkedin || "",
+      label: "LinkedIn",
+      show: Boolean(social.linkedin),
+    },
+    {
+      icon: Instagram,
+      href: social.instagram || "",
+      label: "Instagram",
+      show: Boolean(social.instagram),
+    },
+    {
+      icon: Facebook,
+      href: social.facebook || "",
+      label: "Facebook",
+      show: Boolean(social.facebook),
+    },
+  ].filter((item) => item.show);
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: "Phone",
+      value: contact.phoneDisplay || contact.phone,
+      href: `tel:${contact.phone}`,
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: contact.addressRegion,
+      detail: contact.address,
+      href: contact.mapsLink || undefined,
+    },
+  ];
 
   const serviceOptions = [
     { value: "web-development", label: "Web Development" },

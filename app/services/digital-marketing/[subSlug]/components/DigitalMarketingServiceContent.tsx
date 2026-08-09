@@ -2,23 +2,17 @@
 
 import ServiceLayout from "../../../components/ServiceLayout";
 import ServicePageSchema from "@/components/seo/ServicePageSchema";
-import {
-  getDigitalMarketingService,
-  getRelatedServicesUpToSix,
-} from "../../../config";
+import type { ServiceDefinition } from "../../../config";
 
 interface DigitalMarketingServiceContentProps {
-  subSlug: string;
+  service: ServiceDefinition;
+  relatedServices: ServiceDefinition[];
 }
 
 export default function DigitalMarketingServiceContent({
-  subSlug,
+  service,
+  relatedServices,
 }: DigitalMarketingServiceContentProps) {
-  const service = getDigitalMarketingService(subSlug);
-  if (!service) return null;
-
-  const related = getRelatedServicesUpToSix(service.relatedSlugs, service.slug);
-
   return (
     <>
       <ServicePageSchema
@@ -34,7 +28,7 @@ export default function DigitalMarketingServiceContent({
         process={service.content.process}
         ctaHeading={service.content.ctaHeading}
         ctaDescription={service.content.ctaDescription}
-        relatedServices={related}
+        relatedServices={relatedServices}
         currentSlug={service.slug}
         image={service.content.image}
         faqs={service.content.faqs}

@@ -10,7 +10,11 @@ import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { sidebarLinks, SIDEBAR_PANEL_WIDTH } from "./nav-config";
 import { getServicesNavItems } from "@/app/services/config";
 
-export default function SidebarNav() {
+type SidebarNavProps = {
+  isAdminLoggedIn?: boolean;
+};
+
+export default function SidebarNav({ isAdminLoggedIn = false }: SidebarNavProps) {
   const pathname = usePathname();
   const { open: openContactModal } = useContactModal();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -407,17 +411,28 @@ export default function SidebarNav() {
               >
                 workwithnexgen@gmail.com
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  closeMenu(true);
-                  openContactModal();
-                }}
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 border border-white/20 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98]"
-              >
-                Start a project
-                <ArrowUpRight className="h-4 w-4" />
-              </button>
+              {isAdminLoggedIn ? (
+                <Link
+                  href="/admin/dashboard"
+                  onClick={() => closeMenu(true)}
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 border border-white/20 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98]"
+                >
+                  Go to Admin Panel
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeMenu(true);
+                    openContactModal();
+                  }}
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 border border-white/20 bg-white px-5 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.98]"
+                >
+                  Start a project
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+              )}
             </div>
           </div>
         </aside>
