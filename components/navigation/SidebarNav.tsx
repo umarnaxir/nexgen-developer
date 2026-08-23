@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight, X, ArrowUpRight } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
-import { sidebarLinks, SIDEBAR_PANEL_WIDTH } from "./nav-config";
+import { sidebarLinks, NAV_RAIL_WIDTH, SIDEBAR_PANEL_WIDTH } from "./nav-config";
 import { getServicesNavItems } from "@/app/services/config";
 
 type SidebarNavProps = {
@@ -190,10 +190,13 @@ export default function SidebarNav({ isAdminLoggedIn = false }: SidebarNavProps)
   return (
     <>
       {!isOpen && (
-        <div className="fixed left-0 top-0 z-[9990] flex h-screen w-[5vw] flex-col items-center justify-between border-r border-white/[0.08] bg-black px-2 py-4">
+        <div
+          className="fixed left-0 top-0 z-[9990] flex h-screen flex-col items-center justify-between border-r border-white/[0.08] bg-black px-1.5 py-4 sm:px-2"
+          style={{ width: NAV_RAIL_WIDTH }}
+        >
           <Link
             href="/"
-            className="flex aspect-square w-full max-w-[3.25rem] items-center justify-center p-3 transition-transform duration-300 hover:scale-105 active:scale-95"
+            className="flex w-full items-center justify-center transition-transform duration-300 hover:scale-105 active:scale-95"
             aria-label="NexGen Developers home"
           >
             <Image
@@ -201,7 +204,7 @@ export default function SidebarNav({ isAdminLoggedIn = false }: SidebarNavProps)
               alt="NexGen Developers"
               width={80}
               height={80}
-              className="h-full w-full object-contain"
+              className="h-10 w-10 object-contain sm:h-11 sm:w-11 lg:h-12 lg:w-12"
               priority
             />
           </Link>
@@ -211,7 +214,7 @@ export default function SidebarNav({ isAdminLoggedIn = false }: SidebarNavProps)
             onClick={toggleMenu}
             aria-label="Open navigation menu"
             aria-expanded={false}
-            className="group flex aspect-square w-full max-w-[3.25rem] items-center justify-center p-3 text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="group flex aspect-square w-full max-w-[3.5rem] items-center justify-center p-2 text-white transition-colors hover:text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             <ChevronRight
               className="h-6 w-6 stroke-[2.5px] transition-transform duration-300 group-hover:translate-x-0.5 sm:h-7 sm:w-7"

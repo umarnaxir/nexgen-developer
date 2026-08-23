@@ -23,6 +23,7 @@ const pageLinks = [
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
   { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Blogs", href: "/blogs" },
   { label: "Team", href: "/team" },
 ];

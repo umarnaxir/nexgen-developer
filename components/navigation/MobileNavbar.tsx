@@ -49,7 +49,7 @@ export default function MobileNavbar({
               alt="NexGen Developers"
               width={48}
               height={48}
-              className="h-9 w-9 object-contain sm:h-10 sm:w-10"
+              className="h-10 w-10 object-contain sm:h-11 sm:w-11"
               priority
             />
           </Link>

@@ -1,23 +1,49 @@
 "use client";
 
-import { serviceLabels, type PricingServiceType } from "../data";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { BadgeCheck, CalendarClock, ShieldCheck } from "lucide-react";
+import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import GalaxyBackground from "@/components/GalaxyBackground";
 
-interface PricingHeroProps {
-  service: PricingServiceType;
-}
+const trustItems = [
+  { icon: BadgeCheck, label: "Fixed starting prices" },
+  { icon: CalendarClock, label: "Scope call before kickoff" },
+  { icon: ShieldCheck, label: "50% advance · 50% at launch" },
+];
 
-const heroSubtitles: Record<PricingServiceType, string> = {
-  website:
-    "Choose the perfect plan for your business journey. From essential presence to scalable digital assets, we deliver value at every stage.",
-  app: "From MVP to enterprise apps. Pick a plan that fits your product stage and scale with confidence.",
-  other:
-    "AI/ML, Chatbot, SEO, Graphic Design, DevOps & more. Transparent pricing for all our services.",
-};
+export default function PricingHero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
 
-export default function PricingHero({ service }: PricingHeroProps) {
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(headlineRef.current?.querySelectorAll(".hero-line") ?? [], {
+        y: 72,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+      }).from(sublineRef.current, { y: 28, opacity: 0, duration: 0.75 }, "-=0.45");
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <header className="section-dark relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24">
+    <header
+      ref={sectionRef}
+      className="section-dark relative flex min-h-[46vh] flex-col justify-end overflow-hidden pb-16 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:min-h-[50vh] sm:pb-20 sm:pt-24 lg:pb-24"
+    >
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <GalaxyBackground />
       </div>
@@ -27,24 +53,54 @@ export default function PricingHero({ service }: PricingHeroProps) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
+        className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[480px] w-[480px] rounded-full bg-teal-400/[0.06] blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/75 via-black/20 to-transparent"
       />
 
       <div className="section-container relative z-10">
-        <span className="mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/70">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15, duration: 0.6 }}
+          className="mb-5 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/70"
+        >
           <span className="h-px w-8 bg-white/40" />
           Pricing
-        </span>
-        <h1 className="w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
-          Transparent pricing models.
+        </motion.span>
+
+        <h1
+          ref={headlineRef}
+          className="max-w-4xl text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+        >
+          <span className="hero-line block">Clear packages.</span>
+          <span className="hero-line block text-white/90">Honest timelines.</span>
         </h1>
-        <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg">
-          {heroSubtitles[service]}
+
+        <p
+          ref={sublineRef}
+          className="mt-5 max-w-2xl text-base leading-relaxed text-white/72 sm:mt-6 sm:text-lg"
+        >
+          Starting prices for websites, apps, and other services. We confirm
+          scope and timeline before work begins — no surprises.
         </p>
-        <p className="mt-3 text-sm text-white/50">
-          Showing pricing for:{" "}
-          <strong className="font-medium text-white/80">{serviceLabels[service]}</strong>
-        </p>
+
+        <div className="mt-8 flex flex-wrap gap-3 sm:mt-10">
+          {trustItems.map(({ icon: Icon, label }, i) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 + i * 0.08, duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm text-white/85 backdrop-blur-md"
+            >
+              <Icon className="h-4 w-4 shrink-0 text-teal-300" strokeWidth={2} />
+              <span>{label}</span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </header>
   );

@@ -8,328 +8,208 @@ export interface PricingPlan {
   price: string;
   description: string;
   bestFor: string;
+  timeline: string;
   deliverables: string[];
-  quote: string;
-  accent: "green" | "blue" | "purple" | "orange";
   ctaLabel: string;
-  ctaType: "get-started" | "contact-sales";
   popular?: boolean;
 }
 
 export interface ServicePricingData {
   plans: PricingPlan[];
-  enterprise: PricingPlan;
+  intro: string;
+  note?: string;
+  enterpriseNote: string;
 }
 
-// ----- Website development pricing (default) -----
 export const pricingPlans: PricingPlan[] = [
   {
     id: "essential",
-    name: "ESSENTIAL",
+    name: "Essential",
     price: "$180",
-    description: "Entry-level professional business website",
-    bestFor: "Small businesses, local brands, first serious online presence",
+    description: "A clean business site to launch quickly.",
+    bestFor: "Small businesses & first online presence",
+    timeline: "5–6 working days",
     deliverables: [
-      "Up to 4 pages (Home, About, Services, Contact)",
-      "Mobile-responsive, modern layout",
-      "Clean professional UI (studio-grade template)",
-      "Brand color alignment",
-      "Contact form with email notification",
-      "WhatsApp chat integration",
-      "Google Maps integration",
-      "Basic on-page SEO (meta tags, headings)",
-      "SSL & hosting configuration support",
-      "Speed-optimized build",
-      "1 revision",
-      "Delivery: 5-6 working days",
+      "Up to 4 pages",
+      "Mobile-responsive layout",
+      "Contact form + WhatsApp",
+      "Basic SEO & speed setup",
+      "1 revision included",
     ],
-    quote: "A credible, professional online presence that builds trust.",
-    accent: "green",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
   },
   {
     id: "growth",
-    name: "GROWTH",
+    name: "Growth",
     price: "$360",
-    description: "Semi-custom business website",
-    bestFor: "Growing businesses, service providers, startups",
+    description: "Built to generate leads and look premium.",
+    bestFor: "Growing brands & service businesses",
+    timeline: "9–12 working days",
     deliverables: [
-      "Everything in ESSENTIAL",
       "Up to 8 pages",
-      "Semi-custom UI tailored to brand identity",
-      "Improved UX for lead conversion",
-      "Professional typography & layout system",
-      "Advanced lead capture forms",
-      "Backend lead routing (email / dashboard)",
-      "Social media & Google review integration",
-      "Google Analytics setup",
-      "Structured SEO (H1-H3, image optimization)",
-      "Sitemap & search engine indexing",
-      "Performance optimization",
-      "3 revisions",
-      "Delivery: 9-12 working days",
+      "Semi-custom UI for your brand",
+      "Lead forms + Google Analytics",
+      "Structured SEO & indexing",
+      "3 revisions included",
     ],
-    quote: "A growth-ready website focused on leads, credibility, and visibility.",
-    accent: "blue",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
     popular: true,
   },
   {
     id: "premium",
-    name: "PREMIUM",
+    name: "Premium",
     price: "$600",
-    description: "Fully custom, startup-grade website",
-    bestFor: "Serious brands, funded startups, long-term businesses",
+    description: "Fully custom site with admin control.",
+    bestFor: "Startups & long-term brands",
+    timeline: "14–18 working days",
     deliverables: [
-      "Everything in GROWTH",
-      "Fully custom UI/UX (no templates)",
-      "Brand-aligned design system",
-      "Conversion-optimized layouts",
-      "Visual consistency across all pages",
-      "CMS / Admin panel for content control",
-      "Blog / content publishing system",
-      "Payment gateway integration",
-      "Advanced lead management",
-      "Funnel-based landing sections",
-      "SEO-ready site architecture",
-      "Core Web Vitals optimization",
-      "Security hardening & backups",
-      "Basic brand kit (colors, fonts, usage)",
-      "Conversion tracking setup",
-      "Priority support",
-      "Unlimited revisions (within scope)",
-      "Delivery: 14-18 working days",
+      "Custom UI/UX (no templates)",
+      "CMS / admin panel",
+      "Payments + advanced SEO",
+      "Performance & security setup",
+      "Unlimited revisions (in scope)",
     ],
-    quote: "A scalable, high-performance digital asset built for long-term growth.",
-    accent: "purple",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
   },
 ];
 
-export const enterprisePlan: PricingPlan = {
-  id: "enterprise",
-  name: "ENTERPRISE",
-  price: "Custom",
-  description: "Enterprise-grade custom solution",
-  bestFor: "Enterprises, large-scale businesses, complex integrations",
-  deliverables: [
-    "Everything in PREMIUM",
-    "Multi-platform integration (CRM, ERP, etc.)",
-    "Custom dashboard & analytics",
-    "Advanced security & compliance",
-    "Performance optimization for high traffic",
-    "Ongoing consultation & strategy",
-    "Training & documentation",
-    "Flexible delivery timeline",
-    "Custom enterprise architecture",
-    "Advanced API development",
-    "Multi-user role management",
-    "Scalable cloud infrastructure setup",
-    "Dedicated project manager",
-    "White-glove support & maintenance",
-    "Custom SLA & response times",
-    "Post-launch optimization & support",
-  ],
-  quote:
-    "A tailored enterprise solution designed to meet your unique business requirements and scale with your growth.",
-  accent: "orange",
-  ctaLabel: "Contact Sales",
-  ctaType: "contact-sales",
-};
-
-// ----- App development pricing -----
 export const appPricingPlans: PricingPlan[] = [
   {
     id: "essential",
-    name: "STARTER",
-    price: "$300",
-    description: "Entry-level cross-platform or single-platform app",
-    bestFor: "MVPs, small businesses, simple apps",
+    name: "Basic",
+    price: "$4,999",
+    description: "A focused MVP to validate your product idea.",
+    bestFor: "Early-stage founders & MVPs",
+    timeline: "6–8 weeks",
     deliverables: [
-      "Up to 5 screens",
-      "Cross-platform (React Native / Flutter) or native",
-      "Basic UI/UX, responsive layout",
-      "Offline support (basic)",
+      "Up to 5 core screens",
+      "iOS or Android (cross-platform)",
+      "Basic auth & onboarding",
       "Push notifications setup",
-      "App store / Play Store listing support",
-      "1 revision",
-      "Delivery: 6-8 working days",
+      "App store submission support",
     ],
-    quote: "A solid first version to validate your idea and reach users.",
-    accent: "green",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
   },
   {
     id: "growth",
-    name: "GROWTH",
-    price: "$600",
-    description: "Feature-rich business or consumer app",
-    bestFor: "Startups, product companies, apps with auth & payments",
+    name: "Growth",
+    price: "$9,999",
+    description: "Production-ready app with core business features.",
+    bestFor: "Startups ready to launch & grow",
+    timeline: "10–14 weeks",
     deliverables: [
-      "Everything in STARTER",
-      "Up to 12 screens",
-      "Auth (login, signup, social login)",
+      "Up to 12 screens + flows",
+      "Login, signup & payments",
       "Backend API integration",
-      "In-app purchases or payment gateway",
       "Analytics & crash reporting",
       "Custom UI/UX design",
-      "3 revisions",
-      "Delivery: 10-14 working days",
     ],
-    quote: "A growth-ready app with core features to acquire and retain users.",
-    accent: "blue",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
     popular: true,
   },
   {
     id: "premium",
-    name: "PREMIUM",
-    price: "$1,080",
-    description: "Fully custom, scalable app with advanced features",
-    bestFor: "Funded startups, marketplaces, apps with complex logic",
+    name: "Premium",
+    price: "$19,999",
+    description: "Scalable product with admin, real-time & advanced logic.",
+    bestFor: "Funded startups & complex products",
+    timeline: "~5 months",
     deliverables: [
-      "Everything in GROWTH",
-      "Unlimited screens (within scope)",
-      "Custom backend / admin panel",
-      "Real-time features (chat, live updates)",
-      "Advanced security & role-based access",
-      "Performance optimization",
+      "Custom backend + admin panel",
+      "Real-time chat / live updates",
+      "Role-based access & security",
       "CI/CD & deployment support",
-      "Unlimited revisions (within scope)",
-      "Delivery: 18-24 working days",
+      "Ongoing launch support",
     ],
-    quote: "A scalable, production-grade app built for long-term growth.",
-    accent: "purple",
-    ctaLabel: "Get Started",
-    ctaType: "get-started",
+    ctaLabel: "Get started",
   },
 ];
 
-export const appEnterprisePlan: PricingPlan = {
-  id: "enterprise",
-  name: "ENTERPRISE",
-  price: "Custom",
-  description: "Enterprise-grade custom app & integrations",
-  bestFor: "Enterprises, multi-app ecosystems, complex integrations",
-  deliverables: [
-    "Everything in PREMIUM",
-    "Multi-platform (iOS, Android, Web, PWA)",
-    "CRM / ERP / internal tool integration",
-    "Custom analytics & dashboards",
-    "White-label or multi-tenant support",
-    "Dedicated project manager",
-    "SLA & priority support",
-    "Post-launch optimization & maintenance",
-  ],
-  quote:
-    "A tailored enterprise app solution that integrates with your systems and scales with your business.",
-  accent: "orange",
-  ctaLabel: "Contact Sales",
-  ctaType: "contact-sales",
-};
-
-// ----- Other services (AI/ML, Chatbot, SEO, Graphic Design, etc.) -----
 export const otherPricingPlans: PricingPlan[] = [
   {
     id: "essential",
-    name: "ESSENTIAL",
-    price: "From $120",
-    description: "Focused deliverables for a single service",
-    bestFor: "Single project: SEO audit, logo, chatbot, or small AI feature",
+    name: "Essential",
+    price: "From $150",
+    description: "One focused deliverable, done properly.",
+    bestFor: "SEO audit, logo, chatbot, or small AI task",
+    timeline: "5–7 working days",
     deliverables: [
-      "One primary service (SEO / Design / Chatbot / AI feature)",
-      "Clear scope & deliverables",
+      "Single service scope",
+      "Clear deliverables doc",
       "Basic revisions",
-      "Documentation or handover",
-      "Delivery: 5-7 working days",
+      "Handover & documentation",
     ],
-    quote: "Quality output for one clear goal without the full-project overhead.",
-    accent: "green",
-    ctaLabel: "Get Quote",
-    ctaType: "get-started",
+    ctaLabel: "Get quote",
   },
   {
     id: "growth",
-    name: "GROWTH",
-    price: "From $300",
-    description: "Bundled or ongoing service package",
-    bestFor: "Multiple services or ongoing work (e.g. SEO + content, design + social)",
+    name: "Growth",
+    price: "From $350",
+    description: "Bundled services or a short retainer.",
+    bestFor: "SEO + content, design + social, etc.",
+    timeline: "10–14 working days",
     deliverables: [
-      "Everything in ESSENTIAL",
-      "2–3 services or ongoing retainer",
-      "Strategy & reporting",
-      "Multiple revisions",
-      "Ongoing support option",
-      "Delivery: 10-14 working days",
+      "2–3 related services",
+      "Strategy & progress reporting",
+      "Multiple revision rounds",
+      "Optional ongoing support",
     ],
-    quote: "More value when you combine services or need ongoing support.",
-    accent: "blue",
-    ctaLabel: "Get Quote",
-    ctaType: "get-started",
+    ctaLabel: "Get quote",
     popular: true,
   },
   {
     id: "premium",
-    name: "PREMIUM",
+    name: "Premium",
     price: "Custom",
-    description: "Full-service or custom project",
-    bestFor: "Large campaigns, custom AI/ML, full brand + digital strategy",
+    description: "Larger campaigns or multi-service projects.",
+    bestFor: "AI/ML, marketing, design at scale",
+    timeline: "Scoped per project",
     deliverables: [
-      "Everything in GROWTH",
-      "Custom scope (AI/ML, Chatbot, SEO, Graphic Design, DevOps)",
-      "Dedicated resource or team",
-      "Unlimited revisions (within scope)",
-      "Priority support",
-      "Flexible timeline",
+      "Custom scope & timeline",
+      "Dedicated resource",
+      "Priority communication",
+      "Flexible delivery plan",
     ],
-    quote: "A tailored package for complex or long-term engagements.",
-    accent: "purple",
-    ctaLabel: "Contact Us",
-    ctaType: "get-started",
+    ctaLabel: "Talk to us",
   },
 ];
 
-export const otherEnterprisePlan: PricingPlan = {
-  id: "enterprise",
-  name: "ENTERPRISE",
-  price: "Custom",
-  description: "Enterprise-grade custom solution",
-  bestFor: "Enterprises, agencies, large-scale campaigns or integrations",
-  deliverables: [
-    "Everything in PREMIUM",
-    "Multi-brand or multi-region",
-    "Custom SLA & dedicated support",
-    "Training & documentation",
-    "Ongoing optimization & strategy",
-  ],
-  quote:
-    "A tailored enterprise solution for AI/ML, Chatbot, SEO, Design, or other services.",
-  accent: "orange",
-  ctaLabel: "Contact Sales",
-  ctaType: "contact-sales",
-};
-
-// ----- Get pricing data by service type -----
-export function getPricingForService(service: PricingServiceType): ServicePricingData {
+export function getPricingForService(
+  service: PricingServiceType
+): ServicePricingData {
   switch (service) {
-    case "website":
-      return { plans: pricingPlans, enterprise: enterprisePlan };
     case "app":
-      return { plans: appPricingPlans, enterprise: appEnterprisePlan };
+      return {
+        plans: appPricingPlans,
+        intro:
+          "App builds take longer than websites — design, development, testing, and store launch all need time. Timelines below are typical for a well-scoped product.",
+        note: "Premium apps often run around 5 months from kickoff to launch, depending on features and approvals.",
+        enterpriseNote:
+          "Building a multi-platform or enterprise app? We’ll scope a custom timeline and dedicated team.",
+      };
     case "other":
-      return { plans: otherPricingPlans, enterprise: otherEnterprisePlan };
+      return {
+        plans: otherPricingPlans,
+        intro:
+          "Pricing for SEO, design, AI, chatbots, and marketing depends on scope. These are starting points — we confirm after a quick call.",
+        enterpriseNote:
+          "Need a custom package across multiple services? We’ll put together a quote that fits your goals.",
+      };
+    case "website":
     default:
-      return { plans: pricingPlans, enterprise: enterprisePlan };
+      return {
+        plans: pricingPlans,
+        intro:
+          "Website packages are fixed starting prices. Final scope is confirmed on a short call — no surprises.",
+        note: "50% advance to start, 50% at deployment. See our Terms for payment details.",
+        enterpriseNote:
+          "Need a custom or enterprise website? We’ll scope pricing around your requirements.",
+      };
   }
 }
 
 export const serviceLabels: Record<PricingServiceType, string> = {
-  website: "Website development",
-  app: "App development",
-  other: "Other services",
+  website: "Website",
+  app: "App",
+  other: "Other",
 };
