@@ -1,9 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Bot, Megaphone, Palette, Search, Sparkles } from "lucide-react";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { getPricingForService, type PricingServiceType } from "../data";
+
+const customScopes = [
+  { icon: Search, label: "SEO" },
+  { icon: Bot, label: "AI models" },
+  { icon: Sparkles, label: "Chatbots" },
+  { icon: Palette, label: "Design" },
+  { icon: Megaphone, label: "Marketing" },
+];
 
 interface PricingServiceIntroProps {
   service: PricingServiceType;
@@ -22,7 +30,7 @@ export default function PricingServiceIntro({ service }: PricingServiceIntroProp
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}
-          className="mx-auto mt-5 inline-flex max-w-2xl items-start gap-3 rounded-2xl border border-gold-light/70 bg-gradient-to-r from-gold-light/90 to-white px-5 py-4 text-left shadow-[0_12px_40px_-24px_rgba(13,148,136,0.35)]"
+          className="mx-auto mt-5 inline-flex max-w-2xl items-start gap-3 rounded-2xl border border-gold-light/70 bg-gradient-to-r from-gold-light/90 to-white px-5 py-4 text-left shadow-[0_12px_40px_-24px_rgba(230,201,166,0.45)]"
         >
           <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gold-dark text-primary">
             <Sparkles className="h-4 w-4" strokeWidth={2} />
@@ -50,7 +58,7 @@ export function EnterpriseSection({ service }: EnterpriseSectionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5 }}
-      className="relative mt-14 overflow-hidden rounded-3xl border border-gold/40 bg-background shadow-[0_32px_80px_-40px_rgba(0,0,0,0.55)] sm:mt-16"
+      className="relative mt-16 overflow-hidden rounded-[1.75rem] border border-gold/45 bg-[linear-gradient(155deg,#1c1710_0%,#0e0d0d_46%,#050505_100%)] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.7)] sm:mt-20"
     >
       <div
         aria-hidden
@@ -58,31 +66,48 @@ export function EnterpriseSection({ service }: EnterpriseSectionProps) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.04),transparent_40%)]"
+        className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-gold-dark/20 blur-3xl"
       />
 
-      <div className="relative flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-        <div className="max-w-xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold/90">
+      <div className="relative flex flex-col gap-8 p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:p-14">
+        <div className="max-w-2xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
             Need something bigger?
           </p>
-          <p className="mt-2 text-2xl font-semibold tracking-tight text-primary sm:text-[1.65rem]">
-            Custom & enterprise
+          <h2 className="mt-3 text-[1.85rem] font-semibold tracking-tight text-white sm:text-4xl">
+            Custom work, priced to your brief.
+          </h2>
+          <p className="mt-4 text-[15px] leading-relaxed text-gold-light/85 sm:text-base">
+            SEO, AI models, chatbots, design, and marketing are not fixed packages.
+            Those prices are not finalized here. We quote after we understand the
+            requirement, stack, and timeline.
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-text-gray sm:text-[15px]">
+          <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-[15px]">
             {enterpriseNote}
           </p>
+
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {customScopes.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-gold/35 bg-white/5 px-3.5 py-1.5 text-[12px] font-medium text-gold-light transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-primary"
+              >
+                <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <motion.button
           type="button"
           onClick={openContactModal}
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
-          className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-gold-light"
+          className="group inline-flex min-h-[3.75rem] shrink-0 items-center justify-center gap-2.5 rounded-2xl bg-gold px-8 py-5 text-base font-semibold text-primary shadow-[0_18px_40px_-16px_rgba(230,201,166,0.7)] transition-colors hover:bg-gold-dark sm:min-w-[17rem]"
         >
-          Contact sales
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          Tell us your requirements
+          <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </motion.button>
       </div>
     </motion.div>

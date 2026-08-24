@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen">
       <TermsHero />
-      <section className="section-light section-y">
+      <section id="terms" className="section-light section-y">
         <div className="section-container space-y-4 sm:space-y-5">
           <TermsSections />
           <TermsSectionsPart2 />

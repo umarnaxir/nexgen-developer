@@ -128,47 +128,47 @@ export const appPricingPlans: PricingPlan[] = [
 export const otherPricingPlans: PricingPlan[] = [
   {
     id: "essential",
-    name: "Essential",
-    price: "From $150",
-    description: "One focused deliverable, done properly.",
-    bestFor: "SEO audit, logo, chatbot, or small AI task",
-    timeline: "5–7 working days",
+    name: "SEO & Growth",
+    price: "On request",
+    description: "Audits, technical SEO, and content systems quoted after we see the site and goals.",
+    bestFor: "Local brands & content sites",
+    timeline: "Scoped per brief",
     deliverables: [
-      "Single service scope",
-      "Clear deliverables doc",
-      "Basic revisions",
-      "Handover & documentation",
+      "Site & keyword review",
+      "Technical SEO plan",
+      "On-page recommendations",
+      "Reporting cadence on agreement",
     ],
-    ctaLabel: "Get quote",
+    ctaLabel: "Get a quote",
   },
   {
     id: "growth",
-    name: "Growth",
-    price: "From $350",
-    description: "Bundled services or a short retainer.",
-    bestFor: "SEO + content, design + social, etc.",
-    timeline: "10–14 working days",
+    name: "AI & Models",
+    price: "On request",
+    description: "Chatbots, custom models, and AI features are scoped to data, tools, and integrations.",
+    bestFor: "Product teams adding AI",
+    timeline: "Scoped per brief",
     deliverables: [
-      "2–3 related services",
-      "Strategy & progress reporting",
-      "Multiple revision rounds",
-      "Optional ongoing support",
+      "Use-case & model fit",
+      "Chatbot or workflow build",
+      "Tool / API integrations",
+      "Handover & usage guide",
     ],
-    ctaLabel: "Get quote",
+    ctaLabel: "Get a quote",
     popular: true,
   },
   {
     id: "premium",
-    name: "Premium",
-    price: "Custom",
-    description: "Larger campaigns or multi-service projects.",
-    bestFor: "AI/ML, marketing, design at scale",
-    timeline: "Scoped per project",
+    name: "Design & more",
+    price: "On request",
+    description: "Brand, campaigns, and mixed scopes, priced once the requirement is clear.",
+    bestFor: "Launches & multi-service work",
+    timeline: "Scoped per brief",
     deliverables: [
-      "Custom scope & timeline",
-      "Dedicated resource",
-      "Priority communication",
-      "Flexible delivery plan",
+      "Brand or campaign scope",
+      "Design + production plan",
+      "Optional ads or social",
+      "Flexible delivery timeline",
     ],
     ctaLabel: "Talk to us",
   },
@@ -182,28 +182,29 @@ export function getPricingForService(
       return {
         plans: appPricingPlans,
         intro:
-          "App builds take longer than websites — design, development, testing, and store launch all need time. Timelines below are typical for a well-scoped product.",
+          "App builds take longer than websites. Design, development, testing, and store launch all need time. Timelines below are typical for a well-scoped product.",
         note: "Premium apps often run around 5 months from kickoff to launch, depending on features and approvals.",
         enterpriseNote:
-          "Building a multi-platform or enterprise app? We’ll scope a custom timeline and dedicated team.",
+          "Building a multi-platform or enterprise app, or adding AI on top? We scope a custom timeline and quote once the requirement is agreed.",
       };
     case "other":
       return {
         plans: otherPricingPlans,
         intro:
-          "Pricing for SEO, design, AI, chatbots, and marketing depends on scope. These are starting points — we confirm after a quick call.",
+          "SEO, AI models, chatbots, design, and marketing are not listed as fixed prices. We quote after a short call once the requirement is clear.",
+        note: "These cards are starting scopes only. Final pricing is based on requirements, not a published rate card.",
         enterpriseNote:
-          "Need a custom package across multiple services? We’ll put together a quote that fits your goals.",
+          "Need SEO plus AI, or a mixed campaign? Send the brief and we will price the work to that scope. Nothing is locked in until we agree the requirement.",
       };
     case "website":
     default:
       return {
         plans: pricingPlans,
         intro:
-          "Website packages are fixed starting prices. Final scope is confirmed on a short call — no surprises.",
+          "Website packages are fixed starting prices. Final scope is confirmed on a short call. No surprises.",
         note: "50% advance to start, 50% at deployment. See our Terms for payment details.",
         enterpriseNote:
-          "Need a custom or enterprise website? We’ll scope pricing around your requirements.",
+          "Need a custom or enterprise website, or extras like SEO and AI? We scope pricing around the actual requirement, not a one-size rate.",
       };
   }
 }

@@ -38,12 +38,12 @@ export default function PricingServiceSelector({
   onSelect,
 }: PricingServiceSelectorProps) {
   return (
-    <div className="-mt-10 mb-10 flex justify-center sm:-mt-12 sm:mb-12">
+    <div className="relative z-30 mt-6 mb-10 flex justify-center sm:-mt-12 sm:mb-12">
       <LayoutGroup id="pricing-tabs">
         <div
           role="tablist"
           aria-label="Pricing category"
-          className="inline-flex w-full max-w-xl flex-col gap-1 rounded-2xl border border-neutral-200/80 bg-white/95 p-1.5 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:max-w-none sm:flex-row sm:rounded-full"
+          className="relative z-30 inline-flex w-full max-w-xl flex-col gap-1 rounded-2xl border border-neutral-200/80 bg-white p-1.5 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.25)] sm:max-w-none sm:flex-row sm:rounded-full"
         >
           {services.map(({ id, icon: Icon, description }) => {
             const isActive = currentService === id;

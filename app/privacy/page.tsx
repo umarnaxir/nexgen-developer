@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen">
       <PrivacyHero />
-      <section className="section-light section-y">
+      <section id="privacy" className="section-light section-y">
         <div className="section-container space-y-4 sm:space-y-5">
           <PrivacySections />
           <PrivacySectionsPart2 />

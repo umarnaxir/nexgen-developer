@@ -10,7 +10,7 @@ type TeamGridProps = {
 
 export default function TeamGrid({ teamMembers }: TeamGridProps) {
   return (
-    <section className="section-light section-y">
+    <section id="team" className="section-light section-y">
       <div className="section-container">
         <div
           className="mb-6 flex flex-col gap-3 sm:mb-7 sm:flex-row sm:items-end sm:justify-between"

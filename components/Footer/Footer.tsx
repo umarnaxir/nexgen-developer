@@ -175,7 +175,7 @@ export default function Footer({ contact, footer }: FooterProps) {
         </div>
 
         {socialLinks.length > 0 && (
-          <div className="mt-12 flex flex-wrap justify-center gap-3.5 sm:mt-14 sm:gap-4">
+          <div className="mt-12 flex flex-wrap justify-center gap-3 sm:mt-14 sm:gap-3.5">
             {socialLinks.map((item) => {
               const Icon = item.icon;
               return (
@@ -185,9 +185,9 @@ export default function Footer({ contact, footer }: FooterProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-[#d1ac81] sm:h-16 sm:w-16"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-[#d1ac81] sm:h-14 sm:w-14"
                 >
-                  <Icon className="h-6 w-6 text-black sm:h-7 sm:w-7" strokeWidth={2} />
+                  <Icon className="h-5 w-5 text-black sm:h-6 sm:w-6" strokeWidth={2} />
                 </a>
               );
             })}

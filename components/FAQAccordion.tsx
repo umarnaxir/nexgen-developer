@@ -48,7 +48,8 @@ export default function FAQAccordion({
         className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-dark/[0.06] blur-[110px]"
       />
 
-      <div className="section-container relative">
+      <div className="relative px-4 sm:px-6 lg:px-14">
+        <div className="relative mx-auto w-full max-w-7xl">
         <div
           className="mb-6 flex flex-col gap-4 sm:mb-8 lg:flex-row lg:items-end lg:justify-between"
           data-aos="fade-up"
@@ -106,8 +107,8 @@ export default function FAQAccordion({
                   whileTap={{ scale: 0.985 }}
                   className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
                     isOpen
-                      ? "border-gold-dark/35 bg-background text-primary shadow-[0_20px_48px_-32px_rgba(0,0,0,0.4)]"
-                      : "border-black/[0.06] bg-white text-black hover:border-black/12"
+                      ? "border-gold/40 bg-[#111111] text-white shadow-[0_20px_48px_-32px_rgba(0,0,0,0.4)]"
+                      : "border-black/[0.06] bg-white text-black hover:border-gold/45 hover:bg-gold/10"
                   }`}
                 >
                   {isOpen ? (
@@ -129,7 +130,7 @@ export default function FAQAccordion({
                   </span>
                   <span
                     className={`relative min-w-0 flex-1 text-[14px] font-semibold leading-snug tracking-[-0.01em] ${
-                      isOpen ? "text-primary" : "text-black/70 group-hover:text-black"
+                      isOpen ? "text-white" : "text-black/70 group-hover:text-black"
                     }`}
                   >
                     {faq.question}
@@ -162,7 +163,7 @@ export default function FAQAccordion({
             id={`${baseId}-panel`}
             role="tabpanel"
             aria-labelledby={openIndex !== null ? `${baseId}-tab-${openIndex}` : undefined}
-            className="relative min-h-[320px] overflow-hidden rounded-2xl border border-gold/30 bg-background p-7 shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] lg:min-h-[380px] lg:p-9"
+            className="relative min-h-[320px] overflow-hidden rounded-2xl border border-gold/35 bg-[linear-gradient(155deg,#1c1710_0%,#111111_46%,#0a0a0a_100%)] p-7 shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] lg:min-h-[380px] lg:p-9"
           >
             <div
               aria-hidden
@@ -200,7 +201,7 @@ export default function FAQAccordion({
                     className="mt-5 h-px origin-left bg-gradient-to-r from-gold/70 via-gold/20 to-transparent"
                   />
 
-                  <h3 className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-primary sm:text-2xl">
+                  <h3 className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl">
                     {active.question}
                   </h3>
 
@@ -208,7 +209,7 @@ export default function FAQAccordion({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.12, duration: 0.35 }}
-                    className="mt-4 text-[15px] leading-[1.8] text-text-gray"
+                    className="mt-4 text-[15px] leading-[1.8] text-white/75"
                   >
                     {active.answer}
                   </motion.p>
@@ -221,7 +222,7 @@ export default function FAQAccordion({
                           i === null ? 0 : (i - 1 + faqs.length) % faqs.length
                         )
                       }
-                      className="rounded-full border border-gold/35 px-4 py-2 text-sm font-medium text-text-gray transition-colors hover:border-gold/40 hover:text-gold"
+                      className="rounded-full border border-gold/35 px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:border-gold/50 hover:text-gold"
                     >
                       Previous
                     </button>
@@ -258,8 +259,8 @@ export default function FAQAccordion({
                 layout
                 className={`overflow-hidden rounded-xl border transition-colors duration-300 ${
                   isOpen
-                    ? "border-gold-dark/30 bg-background shadow-[0_20px_48px_-28px_rgba(0,0,0,0.35)]"
-                    : "border-black/[0.06] bg-white"
+                    ? "border-gold/40 bg-[linear-gradient(155deg,#1c1710_0%,#111111_46%,#0a0a0a_100%)] shadow-[0_20px_48px_-28px_rgba(0,0,0,0.35)]"
+                    : "border-black/[0.06] bg-white hover:border-gold/45 hover:bg-gold/10"
                 }`}
               >
                 <button
@@ -279,7 +280,7 @@ export default function FAQAccordion({
                   </span>
                   <span
                     className={`min-w-0 flex-1 text-[15px] font-semibold leading-snug tracking-[-0.01em] ${
-                      isOpen ? "text-primary" : "text-black/80"
+                      isOpen ? "text-white" : "text-black/80"
                     }`}
                   >
                     {faq.question}
@@ -310,7 +311,7 @@ export default function FAQAccordion({
                       className="overflow-hidden"
                     >
                       <div className="border-t border-gold/30 px-4 pb-5 pt-3 sm:px-5">
-                        <p className="pl-10 text-[14px] leading-relaxed text-text-gray sm:text-[15px]">
+                        <p className="pl-10 text-[14px] leading-relaxed text-white/75 sm:text-[15px]">
                           {faq.answer}
                         </p>
                       </div>
@@ -320,6 +321,7 @@ export default function FAQAccordion({
               </motion.div>
             );
           })}
+        </div>
         </div>
       </div>
     </section>

@@ -1,32 +1,82 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import MagneticButton from "@/components/ui/MagneticButton";
+import { useContactModal } from "@/components/modals/ContactModalProvider";
+
+export type PageHeroPill = {
+  label: string;
+  icon?: LucideIcon;
+};
+
+export type PageHeroCta = {
+  label: string;
+  href?: string;
+  openContact?: boolean;
+};
 
 export type PageHeroProps = {
   eyebrow: string;
-  title: string;
-  description?: string;
+  title: string | [string, string];
+  highlight?: string;
+  description: string;
   meta?: string;
-  /** `glow` is the default light gold hero. `image` keeps the photo backdrop (Team). */
-  variant?: "glow" | "image" | "galaxy";
+  pills?: PageHeroPill[];
+  primaryCta?: PageHeroCta;
+  secondaryCta?: PageHeroCta;
 };
 
-const HERO_IMAGE = "/images/hero-image.png";
+function TitleLines({
+  title,
+  highlight,
+}: {
+  title: string | [string, string];
+  highlight?: string;
+}) {
+  const lines = Array.isArray(title) ? title : [title];
+
+  return (
+    <>
+      {lines.map((line, index) => {
+        const isLast = index === lines.length - 1;
+        if (highlight && isLast && line.includes(highlight)) {
+          const at = line.lastIndexOf(highlight);
+          return (
+            <span key={line} className="block">
+              {line.slice(0, at)}
+              <span className="text-gold-dark transition-colors duration-300 hover:text-gold">
+                {highlight}
+              </span>
+              {line.slice(at + highlight.length)}
+            </span>
+          );
+        }
+        return (
+          <span key={line} className="block">
+            {line}
+          </span>
+        );
+      })}
+    </>
+  );
+}
 
 export default function PageHero({
   eyebrow,
   title,
+  highlight,
   description,
   meta,
-  variant = "glow",
+  pills = [],
+  primaryCta,
+  secondaryCta,
 }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const sublineRef = useRef<HTMLDivElement>(null);
-  const isImage = variant === "image";
+  const copyRef = useRef<HTMLDivElement>(null);
+  const { open: openContactModal } = useContactModal();
 
   useEffect(() => {
     registerGsapPlugins();
@@ -35,94 +85,98 @@ export default function PageHero({
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.from(headlineRef.current, { y: 64, opacity: 0, duration: 1 }).from(
-        sublineRef.current,
-        { y: 24, opacity: 0, duration: 0.75 },
-        "-=0.5"
-      );
+      if (!copyRef.current) return;
+      gsap.from(copyRef.current.children, {
+        y: 22,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  const renderCta = (cta: PageHeroCta, variant: "primary" | "outline-light") => (
+    <MagneticButton
+      href={cta.href}
+      onClick={cta.openContact ? openContactModal : undefined}
+      variant={variant}
+      className={
+        variant === "outline-light"
+          ? "!bg-white !px-5 !py-2.5 !text-[13px]"
+          : "!px-5 !py-2.5 !text-[13px]"
+      }
+    >
+      {cta.label}
+      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+    </MagneticButton>
+  );
+
   return (
     <header
       ref={sectionRef}
-      className={`relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--site-nav-height)+1.5rem)] sm:pb-12 sm:pt-[calc(var(--site-nav-height)+2.5rem)] lg:pb-14 lg:pt-[calc(var(--site-nav-height)+3rem)] ${
-        isImage ? "section-light" : "hero-glow"
-      }`}
+      className="hero-glow relative z-0 flex h-[70vh] min-h-[70vh] flex-col overflow-hidden pt-[var(--site-nav-height)]"
     >
-      {isImage ? (
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src={HERO_IMAGE}
-            alt=""
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-background/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
-        </div>
-      ) : (
-        <>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,rgba(230,201,166,0.16)_1px,transparent_1px)] bg-[length:48px_48px] opacity-50"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[500px] w-[500px] rounded-full bg-gold/20 blur-[120px]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[420px] w-[420px] rounded-full bg-gold-dark/15 blur-[100px]"
-          />
-        </>
-      )}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--gold-light) 1px, transparent 1px), linear-gradient(to bottom, var(--gold-light) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+        }}
+      />
 
-      <div className="relative z-10 px-4 sm:px-6 lg:px-14">
-        <div className="mx-auto flex w-full max-w-7xl flex-col">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className={`mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] ${
-              isImage ? "text-gold-dark" : "text-gold-dark"
-            }`}
-          >
-            <span className={`h-px w-8 ${isImage ? "bg-gold/50" : "bg-gold"}`} />
+      <div className="relative z-10 flex h-full flex-1 items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-14">
+        <div
+          ref={copyRef}
+          className="mx-auto flex w-full max-w-7xl flex-col items-start text-left md:items-center md:text-center"
+        >
+          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
             {eyebrow}
-          </motion.span>
+          </span>
 
-          <h1
-            ref={headlineRef}
-            className={`w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] ${
-              isImage ? "text-primary" : "text-primary"
-            }`}
-          >
-            {title}
+          <h1 className="mt-4 w-full max-w-5xl text-[clamp(2.4rem,6.5vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-primary">
+            <TitleLines title={title} highlight={highlight} />
           </h1>
 
-          <div ref={sublineRef} className="mt-5 w-full max-w-5xl space-y-2 sm:mt-6">
-            {meta ? (
-              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-dark">
-                {meta}
-              </p>
-            ) : null}
-            {description ? (
-              <p
-                className={`text-base leading-relaxed sm:text-lg ${
-                  isImage ? "text-text-gray" : "text-text-gray"
-                }`}
-              >
-                {description}
-              </p>
-            ) : null}
-          </div>
+          {meta ? (
+            <p className="mt-4 text-[11px] font-medium uppercase tracking-[0.2em] text-gold-dark">
+              {meta}
+            </p>
+          ) : null}
+
+          <p className="mt-5 w-full max-w-3xl text-[15px] leading-relaxed text-text-gray sm:text-lg">
+            {description}
+          </p>
+
+          {pills.length > 0 ? (
+            <ul className="mt-5 flex flex-wrap justify-start gap-2 md:justify-center">
+              {pills.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className="group inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3 py-1.5 text-[12px] font-medium text-primary shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold-light hover:shadow-[0_14px_28px_-16px_rgba(230,201,166,0.7)]"
+                >
+                  {Icon ? (
+                    <Icon
+                      className="h-3.5 w-3.5 text-gold-dark transition-transform duration-300 group-hover:scale-110"
+                      strokeWidth={2}
+                    />
+                  ) : null}
+                  {label}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {primaryCta || secondaryCta ? (
+            <div className="mt-6 flex flex-wrap items-center justify-start gap-2.5 md:justify-center">
+              {primaryCta ? renderCta(primaryCta, "primary") : null}
+              {secondaryCta ? renderCta(secondaryCta, "outline-light") : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </header>

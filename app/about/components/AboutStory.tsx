@@ -13,7 +13,7 @@ export default function AboutStory() {
   const highlight = aboutStory.highlights[activeHighlight] ?? aboutStory.highlights[0];
 
   return (
-    <section className="section-light relative overflow-hidden border-t border-black/[0.06] section-y">
+    <section id="about-story" className="section-light relative overflow-hidden border-t border-black/[0.06] section-y">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-dark/[0.06] blur-[100px]"
