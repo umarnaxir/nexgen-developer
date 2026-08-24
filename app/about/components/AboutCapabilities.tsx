@@ -1,108 +1,162 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { aboutCapabilities } from "../data";
 
-/** White section, black cards with white content. */
+function CapabilityCard({
+  item,
+  index,
+  className = "",
+}: {
+  item: (typeof aboutCapabilities)[number];
+  index: number;
+  className?: string;
+}) {
+  const Icon = item.icon;
+  const goldCard = index % 2 === 1;
+
+  return (
+    <motion.article
+      whileHover={{ y: -8 }}
+      transition={{ type: "spring", stiffness: 380, damping: 28 }}
+      className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-[1.35rem] border p-6 sm:min-h-[320px] sm:p-7 ${
+        goldCard
+          ? "border-gold/40 bg-gold text-primary shadow-[0_24px_56px_-32px_rgba(209,172,129,0.55)]"
+          : "border-gold/30 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] text-white shadow-[0_24px_56px_-32px_rgba(0,0,0,0.55)]"
+      } ${className}`}
+    >
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 ${
+          goldCard
+            ? "bg-[radial-gradient(circle_at_100%_0%,rgba(14,13,13,0.08),transparent_46%)]"
+            : "bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.22),transparent_46%)]"
+        }`}
+      />
+
+      <div className="relative flex items-start justify-between">
+        <span
+          className={`flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105 ${
+            goldCard ? "bg-primary text-gold" : "border border-gold/35 bg-gold text-primary"
+          }`}
+        >
+          <Icon className="h-5 w-5" />
+        </span>
+        <span
+          className={`text-[11px] font-semibold tabular-nums tracking-[0.25em] ${
+            goldCard ? "text-primary/50" : "text-gold"
+          }`}
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="relative mt-8 flex flex-1 flex-col">
+        <h3
+          className={`text-xl font-semibold tracking-[-0.02em] sm:text-2xl ${
+            goldCard ? "text-primary" : "text-white"
+          }`}
+        >
+          {item.title}
+        </h3>
+        <p className={`mt-2 text-sm font-medium ${goldCard ? "text-primary/70" : "text-gold"}`}>
+          {item.summary}
+        </p>
+        <p
+          className={`mt-3 text-[14px] leading-relaxed sm:text-[15px] ${
+            goldCard ? "text-primary/65" : "text-gold-light/80"
+          }`}
+        >
+          {item.detail}
+        </p>
+        <ul className="mt-auto flex flex-wrap gap-2 pt-6">
+          {item.points.map((point) => (
+            <li
+              key={point}
+              className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
+                goldCard
+                  ? "bg-primary/10 text-primary"
+                  : "border border-gold/30 bg-white/5 text-gold-light"
+              }`}
+            >
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function AboutCapabilities() {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const scrollBy = (dir: -1 | 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const amount = Math.min(el.clientWidth * 0.72, 420);
-    el.scrollBy({ left: dir * amount, behavior: "smooth" });
-  };
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const onScroll = () => {
+      const card = scroller.querySelector("article");
+      const width = card instanceof HTMLElement ? card.offsetWidth + 12 : scroller.clientWidth;
+      if (!width) return;
+      const next = Math.round(scroller.scrollLeft / width);
+      setActiveIndex(Math.min(Math.max(next, 0), aboutCapabilities.length - 1));
+    };
+
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section className="section-light relative overflow-hidden border-t border-black/[0.06] section-y">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 top-1/4 h-[320px] w-[320px] rounded-full bg-gold-dark/[0.05] blur-[110px]"
+        className="pointer-events-none absolute -right-20 top-1/4 h-[320px] w-[320px] rounded-full bg-gold-dark/[0.08] blur-[110px]"
       />
 
       <div className="section-container relative z-10">
-        <div
-          className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-end sm:justify-between"
-          data-aos="fade-up"
-        >
-          <div className="max-w-xl">
-            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
-              What we ship.
-            </h2>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-black/50">
-              Scroll sideways, every capability is a full card with its own story.
-            </p>
-          </div>
+        <div className="mb-6 max-w-2xl sm:mb-8" data-aos="fade-up">
+          <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
+            Capabilities
+          </span>
+          <h2 className="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
+            What we ship.
+          </h2>
+          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-black/50">
+            Four practices, one studio. Cards alternate black and gold, the same language as
+            the rest of the site.
+          </p>
+        </div>
 
-          <div className="flex gap-2">
-            <button
-              type="button"
-              aria-label="Scroll capabilities left"
-              onClick={() => scrollBy(-1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              aria-label="Scroll capabilities right"
-              onClick={() => scrollBy(1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </button>
+        <div className="md:hidden">
+          <div ref={scrollerRef} className="process-mobile-scroller">
+            {aboutCapabilities.map((item, index) => (
+              <CapabilityCard
+                key={item.id}
+                item={item}
+                index={index}
+                className="process-mobile-card min-h-[340px]"
+              />
+            ))}
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-1.5" aria-hidden>
+            {aboutCapabilities.map((item, index) => (
+              <span
+                key={item.id}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === activeIndex ? "w-5 bg-gold-dark" : "w-1.5 bg-gold/40"
+                }`}
+              />
+            ))}
           </div>
         </div>
 
-        <div
-          ref={scrollerRef}
-          className="relative z-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden"
-          data-aos="fade-up"
-          data-aos-delay="80"
-        >
-          {aboutCapabilities.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <motion.article
-                key={item.id}
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                className="group relative flex h-[340px] w-[min(85vw,320px)] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl border border-black/10 bg-background p-6 text-primary shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] sm:h-[380px] sm:w-[360px] sm:p-7 md:w-[380px]"
-              >
-                <div
-                  aria-hidden
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.accent}`}
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:28px_28px] opacity-40"
-                />
-
-                <div className="relative flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/35 bg-gold/10 text-gold transition-transform duration-300 group-hover:scale-105">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="text-[11px] font-semibold tabular-nums tracking-[0.25em] text-gold-dark">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div className="relative">
-                  <h3 className="text-xl font-semibold tracking-[-0.02em] text-primary sm:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm font-medium text-gold/90">{item.summary}</p>
-                  <p className="mt-3 text-[14px] leading-relaxed text-text-gray sm:text-[15px]">
-                    {item.detail}
-                  </p>
-                </div>
-              </motion.article>
-            );
-          })}
-          <div className="w-2 shrink-0 sm:w-6" aria-hidden />
+        <div className="hidden grid-cols-2 gap-5 md:grid lg:gap-6">
+          {aboutCapabilities.map((item, index) => (
+            <CapabilityCard key={item.id} item={item} index={index} />
+          ))}
         </div>
       </div>
     </section>

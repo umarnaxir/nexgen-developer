@@ -1,124 +1,127 @@
 import {
- Award,
- Bot,
- BrainCircuit,
- Code2,
- Layers,
- Lightbulb,
- Megaphone,
- Rocket,
- TrendingUp,
- Users,
- Wallet,
+  Award,
+  Bot,
+  BrainCircuit,
+  Code2,
+  Layers,
+  Lightbulb,
+  Megaphone,
+  Rocket,
+  TrendingUp,
+  Users,
+  Wallet,
 } from "lucide-react";
 
 /** All narrative / descriptive copy, rendered once in AboutStory. */
 export const aboutStory = {
- eyebrow: "The studio",
- headline: "We build digital products that feel intentional.",
- lead: "NexGen Developers is a collective of engineers, designers, and marketers helping startups and local brands ship work that stands out, and actually ships.",
- paragraphs: [
- "We partner on AI/ML, chatbots, web & app development, and digital marketing. Less noise, more craft: clear process, honest timelines, and products people enjoy using.",
- "Based in Baramulla, Jammu and Kashmir, we work with clients globally. You stay close to every milestone, from first brief to launch and beyond.",
- "Whether you need a full product build or a focused growth push, we tailor the stack and the plan to your goals, budget, and pace.",
- ],
- quote: "Build with intention. Launch with confidence. Grow with clarity.",
- meta: [
- { label: "Based in", value: "Baramulla, India" },
- { label: "Focus", value: "Build · Launch · Grow" },
- { label: "Model", value: "Collective studio" },
- { label: "Clients", value: "Startups & local brands" },
- ],
- highlights: [
- {
- title: "Product craft",
- text: "Interfaces and systems designed for clarity, not clutter. Every screen earns its place.",
- },
- {
- title: "Honest delivery",
- text: "Visible progress, real timelines, and updates you can plan around. No black-box sprints.",
- },
- {
- title: "Growth mindset",
- text: "We don’t stop at launch. Measure, learn, and compound what already works for your brand.",
- },
- ],
+  eyebrow: "The studio",
+  headline: "We build digital products that feel intentional.",
+  lead: "NexGen Developers is a collective of engineers, designers, and marketers helping startups and local brands ship work that stands out, and actually ships. We are one studio for build, launch, and growth, not a chain of handoffs.",
+  paragraphs: [
+    "We partner on AI and ML, chatbots, web and app development, and digital marketing. Less noise, more craft: clear process, honest timelines, and products people enjoy using. If a tool does not earn its place in the product, it does not make the stack.",
+    "Based in Baramulla, Jammu and Kashmir, we work with clients in India and globally. Collaboration is remote-friendly. You stay close to every milestone, from first brief to launch and the weeks after go-live.",
+    "Whether you need a full product build or a focused growth push, we tailor the stack and the plan to your goals, budget, and pace. Website and app packages have starting prices. SEO, AI models, and mixed work are quoted after we understand the requirement.",
+    "We write the brief with you, show working slices early, and stay through launch. Demos land while change is still cheap. The aim is a product that looks premium and holds up under real traffic, real users, and real deadlines.",
+    "The same people who plan also ship. Product, engineering, and growth sit in one room, so nothing gets lost between a slide and a commit. You talk to the studio, not five vendors with five calendars.",
+    "After launch we measure what shipped and compound what already converts. Analytics, iteration, and a plan for the next win, not a one-and-done handoff. That is how local brands and startups stay with us.",
+  ],
+  quote: "Build with intention. Launch with confidence. Grow with clarity.",
+  meta: [
+    { label: "Based in", value: "Baramulla, India" },
+    { label: "Focus", value: "Build, launch, grow" },
+    { label: "Model", value: "Collective studio" },
+    { label: "Clients", value: "Startups and local brands" },
+  ],
+  highlights: [
+    {
+      title: "Product craft",
+      text: "Interfaces and systems designed for clarity, not clutter. Every screen earns its place, and the stack stays maintainable after launch.",
+    },
+    {
+      title: "Honest delivery",
+      text: "Visible progress, real timelines, and updates you can plan around. No black-box sprints, no surprise scope at the eleventh hour.",
+    },
+    {
+      title: "Growth mindset",
+      text: "We do not stop at launch. Measure, learn, and compound what already works for your brand, from SEO to product iteration.",
+    },
+  ],
 };
 
 export const aboutCapabilities = [
- {
- id: "web",
- title: "Web & App Development",
- summary: "Sites and products built to scale.",
- detail:
- "Landing pages to full applications, clean architecture, fast performance, and interfaces people actually enjoy.",
- accent: "from-gold-dark/20 to-transparent",
- icon: Code2,
- },
- {
- id: "ai",
- title: "AI & Machine Learning",
- summary: "Automation without the hype.",
- detail:
- "Practical models and pipelines that fit your workflow, save time, surface decisions, stay measurable.",
- accent: "from-white/10 to-transparent",
- icon: BrainCircuit,
- },
- {
- id: "chatbots",
- title: "Chatbot Development",
- summary: "Conversations that convert.",
- detail:
- "Assistants for sales, support, and ops, trained on your context, deployed where users already are.",
- accent: "from-gold/15 to-transparent",
- icon: Bot,
- },
- {
- id: "marketing",
- title: "Digital Marketing",
- summary: "Presence that compounds.",
- detail:
- "SEO, campaigns, and content systems designed to grow traffic and trust, measured and iterated.",
- accent: "from-white/10 to-transparent",
- icon: Megaphone,
- },
+  {
+    id: "web",
+    title: "Web and app development",
+    summary: "Sites and products built to scale.",
+    detail:
+      "From marketing sites to full applications: clean architecture, fast performance, and interfaces people actually enjoy. We handle frontend, backend, CMS, and launch.",
+    points: ["Custom UI and UX", "CMS and admin", "Speed and SEO basics"],
+    icon: Code2,
+  },
+  {
+    id: "ai",
+    title: "AI and machine learning",
+    summary: "Automation without the hype.",
+    detail:
+      "Practical models and pipelines that fit your workflow. We save time, surface decisions, and keep results measurable. Pricing is quoted to the requirement, not a fixed menu.",
+    points: ["Workflow automation", "Custom model fit", "Measurable outcomes"],
+    icon: BrainCircuit,
+  },
+  {
+    id: "chatbots",
+    title: "Chatbot development",
+    summary: "Conversations that convert.",
+    detail:
+      "Assistants for sales, support, and ops, trained on your context and deployed where users already are: site, WhatsApp, or product.",
+    points: ["Sales and support bots", "Your knowledge base", "Channel deployment"],
+    icon: Bot,
+  },
+  {
+    id: "marketing",
+    title: "Digital marketing",
+    summary: "Presence that compounds.",
+    detail:
+      "SEO, campaigns, and content systems designed to grow traffic and trust. We measure, iterate, and keep the brief honest. Scopes like SEO and ads are quoted after we see the requirement.",
+    points: ["SEO and content", "Campaigns and ads", "Analytics and iteration"],
+    icon: Megaphone,
+  },
 ];
 
 export const aboutPillars = [
- {
- number: "01",
- title: "Expert team",
- description:
- "Seasoned talent across product, engineering, and growth, the same people who plan also ship.",
- icon: Users,
- },
- {
- number: "02",
- title: "Full-stack delivery",
- description:
- "Strategy to launch: frontend, backend, infrastructure, and ongoing care under one roof.",
- icon: Layers,
- },
- {
- number: "03",
- title: "Clear pricing",
- description:
- "Project, hourly, or retainer, flexible models that respect scope and budget without surprises.",
- icon: Wallet,
- },
- {
- number: "04",
- title: "Fast cycles",
- description:
- "Tight loops and visible progress. You always know what’s done, what’s next, and why.",
- icon: Rocket,
- },
+  {
+    number: "01",
+    title: "Expert team",
+    description:
+      "Seasoned talent across product, engineering, and growth. The same people who plan also ship, so nothing gets lost between a slide and a commit.",
+    icon: Users,
+  },
+  {
+    number: "02",
+    title: "Full-stack delivery",
+    description:
+      "Strategy to launch: frontend, backend, infrastructure, and ongoing care under one roof. You talk to one studio, not five vendors.",
+    icon: Layers,
+  },
+  {
+    number: "03",
+    title: "Clear pricing",
+    description:
+      "Website and app packages start from listed prices. SEO, AI models, and mixed work are quoted from the brief. No surprises after kickoff.",
+    icon: Wallet,
+  },
+  {
+    number: "04",
+    title: "Fast cycles",
+    description:
+      "Tight loops and visible progress. You always know what is done, what is next, and why. Demos land while change is still cheap.",
+    icon: Rocket,
+  },
 ];
 
 export const aboutValues = [
   {
     title: "Innovation",
-    description: "We adopt what works and skip the theater, new tech only when it earns its place.",
+    description: "We adopt what works and skip the theater. New tech only when it earns its place.",
     detail: "Practical bets over hype. Tools earn a seat by making the product faster, clearer, or more reliable.",
     points: ["Right tool, not shiny tool", "Proven patterns first", "Experiment with intent"],
     icon: Lightbulb,
@@ -132,7 +135,7 @@ export const aboutValues = [
   },
   {
     title: "Collaboration",
-    description: "You’re in the room for every important call. No black-box handoffs.",
+    description: "You are in the room for every important call. No black-box handoffs.",
     detail: "Shared context, visible progress, and decisions you can follow without chasing updates.",
     points: ["Transparent updates", "Shared decisions", "One team mindset"],
     icon: Users,
@@ -159,7 +162,7 @@ export const aboutApproach = [
     title: "Discover",
     text: "Goals, constraints, and success metrics, aligned before a line of code.",
     detail: "Workshops, audits, and a shared definition of done so the build starts with clarity.",
-    outcomes: ["Scope & roadmap", "Success metrics", "Technical audit"],
+    outcomes: ["Scope and roadmap", "Success metrics", "Technical audit"],
   },
   {
     step: "02",
@@ -172,8 +175,8 @@ export const aboutApproach = [
     step: "03",
     title: "Build",
     text: "Agile sprints, regular demos, and transparent updates along the way.",
-    detail: "Ship in slices you can see and click. Feedback lands while it’s still cheap to change.",
-    outcomes: ["Working slices", "Weekly demos", "QA & polish"],
+    detail: "Ship in slices you can see and click. Feedback lands while it is still cheap to change.",
+    outcomes: ["Working slices", "Weekly demos", "QA and polish"],
   },
   {
     step: "04",
@@ -203,17 +206,22 @@ export const aboutFaqs = [
   {
     question: "Who is NexGen Developers?",
     answer:
-      "We're a collective of engineers, designers, and marketers helping startups and local brands ship AI, chatbots, web & apps, and growth campaigns, with clear process and craft-focused delivery.",
+      "We are a collective of engineers, designers, and marketers helping startups and local brands ship AI, chatbots, web and apps, and growth campaigns, with clear process and craft-focused delivery.",
   },
   {
     question: "Where are you based, and do you work remotely?",
     answer:
-      "We're based in Baramulla, Jammu and Kashmir, India, and work with clients globally. Collaboration is remote-friendly with regular updates across time zones.",
+      "We are based in Baramulla, Jammu and Kashmir, India, and work with clients globally. Collaboration is remote-friendly with regular updates across time zones.",
   },
   {
     question: "What kinds of projects do you take on?",
     answer:
       "From landing pages and product builds to AI tools, chatbots, and digital marketing. If it helps you build, launch, or grow, we can scope it and ship it.",
+  },
+  {
+    question: "How is pricing decided?",
+    answer:
+      "Website and app packages have starting prices on the pricing page. SEO, AI models, chatbots, design, and mixed work are not a fixed rate card. We quote after a short call once the requirement is clear.",
   },
   {
     question: "How do engagements usually start?",
@@ -223,30 +231,30 @@ export const aboutFaqs = [
   {
     question: "How can I get in touch?",
     answer:
-      "Use the contact page or schedule a meeting from the site. We'll reply with next steps, timeline options, and a clear proposal before any work begins.",
+      "Use the contact page or schedule a meeting from the site. We will reply with next steps, timeline options, and a clear proposal before any work begins.",
   },
 ];
 
 export const pricingOptions = [
- {
- title: "Project-Based",
- description: "Fixed price for complete projects",
- features: ["Clear scope & timeline", "One-time payment", "Perfect for specific needs"],
- },
- {
- title: "Hourly Rate",
- description: "Pay for actual time worked",
- features: ["Flexible scope", "Transparent billing", "Ideal for ongoing work"],
- },
- {
- title: "Monthly Retainer",
- description: "Dedicated support & maintenance",
- features: ["Priority support", "Regular updates", "Long-term partnership"],
- },
+  {
+    title: "Project-Based",
+    description: "Fixed price for complete projects",
+    features: ["Clear scope and timeline", "One-time payment", "Perfect for specific needs"],
+  },
+  {
+    title: "Hourly Rate",
+    description: "Pay for actual time worked",
+    features: ["Flexible scope", "Transparent billing", "Ideal for ongoing work"],
+  },
+  {
+    title: "Monthly Retainer",
+    description: "Dedicated support and maintenance",
+    features: ["Priority support", "Regular updates", "Long-term partnership"],
+  },
 ];
 
 export const stats = [
- { value: "2+", label: "Years of Excellence" },
- { value: "50+", label: "Projects Completed" },
- { value: "9", label: "Team Members" },
+  { value: "2+", label: "Years of Excellence" },
+  { value: "50+", label: "Projects Completed" },
+  { value: "9", label: "Team Members" },
 ];

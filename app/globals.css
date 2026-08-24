@@ -228,6 +228,8 @@ body {
   display: flex;
   gap: 12px;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 4px;
@@ -816,6 +818,7 @@ body {
   margin-left: 0;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   padding-top: 0;
 }
 
@@ -824,7 +827,7 @@ body {
 }
 
 .section-container {
-  @apply container mx-auto max-w-7xl px-4 sm:px-6 lg:px-14;
+  @apply mx-auto w-full min-w-0 max-w-7xl px-4 sm:px-6 lg:px-14;
 }
 
 .section-padding {

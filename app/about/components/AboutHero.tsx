@@ -9,7 +9,7 @@ export default function AboutHero() {
       eyebrow="About"
       title={["A studio built", "to launch and grow."]}
       highlight="grow."
-      description="A creative studio helping startups and local brands build, launch, and grow, with craft, speed, and clarity."
+      description="A creative studio helping startups and local brands build, launch, and grow. Craft, speed, and clarity in one team, from first brief to what ships after launch."
       pills={[
         { label: "Craft", icon: Lightbulb },
         { label: "Speed", icon: Rocket },

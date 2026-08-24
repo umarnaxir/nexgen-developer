@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Keep `next dev --turbopack` out of `.next` so `next build` is not poisoned
+  // by leftover pages/_document.js that require [turbopack]_runtime.js.
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   images: {
     remotePatterns: [
       {

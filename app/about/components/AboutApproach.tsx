@@ -140,9 +140,8 @@ export default function AboutApproach() {
   }, []);
 
   return (
-    <section className="relative bg-white text-black" aria-label="How a project moves">
-      <div className="px-4 py-8 sm:px-6 sm:py-10 lg:px-14 lg:py-12">
-        <div className="mx-auto w-full max-w-7xl">
+    <section className="relative bg-white text-black section-y" aria-label="How a project moves">
+      <div className="section-container">
           <div className="max-w-2xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Process
@@ -223,7 +222,6 @@ export default function AboutApproach() {
               })}
             </div>
           </div>
-        </div>
       </div>
     </section>
   );
