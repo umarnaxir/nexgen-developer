@@ -9,7 +9,12 @@ export function OrganizationSchema() {
     "@type": "Organization",
     name: seoConfig.siteName,
     url: seoConfig.siteUrl,
-    logo: seoConfig.defaultOgImage,
+    logo: {
+      "@type": "ImageObject",
+      url: seoConfig.defaultLogo,
+      width: seoConfig.defaultLogoWidth,
+      height: seoConfig.defaultLogoHeight,
+    },
     description: seoConfig.defaultDescription,
     sameAs: [
       // Add your social media profiles here
@@ -45,7 +50,12 @@ export function WebsiteSchema() {
     publisher: {
       "@type": "Organization",
       name: seoConfig.publisher,
-      logo: seoConfig.defaultOgImage,
+      logo: {
+        "@type": "ImageObject",
+        url: seoConfig.defaultLogo,
+        width: seoConfig.defaultLogoWidth,
+        height: seoConfig.defaultLogoHeight,
+      },
     },
     potentialAction: {
       "@type": "SearchAction",
@@ -95,7 +105,6 @@ export function ArticleSchema({
   title,
   description,
   url,
-  image,
   publishedDate,
   modifiedDate,
   author,
@@ -115,9 +124,7 @@ export function ArticleSchema({
     "@type": "Article",
     headline: title,
     description: description,
-    image: image 
-      ? (image.startsWith("http") ? image : `${seoConfig.siteUrl}${image}`)
-      : seoConfig.defaultOgImage,
+    image: seoConfig.defaultOgImage,
     datePublished: publishedDate,
     ...(modifiedDate && { dateModified: modifiedDate }),
     author: {
@@ -129,7 +136,9 @@ export function ArticleSchema({
       name: publisher || seoConfig.publisher,
       logo: {
         "@type": "ImageObject",
-        url: seoConfig.defaultOgImage,
+        url: seoConfig.defaultLogo,
+        width: seoConfig.defaultLogoWidth,
+        height: seoConfig.defaultLogoHeight,
       },
     },
     mainEntityOfPage: {
@@ -167,10 +176,17 @@ export function ServiceSchema({
     "@type": "Service",
     name: name,
     description: description,
+    image: seoConfig.defaultOgImage,
     provider: {
       "@type": "Organization",
       name: provider || seoConfig.publisher,
       url: seoConfig.siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: seoConfig.defaultLogo,
+        width: seoConfig.defaultLogoWidth,
+        height: seoConfig.defaultLogoHeight,
+      },
     },
     ...(areaServed && { areaServed: areaServed }),
     ...(serviceType && { serviceType: serviceType }),

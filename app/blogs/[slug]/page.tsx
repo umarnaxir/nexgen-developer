@@ -68,11 +68,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const publishedDate = new Date(blogRaw.publishDate || blog.date).toISOString();
   const blogUrl = `${seoConfig.siteUrl}/blogs/${blog.slug}`;
-  const blogImage = blog.images?.[0]
-    ? blog.images[0].startsWith("http")
-      ? blog.images[0]
-      : `${seoConfig.siteUrl}${blog.images[0]}`
-    : undefined;
 
   return (
     <>
@@ -80,7 +75,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         title={blog.title}
         description={blog.excerpt}
         url={blogUrl}
-        image={blogImage}
         publishedDate={publishedDate}
         author={blog.author}
         publisher={seoConfig.publisher}

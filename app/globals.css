@@ -803,6 +803,7 @@ body {
   --site-nav-height: 4.5rem;
   --nav-height: var(--site-nav-height);
   --mobile-nav-height: 4.5rem;
+  --service-page-nav-height: 3.25rem;
 }
 
 @media (min-width: 640px) {
@@ -824,6 +825,10 @@ body {
 
 .section-y {
   @apply py-8 sm:py-10 lg:py-12;
+}
+
+.service-section-anchor {
+  scroll-margin-top: calc(var(--site-nav-height) + var(--service-page-nav-height) + 0.5rem);
 }
 
 .section-container {

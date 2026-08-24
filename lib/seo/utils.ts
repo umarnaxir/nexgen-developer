@@ -144,18 +144,15 @@ export function generateMetadata(seo: SEOProps): Metadata {
       ? openGraph.url
       : `${seoConfig.siteUrl}${openGraph.url.startsWith("/") ? openGraph.url : `/${openGraph.url}`}`
     : canonicalUrl;
-  const ogImages = openGraph?.images || [
-    {
-      url: seoConfig.defaultOgImage,
-      width: seoConfig.defaultOgImageWidth,
-      height: seoConfig.defaultOgImageHeight,
-      alt: seoConfig.defaultOgImageAlt,
-    },
-  ];
+  const brandOgImage = {
+    url: seoConfig.defaultOgImage,
+    width: seoConfig.defaultOgImageWidth,
+    height: seoConfig.defaultOgImageHeight,
+    alt: seoConfig.defaultOgImageAlt,
+  };
 
   const twitterTitle = buildSeoTitle(twitter?.title || title);
   const twitterDescription = buildSeoDescription(twitter?.description || description);
-  const twitterImages = twitter?.images || [seoConfig.defaultOgImage];
 
   const metadata: Metadata = {
     metadataBase: new URL(seoConfig.siteUrl),
@@ -175,12 +172,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
       title: ogTitle,
       description: ogDescription,
       siteName: seoConfig.siteName,
-      images: ogImages.map((img) => ({
-        url: img.url.startsWith("http") ? img.url : `${seoConfig.siteUrl}${img.url}`,
-        width: img.width || seoConfig.defaultOgImageWidth,
-        height: img.height || seoConfig.defaultOgImageHeight,
-        alt: img.alt || seoConfig.defaultOgImageAlt,
-      })),
+      images: [brandOgImage],
       ...(openGraph?.publishedTime && { publishedTime: openGraph.publishedTime }),
       ...(openGraph?.modifiedTime && { modifiedTime: openGraph.modifiedTime }),
       ...(openGraph?.authors && { authors: openGraph.authors }),
@@ -193,9 +185,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
       creator: seoConfig.twitterHandle,
       title: twitterTitle,
       description: twitterDescription,
-      images: twitterImages.map((img) =>
-        img.startsWith("http") ? img : `${seoConfig.siteUrl}${img}`
-      ),
+      images: [seoConfig.defaultOgImage],
     },
     verification: seoConfig.verification,
   };

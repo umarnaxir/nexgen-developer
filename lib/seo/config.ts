@@ -30,10 +30,15 @@ export const seoConfig = {
     "Other services",
   ],
   
-  // Shared logo used for metadata, social previews, and structured data.
-  defaultOgImage: "https://www.nexgendevelopers.in/logo/logo.png",
-  defaultOgImageWidth: 1254,
-  defaultOgImageHeight: 1254,
+  // Square mark for favicons, Google Knowledge Panel, and Organization schema.
+  defaultLogo: "https://www.nexgendevelopers.in/logo/logo.png?v=20260825",
+  defaultLogoWidth: 1254,
+  defaultLogoHeight: 1254,
+
+  // 1200×630 social card (logo centered on black) used for every OG/Twitter preview.
+  defaultOgImage: "https://www.nexgendevelopers.in/og/og-image.png?v=20260825",
+  defaultOgImageWidth: 1200,
+  defaultOgImageHeight: 630,
   defaultOgImageAlt: "NexGen Developers logo",
   
   // Social Media

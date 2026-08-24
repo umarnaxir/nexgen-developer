@@ -56,7 +56,7 @@ export const metadata = {
     google: "K5WPaPu_n40Lp7BlSC2vph3oTrM3QzSlCbkCSZpA2iE",
   },
   icons: {
-    icon: "/logo/logo.png",
+    icon: [{ url: "/logo/logo.png", type: "image/png" }],
     shortcut: "/logo/logo.png",
     apple: "/logo/logo.png",
   },

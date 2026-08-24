@@ -216,7 +216,9 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const solid = scrolled || mobileOpen;
+  const servicesActive = pathname.startsWith("/services");
+  const isServiceDetail = pathname.startsWith("/services/");
+  const solid = scrolled || mobileOpen || isServiceDetail;
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -234,8 +236,6 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
       window.removeEventListener("mousedown", onClick);
     };
   }, [closeAll]);
-
-  const servicesActive = pathname.startsWith("/services");
 
   return (
     <header

@@ -28,7 +28,6 @@ export async function generateMetadata({
     title: blog.title,
     description: blog.excerpt,
     slug: blog.slug,
-    image: blog.images?.[0] || blog.image,
     publishedDate,
     author: blog.author,
     category: blog.category,

@@ -43,7 +43,6 @@ export default function ServiceLayout({
   ctaDescription,
   relatedServices = [],
   currentSlug,
-  image,
   faqs = [],
   expectedResults = [],
   technologies,
@@ -91,7 +90,6 @@ export default function ServiceLayout({
         intro={copy.intro}
         pillars={copy.pillars}
         whyChoose={whyChoose}
-        image={image}
       />
 
       <ServiceOfferingsSection offerings={copy.offerings} />
@@ -102,16 +100,14 @@ export default function ServiceLayout({
 
       <ServiceProcessSection steps={copy.process} />
 
-      <div id="outcomes" className="scroll-mt-24 sm:scroll-mt-28">
-        <ServiceBenefitsSection benefits={benefits} expectedResults={expectedResults} />
-      </div>
+      <ServiceBenefitsSection benefits={benefits} expectedResults={expectedResults} />
 
       {allFaqs.length > 0 ? (
         <FAQAccordion
           faqs={allFaqs}
           title="Common questions"
           description="Straight answers about scope, process, timeline, and what working together looks like."
-          className="!py-6 sm:!py-8 lg:!py-9"
+          className="!scroll-mt-[calc(var(--site-nav-height)+var(--service-page-nav-height)+0.5rem)]"
         />
       ) : null}
 
@@ -123,7 +119,7 @@ export default function ServiceLayout({
         heading={ctaHeading}
         description={ctaDescription}
         secondaryLink={{ href: "/services", label: "Explore all services" }}
-        className="!border-t-0 !pt-2 !pb-8 sm:!pt-3 sm:!pb-10 lg:!pt-4 lg:!pb-12"
+        className="!border-t-0"
       />
     </main>
   );

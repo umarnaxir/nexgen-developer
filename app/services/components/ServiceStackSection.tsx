@@ -1,6 +1,6 @@
 "use client";
 
-import ServiceSectionHeader from "./ServiceSectionHeader";
+import { ServiceReveal } from "./ServiceMotion";
 import TechnologiesTools from "./TechnologiesTools";
 
 interface ServiceStackSectionProps {
@@ -13,13 +13,20 @@ export default function ServiceStackSection({ technologies }: ServiceStackSectio
   return (
     <section
       id="stack"
-      className="section-light scroll-mt-24 border-t border-black/[0.06] py-6 sm:py-8 lg:py-9 sm:scroll-mt-28"
+      className="service-section-anchor section-light border-t border-black/[0.06] section-y"
     >
       <div className="section-container">
-        <ServiceSectionHeader
-          title="Stack and tools we actually use"
-          description="Chosen for the job, your team, and what you will have to maintain — not a fashion list. We will change it when the project demands it."
-        />
+        <ServiceReveal className="max-w-2xl">
+          <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
+            Stack
+          </span>
+          <h2 className="mt-3 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-black">
+            Tools we use
+          </h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-black/55 sm:text-base">
+            Chosen for the job, your team, and what you will have to maintain — not a fashion list.
+          </p>
+        </ServiceReveal>
         <div className="mt-8 sm:mt-10">
           <TechnologiesTools technologies={technologies} />
         </div>

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: ServicePageProps) {
   const service = getTopLevelServiceServer(slug);
   if (!service) return {};
   const path = `/services/${slug}`;
-  return getServiceSEO(path, service.seo, service.content.image);
+  return getServiceSEO(path, service.seo);
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {

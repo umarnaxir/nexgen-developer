@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { generateMetadata } from "./utils";
-import { seoConfig } from "./config";
 
 /**
  * Home Page SEO
@@ -169,7 +168,6 @@ export function getBlogPostSEO({
   title,
   description,
   slug,
-  image,
   publishedDate,
   modifiedDate,
   author,
@@ -179,7 +177,6 @@ export function getBlogPostSEO({
   title: string;
   description: string;
   slug: string;
-  image?: string;
   publishedDate: string;
   modifiedDate?: string;
   author?: string;
@@ -187,11 +184,6 @@ export function getBlogPostSEO({
   keywords?: string[];
 }): Metadata {
   const url = `/blogs/${slug}`;
-  const ogImage = image
-    ? image.startsWith("http")
-      ? image
-      : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`
-    : seoConfig.defaultOgImage;
 
   const keywords = [
     category || "blog",
@@ -210,14 +202,6 @@ export function getBlogPostSEO({
       title,
       description,
       url,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
       publishedTime: publishedDate,
       ...(modifiedDate && { modifiedTime: modifiedDate }),
       ...(author && { authors: [author] }),
@@ -227,7 +211,6 @@ export function getBlogPostSEO({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
     },
   });
 }
@@ -342,15 +325,8 @@ export function getServiceSEO(
     title: string;
     description: string;
     keywords: string[];
-  },
-  ogImage?: string
+  }
 ): Metadata {
-  const imageUrl = ogImage
-    ? ogImage.startsWith("http")
-      ? ogImage
-      : `${seoConfig.siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`
-    : seoConfig.defaultOgImage;
-
   return generateMetadata({
     title: seo.title,
     description: seo.description,
@@ -361,20 +337,11 @@ export function getServiceSEO(
       title: seo.title,
       description: seo.description,
       url: canonicalPath,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: seo.title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
-      images: [imageUrl],
     },
   });
 }

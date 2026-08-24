@@ -19,7 +19,7 @@ export async function generateMetadata({
   const service = getDigitalMarketingServiceServer(subSlug);
   if (!service) return {};
   const path = `/services/digital-marketing/${subSlug}`;
-  return getServiceSEO(path, service.seo, service.content.image);
+  return getServiceSEO(path, service.seo);
 }
 
 export default async function DigitalMarketingServicePage({
