@@ -42,14 +42,14 @@ export default function RelatedBlogs({ relatedBlogs }: RelatedBlogsProps) {
               </div>
               <div className="p-6">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1 border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700 text-xs font-bold rounded uppercase">
+                  <span className="inline-block px-3 py-1 border border-gold/20 light:border-gold-light bg-gold/10 light:bg-gold-light text-gold light:text-gold-dark text-xs font-bold rounded uppercase">
                     {relatedBlog.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white light:text-gray-900 mb-3 transition-colors group-hover:text-teal-300 light:group-hover:text-teal-700">{relatedBlog.title}</h3>
+                <h3 className="text-xl font-bold text-white light:text-gray-900 mb-3 transition-colors group-hover:text-gold light:group-hover:text-gold-dark">{relatedBlog.title}</h3>
                 <p className="text-silver light:text-gray-600 mb-4 leading-relaxed text-sm">{relatedBlog.excerpt}</p>
                 <p className="text-sm text-silver-dark light:text-gray-500 mb-4">{relatedBlog.date}</p>
-                <span className="inline-flex items-center text-teal-300 light:text-teal-700 font-bold">
+                <span className="inline-flex items-center text-gold light:text-gold-dark font-bold">
                   Read More
                   <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

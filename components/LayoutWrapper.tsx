@@ -37,8 +37,8 @@ export default function LayoutWrapper({
   return (
     <ContactModalProvider>
       <SiteNavigation isAdminLoggedIn={isAdminLoggedIn} />
-      <div id="layout-root" className="relative min-h-screen bg-black text-white">
-        <div className="page-with-rail relative z-10">
+      <div id="layout-root" className="page-bg relative min-h-screen bg-background text-foreground">
+        <div className="page-with-navbar relative z-10">
           <main className="flex-1">{children}</main>
           <Footer contact={contact} footer={footer} />
           {SHOW_WHATSAPP_BUTTON && <WhatsAppButton />}

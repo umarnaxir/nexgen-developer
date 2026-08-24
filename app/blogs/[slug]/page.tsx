@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher={seoConfig.publisher}
       />
       <div className="min-h-screen">
-        <article className="section-y">
+        <article className="section-y !pt-[calc(var(--site-nav-height)+2rem)]">
           <div className="section-container">
             <BlogPostHero blog={blog} />
             <BlogPostContent blog={blog} />

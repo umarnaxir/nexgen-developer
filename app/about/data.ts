@@ -52,7 +52,7 @@ export const aboutCapabilities = [
  summary: "Sites and products built to scale.",
  detail:
  "Landing pages to full applications, clean architecture, fast performance, and interfaces people actually enjoy.",
- accent: "from-teal-500/20 to-transparent",
+ accent: "from-gold-dark/20 to-transparent",
  icon: Code2,
  },
  {
@@ -70,7 +70,7 @@ export const aboutCapabilities = [
  summary: "Conversations that convert.",
  detail:
  "Assistants for sales, support, and ops, trained on your context, deployed where users already are.",
- accent: "from-teal-400/15 to-transparent",
+ accent: "from-gold/15 to-transparent",
  icon: Bot,
  },
  {
@@ -177,10 +177,17 @@ export const aboutApproach = [
   },
   {
     step: "04",
-    title: "Launch & grow",
-    text: "Ship, measure, iterate, then keep compounding what works.",
-    detail: "Go-live support, analytics, and a plan for the next win, not a one-and-done handoff.",
-    outcomes: ["Production launch", "Analytics setup", "Growth plan"],
+    title: "Launch",
+    text: "Go live with support, checks, and a calm handoff into production.",
+    detail: "Deploy, monitor, and stay close through the first days after release.",
+    outcomes: ["Production launch", "QA sign-off", "Go-live support"],
+  },
+  {
+    step: "05",
+    title: "Grow",
+    text: "Measure what shipped, then compound the work that already converts.",
+    detail: "Analytics, iteration, and a plan for the next win, not a one-and-done handoff.",
+    outcomes: ["Analytics setup", "Iteration loop", "Growth plan"],
   },
 ];
 

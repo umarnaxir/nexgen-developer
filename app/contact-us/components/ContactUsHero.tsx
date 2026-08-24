@@ -35,7 +35,7 @@ export default function ContactUsHero() {
   return (
     <section
       ref={sectionRef}
-      className="section-dark relative flex min-h-[56svh] flex-col justify-end overflow-hidden pb-12 pt-[calc(var(--mobile-nav-height)+2rem)] sm:min-h-[52vh] sm:pb-14 sm:pt-24 lg:min-h-[58vh] lg:pb-16 lg:pt-32"
+      className="section-light relative flex min-h-[56svh] flex-col justify-end overflow-hidden pb-12 pt-[calc(var(--site-nav-height)+2rem)] sm:min-h-[52vh] sm:pb-14 sm:pt-[calc(var(--site-nav-height)+3rem)] lg:min-h-[58vh] lg:pb-16 lg:pt-[calc(var(--site-nav-height)+4rem)]"
     >
       <div className="absolute inset-0" aria-hidden>
         <Image
@@ -46,36 +46,39 @@ export default function ContactUsHero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/35" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(230,201,166,0.18),transparent_40%)]" />
       </div>
 
-      <div className="section-container relative z-10">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-14">
+        <div className="mx-auto flex w-full max-w-7xl flex-col">
         <div className="w-full max-w-none">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/70"
+            className="mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark"
           >
-            <span className="h-px w-8 bg-white/40" />
+            <span className="h-px w-8 bg-gold" />
             Contact
           </motion.span>
 
           <h1
             ref={headlineRef}
-            className="w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+            className="w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-primary"
           >
             <span className="hero-line block">Let&apos;s start</span>
-            <span className="hero-line block text-white/90">a conversation.</span>
+            <span className="hero-line block text-gold-dark">a conversation.</span>
           </h1>
 
           <p
             ref={sublineRef}
-            className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg"
+            className="mt-5 max-w-3xl text-base leading-relaxed text-text-gray sm:mt-6 sm:text-lg"
           >
             Tell us about your project. We&apos;ll get back within one business day.
           </p>
+        </div>
         </div>
       </div>
     </section>

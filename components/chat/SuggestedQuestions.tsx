@@ -38,7 +38,7 @@ export default function SuggestedQuestions({
             key={q}
             onClick={() => onSelect(q)}
             className="w-full text-left py-1 text-[11px] font-medium
-              text-white/55 hover:text-cyan-300
+              text-white/55 hover:text-gold-light
               transition-colors cursor-pointer truncate"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}

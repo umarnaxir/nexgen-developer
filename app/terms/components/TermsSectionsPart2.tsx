@@ -8,7 +8,7 @@ export default function TermsSectionsPart2() {
     <>
       <TermsSection icon={CheckCircle} title="6. Acceptable Use" delay={0.6} altBg>
         <p className="mb-3 sm:mb-4">When you access or use our website and services, you must follow these rules. You agree not to:</p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-gold-dark">
           <li>Use the Service for any unlawful purpose or in violation of any applicable local, state, national, or international law</li>
           <li>Impersonate any person or entity or falsely state or misrepresent your affiliation with a person or entity</li>
           <li>Infringe any patent, trademark, trade secret, copyright, or other proprietary rights</li>
@@ -24,7 +24,7 @@ export default function TermsSectionsPart2() {
         <p className="mb-3 sm:mb-4">
           In no event shall NexGen, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:
         </p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-gold-dark">
           <li>Your use or inability to use the Service</li>
           <li>Any conduct or content of third parties on the Service</li>
           <li>Any unauthorized access to or use of our servers and/or any personal information stored therein</li>
@@ -56,7 +56,7 @@ export default function TermsSectionsPart2() {
           Unless a written service agreement states otherwise, project fees for client work are billed in{" "}
           <strong className="text-black">two installments</strong>:
         </p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-gold-dark">
           <li>
             <strong className="text-black">50% advance (first installment):</strong> Due upon acceptance of
             the proposal or service agreement, before project work begins.

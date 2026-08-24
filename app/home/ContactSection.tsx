@@ -26,7 +26,7 @@ function ContactArt() {
     <svg viewBox="0 0 440 320" className="h-auto w-full" fill="none" aria-hidden>
       <defs>
         <radialGradient id="cs-sun" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#5eead4" stopOpacity="0.55" />
+          <stop offset="0%" stopColor="#eae3db" stopOpacity="0.55" />
           <stop offset="70%" stopColor="#99f6e4" stopOpacity="0.22" />
           <stop offset="100%" stopColor="#ccfbf1" stopOpacity="0" />
         </radialGradient>
@@ -45,21 +45,21 @@ function ContactArt() {
       </g>
       <path
         d="M68 252 C 150 236 120 166 202 172 C 252 176 252 120 300 110"
-        stroke="#2dd4bf"
+        stroke="#e6c9a6"
         strokeWidth="2.5"
         strokeDasharray="1 9"
         strokeLinecap="round"
       />
-      <circle cx="206" cy="150" r="18" stroke="#2dd4bf" strokeWidth="2" strokeDasharray="1 9" opacity="0.75" />
+      <circle cx="206" cy="150" r="18" stroke="#e6c9a6" strokeWidth="2" strokeDasharray="1 9" opacity="0.75" />
       <g transform="translate(298 64) rotate(-18)" className="animate-float">
         <polygon points="0,40 80,2 36,46" fill="url(#cs-plane)" />
-        <polygon points="36,46 80,2 54,40" fill="#14b8a6" />
+        <polygon points="36,46 80,2 54,40" fill="#d1ac81" />
         <polygon points="36,46 54,40 42,62" fill="#0f172a" />
       </g>
       <g transform="translate(252 252)">
         <path d="M0 0 C -10 -30 6 -52 22 -58 C 18 -34 10 -12 0 0Z" fill="#0f172a" />
-        <path d="M6 4 C 18 -22 44 -30 60 -28 C 44 -14 24 -2 6 4Z" fill="#14b8a6" />
-        <path d="M-4 4 C -22 -10 -30 -34 -26 -52 C -12 -34 -4 -16 -4 4Z" fill="#5eead4" />
+        <path d="M6 4 C 18 -22 44 -30 60 -28 C 44 -14 24 -2 6 4Z" fill="#d1ac81" />
+        <path d="M-4 4 C -22 -10 -30 -34 -26 -52 C -12 -34 -4 -16 -4 4Z" fill="#eae3db" />
       </g>
     </svg>
   );
@@ -255,7 +255,7 @@ export default function ContactSection({
 
   const fieldWrap = isPage
     ? "rounded-xl border border-black/[0.08] bg-white px-4 py-3.5 transition-all focus-within:border-black/20 focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.04)]"
-    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-teal-500 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(20,184,166,0.12)]";
+    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-gold-dark focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.12)]";
 
   const labelCls = isPage
     ? "block text-[11px] font-medium uppercase tracking-[0.18em] text-black/45"
@@ -266,7 +266,7 @@ export default function ContactSection({
     : "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
 
   const renderFieldIcon = (Icon: React.ElementType) =>
-    isPage ? null : <Icon className="h-5 w-5 shrink-0 text-teal-600" />;
+    isPage ? null : <Icon className="h-5 w-5 shrink-0 text-gold-dark" />;
 
   const renderLabel = (
     htmlFor: string,
@@ -374,7 +374,7 @@ export default function ContactSection({
       </div>
 
       <div className={`${fieldWrap} ${isPage ? "" : "flex items-start gap-3"}`}>
-        {isPage ? null : <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" />}
+        {isPage ? null : <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-gold-dark" />}
         <div className="min-w-0 flex-1">
           {renderLabel("cf-message", "Tell us about your project")}
           <textarea
@@ -409,13 +409,13 @@ export default function ContactSection({
           className={
             isPage
               ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-black/90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-              : "group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(20,184,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+              : "group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(230,201,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
           }
         >
           {!isPage && (
             <>
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-teal-400/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 text-white transition-transform duration-300 group-hover:scale-105">
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-gold-dark text-white transition-transform duration-300 group-hover:scale-105">
                 <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </>
@@ -516,12 +516,12 @@ export default function ContactSection({
           <div className="grid gap-8 lg:grid-cols-[1.65fr_1fr] lg:items-center lg:gap-12">
             <div>
               <div className="mb-6 text-center">
-                <span className="text-xs font-bold uppercase tracking-[0.3em] text-teal-600">
+                <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark">
                   Let&apos;s Connect
                 </span>
-                <span className="mx-auto mt-2 block h-0.5 w-10 rounded-full bg-teal-500" />
+                <span className="mx-auto mt-2 block h-0.5 w-10 rounded-full bg-gold-dark" />
                 <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                  Contact <span className="text-teal-600">Us</span>
+                  Contact <span className="text-gold-dark">Us</span>
                 </h2>
                 <p className="mx-auto mt-3 max-w-md text-sm text-gray-600 sm:text-base">
                   Ready to bring your ideas to life? We&apos;re here to help.
@@ -537,15 +537,15 @@ export default function ContactSection({
 
               <div>
                 <h3 className="text-xl font-extrabold tracking-tight text-gray-900 sm:text-2xl">
-                  Get in <span className="text-teal-600">Touch</span>
+                  Get in <span className="text-gold-dark">Touch</span>
                 </h3>
-                <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-teal-500 to-teal-700" />
+                <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-gold-dark to-gold-dark" />
 
                 <div className="mt-5 space-y-4">
                   {contactInfo.map(({ icon: Icon, label, value, href }) => {
                     const inner = (
                       <>
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-900 text-teal-400 transition-transform duration-300 group-hover:scale-110">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-900 text-gold transition-transform duration-300 group-hover:scale-110">
                           <Icon className="h-5 w-5" />
                         </span>
                         <div className="min-w-0">
@@ -577,7 +577,7 @@ export default function ContactSection({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-teal-500/40 text-teal-600 transition-all duration-300 hover:scale-110 hover:border-teal-500 hover:bg-teal-500 hover:text-white"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-gold-dark/40 text-gold-dark transition-all duration-300 hover:scale-110 hover:border-gold-dark hover:bg-gold-dark hover:text-white"
                     >
                       <Icon className="h-4 w-4" />
                     </a>

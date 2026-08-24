@@ -47,7 +47,7 @@ function renderInlineMarkdown(text: string): ReactNode[] {
             <Link
               key={`l-${key++}`}
               href={href}
-              className="font-semibold text-teal-300 underline decoration-teal-400/40 underline-offset-2 hover:text-teal-200 light:text-teal-700"
+              className="font-semibold text-gold underline decoration-gold/40 underline-offset-2 hover:text-gold-light light:text-gold-dark"
             >
               {label}
             </Link>
@@ -59,7 +59,7 @@ function renderInlineMarkdown(text: string): ReactNode[] {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-teal-300 underline decoration-teal-400/40 underline-offset-2 hover:text-teal-200 light:text-teal-700"
+              className="font-semibold text-gold underline decoration-gold/40 underline-offset-2 hover:text-gold-light light:text-gold-dark"
             >
               {label}
             </a>
@@ -84,7 +84,7 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
     Boolean(blog.externalLink?.href) && Boolean(blog.externalLink?.text);
 
   return (
-    <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white light:prose-headings:text-gray-900 prose-p:text-silver-light light:prose-p:text-gray-700 prose-a:text-teal-300 light:prose-a:text-teal-700 prose-strong:text-white light:prose-strong:text-gray-900 prose-li:text-silver-light light:prose-li:text-gray-700 prose-code:text-teal-200 light:prose-code:text-teal-700 prose-blockquote:text-silver-light light:prose-blockquote:text-gray-700 prose-blockquote:border-teal-400/50 light:prose-blockquote:border-teal-200 prose-hr:border-white/10 light:prose-hr:border-gray-200">
+    <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white light:prose-headings:text-gray-900 prose-p:text-silver-light light:prose-p:text-gray-700 prose-a:text-gold light:prose-a:text-gold-dark prose-strong:text-white light:prose-strong:text-gray-900 prose-li:text-silver-light light:prose-li:text-gray-700 prose-code:text-gold-light light:prose-code:text-gold-dark prose-blockquote:text-silver-light light:prose-blockquote:text-gray-700 prose-blockquote:border-gold/50 light:prose-blockquote:border-gold-light prose-hr:border-white/10 light:prose-hr:border-gray-200">
       {blog.sections.map((section, index) => {
         const aosDelay = Math.min(index * 50, 400);
 
@@ -154,7 +154,7 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
           <li>
             <Link
               href={blog.internalLink.href || "/services"}
-              className="font-semibold text-teal-300 underline decoration-teal-400/40 underline-offset-2 hover:text-teal-200 light:text-teal-700"
+              className="font-semibold text-gold underline decoration-gold/40 underline-offset-2 hover:text-gold-light light:text-gold-dark"
             >
               {blog.internalLink.text || "Explore our services"} →
             </Link>
@@ -168,7 +168,7 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
                 href={blog.externalLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-teal-300 underline decoration-teal-400/40 underline-offset-2 hover:text-teal-200 light:text-teal-700"
+                className="font-semibold text-gold underline decoration-gold/40 underline-offset-2 hover:text-gold-light light:text-gold-dark"
               >
                 {blog.externalLink.text} ↗
               </a>

@@ -51,7 +51,7 @@ export default function TeamGrid({ teamMembers }: TeamGridProps) {
               </span>
 
               <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
-                <div className="h-px w-8 bg-teal-400/70 transition-all duration-300 group-hover:w-12" />
+                <div className="h-px w-8 bg-gold/70 transition-all duration-300 group-hover:w-12" />
                 <h3 className="mt-2 text-sm font-semibold tracking-[-0.02em] text-white sm:text-base">
                   {member.name}
                 </h3>

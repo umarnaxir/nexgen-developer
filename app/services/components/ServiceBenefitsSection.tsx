@@ -59,15 +59,15 @@ function BenefitListItem({
       style={{ rotateX, rotateY, transformPerspective: 800 }}
       className={`group relative flex w-full items-start gap-3 overflow-hidden rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 sm:px-5 sm:py-4 ${
         isActive
-          ? "border-teal-500/30 bg-teal-500/[0.07] shadow-[0_20px_48px_-32px_rgba(0,0,0,0.18)]"
+          ? "border-gold-dark/30 bg-gold-dark/[0.07] shadow-[0_20px_48px_-32px_rgba(0,0,0,0.18)]"
           : "border-black/[0.06] bg-white hover:border-black/12 hover:bg-black/[0.02]"
       }`}
     >
       <span
         className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 ${
           isActive
-            ? "border-teal-500/30 bg-teal-600 text-white"
-            : "border-teal-500/15 bg-teal-500/10 text-teal-600 group-hover:scale-105"
+            ? "border-gold-dark/30 bg-gold-dark text-primary"
+            : "border-gold-dark/15 bg-gold-dark/10 text-gold-dark group-hover:scale-105"
         }`}
       >
         {isActive ? (
@@ -86,7 +86,7 @@ function BenefitListItem({
       <ArrowRight
         className={`mt-1 hidden h-3.5 w-3.5 shrink-0 transition-all duration-300 lg:block ${
           isActive
-            ? "translate-x-0 text-teal-600 opacity-100"
+            ? "translate-x-0 text-gold-dark opacity-100"
             : "translate-x-[-4px] text-black/20 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
         }`}
       />
@@ -178,7 +178,7 @@ export default function ServiceBenefitsSection({
   return (
     <section
       ref={sectionRef}
-      className="section-light relative overflow-hidden border-t border-black/[0.06] section-y"
+      className="section-light relative overflow-hidden border-t border-black/[0.06] py-6 sm:py-8 lg:py-9"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.4]"
@@ -208,7 +208,7 @@ export default function ServiceBenefitsSection({
               </span>
             </div>
             <div className="h-px w-24 overflow-hidden bg-black/[0.08] sm:w-32">
-              <div ref={progressRef} className="h-full bg-teal-600" style={{ width: "0%" }} />
+              <div ref={progressRef} className="h-full bg-gold-dark" style={{ width: "0%" }} />
             </div>
           </div>
         </div>
@@ -226,7 +226,7 @@ export default function ServiceBenefitsSection({
                 type="button"
                 onClick={() => setActiveTab(id)}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.12em] transition-all duration-300 sm:px-5 ${
-                  activeTab === id ? "bg-black text-white" : "text-black/45 hover:text-black"
+                  activeTab === id ? "bg-gold text-primary" : "text-black/45 hover:text-gold-dark"
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -254,13 +254,13 @@ export default function ServiceBenefitsSection({
           {/* Spotlight panel — desktop only */}
           <div
             ref={spotlightRef}
-            className="relative hidden min-h-[360px] overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-950 shadow-[0_28px_72px_-36px_rgba(0,0,0,0.45)] lg:block lg:min-h-[440px]"
+            className="relative hidden min-h-[360px] overflow-hidden rounded-xl border border-gold/30 bg-background shadow-[0_28px_72px_-36px_rgba(0,0,0,0.45)] lg:block lg:min-h-[440px]"
           >
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:28px_28px] opacity-50"
             />
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-teal-400/15 blur-3xl" />
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/15 blur-3xl" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -272,7 +272,7 @@ export default function ServiceBenefitsSection({
                 className="relative flex h-full flex-col p-6 sm:p-8 lg:p-10"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-teal-300">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold-dark/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">
                     {activeTab === "benefits" ? (
                       <>
                         <Zap className="h-3 w-3" /> Benefit
@@ -283,7 +283,7 @@ export default function ServiceBenefitsSection({
                       </>
                     )}
                   </span>
-                  <span className="text-[11px] font-medium tabular-nums tracking-[0.25em] text-white/35">
+                  <span className="text-[11px] font-medium tabular-nums tracking-[0.25em] text-gold-dark">
                     {String(activeIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
                   </span>
                 </div>
@@ -292,15 +292,15 @@ export default function ServiceBenefitsSection({
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-6 h-px origin-left bg-gradient-to-r from-teal-400/70 via-teal-400/25 to-transparent"
+                  className="mt-6 h-px origin-left bg-gradient-to-r from-gold/70 via-gold/25 to-transparent"
                 />
 
-                <p className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl lg:text-[1.65rem]">
+                <p className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-primary sm:text-2xl lg:text-[1.65rem]">
                   {spotlightTitle}
                 </p>
 
                 <div className="mt-6 flex-1">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-text-gray">
                     Key points
                   </span>
                   <ul className="mt-3 space-y-2.5">
@@ -314,21 +314,21 @@ export default function ServiceBenefitsSection({
                           duration: 0.35,
                           ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="flex items-start gap-3 text-[14px] leading-relaxed text-white/70"
+                        className="flex items-start gap-3 text-[14px] leading-relaxed text-text-gray"
                       >
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400" />
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                         {point}
                       </motion.li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/[0.1] pt-6">
+                <div className="mt-6 flex items-center justify-between gap-4 border-t border-gold/35 pt-6">
                   <button
                     type="button"
                     onClick={() => setActiveIndex((i) => Math.max(i - 1, 0))}
                     disabled={activeIndex === 0}
-                    className="text-sm font-medium text-white/40 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                    className="text-sm font-medium text-text-gray transition-colors hover:text-gold-dark disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Previous
                   </button>
@@ -336,13 +336,13 @@ export default function ServiceBenefitsSection({
                     <button
                       type="button"
                       onClick={() => setActiveIndex((i) => Math.min(i + 1, items.length - 1))}
-                      className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-teal-400/40 hover:bg-teal-500/10"
+                      className="group inline-flex items-center gap-2 rounded-full border border-gold/35 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:border-gold/40 hover:bg-gold-dark/10"
                     >
                       Next
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </button>
                   ) : (
-                    <span className="text-sm font-medium text-teal-300/90">All covered</span>
+                    <span className="text-sm font-medium text-gold/90">All covered</span>
                   )}
                 </div>
               </motion.div>

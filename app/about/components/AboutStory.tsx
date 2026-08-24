@@ -16,7 +16,7 @@ export default function AboutStory() {
     <section className="section-light relative overflow-hidden border-t border-black/[0.06] section-y">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-teal-500/[0.06] blur-[100px]"
+        className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-dark/[0.06] blur-[100px]"
       />
 
       <div className="section-container relative z-10">
@@ -45,7 +45,7 @@ export default function AboutStory() {
             <div className="mt-10 flex flex-wrap gap-5">
               <Link
                 href="/team"
-                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-teal-700 transition-colors hover:text-teal-600"
+                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dark transition-colors hover:text-gold-dark"
               >
                 Meet the team
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -72,7 +72,7 @@ export default function AboutStory() {
               viewport={{ once: true }}
               className="rounded-2xl border border-black/[0.06] bg-neutral-50 p-6 sm:p-7"
             >
-              <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-teal-700/80">
+              <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-gold-dark/80">
                 Manifesto
               </p>
               <p className="mt-3 text-lg font-medium leading-snug tracking-[-0.02em] text-black sm:text-xl">
@@ -95,7 +95,7 @@ export default function AboutStory() {
                         onMouseEnter={() => setActiveHighlight(index)}
                         className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all ${
                           isActive
-                            ? "border-teal-500/30 bg-teal-500/[0.08]"
+                            ? "border-gold-dark/30 bg-gold-dark/[0.08]"
                             : "border-transparent bg-neutral-50 hover:border-black/[0.06]"
                         }`}
                       >
@@ -108,7 +108,7 @@ export default function AboutStory() {
                         </span>
                         <span
                           className={`text-[10px] font-semibold tabular-nums tracking-[0.2em] ${
-                            isActive ? "text-teal-700" : "text-black/25"
+                            isActive ? "text-gold-dark" : "text-black/25"
                           }`}
                         >
                           {String(index + 1).padStart(2, "0")}
@@ -141,7 +141,7 @@ export default function AboutStory() {
                   key={item.label}
                   data-aos="fade-up"
                   data-aos-delay={150 + index * 60}
-                  className="rounded-xl border border-black/[0.06] bg-white px-4 py-3.5 transition-colors hover:border-teal-500/25"
+                  className="rounded-xl border border-black/[0.06] bg-white px-4 py-3.5 transition-colors hover:border-gold-dark/25"
                 >
                   <dt className="text-[10px] font-medium uppercase tracking-[0.22em] text-black/35">
                     {item.label}

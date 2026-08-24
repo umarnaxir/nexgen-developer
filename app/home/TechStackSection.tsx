@@ -10,7 +10,7 @@ import {
   totalTechStackItems,
   type TechStackCategory,
 } from "./tech-stack-data";
-import { getTechBrandIcon, brandFillOnDark } from "./tech-brand-icons";
+import { getTechBrandIcon } from "./tech-brand-icons";
 
 export default function TechStackSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,7 +109,7 @@ export default function TechStackSection() {
     <section
       ref={sectionRef}
       id="tech-stack"
-      className="section-dark relative overflow-hidden bg-black text-white section-y"
+      className="section-light relative overflow-hidden section-y"
       aria-label="Technology stack"
     >
       <div
@@ -118,7 +118,7 @@ export default function TechStackSection() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-teal-500/[0.08] blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-gold-dark/[0.08] blur-[130px]"
       />
 
       <div className="section-container relative z-10">
@@ -127,20 +127,20 @@ export default function TechStackSection() {
           className="mb-6 flex items-end justify-between gap-3 sm:mb-8 sm:gap-4"
         >
           <div className="min-w-0 max-w-3xl">
-            <h2 className="text-[clamp(1.7rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-white">
+            <h2 className="text-[clamp(1.7rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-primary">
               Stack we ship with.
             </h2>
-            <p className="mt-2.5 text-[15px] leading-relaxed text-white/50 sm:whitespace-nowrap">
+            <p className="mt-2.5 text-[15px] leading-relaxed text-text-gray sm:whitespace-nowrap">
               {totalTechStackItems}+ tools across {techStackCategories.length} disciplines,
               browse the shelf or search anything.
             </p>
           </div>
 
           <div className="hidden shrink-0 flex-col items-end gap-2 sm:flex sm:flex-row sm:items-center sm:gap-2.5">
-            <span className="rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1.5 text-xs font-medium tabular-nums text-teal-300">
+            <span className="rounded-full border border-gold/25 bg-gold-dark/10 px-3 py-1.5 text-xs font-medium tabular-nums text-gold">
               {totalTechStackItems}+ skills
             </span>
-            <span className="text-xs tabular-nums text-white/40 sm:text-sm">
+            <span className="text-xs tabular-nums text-text-gray sm:text-sm">
               {String(activeIndex + 1).padStart(2, "0")} /{" "}
               {String(Math.max(categories.length, 1)).padStart(2, "0")}
             </span>
@@ -156,20 +156,20 @@ export default function TechStackSection() {
         </div>
 
         <label className="relative mb-5 block sm:mb-6">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-teal-300/50" />
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gold/50" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search technologies, tools, or skills..."
-            className="w-full rounded-2xl border border-white/[0.1] bg-white/[0.04] py-3.5 pl-11 pr-11 text-sm text-white outline-none transition-all placeholder:text-white/35 focus:border-teal-400/40 focus:bg-white/[0.06]"
+            className="w-full rounded-2xl border border-gold/35 bg-gold/[0.08] py-3.5 pl-11 pr-11 text-sm text-primary outline-none transition-all placeholder:text-gold-dark focus:border-gold/40 focus:bg-gold/10"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
               aria-label="Clear search"
-              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-white/35 transition-colors hover:bg-white/10 hover:text-teal-300"
+              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-gold-dark transition-colors hover:bg-gold/15 hover:text-gold"
             >
               <X className="h-4 w-4" />
             </button>
@@ -188,28 +188,28 @@ export default function TechStackSection() {
               />
             ))}
           </div>
-          <div aria-hidden className="h-2 rounded-full bg-white/[0.08]" />
+          <div aria-hidden className="h-2 rounded-full bg-gold/12" />
         </div>
 
         <div
           ref={stageRef}
-          className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.1] bg-white/[0.03] sm:rounded-[1.75rem]"
+          className="relative overflow-hidden rounded-[1.5rem] border border-gold/35 bg-background sm:rounded-[1.75rem]"
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-1 top-0 select-none text-[6.5rem] font-semibold leading-none text-white/[0.04] sm:text-[9rem] lg:text-[11rem]"
+            className="pointer-events-none absolute -right-1 top-0 select-none text-[6.5rem] font-semibold leading-none text-gold/15 sm:text-[9rem] lg:text-[11rem]"
           >
             {String(activeIndex + 1).padStart(2, "0")}
           </div>
 
-          <div className="relative z-[1] flex flex-col gap-3 border-b border-white/[0.08] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
+          <div className="relative z-[1] flex flex-col gap-3 border-b border-gold/30 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
             <div className="flex items-center gap-3">
               <motion.span
                 key={activeCategory.id}
                 initial={{ scale: 0.86, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                className="flex items-center justify-center text-teal-300"
+                className="flex items-center justify-center text-gold"
               >
                 <ActiveIcon className="h-8 w-8 sm:h-9 sm:w-9" />
               </motion.span>
@@ -221,14 +221,14 @@ export default function TechStackSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.25 }}
-                    className="truncate text-lg font-semibold tracking-[-0.02em] text-white sm:text-2xl"
+                    className="truncate text-lg font-semibold tracking-[-0.02em] text-primary sm:text-2xl"
                   >
                     {query.trim() ? "Search results" : activeCategory.title}
                   </motion.h3>
                 </AnimatePresence>
               </div>
             </div>
-            <span className="w-fit rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1 text-xs font-medium tabular-nums text-teal-300">
+            <span className="w-fit rounded-full border border-gold/25 bg-gold-dark/10 px-3 py-1 text-xs font-medium tabular-nums text-gold">
               {activeCategory.items.length} skills
             </span>
           </div>
@@ -252,7 +252,7 @@ export default function TechStackSection() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="flex min-h-[180px] items-center justify-center px-6 text-sm text-white/40"
+                  className="flex min-h-[180px] items-center justify-center px-6 text-sm text-text-gray"
                 >
                   No matches. Try another keyword or clear search.
                 </motion.p>
@@ -279,7 +279,7 @@ function NavButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/60 transition-all hover:border-teal-400/40 hover:bg-teal-500/15 hover:text-teal-300"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/35 bg-gold/10 text-text-gray transition-all hover:border-gold/40 hover:bg-gold-dark/15 hover:text-gold"
     >
       {children}
     </button>
@@ -309,13 +309,13 @@ function CategoryBook({
       title={category.title}
       className={`group relative flex h-[7.75rem] w-[5.5rem] shrink-0 flex-col items-center justify-between overflow-hidden rounded-lg border px-2 py-2.5 transition-all duration-300 sm:h-[9rem] sm:w-[6.25rem] sm:rounded-xl sm:px-2.5 sm:py-3 ${
         isActive
-          ? "-translate-y-2 border-teal-400/50 bg-teal-500/15 text-white"
-          : "border-white/[0.1] bg-white/[0.04] text-white hover:-translate-y-1.5 hover:border-teal-400/40 hover:bg-teal-500/10"
+          ? "-translate-y-2 border-gold/50 bg-gold-dark/15 text-primary"
+          : "border-gold/35 bg-gold/[0.08] text-primary hover:-translate-y-1.5 hover:border-gold/40 hover:bg-gold-dark/10"
       }`}
     >
       <span
         className={`text-[9px] font-semibold tabular-nums tracking-[0.12em] transition-colors ${
-          isActive ? "text-teal-300/80" : "text-white/35 group-hover:text-teal-300/70"
+          isActive ? "text-gold/80" : "text-gold-dark group-hover:text-gold/70"
         }`}
       >
         {String(index + 1).padStart(2, "0")}
@@ -323,15 +323,15 @@ function CategoryBook({
       <span
         className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors sm:h-11 sm:w-11 ${
           isActive
-            ? "bg-teal-500/20 text-teal-300"
-            : "bg-white/10 text-white/70 group-hover:bg-teal-500/20 group-hover:text-teal-300"
+            ? "bg-gold-dark/20 text-gold"
+            : "bg-gold/15 text-text-gray group-hover:bg-gold-dark/20 group-hover:text-gold"
         }`}
       >
         <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
       </span>
       <span
         className={`w-full text-center text-[10px] font-semibold leading-tight tracking-tight transition-colors sm:text-[11px] ${
-          isActive ? "text-white" : "text-white/60 group-hover:text-white"
+          isActive ? "text-primary" : "text-text-gray group-hover:text-gold-dark"
         }`}
       >
         {category.shortTitle}
@@ -359,7 +359,7 @@ function SkillBook({ label, index }: { label: string; index: number }) {
             aria-hidden
             className="h-8 w-8 sm:h-9 sm:w-9"
           >
-            <path fill={brandFillOnDark(brand.icon.hex)} d={brand.icon.path} />
+            <path fill={`#${brand.icon.hex.replace(/^#/, "")}`} d={brand.icon.path} />
           </svg>
         ) : brand.type === "url" && !failed ? (
           brand.mono ? (
@@ -367,7 +367,7 @@ function SkillBook({ label, index }: { label: string; index: number }) {
               aria-hidden
               className="h-8 w-8 sm:h-9 sm:w-9"
               style={{
-                backgroundColor: brandFillOnDark(brand.color ?? "000000"),
+                backgroundColor: `#${(brand.color ?? "000000").replace(/^#/, "")}`,
                 WebkitMaskImage: `url(${brand.src})`,
                 maskImage: `url(${brand.src})`,
                 WebkitMaskSize: "contain",
@@ -390,12 +390,12 @@ function SkillBook({ label, index }: { label: string; index: number }) {
             />
           )
         ) : (
-          <span className="text-sm font-bold uppercase tracking-wide text-white/70">
+          <span className="text-sm font-bold uppercase tracking-wide text-text-gray">
             {label.slice(0, 2)}
           </span>
         )}
       </span>
-      <span className="line-clamp-2 text-[11px] font-semibold leading-snug tracking-[-0.01em] text-white/75 sm:text-xs">
+      <span className="line-clamp-2 text-[11px] font-semibold leading-snug tracking-[-0.01em] text-text-gray sm:text-xs">
         {label}
       </span>
     </motion.li>

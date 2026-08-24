@@ -16,7 +16,7 @@ export default function BlogPostCTA() {
       </p>
       <button
         onClick={openContactModal}
-        className="inline-block px-8 py-4 bg-gradient-to-r from-teal-500 to-teal-700 text-white font-bold rounded-lg hover:from-teal-400 hover:to-teal-600 transition-all duration-300 uppercase tracking-wide hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40"
+        className="inline-block px-8 py-4 bg-gradient-to-r from-gold-dark to-gold-dark text-white font-bold rounded-lg hover:from-gold hover:to-gold-dark transition-all duration-300 uppercase tracking-wide hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
       >
         Get in Touch
       </button>

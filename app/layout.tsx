@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
 import AOSInit from "@/components/AOSInit";
@@ -9,6 +10,13 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { getContactInfo, getFooterSettings } from "@/lib/content/store";
 import { getSession } from "@/lib/admin/auth";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
 
 const spaceGrotesk = localFont({
   src: [
@@ -68,7 +76,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${spaceGrotesk.className} antialiased`}
+        className={`${spaceGrotesk.variable} ${playfair.variable} ${spaceGrotesk.className} antialiased`}
       >
         <ThemeProvider>
           <OrganizationSchema />

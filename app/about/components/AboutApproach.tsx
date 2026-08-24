@@ -1,228 +1,227 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import GalaxyBackground from "@/components/GalaxyBackground";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { Code2, Compass, PenTool, Rocket, TrendingUp } from "lucide-react";
 import { aboutApproach, aboutApproachMetrics } from "../data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const stepIcons = [Compass, PenTool, Code2, Rocket, TrendingUp] as const;
 
-/**
- * Full-viewport process stage — clean, interactive, edge-to-edge.
- */
-export default function AboutApproach() {
-  const [active, setActive] = useState(0);
-  const current = aboutApproach[active] ?? aboutApproach[0];
-  const total = aboutApproach.length;
+function parseMetric(value: string) {
+  const match = value.match(/^(\d+)(.*)$/);
+  return { amount: match ? Number(match[1]) : 0, suffix: match?.[2] ?? "" };
+}
 
-  const go = useCallback(
-    (dir: -1 | 1) => {
-      setActive((prev) => (prev + dir + total) % total);
-    },
-    [total]
-  );
+function CountUp({ to }: { to: number }) {
+  const reduceMotion = useReducedMotion();
+  const [n, setN] = useState(reduceMotion ? to : 0);
 
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        event.preventDefault();
-        go(1);
-      }
-      if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        event.preventDefault();
-        go(-1);
-      }
+    if (reduceMotion) {
+      setN(to);
+      return;
+    }
+    const start = performance.now();
+    const duration = 900;
+    let frame = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setN(Math.round(eased * to));
+      if (t < 1) frame = requestAnimationFrame(tick);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [go]);
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [reduceMotion, to]);
+
+  return <>{n}</>;
+}
+
+function ProcessCard({
+  item,
+  index,
+  className = "",
+}: {
+  item: (typeof aboutApproach)[number];
+  index: number;
+  className?: string;
+}) {
+  const Icon = stepIcons[index] ?? Compass;
+  const goldCard = index % 2 === 1;
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section
-      className="section-dark relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden"
-      aria-label="How a project moves"
+    <motion.article
+      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.45, delay: index * 0.08, ease }}
+      whileHover={reduceMotion ? undefined : { y: -8, scale: 1.015 }}
+      className={`group relative flex flex-col overflow-hidden rounded-[1.35rem] p-5 sm:p-6 ${
+        goldCard ? "bg-gold text-primary" : "bg-[#111111] text-white"
+      } ${className}`}
     >
-      {/* Galaxy starfield — same as hero */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <GalaxyBackground />
-      </div>
-      <div
+      <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:40px_40px] opacity-70"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-1/4 top-1/3 z-[1] h-[50vh] w-[50vh] rounded-full bg-white/[0.03] blur-[120px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[45vh] w-[45vh] rounded-full bg-white/[0.025] blur-[110px]"
+        className={`pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full ${
+          goldCard ? "via-white/35" : "via-gold/20"
+        }`}
       />
 
-      <div className="relative z-10 flex h-full w-full flex-col px-4 pb-5 pt-[calc(var(--mobile-nav-height)+0.75rem)] sm:px-8 sm:pb-7 sm:pt-10 lg:px-12 lg:pb-8 lg:pt-12 xl:px-16">
-        {/* Header */}
-        <div className="flex shrink-0 flex-col gap-3 sm:gap-4">
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+      <div className="relative flex items-start justify-between gap-3">
+        <span
+          className={`font-serif text-[2.1rem] leading-none transition-transform duration-300 group-hover:scale-105 ${
+            goldCard ? "text-primary/35" : "text-gold-dark/80"
+          }`}
+        >
+          {item.step}
+        </span>
+        <span
+          className={`flex h-9 w-9 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 ${
+            goldCard ? "bg-primary text-gold" : "bg-gold text-primary"
+          }`}
+        >
+          <Icon className="h-4 w-4" strokeWidth={1.9} />
+        </span>
+      </div>
+
+      <h3
+        className={`relative mt-8 text-[1.35rem] font-semibold tracking-[-0.03em] sm:text-[1.45rem] ${
+          goldCard ? "text-primary" : "text-white"
+        }`}
+      >
+        {item.title}
+      </h3>
+      <p
+        className={`relative mt-2 text-[13px] leading-relaxed sm:text-sm ${
+          goldCard ? "text-primary/70" : "text-white/60"
+        }`}
+      >
+        {item.text}
+      </p>
+
+      <ul className="relative mt-auto flex flex-col gap-1.5 pt-6">
+        {item.outcomes.slice(0, 2).map((outcome) => (
+          <li
+            key={outcome}
+            className={`text-[11px] font-medium ${
+              goldCard ? "text-primary/80" : "text-gold"
+            }`}
+          >
+            {outcome}
+          </li>
+        ))}
+      </ul>
+    </motion.article>
+  );
+}
+
+export default function AboutApproach() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const metricsRef = useRef<HTMLDivElement>(null);
+  const metricsInView = useInView(metricsRef, { once: true, amount: 0.5 });
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const onScroll = () => {
+      const card = scroller.querySelector("article");
+      const width = card instanceof HTMLElement ? card.offsetWidth + 12 : scroller.clientWidth;
+      if (!width) return;
+      const next = Math.round(scroller.scrollLeft / width);
+      setActiveIndex(Math.min(Math.max(next, 0), aboutApproach.length - 1));
+    };
+
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <section className="relative bg-white text-black" aria-label="How a project moves">
+      <div className="px-4 py-8 sm:px-6 sm:py-10 lg:px-14 lg:py-12">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="max-w-2xl">
+            <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Process
             </span>
+            <h2 className="mt-3 text-[clamp(1.9rem,4.8vw,3.15rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-primary">
+              How a project <span className="text-gold-dark">moves.</span>
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-gray sm:text-base">
+              Five clear stages from first conversation to sustained growth.
+            </p>
+          </div>
 
-            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-              <span className="font-mono text-xs tabular-nums text-white/40 sm:text-sm">
-                <span className="text-white">{String(active + 1).padStart(2, "0")}</span>
-                <span className="mx-1 text-white/20">/</span>
-                {String(total).padStart(2, "0")}
-              </span>
-              <button
-                type="button"
-                aria-label="Previous step"
-                onClick={() => go(-1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/12 text-white/70 transition-colors hover:border-white/30 hover:bg-white/5 hover:text-white sm:h-11 sm:w-11"
-              >
-                <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next step"
-                onClick={() => go(1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/12 text-white/70 transition-colors hover:border-white/30 hover:bg-white/5 hover:text-white sm:h-11 sm:w-11"
-              >
-                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              </button>
+          <div className="mt-6 lg:hidden">
+            <div ref={scrollerRef} className="process-mobile-scroller">
+              {aboutApproach.map((item, index) => (
+                <ProcessCard
+                  key={item.step}
+                  item={item}
+                  index={index}
+                  className="process-mobile-card min-h-[340px]"
+                />
+              ))}
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-1.5" aria-hidden>
+              {aboutApproach.map((item, index) => (
+                <span
+                  key={item.step}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    index === activeIndex ? "w-5 bg-gold-dark" : "w-1.5 bg-gold/40"
+                  }`}
+                />
+              ))}
             </div>
           </div>
 
-          <div className="min-w-0">
-            <h2 className="whitespace-nowrap text-[clamp(1.35rem,5.8vw,3.25rem)] font-semibold tracking-[-0.035em] text-white">
-              How a project moves.
-            </h2>
-            <p className="mt-2 line-clamp-1 max-w-xl text-sm leading-relaxed text-white/45 sm:line-clamp-none sm:text-[15px]">
-              Four clear stages from first conversation to sustained growth.
-            </p>
-          </div>
-        </div>
-
-        {/* Progress rail */}
-        <div className="relative mt-6 shrink-0 sm:mt-8">
-          <div className="absolute left-0 right-0 top-[11px] h-px bg-white/10 sm:top-[13px]" aria-hidden>
-            <motion.div
-              className="h-full origin-left bg-white"
-              animate={{ scaleX: total <= 1 ? 1 : active / (total - 1) }}
-              transition={{ duration: 0.45, ease }}
-            />
-          </div>
-
-          <div className="relative grid grid-cols-4 gap-2 sm:gap-4">
-            {aboutApproach.map((item, index) => {
-              const isActive = index === active;
-              const isPast = index < active;
-              return (
-                <button
-                  key={item.step}
-                  type="button"
-                  onClick={() => setActive(index)}
-                  onMouseEnter={() => {
-                    if (window.matchMedia("(min-width: 1024px)").matches) setActive(index);
-                  }}
-                  className="group relative flex flex-col items-start pt-0 text-left"
-                >
-                  <span
-                    className={`relative z-10 mb-3 flex h-[22px] w-[22px] items-center justify-center rounded-full border transition-all duration-300 sm:mb-4 sm:h-[26px] sm:w-[26px] ${
-                      isActive
-                        ? "border-white bg-white text-black scale-110"
-                        : isPast
-                          ? "border-white/50 bg-white/20 text-white"
-                          : "border-white/20 bg-black text-white/40 group-hover:border-white/40"
-                    }`}
-                  >
-                    <span className="text-[9px] font-semibold tabular-nums sm:text-[10px]">
-                      {item.step}
-                    </span>
-                  </span>
-                  <span
-                    className={`w-full truncate whitespace-nowrap text-[10px] font-semibold tracking-[-0.02em] transition-colors sm:text-sm lg:text-base ${
-                      isActive ? "text-white" : "text-white/40 group-hover:text-white/70"
-                    }`}
-                  >
-                    {item.title}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Main stage — fills remaining viewport */}
-        <div className="relative mt-6 flex min-h-0 flex-1 flex-col justify-center sm:mt-8">
-          <AnimatePresence mode="wait">
-            {current ? (
-              <motion.div
-                key={current.step}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.45, ease }}
-                className="grid h-full min-h-0 items-center gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 xl:gap-24"
-              >
-                {/* Giant step mark */}
-                <div className="relative hidden h-full items-center lg:flex">
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.92 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease }}
-                    className="select-none text-[clamp(8rem,22vw,16rem)] font-semibold leading-none tracking-[-0.08em] text-white/[0.06]"
-                  >
-                    {current.step}
-                  </motion.span>
-                </div>
-
-                <div className="flex flex-col justify-center">
-                  <span className="font-mono text-[11px] tabular-nums tracking-[0.2em] text-white/35 lg:hidden">
-                    {current.step}
-                  </span>
-                  <h3 className="mt-1 whitespace-nowrap text-[clamp(1.75rem,7vw,3.75rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-white lg:mt-0">
-                    {current.title}
-                  </h3>
-                  <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-5 sm:text-lg lg:text-xl">
-                    {current.text}
-                  </p>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/45 sm:text-[15px]">
-                    {current.detail}
-                  </p>
-
-                  <ul className="mt-6 flex flex-wrap gap-2 sm:mt-8">
-                    {current.outcomes.map((outcome) => (
-                      <li
-                        key={outcome}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/65 sm:text-xs"
-                      >
-                        {outcome}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
-        </div>
-
-        {/* Metrics — clean full-width strip */}
-        <div className="mt-auto shrink-0 border-t border-white/10 pt-4 sm:pt-5">
-          <div className="grid grid-cols-4 gap-3 sm:gap-8 lg:gap-12">
-            {aboutApproachMetrics.map((metric, index) => (
-              <div key={metric.label} className="min-w-0">
-                <p className="text-lg font-semibold tabular-nums tracking-[-0.03em] text-white sm:text-2xl lg:text-3xl">
-                  {metric.value}
-                </p>
-                <p className="mt-0.5 truncate whitespace-nowrap text-[10px] text-white/40 sm:mt-1 sm:text-[13px]">
-                  {metric.label}
-                </p>
-                {index < aboutApproachMetrics.length - 1 ? (
-                  <span className="sr-only">·</span>
-                ) : null}
-              </div>
+          <div className="mt-6 hidden grid-cols-5 gap-4 lg:grid">
+            {aboutApproach.map((item, index) => (
+              <ProcessCard
+                key={item.step}
+                item={item}
+                index={index}
+                className="min-h-[280px] shadow-[0_16px_40px_-28px_rgba(0,0,0,0.35)] hover:shadow-[0_24px_48px_-24px_rgba(209,172,129,0.55)]"
+              />
             ))}
+          </div>
+
+          <div
+            ref={metricsRef}
+            className="relative mx-auto mt-6 w-[min(100%,52rem)] overflow-hidden rounded-[1.35rem] border border-gold/25 bg-[#111111] px-4 py-5 sm:mt-8 sm:px-8 sm:py-6"
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(230,201,166,0.18),transparent_42%),radial-gradient(circle_at_88%_100%,rgba(209,172,129,0.12),transparent_36%)]"
+            />
+            <div className="relative grid grid-cols-2 gap-y-5 sm:grid-cols-4">
+              {aboutApproachMetrics.map((metric, index) => {
+                const { amount, suffix } = parseMetric(metric.value);
+                return (
+                  <div
+                    key={metric.label}
+                    className={`min-w-0 px-2 text-center sm:px-3 ${
+                      index % 2 === 1 ? "border-l border-white/10" : ""
+                    } ${index >= 2 ? "border-t border-white/10 sm:border-t-0" : ""} sm:border-l sm:border-white/10 sm:first:border-l-0`}
+                  >
+                    <p className="text-xl font-semibold tabular-nums tracking-[-0.04em] text-gold sm:text-2xl">
+                      {metricsInView ? (
+                        <>
+                          <CountUp to={amount} />
+                          {suffix}
+                        </>
+                      ) : (
+                        `0${suffix}`
+                      )}
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-white/70 sm:text-[13px]">{metric.label}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

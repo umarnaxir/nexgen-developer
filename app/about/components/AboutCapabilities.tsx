@@ -20,7 +20,7 @@ export default function AboutCapabilities() {
     <section className="section-light relative overflow-hidden border-t border-black/[0.06] section-y">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 top-1/4 h-[320px] w-[320px] rounded-full bg-teal-500/[0.05] blur-[110px]"
+        className="pointer-events-none absolute -right-20 top-1/4 h-[320px] w-[320px] rounded-full bg-gold-dark/[0.05] blur-[110px]"
       />
 
       <div className="section-container relative z-10">
@@ -42,7 +42,7 @@ export default function AboutCapabilities() {
               type="button"
               aria-label="Scroll capabilities left"
               onClick={() => scrollBy(-1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-teal-600/40 hover:text-teal-700"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -50,7 +50,7 @@ export default function AboutCapabilities() {
               type="button"
               aria-label="Scroll capabilities right"
               onClick={() => scrollBy(1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-teal-600/40 hover:text-teal-700"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
             >
               <ArrowRight className="h-4 w-4" />
             </button>
@@ -70,7 +70,7 @@ export default function AboutCapabilities() {
                 key={item.id}
                 whileHover={{ y: -6 }}
                 transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                className="group relative flex h-[340px] w-[min(85vw,320px)] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl border border-black/10 bg-neutral-950 p-6 text-white shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] sm:h-[380px] sm:w-[360px] sm:p-7 md:w-[380px]"
+                className="group relative flex h-[340px] w-[min(85vw,320px)] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-2xl border border-black/10 bg-background p-6 text-primary shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] sm:h-[380px] sm:w-[360px] sm:p-7 md:w-[380px]"
               >
                 <div
                   aria-hidden
@@ -82,20 +82,20 @@ export default function AboutCapabilities() {
                 />
 
                 <div className="relative flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-teal-300 transition-transform duration-300 group-hover:scale-105">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/35 bg-gold/10 text-gold transition-transform duration-300 group-hover:scale-105">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <span className="text-[11px] font-semibold tabular-nums tracking-[0.25em] text-white/35">
+                  <span className="text-[11px] font-semibold tabular-nums tracking-[0.25em] text-gold-dark">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
 
                 <div className="relative">
-                  <h3 className="text-xl font-semibold tracking-[-0.02em] text-white sm:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-[-0.02em] text-primary sm:text-2xl">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm font-medium text-teal-300/90">{item.summary}</p>
-                  <p className="mt-3 text-[14px] leading-relaxed text-white/50 sm:text-[15px]">
+                  <p className="mt-2 text-sm font-medium text-gold/90">{item.summary}</p>
+                  <p className="mt-3 text-[14px] leading-relaxed text-text-gray sm:text-[15px]">
                     {item.detail}
                   </p>
                 </div>

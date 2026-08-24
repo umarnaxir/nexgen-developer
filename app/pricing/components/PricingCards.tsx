@@ -38,8 +38,8 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
         "group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border bg-white",
         "transition-[box-shadow,border-color] duration-400",
         plan.popular
-          ? "z-10 border-teal-400/80 shadow-[0_28px_80px_-32px_rgba(13,148,136,0.45)] ring-1 ring-teal-400/25 md:-mt-3 md:mb-3 md:scale-[1.03]"
-          : "border-neutral-200/90 shadow-[0_16px_48px_-32px_rgba(0,0,0,0.12)] hover:border-teal-200/70 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.14)]"
+          ? "z-10 border-gold/80 shadow-[0_28px_80px_-32px_rgba(13,148,136,0.45)] ring-1 ring-gold/25 md:-mt-3 md:mb-3 md:scale-[1.03]"
+          : "border-neutral-200/90 shadow-[0_16px_48px_-32px_rgba(0,0,0,0.12)] hover:border-gold-light/70 hover:shadow-[0_24px_60px_-28px_rgba(0,0,0,0.14)]"
       )}
     >
       <div
@@ -48,12 +48,12 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
       />
 
       {plan.popular ? (
-        <div className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-teal-700 via-teal-600 to-teal-500 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+        <div className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-gold-dark via-gold-dark to-gold-dark px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
           <Sparkles className="h-3.5 w-3.5" strokeWidth={2.25} />
           Most popular
         </div>
       ) : (
-        <div className="h-2 bg-gradient-to-r from-neutral-100 via-neutral-50 to-neutral-100 transition-all duration-300 group-hover:from-teal-100/80 group-hover:via-teal-50/50 group-hover:to-teal-100/80" />
+        <div className="h-2 bg-gradient-to-r from-neutral-100 via-neutral-50 to-neutral-100 transition-all duration-300 group-hover:from-gold-light/80 group-hover:via-gold-light/50 group-hover:to-gold-light/80" />
       )}
 
       <div className="relative flex flex-1 flex-col p-6 sm:p-8">
@@ -62,11 +62,11 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400">
               Plan
             </p>
-            <h3 className="mt-1 text-xl font-semibold tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-teal-800">
+            <h3 className="mt-1 text-xl font-semibold tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-gold-dark">
               {plan.name}
             </h3>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-neutral-200/80 bg-neutral-50 px-3 py-1.5 text-[11px] font-medium text-neutral-600 transition-all duration-300 group-hover:border-teal-200 group-hover:bg-teal-50 group-hover:text-teal-800">
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-neutral-200/80 bg-neutral-50 px-3 py-1.5 text-[11px] font-medium text-neutral-600 transition-all duration-300 group-hover:border-gold-light group-hover:bg-gold-light group-hover:text-gold-dark">
             <Clock className="h-3 w-3" />
             {plan.timeline}
           </span>
@@ -85,7 +85,7 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
           <p className="mt-3 text-sm leading-relaxed text-neutral-600">
             {plan.description}
           </p>
-          <p className="mt-3 inline-flex rounded-lg bg-teal-50/80 px-2.5 py-1 text-xs font-medium text-teal-900/85">
+          <p className="mt-3 inline-flex rounded-lg bg-gold-light/80 px-2.5 py-1 text-xs font-medium text-gold-dark/85">
             Best for: {plan.bestFor}
           </p>
         </div>
@@ -103,7 +103,7 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
               transition={{ delay: 0.2 + i * 0.05, duration: 0.35 }}
               className="flex items-start gap-3 text-sm text-neutral-700"
             >
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100 text-teal-700 transition-transform duration-300 group-hover:scale-110">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-light text-gold-dark transition-transform duration-300 group-hover:scale-110">
                 <Check className="h-3 w-3" strokeWidth={2.5} />
               </span>
               <span>{item}</span>
@@ -119,8 +119,8 @@ function PlanCard({ plan, index }: { plan: PricingPlan; index: number }) {
           className={cn(
             "relative mt-8 w-full overflow-hidden rounded-2xl px-4 py-4 text-sm font-semibold transition-colors duration-300",
             plan.popular
-              ? "bg-gradient-to-r from-teal-700 to-teal-600 text-white shadow-lg shadow-teal-600/25 hover:from-teal-600 hover:to-teal-500"
-              : "border border-neutral-200 bg-neutral-50 text-neutral-900 hover:border-teal-300 hover:bg-white hover:text-teal-900"
+              ? "bg-gradient-to-r from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/25 hover:from-gold-dark hover:to-gold-dark"
+              : "border border-neutral-200 bg-neutral-50 text-neutral-900 hover:border-gold hover:bg-white hover:text-gold-dark"
           )}
         >
           <span className="relative z-10">{plan.ctaLabel}</span>
@@ -147,7 +147,7 @@ export default function PricingCards({ service }: PricingCardsProps) {
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-8 top-1/2 -z-10 hidden h-64 -translate-y-1/2 rounded-full bg-teal-200/20 blur-3xl md:block"
+        className="pointer-events-none absolute inset-x-8 top-1/2 -z-10 hidden h-64 -translate-y-1/2 rounded-full bg-gold-light/20 blur-3xl md:block"
       />
 
       <div className="grid grid-cols-1 items-end gap-6 md:grid-cols-3 lg:gap-8">

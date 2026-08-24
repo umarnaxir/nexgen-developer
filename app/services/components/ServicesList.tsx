@@ -88,7 +88,7 @@ export default function ServicesList({ services }: ServicesListProps) {
     <section
       ref={sectionRef}
       id="services-list"
-      className="section-dark relative text-white"
+      className="section-light relative text-primary"
       aria-label="Services listing"
     >
       <div
@@ -97,12 +97,12 @@ export default function ServicesList({ services }: ServicesListProps) {
       >
         <div className="mx-auto mb-5 flex w-full max-w-7xl shrink-0 flex-col gap-4 sm:mb-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-text-gray">
               What we offer
             </span>
             <h2
               id="services-list-heading"
-              className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl"
+              className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-primary sm:text-4xl lg:text-5xl"
             >
               Our services
             </h2>
@@ -125,8 +125,8 @@ export default function ServicesList({ services }: ServicesListProps) {
                   onClick={() => setActiveTab(category)}
                   className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
                     activeTab === category
-                      ? "bg-white text-black"
-                      : "border border-white/15 bg-white/5 text-white/55 hover:border-white/30 hover:text-white"
+                      ? "bg-gold text-primary"
+                      : "border border-gold/35 bg-gold/10 text-text-gray hover:border-gold hover:text-gold-dark"
                   }`}
                 >
                   {CATEGORY_LABELS[category]}
@@ -135,13 +135,13 @@ export default function ServicesList({ services }: ServicesListProps) {
             </div>
 
             <div className="hidden items-center gap-4 sm:flex">
-              <span className="text-sm tabular-nums text-white/45">
+              <span className="text-sm tabular-nums text-text-gray">
                 {String(filteredServices.length).padStart(2, "0")} services
               </span>
-              <div className="h-px w-28 overflow-hidden bg-white/10 sm:w-40">
+              <div className="h-px w-28 overflow-hidden bg-gold/15 sm:w-40">
                 <div
                   ref={progressRef}
-                  className="h-full origin-left bg-white"
+                  className="h-full origin-left bg-gold-dark"
                   style={{ transform: "scaleX(0.015)" }}
                 />
               </div>

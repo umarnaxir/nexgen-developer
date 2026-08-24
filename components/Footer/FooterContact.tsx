@@ -12,7 +12,7 @@ export default function FooterContact() {
         <div>
           <a
             href="tel:+91600-616-1726"
-            className="text-silver light:text-gray-600 hover:text-white light:hover:text-teal-700 underline-offset-2 transition-colors duration-200 block font-medium"
+            className="text-silver light:text-gray-600 hover:text-white light:hover:text-gold-dark underline-offset-2 transition-colors duration-200 block font-medium"
           >
             +91 6006161726
           </a>
@@ -20,7 +20,7 @@ export default function FooterContact() {
         <div>
           <a
             href="tel:+917889629640"
-            className="text-silver light:text-gray-600 hover:text-white light:hover:text-teal-700 underline-offset-2 transition-colors duration-200 block font-medium"
+            className="text-silver light:text-gray-600 hover:text-white light:hover:text-gold-dark underline-offset-2 transition-colors duration-200 block font-medium"
           >
             +91 788-962-9640
           </a>
@@ -29,7 +29,7 @@ export default function FooterContact() {
       <div className="text-sm font-medium text-silver light:text-gray-600">
         <a
           href="mailto:workwithnexgen@gmail.com"
-          className="text-silver light:text-gray-600 hover:text-white light:hover:text-teal-700 underline-offset-2 transition-colors duration-200 font-medium"
+          className="text-silver light:text-gray-600 hover:text-white light:hover:text-gold-dark underline-offset-2 transition-colors duration-200 font-medium"
         >
           workwithnexgen@gmail.com
         </a>

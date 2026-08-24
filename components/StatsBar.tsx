@@ -58,13 +58,13 @@ function StatItem({
       data-aos-delay={index * 60}
       className={`group relative overflow-hidden rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6 ${
         dark
-          ? "border border-white/[0.08] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.5)] hover:border-teal-500/25"
-          : "border border-black/[0.06] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.14)] hover:border-teal-500/20 hover:shadow-[0_28px_64px_-36px_rgba(0,0,0,0.18)]"
+          ? "border border-gold/30 bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.5)] hover:border-gold-dark/25"
+          : "border border-black/[0.06] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.14)] hover:border-gold-dark/20 hover:shadow-[0_28px_64px_-36px_rgba(0,0,0,0.18)]"
       }`}
     >
-      <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-teal-500/[0.06] opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gold-dark/[0.06] opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
 
-      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600 transition-transform duration-300 group-hover:scale-105">
+      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-gold-dark/20 bg-gold-dark/10 text-gold-dark transition-transform duration-300 group-hover:scale-105">
         <Icon className="h-5 w-5" />
       </span>
 
@@ -86,14 +86,14 @@ export default function StatsBar({ tone = "light" }: StatsBarProps) {
 
   return (
     <section
-      className={`${dark ? "section-dark" : "section-light"} section-y`}
+      className={`${dark ? "section-light" : "section-light"} section-y`}
       aria-label="Company stats"
     >
       <div className="section-container">
         <div className="mb-10 max-w-xl sm:mb-12" data-aos="fade-up">
           <h2
             className={`text-2xl font-semibold tracking-[-0.03em] sm:text-3xl lg:text-4xl ${
-              dark ? "text-white" : "text-black"
+              dark ? "text-primary" : "text-black"
             }`}
           >
             Results that speak for themselves.

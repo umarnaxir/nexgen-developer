@@ -21,10 +21,10 @@ export default function PrivacySections() {
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
  <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
  <h3 className="font-bold text-sm sm:text-base text-black mb-2 sm:mb-3 flex items-center gap-2">
- <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-teal-600" />
+ <UserCheck className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gold-dark" />
  Personal Information
  </h3>
- <ul className="text-xs sm:text-sm text-black/60 space-y-1.5 sm:space-y-2 marker:text-teal-600">
+ <ul className="text-xs sm:text-sm text-black/60 space-y-1.5 sm:space-y-2 marker:text-gold-dark">
  <li>• Name and contact information (email, phone number)</li>
  <li>• Business name and website URL</li>
  <li>• Billing address and payment information</li>
@@ -33,10 +33,10 @@ export default function PrivacySections() {
  </div>
  <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
  <h3 className="font-bold text-sm sm:text-base text-black mb-2 sm:mb-3 flex items-center gap-2">
- <Eye className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-teal-600" />
+ <Eye className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gold-dark" />
  Usage & Technical Data
  </h3>
- <ul className="text-xs sm:text-sm text-black/60 space-y-1.5 sm:space-y-2 marker:text-teal-600">
+ <ul className="text-xs sm:text-sm text-black/60 space-y-1.5 sm:space-y-2 marker:text-gold-dark">
  <li>• IP address and device information</li>
  <li>• Browser type and version</li>
  <li>• Pages visited and time spent</li>
@@ -47,14 +47,14 @@ export default function PrivacySections() {
  </div>
  <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6 mb-4 sm:mb-6">
  <h3 className="font-bold text-sm sm:text-base text-black mb-2 sm:mb-3 flex items-center gap-2">
- <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-teal-600" />
+ <FileText className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gold-dark" />
  Communication &amp; Inquiry Data
  </h3>
  <p className="mb-2 sm:mb-3">When you contact us or request a quote through our contact form or by email, we may collect: your name and contact details; details about your project or inquiry; any files or information you choose to share; and our communication history with you.</p>
  </div>
  <div className="rounded-xl border border-black/[0.06] bg-black/[0.02] p-4 sm:p-5 lg:p-6">
  <h3 className="font-bold text-sm sm:text-base text-black mb-2 sm:mb-3 flex items-center gap-2">
- <Cookie className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-teal-600" />
+ <Cookie className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gold-dark" />
  Cookies and Tracking Technologies
  </h3>
  <p className="mb-2 sm:mb-3">We use cookies and similar tracking technologies to track activity on our Service and hold certain information. Types of cookies we use: Essential cookies, Analytics cookies, Functionality cookies, and Marketing cookies.</p>

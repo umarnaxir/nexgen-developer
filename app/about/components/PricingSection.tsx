@@ -28,7 +28,7 @@ export default function PricingSection() {
               <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-silver-light light:text-gray-700 mt-auto">
                 {option.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-300 light:text-teal-700 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-gold light:text-gold-dark flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
@@ -63,7 +63,7 @@ export default function PricingSection() {
                 <ul className="space-y-2 text-sm text-silver-light light:text-gray-700">
                   {option.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-teal-300 light:text-teal-700 flex-shrink-0" />
+                      <Check className="w-4 h-4 text-gold light:text-gold-dark flex-shrink-0" />
                       {feature}
                     </li>
                   ))}

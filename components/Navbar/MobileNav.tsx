@@ -79,7 +79,7 @@ export default function MobileNav({
                 href={href}
                 className="flex min-w-0 items-center gap-3 text-sm font-bold tracking-wide text-white light:text-gray-900"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/20 light:border-gold-light bg-gold/10 light:bg-gold-light text-gold light:text-gold-dark">
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="truncate">{label}</span>
@@ -95,7 +95,7 @@ export default function MobileNav({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 transition-all duration-300 hover:border-teal-400/50 hover:bg-teal-500 hover:text-white active:scale-95"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 transition-all duration-300 hover:border-gold/50 hover:bg-gold-dark hover:text-white active:scale-95"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -107,7 +107,7 @@ export default function MobileNav({
           <button
             type="button"
             onClick={onGetInTouch}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-600 to-teal-700 py-3 px-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-all duration-300 hover:from-teal-500 hover:to-teal-600 hover:scale-[1.02] active:scale-[0.98]"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-dark to-gold-dark py-3 px-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-all duration-300 hover:from-gold-dark hover:to-gold-dark hover:scale-[1.02] active:scale-[0.98]"
           >
             Let&apos;s Talk
             <ArrowRight className="h-4 w-4" />

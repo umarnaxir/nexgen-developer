@@ -29,6 +29,8 @@ export interface ServiceContent {
  useCases?: string[];
  /** Expected results / outcomes */
  expectedResults?: string[];
+ /** Short hero lead shown under the heading */
+ lead?: string;
 }
 
 export interface ServiceDefinition {

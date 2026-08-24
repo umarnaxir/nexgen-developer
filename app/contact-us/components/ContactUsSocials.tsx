@@ -20,7 +20,7 @@ export default function ContactUsSocials() {
         <p className="text-silver light:text-gray-600 text-sm sm:text-base mb-6 sm:mb-8 max-w-md mx-auto">
           Follow us on social media or drop a message. We&apos;re here to help.
         </p>
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+        <div className="flex flex-wrap justify-center gap-3.5 sm:gap-4">
           {socialLinks.map(({ icon: Icon, href, label }) => (
             <a
               key={label}
@@ -28,9 +28,9 @@ export default function ContactUsSocials() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 transition-all duration-200 hover:border-teal-400/50 light:hover:border-teal-200 hover:bg-teal-500 hover:text-white hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:bg-[#d1ac81] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 sm:h-16 sm:w-16"
             >
-              <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <Icon className="h-6 w-6 text-black sm:h-7 sm:w-7" strokeWidth={2} />
             </a>
           ))}
         </div>

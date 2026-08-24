@@ -71,7 +71,7 @@ export default function PricingServiceSelector({
                 <Icon
                   className={cn(
                     "relative z-10 h-4 w-4 shrink-0 transition-colors",
-                    isActive ? "text-teal-300" : "text-teal-600"
+                    isActive ? "text-gold" : "text-gold-dark"
                   )}
                   strokeWidth={2}
                 />

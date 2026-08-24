@@ -20,7 +20,7 @@ export default function ChatWidget() {
             fallback={
               <div className="fixed z-50 bottom-20 right-4 w-[360px] h-[560px] max-sm:left-3 max-sm:right-3 max-sm:bottom-[4.75rem] max-sm:w-auto max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh] rounded-xl bg-[#070b10]/92 backdrop-blur-2xl border border-white/[0.1] flex items-center justify-center">
                 <motion.div
-                  className="w-6 h-6 border-2 border-cyan-500/30 border-t-cyan-400 rounded-full"
+                  className="w-6 h-6 border-2 border-gold/30 border-t-gold rounded-full"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 />
@@ -38,10 +38,10 @@ export default function ChatWidget() {
         className={`fixed bottom-5 right-5 z-50
           w-14 h-14 rounded-full
           flex items-center justify-center
-          focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black
           cursor-pointer ${
             isOpen
-              ? "overflow-hidden bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/35"
+              ? "overflow-hidden bg-gradient-to-br from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/25 hover:shadow-xl hover:shadow-gold-dark/35"
               : "bg-black border border-white/10"
           }`}
         whileHover={{ scale: 1.08 }}
@@ -109,7 +109,7 @@ export default function ChatWidget() {
 
               {/* Soft cyan wash over the eye area */}
               <motion.span
-                className="pointer-events-none absolute inset-[18%] rounded-full bg-cyan-400/25 blur-md"
+                className="pointer-events-none absolute inset-[18%] rounded-full bg-gold/25 blur-md"
                 animate={{ opacity: [0.2, 0.65, 0.2], scale: [0.85, 1.05, 0.85] }}
                 transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -121,12 +121,12 @@ export default function ChatWidget() {
         {!isOpen && (
           <>
             <motion.span
-              className="pointer-events-none absolute inset-0 rounded-full border-2 border-cyan-400/50"
+              className="pointer-events-none absolute inset-0 rounded-full border-2 border-gold/50"
               animate={{ scale: [1, 1.45], opacity: [0.55, 0] }}
               transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
             />
             <motion.span
-              className="pointer-events-none absolute inset-0 rounded-full border border-cyan-300/40"
+              className="pointer-events-none absolute inset-0 rounded-full border border-gold-light/40"
               animate={{ scale: [1, 1.7], opacity: [0.35, 0] }}
               transition={{
                 duration: 2.2,

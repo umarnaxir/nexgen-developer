@@ -55,14 +55,14 @@ export default function ContactUsContent() {
  onClick={() => setActiveIndex(isActive ? null : index)}
  onMouseEnter={() => setActiveIndex(index)}
  onMouseLeave={() => setActiveIndex(null)}
- className={`glass-card text-left w-full min-h-[200px] sm:min-h-[220px] lg:min-h-[240px] p-6 sm:p-7 lg:p-8 rounded-2xl transition-[border-color,background-color,box-shadow] duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 ${
+ className={`glass-card text-left w-full min-h-[200px] sm:min-h-[220px] lg:min-h-[240px] p-6 sm:p-7 lg:p-8 rounded-2xl transition-[border-color,background-color,box-shadow] duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 ${
  isActive
- ? "border-teal-400/50 light:border-teal-200 shadow-lg"
- : "hover:border-teal-400/40 light:hover:border-teal-200"
+ ? "border-gold/50 light:border-gold-light shadow-lg"
+ : "hover:border-gold/40 light:hover:border-gold-light"
  }`}
  >
  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
- <span className={`p-2.5 sm:p-3 rounded-xl border transition-colors duration-300 ${isActive ? "border-teal-400/40 light:border-teal-200 bg-teal-500 text-white" : "border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700"}`}>
+ <span className={`p-2.5 sm:p-3 rounded-xl border transition-colors duration-300 ${isActive ? "border-gold/40 light:border-gold-light bg-gold-dark text-white" : "border-gold/20 light:border-gold-light bg-gold/10 light:bg-gold-light text-gold light:text-gold-dark"}`}>
  <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
  </span>
  <h3 className="font-bold text-white light:text-gray-900 text-base sm:text-lg">{item.title}</h3>

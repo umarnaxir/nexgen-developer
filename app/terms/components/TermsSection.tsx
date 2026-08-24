@@ -26,10 +26,10 @@ export default function TermsSection({ icon: Icon, title, children, delay = 0, i
       id={sectionId}
       data-aos="fade-up"
       data-aos-delay={Math.min(Math.round(delay * 1000), 200)}
-      className="scroll-mt-28 rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.1)] transition-colors hover:border-teal-500/20 sm:p-6 lg:p-8"
+      className="scroll-mt-28 rounded-xl border border-black/[0.06] bg-white p-5 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.1)] transition-colors hover:border-gold-dark/20 sm:p-6 lg:p-8"
     >
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold-dark/20 bg-gold-dark/10 text-gold-dark">
           <Icon className="h-5 w-5" />
         </div>
         <div className="min-w-0 flex-1">

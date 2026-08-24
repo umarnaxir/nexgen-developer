@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function LoadingBubble() {
   return (
     <div className="flex items-start gap-2.5 px-4 py-1">
-      <div className="flex-shrink-0 w-7 h-7 rounded-lg overflow-hidden bg-black border border-cyan-400/20 mt-0.5">
+      <div className="flex-shrink-0 w-7 h-7 rounded-lg overflow-hidden bg-black border border-gold/20 mt-0.5">
         <Image
           src="/images/ai-icon.png"
           alt="AI"

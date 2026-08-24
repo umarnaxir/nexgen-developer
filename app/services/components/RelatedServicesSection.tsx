@@ -43,7 +43,7 @@ function RelatedServiceCard({
         <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-white sm:text-lg">
           {service.label}
         </h3>
-        <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-400 transition-all group-hover:gap-2.5 group-hover:text-teal-300">
+        <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-gold transition-all group-hover:gap-2.5 group-hover:text-gold">
           Explore service
           <ArrowUpRight className="h-3.5 w-3.5" />
         </span>
@@ -67,7 +67,7 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
 
   return (
     <section
-      className="section-light relative overflow-hidden border-t border-black/[0.06] section-y"
+      className="section-light relative overflow-hidden border-t border-black/[0.06] py-6 sm:py-8 lg:py-9"
       aria-label="Related services"
     >
       <div className="section-container">
@@ -83,7 +83,7 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
 
           <Link
             href="/services"
-            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-teal-600 transition-all hover:gap-2.5 hover:text-teal-700"
+            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-gold-dark transition-all hover:gap-2.5 hover:text-gold-dark"
           >
             All services
             <ArrowUpRight className="h-3.5 w-3.5" />
@@ -106,7 +106,7 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
             type="button"
             aria-label="Previous services"
             onClick={() => scrollByDir(-1)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-teal-600/40 hover:text-teal-700"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -114,7 +114,7 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
             type="button"
             aria-label="Next services"
             onClick={() => scrollByDir(1)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-teal-600/40 hover:text-teal-700"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition-colors hover:border-gold-dark/40 hover:text-gold-dark"
           >
             <ArrowRight className="h-4 w-4" />
           </button>

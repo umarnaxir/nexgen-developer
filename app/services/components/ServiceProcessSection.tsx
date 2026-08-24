@@ -1,56 +1,37 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
-
-interface ProcessStep {
-  step: number;
-  title: string;
-  description: string;
-}
+import ServiceSectionHeader from "./ServiceSectionHeader";
+import type { ServiceProcessStep } from "../lib/service-detail-copy";
 
 interface ServiceProcessSectionProps {
-  steps: ProcessStep[];
+  steps: ServiceProcessStep[];
 }
 
 export default function ServiceProcessSection({ steps }: ServiceProcessSectionProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-
-  const activeStep = steps[activeIndex] ?? steps[0];
-  const progress = steps.length <= 1 ? 100 : (activeIndex / (steps.length - 1)) * 100;
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     registerGsapPlugins();
-
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current || !headerRef.current) return;
+    if (prefersReducedMotion || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
       gsap.from(headerRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
         y: 28,
         opacity: 0,
         duration: 0.85,
         ease: "power3.out",
       });
-
-      gsap.from(trackRef.current?.children ?? [], {
-        scrollTrigger: {
-          trigger: trackRef.current,
-          start: "top 85%",
-        },
-        y: 24,
+      gsap.from(listRef.current?.children ?? [], {
+        scrollTrigger: { trigger: listRef.current, start: "top 85%" },
+        y: 22,
         opacity: 0,
-        duration: 0.7,
+        duration: 0.65,
         stagger: 0.08,
         ease: "power3.out",
       });
@@ -59,118 +40,53 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
     return () => ctx.revert();
   }, [steps.length]);
 
-  useEffect(() => {
-    if (progressRef.current) {
-      gsap.to(progressRef.current, {
-        width: `${progress}%`,
-        duration: 0.55,
-        ease: "power2.out",
-      });
-    }
-  }, [progress]);
+  if (steps.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="section-dark section-y">
+    <section
+      id="process"
+      ref={sectionRef}
+      className="section-light scroll-mt-24 py-6 sm:py-8 lg:py-9 sm:scroll-mt-28"
+    >
       <div className="section-container">
-        <div ref={headerRef} className="mb-6 flex flex-col gap-4 lg:mb-7 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-xl">
-            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
-              How we work
-            </h2>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="text-sm tabular-nums text-white/45">
-              Step {String(activeIndex + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
-            </span>
-            <div className="h-px w-24 overflow-hidden bg-white/10 sm:w-32 lg:w-48">
-              <div ref={progressRef} className="h-full bg-teal-400" style={{ width: "0%" }} />
-            </div>
-          </div>
+        <div ref={headerRef} className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+          <ServiceSectionHeader
+            tone="light"
+            title="How the work actually runs"
+            description="Visible stages, named owners, and a definition of done. You always know what week you are in and what “next” means."
+          />
+          <p className="text-sm tabular-nums text-text-gray lg:pb-1">
+            {String(steps.length).padStart(2, "0")} stages
+          </p>
         </div>
 
-        {/* 2×2 step grid — click one to update the card below */}
-        <div ref={trackRef} className="mb-6 grid grid-cols-2 gap-2.5 sm:mb-8 sm:gap-3">
-          {steps.map((item, index) => {
-            const isActive = activeIndex === index;
-
-            return (
-              <button
-                key={item.step}
-                type="button"
-                onClick={() => setActiveIndex(index)}
-                aria-pressed={isActive}
-                className={`relative flex min-h-[3.25rem] items-center justify-center rounded-full border px-3 py-2.5 text-center transition-all duration-300 sm:min-h-[3.5rem] sm:px-5 sm:py-3 ${
-                  isActive
-                    ? "border-white bg-white text-black shadow-[0_12px_32px_-18px_rgba(255,255,255,0.45)]"
-                    : "border-white/15 bg-black text-white/55 hover:border-white/30 hover:text-white/85"
-                }`}
-              >
-                <span className="text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] sm:text-[11px]">
-                  <span className="tabular-nums">{String(item.step).padStart(2, "0")}</span>
-                  <span className="mx-1.5 opacity-50">·</span>
-                  {item.title}
+        <div ref={listRef} className="flex flex-col gap-3 sm:gap-4">
+          {steps.map((step, index) => (
+            <article
+              key={`${step.title}-${index}`}
+              className="relative grid gap-4 rounded-2xl border border-gold/30 bg-background p-5 sm:p-6 md:grid-cols-[auto_minmax(0,1fr)] md:gap-8 md:p-8"
+            >
+              <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-sm font-semibold tabular-nums text-gold md:h-12 md:w-12">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                {isActive ? (
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-6 -bottom-px h-px bg-white/40 sm:inset-x-10"
-                  />
+                {step.meta ? (
+                  <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-text-gray">
+                    {step.meta}
+                  </span>
                 ) : null}
-              </button>
-            );
-          })}
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-primary sm:text-2xl">
+                  {step.title}
+                </h3>
+                <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-text-gray sm:text-base">
+                  {step.description}
+                </p>
+              </div>
+            </article>
+          ))}
         </div>
-
-        {/* Active step detail */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeStep.step}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 sm:p-8 lg:p-10"
-          >
-            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-teal-500/10 blur-3xl" />
-
-            <div className="relative">
-              <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-teal-400/80">
-                Step {String(activeStep.step).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
-                {activeStep.title}
-              </h3>
-              <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-white/55 sm:text-base">
-                {activeStep.description}
-              </p>
-            </div>
-
-            <div className="relative mt-8 flex items-center justify-between gap-4 border-t border-white/[0.08] pt-6">
-              <button
-                type="button"
-                onClick={() => setActiveIndex((i) => Math.max(i - 1, 0))}
-                disabled={activeIndex === 0}
-                className="text-sm font-medium text-white/40 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-              >
-                Previous
-              </button>
-
-              {activeIndex < steps.length - 1 ? (
-                <button
-                  type="button"
-                  onClick={() => setActiveIndex((i) => Math.min(i + 1, steps.length - 1))}
-                  className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-teal-400/40 hover:bg-teal-500/10"
-                >
-                  Next step
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </button>
-              ) : (
-                <span className="text-sm font-medium text-teal-400/80">Final step</span>
-              )}
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );

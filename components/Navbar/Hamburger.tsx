@@ -9,16 +9,24 @@ interface HamburgerProps {
   spinOnMount?: boolean;
   /** When true, render white bars (for dark / home navbar) */
   light?: boolean;
+  /** Keep bars white even when the document is in light theme */
+  forceWhite?: boolean;
 }
 
-export default function Hamburger({ isOpen, onClick, spinOnMount = false, light = false }: HamburgerProps) {
+export default function Hamburger({
+  isOpen,
+  onClick,
+  spinOnMount = false,
+  light = false,
+  forceWhite = false,
+}: HamburgerProps) {
   const bar = `absolute left-0 h-[2.5px] rounded-full transition-all duration-300 ease-in-out ${
-    light ? "bg-white light:bg-gray-900" : "bg-black"
+    forceWhite ? "bg-white" : light ? "bg-white light:bg-gray-900" : "bg-black"
   }`;
   return (
     <button
       onClick={onClick}
-      className="relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-teal-400/50 focus:ring-offset-2 rounded-md shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200"
+      className="relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-background rounded-md shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200"
       aria-label={isOpen ? "Close menu" : "Open menu"}
     >
       <div

@@ -14,7 +14,7 @@ export default function TypingIndicator() {
       transition={{ duration: 0.2 }}
     >
       <div
-        className="relative flex-shrink-0 rounded-md overflow-hidden bg-black border border-cyan-400/20 mt-0.5"
+        className="relative flex-shrink-0 rounded-md overflow-hidden bg-black border border-gold/20 mt-0.5"
         style={{ width: 22, height: 22 }}
       >
         <motion.div
@@ -38,7 +38,7 @@ export default function TypingIndicator() {
         {dots.map((i) => (
           <motion.span
             key={i}
-            className="w-1 h-1 rounded-full bg-cyan-400"
+            className="w-1 h-1 rounded-full bg-gold"
             animate={{
               y: [0, -3, 0],
               opacity: [0.4, 1, 0.4],

@@ -10,7 +10,7 @@ export default async function BlogsPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="pb-20 pt-10 lg:pb-28 lg:pt-14">
+      <section className="pb-20 pt-[calc(var(--site-nav-height)+2.5rem)] lg:pb-28">
         <div className="section-container">
           <BlogsGrid blogs={blogs} />
         </div>

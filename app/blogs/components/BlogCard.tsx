@@ -20,7 +20,7 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="group glass-card flex min-h-[200px] sm:min-h-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
+      className="group glass-card flex min-h-[200px] sm:min-h-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
       data-aos="fade-up"
       data-aos-delay={index * 80}
     >
@@ -38,10 +38,10 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
       {/* Right: content */}
       <div className="flex-1 flex flex-col justify-between p-4 sm:p-5">
         <div>
-          <span className="text-[10px] sm:text-xs font-bold text-teal-300 light:text-teal-700 uppercase tracking-[0.2em]">
+          <span className="text-[10px] sm:text-xs font-bold text-gold light:text-gold-dark uppercase tracking-[0.2em]">
             {blog.category}
           </span>
-          <h2 className="text-lg sm:text-xl font-bold mt-1.5 line-clamp-2 leading-snug text-white light:text-gray-900 group-hover:text-teal-300 light:group-hover:text-teal-700 transition-colors">
+          <h2 className="text-lg sm:text-xl font-bold mt-1.5 line-clamp-2 leading-snug text-white light:text-gray-900 group-hover:text-gold light:group-hover:text-gold-dark transition-colors">
             {blog.title}
           </h2>
           <p className="text-silver light:text-gray-600 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed">
@@ -52,7 +52,7 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
           <time className="text-[10px] sm:text-xs text-silver-dark light:text-gray-500 uppercase tracking-wider">
             {blog.date}
           </time>
-          <span className="inline-flex items-center gap-1 text-sm font-semibold text-teal-300 light:text-teal-700 group-hover:gap-2 transition-all duration-200">
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold light:text-gold-dark group-hover:gap-2 transition-all duration-200">
             Read
             <ArrowUpRight className="w-4 h-4 flex-shrink-0" strokeWidth={2.5} />
           </span>

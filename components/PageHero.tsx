@@ -4,15 +4,14 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
-import GalaxyBackground from "@/components/GalaxyBackground";
 
 export type PageHeroProps = {
   eyebrow: string;
   title: string;
   description?: string;
   meta?: string;
-  /** `galaxy` matches the home hero. `image` keeps the photo backdrop (Team). */
-  variant?: "galaxy" | "image";
+  /** `glow` is the default light gold hero. `image` keeps the photo backdrop (Team). */
+  variant?: "glow" | "image" | "galaxy";
 };
 
 const HERO_IMAGE = "/images/hero-image.png";
@@ -22,11 +21,12 @@ export default function PageHero({
   title,
   description,
   meta,
-  variant = "galaxy",
+  variant = "glow",
 }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sublineRef = useRef<HTMLDivElement>(null);
+  const isImage = variant === "image";
 
   useEffect(() => {
     registerGsapPlugins();
@@ -50,9 +50,11 @@ export default function PageHero({
   return (
     <header
       ref={sectionRef}
-      className="section-dark relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24"
+      className={`relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--site-nav-height)+1.5rem)] sm:pb-12 sm:pt-[calc(var(--site-nav-height)+2.5rem)] lg:pb-14 lg:pt-[calc(var(--site-nav-height)+3rem)] ${
+        isImage ? "section-light" : "hero-glow"
+      }`}
     >
-      {variant === "image" ? (
+      {isImage ? (
         <div className="absolute inset-0" aria-hidden>
           <Image
             src={HERO_IMAGE}
@@ -62,60 +64,63 @@ export default function PageHero({
             className="object-cover object-center"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+          <div className="absolute inset-0 bg-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
         </div>
       ) : (
         <>
-          <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-            <GalaxyBackground />
-          </div>
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:48px_48px]"
+            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,rgba(230,201,166,0.16)_1px,transparent_1px)] bg-[length:48px_48px] opacity-50"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]"
+            className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[500px] w-[500px] rounded-full bg-gold/20 blur-[120px]"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[420px] w-[420px] rounded-full bg-white/[0.02] blur-[100px]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
+            className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[420px] w-[420px] rounded-full bg-gold-dark/15 blur-[100px]"
           />
         </>
       )}
 
-      <div className="section-container relative z-10">
-        <div className="w-full max-w-none">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-14">
+        <div className="mx-auto flex w-full max-w-7xl flex-col">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/70"
+            className={`mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] ${
+              isImage ? "text-gold-dark" : "text-gold-dark"
+            }`}
           >
-            <span className="h-px w-8 bg-white/40" />
+            <span className={`h-px w-8 ${isImage ? "bg-gold/50" : "bg-gold"}`} />
             {eyebrow}
           </motion.span>
 
           <h1
             ref={headlineRef}
-            className="w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+            className={`w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] ${
+              isImage ? "text-primary" : "text-primary"
+            }`}
           >
             {title}
           </h1>
 
           <div ref={sublineRef} className="mt-5 w-full max-w-5xl space-y-2 sm:mt-6">
             {meta ? (
-              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-teal-300">
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-dark">
                 {meta}
               </p>
             ) : null}
             {description ? (
-              <p className="text-base leading-relaxed text-white/75 sm:text-lg">{description}</p>
+              <p
+                className={`text-base leading-relaxed sm:text-lg ${
+                  isImage ? "text-text-gray" : "text-text-gray"
+                }`}
+              >
+                {description}
+              </p>
             ) : null}
           </div>
         </div>

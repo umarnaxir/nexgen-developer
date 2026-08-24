@@ -12,7 +12,7 @@ type MagneticButtonProps = {
   href?: string;
   type?: "button" | "submit";
   disabled?: boolean;
-  variant?: "primary" | "outline" | "outline-light";
+  variant?: "primary" | "outline" | "outline-light" | "gold";
 };
 
 export default function MagneticButton({
@@ -48,10 +48,14 @@ export default function MagneticButton({
   };
 
   const variantStyles = {
-    primary: "bg-white text-black hover:bg-neutral-100",
-    outline: "border border-white/20 bg-transparent text-white hover:border-white/40 hover:bg-white/5",
+    primary:
+      "border border-gold bg-primary text-primary-foreground shadow-[0_10px_28px_-18px_rgba(14,13,13,0.45)] hover:-translate-y-0.5 hover:bg-gold hover:text-primary hover:shadow-[0_16px_36px_-16px_rgba(230,201,166,0.7)]",
+    outline:
+      "border border-gold bg-transparent text-primary-foreground hover:-translate-y-0.5 hover:bg-gold hover:text-primary hover:shadow-[0_14px_32px_-16px_rgba(230,201,166,0.55)]",
     "outline-light":
-      "border border-black/15 bg-transparent text-black hover:border-black/30 hover:bg-black/[0.03]",
+      "border border-gold bg-transparent text-primary hover:-translate-y-0.5 hover:bg-gold hover:text-primary hover:shadow-[0_14px_32px_-16px_rgba(230,201,166,0.55)]",
+    gold:
+      "border border-gold bg-gold text-primary shadow-[0_12px_28px_-16px_rgba(230,201,166,0.55)] hover:-translate-y-0.5 hover:bg-gold-dark hover:shadow-[0_16px_36px_-16px_rgba(230,201,166,0.7)]",
   };
 
   const content = (
@@ -63,13 +67,13 @@ export default function MagneticButton({
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 text-sm font-semibold tracking-wide transition-colors duration-300",
+        "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300",
         variantStyles[variant],
         className
       )}
     >
       <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
       </span>
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </motion.div>

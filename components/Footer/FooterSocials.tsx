@@ -48,7 +48,7 @@ export default function FooterSocials({ variant = "dark" }: FooterSocialsProps) 
           className={cn(
             "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-0.5 active:scale-95",
             isLight
-              ? "border border-neutral-300 bg-white/60 text-neutral-700 hover:border-teal-600/50 hover:bg-white hover:text-teal-700 hover:shadow-md"
+              ? "border border-neutral-300 bg-white/60 text-neutral-700 hover:border-gold-dark/50 hover:bg-white hover:text-gold-dark hover:shadow-md"
               : "bg-white text-black hover:scale-105"
           )}
         >

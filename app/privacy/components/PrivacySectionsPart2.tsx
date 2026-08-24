@@ -43,7 +43,7 @@ export default function PrivacySectionsPart2() {
         <p>
           Commercial terms — including the non-refundable nature of the advance after proposal acceptance,
           and consequences of late or missed payment near a project deadline — are described in our{" "}
-          <a href="/terms" className="font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800">
+          <a href="/terms" className="font-medium text-gold-dark underline underline-offset-2 hover:text-gold-dark">
             Terms of Service (Payment Policy)
           </a>
           .

@@ -135,6 +135,7 @@ export type ServiceRecord = {
     whyChoose?: string[];
     useCases?: string[];
     expectedResults?: string[];
+    lead?: string;
   };
 };
 

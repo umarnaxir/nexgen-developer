@@ -3,13 +3,20 @@
 import GetStartedCTA from "@/components/GetStartedCTA";
 import FAQAccordion from "@/components/FAQAccordion";
 import ServiceDetailHero from "./ServiceDetailHero";
+import ServicePageNav from "./ServicePageNav";
 import ServiceOverviewSection from "./ServiceOverviewSection";
+import ServiceOfferingsSection from "./ServiceOfferingsSection";
+import ServiceUseCasesSection from "./ServiceUseCasesSection";
+import ServiceStackSection from "./ServiceStackSection";
 import ServiceProcessSection from "./ServiceProcessSection";
 import ServiceBenefitsSection from "./ServiceBenefitsSection";
 import RelatedServicesSection from "./RelatedServicesSection";
+import { getServicePageCopy, mergeServiceFaqs } from "../lib/get-service-page-copy";
 import type { ServiceDefinition } from "../config";
+import type { ServiceNavItem } from "./ServicePageNav";
 
 interface ServiceLayoutProps {
+  slug: string;
   heading: string;
   description: string;
   benefits: string[];
@@ -21,9 +28,13 @@ interface ServiceLayoutProps {
   image?: string;
   faqs?: { question: string; answer: string }[];
   expectedResults?: string[];
+  technologies?: string;
+  whyChoose?: string[];
+  useCases?: string[];
 }
 
 export default function ServiceLayout({
+  slug,
   heading,
   description,
   benefits,
@@ -35,24 +46,72 @@ export default function ServiceLayout({
   image,
   faqs = [],
   expectedResults = [],
+  technologies,
+  whyChoose,
+  useCases,
 }: ServiceLayoutProps) {
   const filteredRelated = relatedServices.filter((s) => s.slug !== currentSlug);
+  const copy = getServicePageCopy(slug, {
+    description,
+    benefits,
+    process: processSteps.map((step) => ({
+      title: step.title,
+      description: step.description,
+    })),
+    useCases,
+    faqs,
+  });
+  const allFaqs = mergeServiceFaqs(faqs, copy.extraFaqs);
+
+  const navItems: ServiceNavItem[] = [
+    { id: "overview", label: "Overview" },
+    copy.offerings.length > 0 ? { id: "capabilities", label: "Capabilities" } : null,
+    copy.useCases.length > 0 ? { id: "use-cases", label: "Use cases" } : null,
+    technologies?.trim() ? { id: "stack", label: "Stack" } : null,
+    copy.process.length > 0 ? { id: "process", label: "Process" } : null,
+    benefits.length > 0 || expectedResults.length > 0
+      ? { id: "outcomes", label: "Outcomes" }
+      : null,
+    allFaqs.length > 0 ? { id: "faq", label: "FAQ" } : null,
+  ].filter((item): item is ServiceNavItem => item !== null);
 
   return (
     <main className="min-h-screen">
-      <ServiceDetailHero heading={heading} image={image} />
+      <ServiceDetailHero
+        heading={heading}
+        lead={copy.lead}
+        stats={copy.stats}
+        technologies={technologies}
+      />
 
-      <ServiceOverviewSection description={description} />
+      <ServicePageNav items={navItems} />
 
-      <ServiceBenefitsSection benefits={benefits} expectedResults={expectedResults} />
+      <ServiceOverviewSection
+        heading={heading}
+        intro={copy.intro}
+        pillars={copy.pillars}
+        whyChoose={whyChoose}
+        image={image}
+      />
 
-      <ServiceProcessSection steps={processSteps} />
+      <ServiceOfferingsSection offerings={copy.offerings} />
 
-      {faqs.length > 0 ? (
+      <ServiceUseCasesSection useCases={copy.useCases} />
+
+      <ServiceStackSection technologies={technologies} />
+
+      <ServiceProcessSection steps={copy.process} />
+
+      <div id="outcomes" className="scroll-mt-24 sm:scroll-mt-28">
+        <ServiceBenefitsSection benefits={benefits} expectedResults={expectedResults} />
+      </div>
+
+      {allFaqs.length > 0 ? (
         <FAQAccordion
-          faqs={faqs}
+          faqs={allFaqs}
           title="Common questions"
-          description="Straight answers about scope, process, and what to expect."
+          description="Straight answers about scope, process, timeline, and what working together looks like."
+          className="!py-6 sm:!py-8 lg:!py-9"
         />
       ) : null}
 
@@ -64,6 +123,7 @@ export default function ServiceLayout({
         heading={ctaHeading}
         description={ctaDescription}
         secondaryLink={{ href: "/services", label: "Explore all services" }}
+        className="!border-t-0 !pt-2 !pb-8 sm:!pt-3 sm:!pb-10 lg:!pt-4 lg:!pb-12"
       />
     </main>
   );
