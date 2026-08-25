@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { MapPin, Globe, Users, Zap } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const highlights = [
  {
@@ -32,6 +33,7 @@ const highlights = [
 
 export default function ContactUsContent() {
  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+ const reduceMotion = useReducedMotion();
 
  return (
  <section className="section-y" data-aos="fade-up">
@@ -49,12 +51,16 @@ export default function ContactUsContent() {
  const Icon = item.icon;
  const isActive = activeIndex === index;
  return (
- <button
+ <motion.button
  key={item.title}
  type="button"
  onClick={() => setActiveIndex(isActive ? null : index)}
  onMouseEnter={() => setActiveIndex(index)}
  onMouseLeave={() => setActiveIndex(null)}
+ data-aos="fade-up"
+ data-aos-delay={index * 70}
+ whileHover={reduceMotion ? undefined : { y: -6 }}
+ transition={{ type: "spring", stiffness: 400, damping: 28 }}
  className={`glass-card text-left w-full min-h-[200px] sm:min-h-[220px] lg:min-h-[240px] p-6 sm:p-7 lg:p-8 rounded-2xl transition-[border-color,background-color,box-shadow] duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 ${
  isActive
  ? "border-gold/50 light:border-gold-light shadow-lg"
@@ -71,7 +77,7 @@ export default function ContactUsContent() {
  <p className={`text-silver light:text-gray-600 text-sm sm:text-base transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-80"}`}>
  {item.detail}
  </p>
- </button>
+ </motion.button>
  );
  })}
  </div>

@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface BlogCardProps {
   blog: {
@@ -17,19 +18,24 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ blog, index }: BlogCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <Link
-      href={`/blogs/${blog.slug}`}
-      className="group flex min-h-[200px] overflow-hidden rounded-2xl border border-gold/30 bg-[#111111] shadow-[0_24px_56px_-32px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:min-h-[220px]"
+    <motion.div
       data-aos="fade-up"
-      data-aos-delay={index * 80}
+      data-aos-delay={Math.min(index * 80, 240)}
+      whileHover={reduceMotion ? undefined : { y: -6 }}
+      transition={{ type: "spring", stiffness: 400, damping: 28 }}
     >
+      <Link
+        href={`/blogs/${blog.slug}`}
+        className="group flex min-h-[200px] overflow-hidden rounded-2xl border border-gold/30 bg-[#111111] shadow-[0_24px_56px_-32px_rgba(0,0,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:min-h-[220px]"
+      >
       <div className="relative w-[42%] min-w-[100px] flex-shrink-0 self-stretch overflow-hidden">
-        <Image
+        <MotionImage
           src={blog.image}
           alt={blog.title}
           fill
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
           sizes="(max-width: 768px) 40vw, 200px"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -58,5 +64,6 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
         </div>
       </div>
     </Link>
+    </motion.div>
   );
 }

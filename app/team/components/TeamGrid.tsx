@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 import type { TeamMember } from "@/lib/content/types";
 
 type TeamGridProps = {
@@ -36,11 +36,10 @@ export default function TeamGrid({ teamMembers }: TeamGridProps) {
               transition={{ type: "spring", stiffness: 400, damping: 28 }}
               className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-black/[0.06] bg-neutral-900 shadow-[0_24px_64px_-40px_rgba(0,0,0,0.2)]"
             >
-              <Image
+              <MotionImage
                 src={member.image}
                 alt={member.name}
                 fill
-                className="object-cover"
                 sizes="(max-width: 640px) 50vw, 25vw"
                 priority={index < 4}
               />

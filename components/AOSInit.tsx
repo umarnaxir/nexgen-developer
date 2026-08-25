@@ -8,16 +8,16 @@ import "aos/dist/aos.css";
 /**
  * Global AOS — once:true, smooth ease.
  * Skipped on pin/GSAP-heavy sections by simply not adding data-aos there
- * (Selected Work, home Services pin, service slug GSAP blocks, Tech Stack).
+ * (Selected Work pin, home Services pin, service-detail GSAP hero).
  */
 export default function AOSInit() {
   const pathname = usePathname();
 
   useEffect(() => {
     AOS.init({
-      duration: 720,
+      duration: 780,
       once: true,
-      offset: 72,
+      offset: 64,
       delay: 0,
       easing: "ease-out-cubic",
       mirror: false,
@@ -26,6 +26,8 @@ export default function AOSInit() {
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     });
+
+    void document.fonts?.ready.then(() => AOS.refreshHard());
   }, []);
 
   useEffect(() => {

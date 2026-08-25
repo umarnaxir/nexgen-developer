@@ -18,6 +18,8 @@ function PillarCard({
 
   return (
     <motion.article
+      data-aos="fade-up"
+      data-aos-delay={Math.min(index * 80, 240)}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
       className={`group relative overflow-hidden rounded-[1.35rem] border p-6 sm:p-7 ${

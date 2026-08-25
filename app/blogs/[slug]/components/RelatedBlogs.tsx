@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface RelatedBlog {
   title: string;
@@ -27,17 +27,17 @@ export default function RelatedBlogs({ relatedBlogs }: RelatedBlogsProps) {
         {relatedBlogs.map((relatedBlog, index) => (
           <div
             key={relatedBlog.slug}
-            className="glass-card group p-0 rounded-2xl overflow-hidden"
+            className="glass-card group overflow-hidden rounded-2xl p-0 transition-transform duration-300 hover:-translate-y-1"
             data-aos="fade-up"
             data-aos-delay={index * 80}
           >
             <Link href={`/blogs/${relatedBlog.slug}`}>
               <div className="relative w-full h-48 overflow-hidden">
-                <Image
+                <MotionImage
                   src={relatedBlog.image}
                   alt={relatedBlog.title}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
               <div className="p-6">

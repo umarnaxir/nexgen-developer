@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface BlogPostHeroProps {
   blog: {
@@ -44,12 +44,12 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
         </div>
       </div>
 
-      <div className="relative w-full h-64 sm:h-96 mb-12 rounded-xl overflow-hidden border border-white/10 light:border-gray-200">
-        <Image
+      <div className="relative mb-12 h-64 w-full overflow-hidden rounded-xl border border-white/10 light:border-gray-200 sm:h-96">
+        <MotionImage
           src={blog.images[0]}
           alt={blog.title}
           fill
-          className="object-cover"
+          sizes="100vw"
         />
       </div>
     </>

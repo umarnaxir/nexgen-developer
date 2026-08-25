@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface FeaturedBlogCardProps {
   blog: {
@@ -16,18 +17,23 @@ interface FeaturedBlogCardProps {
 }
 
 export default function FeaturedBlogCard({ blog }: FeaturedBlogCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
+    <motion.div
+      data-aos="fade-up"
+      whileHover={reduceMotion ? undefined : { y: -6 }}
+      transition={{ type: "spring", stiffness: 400, damping: 28 }}
+    >
     <Link
       href={`/blogs/${blog.slug}`}
       className="group glass-card beam-border block focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-4 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
-      data-aos="fade-up"
     >
       <article className="relative w-full aspect-[21/9] min-h-[280px] sm:min-h-[320px] overflow-hidden rounded-2xl">
-        <Image
+        <MotionImage
           src={blog.image}
           alt={blog.title}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="100vw"
           priority
         />
@@ -55,5 +61,6 @@ export default function FeaturedBlogCard({ blog }: FeaturedBlogCardProps) {
         </div>
       </article>
     </Link>
+    </motion.div>
   );
 }

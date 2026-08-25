@@ -18,6 +18,8 @@ function CapabilityCard({
 
   return (
     <motion.article
+      data-aos="fade-up"
+      data-aos-delay={Math.min(index * 80, 240)}
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-[1.35rem] border p-6 sm:min-h-[320px] sm:p-7 ${

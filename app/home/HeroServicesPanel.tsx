@@ -25,6 +25,7 @@ export default function HeroServicesPanel() {
       id="what-we-do"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      data-aos="fade-up"
       className="relative overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#111111] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.55)] sm:rounded-[1.75rem]"
     >
       <div
@@ -77,14 +78,25 @@ export default function HeroServicesPanel() {
             aria-hidden
             className="absolute left-1/2 top-[58%] h-40 w-40 -translate-x-1/2 rounded-full bg-gold/20 blur-3xl"
           />
-          <Image
-            src="/images/hero/laptop.png"
-            alt={`${active.title} preview`}
-            width={640}
-            height={640}
-            className="relative z-10 w-[min(100%,340px)] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)] lg:w-[min(100%,400px)]"
-            priority
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active.title}
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.04, y: -10 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10"
+            >
+              <Image
+                src="/images/hero/laptop.png"
+                alt={`${active.title} preview`}
+                width={640}
+                height={640}
+                className="w-[min(100%,340px)] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)] lg:w-[min(100%,400px)]"
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className="flex flex-col justify-center gap-6 p-5 sm:flex-row sm:items-center sm:p-6 lg:gap-8 lg:p-8">

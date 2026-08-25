@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import MagneticButton from "@/components/ui/MagneticButton";
+import MotionImage from "@/components/motion/MotionImage";
 
 export default function AboutSection() {
   return (
@@ -13,11 +13,11 @@ export default function AboutSection() {
           data-aos="fade-up"
         >
           <div className="relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-gold/30 lg:max-w-none">
-            <Image
+            <MotionImage
               src="/images/projects/code2concept.png"
               alt="NexGen Developers team at work"
               fill
-              className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
+              className="grayscale hover:grayscale-0"
               sizes="(max-width: 1024px) 100vw, 40vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />

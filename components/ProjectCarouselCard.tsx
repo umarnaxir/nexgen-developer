@@ -33,7 +33,7 @@ export default function ProjectCarouselCard({
   slug,
 }: ProjectCarouselCardProps) {
   return (
-    <div className="group glass-card overflow-hidden rounded-2xl sm:rounded-3xl h-full">
+    <div className="group glass-card overflow-hidden rounded-2xl sm:rounded-3xl h-full" data-aos="fade-up">
       <div className="flex flex-col lg:flex-row h-full">
         {/* Image Section - Left */}
         <div className="relative w-full lg:w-1/2 h-48 sm:h-72 lg:h-auto min-h-[280px] sm:min-h-[360px] lg:min-h-[400px] overflow-hidden">

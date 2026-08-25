@@ -34,7 +34,10 @@ export default function HomeCtaSection({ contact }: HomeCtaSectionProps) {
           }}
         />
 
-        <div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 py-10 text-center sm:px-10 sm:py-12 lg:py-14">
+        <div
+          className="relative mx-auto flex max-w-4xl flex-col items-center px-4 py-10 text-center sm:px-10 sm:py-12 lg:py-14"
+          data-aos="fade-up"
+        >
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/60 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-gold sm:px-4 sm:text-[11px]">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
             Have a project in mind?

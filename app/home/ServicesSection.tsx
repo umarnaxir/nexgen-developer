@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import MotionImage from "@/components/motion/MotionImage";
 import { homeServices, type HomeService } from "./data";
 
 function ServiceCard({
@@ -23,15 +23,14 @@ function ServiceCard({
     <article
       className={
         isMobile
-          ? "services-mobile-card relative shrink-0 overflow-hidden rounded-2xl bg-neutral-900"
-          : "group relative h-[min(56vh,500px)] w-[70vw] max-w-[720px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] lg:h-[min(62vh,620px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]"
+          ? "services-mobile-card group relative shrink-0 overflow-hidden rounded-2xl bg-neutral-900"
+          : "group relative h-[min(56vh,500px)] w-[70vw] max-w-[720px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-out hover:-translate-y-1 lg:h-[min(62vh,620px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]"
       }
     >
-      <Image
+      <MotionImage
         src={service.image}
         alt={service.title}
         fill
-        className="object-cover"
         sizes={isMobile ? "88vw" : "(max-width: 1024px) 70vw, 54vw"}
         priority={index < 2}
       />
@@ -163,7 +162,7 @@ export default function ServicesSection() {
       aria-label="Services"
     >
       <div className="px-4 py-6 sm:px-6 md:hidden lg:px-14">
-        <div className="mx-auto w-full max-w-7xl">
+        <div className="mx-auto w-full max-w-7xl" data-aos="fade-up">
         <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
           Services
         </span>

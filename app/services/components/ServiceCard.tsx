@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 import ServiceIcon from "./ServiceIcon";
 import type { ServiceListingItem } from "../config";
 
@@ -13,14 +14,18 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service, index }: ServiceCardProps) {
   const highlights = service.features.slice(0, 4);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <article className="group relative h-[min(52vh,390px)] w-[90vw] min-w-[280px] max-w-[640px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.55)] transition-[transform,box-shadow] duration-500 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_28px_60px_-24px_rgba(0,0,0,0.65)] sm:h-[min(56vh,480px)] sm:w-[70vw] sm:max-w-[720px] lg:h-[min(64vh,660px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]">
-      <Image
+    <motion.article
+      whileHover={reduceMotion ? undefined : { y: -8 }}
+      transition={{ type: "spring", stiffness: 380, damping: 28 }}
+      className="group relative h-[min(52vh,390px)] w-[90vw] min-w-[280px] max-w-[640px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.55)] will-change-transform hover:shadow-[0_28px_60px_-24px_rgba(0,0,0,0.65)] sm:h-[min(56vh,480px)] sm:w-[70vw] sm:max-w-[720px] lg:h-[min(64vh,660px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]"
+    >
+      <MotionImage
         src={service.image}
         alt={`${service.title} - NexGen Developers`}
         fill
-        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 54vw"
         priority={index < 2}
       />
@@ -68,6 +73,6 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }

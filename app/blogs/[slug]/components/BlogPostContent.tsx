@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface BlogPostContentProps {
   blog: {
@@ -116,11 +116,11 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
               data-aos="fade-up"
               data-aos-delay={aosDelay}
             >
-              <Image
+              <MotionImage
                 src={section.image || blog.images?.[0] || "/images/blogs/ai-blog.jpg"}
                 alt={`${blog.title} - Image ${index + 1}`}
                 fill
-                className="object-cover"
+                sizes="100vw"
               />
             </div>
           );

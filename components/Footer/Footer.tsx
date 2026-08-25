@@ -129,7 +129,10 @@ export default function Footer({ contact, footer }: FooterProps) {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(230,201,166,0.12),transparent_40%)]"
       />
       <div className="section-container relative py-12 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
+        <div
+          className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12"
+          data-aos="fade-up"
+        >
           <FooterColumn title="About Us" links={aboutLinks} />
 
           <div>
@@ -175,7 +178,11 @@ export default function Footer({ contact, footer }: FooterProps) {
         </div>
 
         {socialLinks.length > 0 && (
-          <div className="mt-12 flex flex-wrap justify-center gap-3 sm:mt-14 sm:gap-3.5">
+          <div
+            className="mt-12 flex flex-wrap justify-center gap-3 sm:mt-14 sm:gap-3.5"
+            data-aos="fade-up"
+            data-aos-delay="80"
+          >
             {socialLinks.map((item) => {
               const Icon = item.icon;
               return (

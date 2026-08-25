@@ -2,9 +2,9 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 import type { ServiceDefinition } from "../config";
 import { getServiceHref } from "../config";
 import { ServiceReveal } from "./ServiceMotion";
@@ -30,6 +30,7 @@ function RelatedServiceCard({
       initial={reduceMotion ? false : { opacity: 0, y: 18 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
+      whileHover={reduceMotion ? undefined : { y: -8 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease }}
       className="h-[240px] w-[85%] shrink-0 snap-start sm:h-[260px] sm:w-[calc((100%-1rem)/2)] lg:h-[280px] lg:w-[calc((100%-2rem)/3)]"
     >
@@ -37,11 +38,10 @@ function RelatedServiceCard({
         href={getServiceHref(service)}
         className="group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-2xl"
       >
-        <Image
+        <MotionImage
           src={image}
           alt={service.label}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent transition-opacity duration-300 group-hover:from-black/90" />

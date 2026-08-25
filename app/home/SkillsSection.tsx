@@ -84,6 +84,7 @@ export default function SkillsSection() {
       <div className="section-container">
         <div 
           className="text-center mb-8 sm:mb-10"
+          data-aos="fade-up"
         >
           <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
             -SKILLS
@@ -106,7 +107,9 @@ export default function SkillsSection() {
           {skills.map((skill, index) => (
             <div 
               key={index}
-              className="bg-white p-4 sm:p-5 rounded-xl shadow-lg text-center border-2 border-gray-200"
+              className="bg-white p-4 sm:p-5 rounded-xl shadow-lg text-center border-2 border-gray-200 transition-transform duration-300 hover:-translate-y-1"
+              data-aos="zoom-in"
+              data-aos-delay={Math.min(index * 40, 280)}
             >
               {/* Icon container */}
               <div className="relative flex justify-center mb-3 sm:mb-4">

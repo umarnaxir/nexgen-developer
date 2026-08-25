@@ -21,10 +21,12 @@ export default function AboutStory() {
           </p>
 
           <div className="mt-8 grid w-full grid-cols-1 gap-x-12 gap-y-5 md:grid-cols-2 lg:gap-x-16">
-            {aboutStory.paragraphs.map((paragraph) => (
+            {aboutStory.paragraphs.map((paragraph, index) => (
               <p
                 key={paragraph.slice(0, 28)}
                 className="text-[15px] leading-[1.85] text-black/50 sm:text-base"
+                data-aos="fade-up"
+                data-aos-delay={Math.min(index * 70, 210)}
               >
                 {paragraph}
               </p>

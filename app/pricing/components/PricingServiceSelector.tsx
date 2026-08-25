@@ -38,7 +38,7 @@ export default function PricingServiceSelector({
   onSelect,
 }: PricingServiceSelectorProps) {
   return (
-    <div className="relative z-30 mt-6 mb-10 flex justify-center sm:-mt-12 sm:mb-12">
+    <div className="relative z-30 mt-6 mb-10 flex justify-center sm:-mt-12 sm:mb-12" data-aos="fade-up">
       <LayoutGroup id="pricing-tabs">
         <div
           role="tablist"

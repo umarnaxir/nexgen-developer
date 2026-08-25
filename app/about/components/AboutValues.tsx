@@ -29,14 +29,14 @@ export default function AboutValues() {
     >
       <div className="relative px-4 py-6 sm:px-6 sm:py-8 lg:px-14 lg:py-8">
       <div className="mx-auto w-full max-w-7xl">
-        <div>
+        <div data-aos="fade-up">
           <h2 className="text-[clamp(1.45rem,4.2vw,2.45rem)] font-semibold tracking-[-0.03em] text-black">
             How we decide.
           </h2>
           <p className="mt-1 text-sm text-black/50">Tap a principle, the page answers in type.</p>
         </div>
 
-        <div className="relative mt-4 lg:mt-5">
+        <div className="relative mt-4 lg:mt-5" data-aos="fade-up" data-aos-delay="80">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden"

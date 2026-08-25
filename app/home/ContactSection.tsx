@@ -434,7 +434,10 @@ export default function ContactSection({
       <section id="contact" className="section-light pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
         <div className="section-container">
           <div className="grid items-stretch gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
-            <div className="rounded-[1.5rem] border border-gold/30 bg-white p-5 shadow-[0_24px_60px_-36px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_28px_70px_-32px_rgba(230,201,166,0.35)] sm:p-7 lg:p-8">
+            <div
+              className="rounded-[1.5rem] border border-gold/30 bg-white p-5 shadow-[0_24px_60px_-36px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_28px_70px_-32px_rgba(230,201,166,0.35)] sm:p-7 lg:p-8"
+              data-aos="fade-up"
+            >
               <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
                 Message
               </span>
@@ -447,7 +450,11 @@ export default function ContactSection({
               {formContent}
             </div>
 
-            <aside className="group/details relative overflow-hidden rounded-[1.5rem] border border-gold/40 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] p-5 text-white shadow-[0_28px_70px_-32px_rgba(0,0,0,0.55)] sm:p-7 lg:p-8">
+            <aside
+              className="group/details relative overflow-hidden rounded-[1.5rem] border border-gold/40 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] p-5 text-white shadow-[0_28px_70px_-32px_rgba(0,0,0,0.55)] sm:p-7 lg:p-8"
+              data-aos="fade-up"
+              data-aos-delay="80"
+            >
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.24),transparent_46%)]"
@@ -536,7 +543,10 @@ export default function ContactSection({
   return (
     <section id="contact" className="py-6 sm:py-10">
       <div className="section-container">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10">
+        <div
+          className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10"
+          data-aos="fade-up"
+        >
           <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/80" />
 
           <div className="grid gap-8 lg:grid-cols-[1.65fr_1fr] lg:items-center lg:gap-12">

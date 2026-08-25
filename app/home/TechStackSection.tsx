@@ -62,7 +62,10 @@ export default function TechStackSection() {
       aria-label="Technology stack"
     >
       <div className="section-container relative z-10 min-w-0">
-        <div className="mb-6 flex min-w-0 flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+        <div
+          className="mb-6 flex min-w-0 flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between"
+          data-aos="fade-up"
+        >
           <div className="min-w-0">
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Tools

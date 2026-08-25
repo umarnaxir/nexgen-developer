@@ -142,7 +142,7 @@ export default function AboutApproach() {
   return (
     <section className="relative bg-white text-black section-y" aria-label="How a project moves">
       <div className="section-container">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl" data-aos="fade-up">
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Process
             </span>
@@ -191,6 +191,7 @@ export default function AboutApproach() {
           <div
             ref={metricsRef}
             className="relative mx-auto mt-6 w-[min(100%,52rem)] overflow-hidden rounded-[1.35rem] border border-gold/25 bg-[#111111] px-4 py-5 sm:mt-8 sm:px-8 sm:py-6"
+            data-aos="zoom-in"
           >
             <div
               aria-hidden
