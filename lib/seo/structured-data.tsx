@@ -1,12 +1,46 @@
-import { seoConfig } from "./config";
+import { absoluteUrl, seoConfig } from "./config";
+import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
-/**
- * Organization Schema (JSON-LD)
- */
-export function OrganizationSchema() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
+export function JsonLd({ data }: { data: Record<string, unknown> | object }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+function socialUrls(footer?: FooterSettings | null): string[] {
+  const fromFooter = footer?.social
+    ? Object.values(footer.social).filter((url): url is string => Boolean(url))
+    : [];
+  const merged = [...seoConfig.sameAs, ...fromFooter];
+  const seen = new Set<string>();
+  return merged.filter((url) => {
+    const key = url.split("?")[0].replace(/\/$/, "");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function organizationId() {
+  return `${seoConfig.siteUrl}/#organization`;
+}
+
+function websiteId() {
+  return `${seoConfig.siteUrl}/#website`;
+}
+
+export function organizationNode(contact?: ContactInfo | null, footer?: FooterSettings | null) {
+  const email = contact?.email || seoConfig.contact.email;
+  const phone = contact?.phone || seoConfig.contact.phone;
+  const locality = seoConfig.contact.addressLocality;
+  const region = seoConfig.contact.addressRegion;
+
+  return {
+    "@type": ["Organization", "ProfessionalService"],
+    "@id": organizationId(),
     name: seoConfig.siteName,
     url: seoConfig.siteUrl,
     logo: {
@@ -15,92 +49,161 @@ export function OrganizationSchema() {
       width: seoConfig.defaultLogoWidth,
       height: seoConfig.defaultLogoHeight,
     },
+    image: seoConfig.defaultOgImage,
     description: seoConfig.defaultDescription,
-    sameAs: [
-      // Add your social media profiles here
-      // "https://twitter.com/nexgendevelopers",
-      // "https://linkedin.com/company/nexgen-developers",
-      // "https://facebook.com/nexgendevelopers",
+    foundingDate: seoConfig.foundingDate,
+    email,
+    telephone: phone,
+    sameAs: socialUrls(footer),
+    knowsAbout: [...seoConfig.knowsAbout],
+    areaServed: seoConfig.areaServed.map((area) =>
+      area === "Worldwide"
+        ? { "@type": "Place", name: "Worldwide" }
+        : { "@type": "Country", name: "India" }
+    ),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: locality,
+      addressRegion: region,
+      postalCode: seoConfig.contact.postalCode,
+      addressCountry: seoConfig.contact.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: seoConfig.contact.geo.latitude,
+      longitude: seoConfig.contact.geo.longitude,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email,
+        telephone: phone,
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email,
+        telephone: phone,
+        url: absoluteUrl("/contact-us"),
+      },
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "Customer Service",
-      // Add contact information if available
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Digital product and marketing services",
+      url: absoluteUrl("/services"),
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website Development", url: absoluteUrl("/services/website-development") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "App Development", url: absoluteUrl("/services/app-development") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI & ML Solutions", url: absoluteUrl("/services/ai-ml") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chatbot Development", url: absoluteUrl("/services/chatbot-development") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing", url: absoluteUrl("/services/digital-marketing") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO Services", url: absoluteUrl("/services/digital-marketing/seo") } },
+      ],
     },
   };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
 }
 
-/**
- * Website Schema (JSON-LD)
- */
-export function WebsiteSchema() {
-  const schema = {
-    "@context": "https://schema.org",
+export function websiteNode() {
+  return {
     "@type": "WebSite",
+    "@id": websiteId(),
     name: seoConfig.siteName,
     url: seoConfig.siteUrl,
     description: seoConfig.defaultDescription,
-    publisher: {
-      "@type": "Organization",
-      name: seoConfig.publisher,
-      logo: {
-        "@type": "ImageObject",
-        url: seoConfig.defaultLogo,
-        width: seoConfig.defaultLogoWidth,
-        height: seoConfig.defaultLogoHeight,
-      },
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${seoConfig.siteUrl}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    inLanguage: seoConfig.language,
+    publisher: { "@id": organizationId() },
   };
+}
 
+export function OrganizationSchema({
+  contact,
+  footer,
+}: {
+  contact?: ContactInfo | null;
+  footer?: FooterSettings | null;
+}) {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@graph": [organizationNode(contact, footer), websiteNode()],
+      }}
     />
   );
 }
 
-/**
- * Breadcrumb Schema (JSON-LD)
- */
-export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: string }> }) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url.startsWith("http") ? item.url : `${seoConfig.siteUrl}${item.url}`,
-    })),
-  };
+/** @deprecated Website is included in OrganizationSchema @graph. Kept for compatibility. */
+export function WebsiteSchema() {
+  return null;
+}
+
+export function BreadcrumbSchema({
+  items,
+}: {
+  items: Array<{ name: string; url: string }>;
+}) {
+  const pageUrl = items[items.length - 1]?.url
+    ? absoluteUrl(items[items.length - 1].url)
+    : seoConfig.siteUrl;
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: items.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          item: absoluteUrl(item.url),
+        })),
+      }}
     />
   );
 }
 
-/**
- * Article Schema (JSON-LD) for blog posts
- */
+export function WebPageSchema({
+  name,
+  description,
+  url,
+  datePublished,
+  dateModified,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  datePublished?: string;
+  dateModified?: string;
+}) {
+  const pageUrl = absoluteUrl(url);
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name,
+        description,
+        inLanguage: seoConfig.language,
+        isPartOf: { "@id": websiteId() },
+        about: { "@id": organizationId() },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: seoConfig.defaultOgImage,
+        },
+        ...(datePublished && { datePublished }),
+        dateModified: dateModified || datePublished || undefined,
+      }}
+    />
+  );
+}
+
 export function ArticleSchema({
   title,
   description,
@@ -109,6 +212,8 @@ export function ArticleSchema({
   modifiedDate,
   author,
   publisher,
+  image,
+  keywords,
 }: {
   title: string;
   description: string;
@@ -118,84 +223,131 @@ export function ArticleSchema({
   modifiedDate?: string;
   author?: string;
   publisher?: string;
+  keywords?: string[];
 }) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: title,
-    description: description,
-    image: seoConfig.defaultOgImage,
-    datePublished: publishedDate,
-    ...(modifiedDate && { dateModified: modifiedDate }),
-    author: {
-      "@type": "Organization",
-      name: author || seoConfig.publisher,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: publisher || seoConfig.publisher,
-      logo: {
-        "@type": "ImageObject",
-        url: seoConfig.defaultLogo,
-        width: seoConfig.defaultLogoWidth,
-        height: seoConfig.defaultLogoHeight,
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": url.startsWith("http") ? url : `${seoConfig.siteUrl}${url}`,
-    },
-  };
+  const pageUrl = absoluteUrl(url);
+  const imageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : absoluteUrl(image)
+    : seoConfig.defaultOgImage;
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: title,
+        description,
+        image: [imageUrl, seoConfig.defaultOgImage],
+        datePublished: publishedDate,
+        dateModified: modifiedDate || publishedDate,
+        author: {
+          "@type": "Organization",
+          name: author || seoConfig.publisher,
+          url: seoConfig.siteUrl,
+        },
+        publisher: {
+          "@type": "Organization",
+          "@id": organizationId(),
+          name: publisher || seoConfig.publisher,
+          logo: {
+            "@type": "ImageObject",
+            url: seoConfig.defaultLogo,
+            width: seoConfig.defaultLogoWidth,
+            height: seoConfig.defaultLogoHeight,
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${pageUrl}#webpage`,
+        },
+        keywords: keywords?.join(", "),
+        inLanguage: seoConfig.language,
+      }}
     />
   );
 }
 
-/**
- * Service Schema (JSON-LD) for services pages
- */
 export function ServiceSchema({
   name,
   description,
   provider,
   areaServed,
   serviceType,
+  url,
 }: {
   name: string;
   description: string;
   provider?: string;
   areaServed?: string;
   serviceType?: string;
+  url?: string;
 }) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: name,
-    description: description,
-    image: seoConfig.defaultOgImage,
-    provider: {
-      "@type": "Organization",
-      name: provider || seoConfig.publisher,
-      url: seoConfig.siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: seoConfig.defaultLogo,
-        width: seoConfig.defaultLogoWidth,
-        height: seoConfig.defaultLogoHeight,
-      },
-    },
-    ...(areaServed && { areaServed: areaServed }),
-    ...(serviceType && { serviceType: serviceType }),
-  };
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name,
+        description,
+        url: url ? absoluteUrl(url) : undefined,
+        image: seoConfig.defaultOgImage,
+        provider: {
+          "@type": "Organization",
+          "@id": organizationId(),
+          name: provider || seoConfig.publisher,
+          url: seoConfig.siteUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: seoConfig.defaultLogo,
+            width: seoConfig.defaultLogoWidth,
+            height: seoConfig.defaultLogoHeight,
+          },
+        },
+        areaServed: areaServed || "India",
+        serviceType: serviceType || name,
+        offers: {
+          "@type": "Offer",
+          url: absoluteUrl("/pricing"),
+          availability: "https://schema.org/InStock",
+          priceCurrency: "USD",
+        },
+      }}
+    />
+  );
+}
+
+export function OfferCatalogSchema({
+  name,
+  description,
+  url,
+  offers,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  offers: Array<{ name: string; price: string; description: string }>;
+}) {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        name,
+        description,
+        url: absoluteUrl(url),
+        itemListElement: offers.map((offer, index) => ({
+          "@type": "Offer",
+          position: index + 1,
+          name: offer.name,
+          description: offer.description,
+          price: offer.price.replace(/[^0-9.]/g, "") || undefined,
+          priceCurrency: "USD",
+          url: absoluteUrl("/contact-us"),
+          seller: { "@id": organizationId() },
+        })),
+      }}
     />
   );
 }

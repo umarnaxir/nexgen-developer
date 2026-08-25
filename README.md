@@ -159,6 +159,9 @@ Create `.env` or `.env.local` in the project root.
 | `content/contact.json` | Public contact details |
 | `content/footer.json` | Footer copy + social links |
 | `content/users.json` | Admin users (includes `passwordHash`) |
+| `content/theme.json` | Brand colors, logos, light/dark palette (source of truth for UI) |
+| `content/admin.json` | Admin nav, dashboard labels, search placeholder |
+| `content/cms-fields.json` | Field-to-frontend mapping docs (used by admin forms) |
 
 Uploads: `public/uploads/{projects|team|blogs|services|general}/`
 
@@ -171,11 +174,24 @@ Uploads: `public/uploads/{projects|team|blogs|services|general}/`
 | `lib/content/services-server.ts` | Server-only services loader (avoids `fs` in client bundles) |
 | `lib/content/services-runtime.ts` | Runtime helpers for service config |
 | `lib/content/project-icons.ts` | Project icon mapping |
+| `lib/content/cms-fields.ts` | Loads `content/cms-fields.json` for admin field hints |
+| `lib/theme/index.ts` | Loads `content/theme.json` + `content/admin.json` |
+| `lib/admin/ui.ts` | Centralized admin Tailwind class tokens (black/gold/white) |
+
+### Centralized configuration (JSON)
+
+| File | Purpose |
+|------|---------|
+| `content/theme.json` | Brand name, logo paths, hex colors for light/dark |
+| `content/admin.json` | Sidebar navigation, dashboard card styling tokens |
+| `content/cms-fields.json` | Documents which admin fields map to which frontend surfaces |
+
+Admin forms read `cms-fields.json` to show **“Frontend: …”** hints under inputs. Theme colors in `app/globals.css` should stay in sync with `theme.json`.
 
 ### Types snapshot
 
-- **Project** — title, descriptions, image/gallery, link, technologies, featured, order, …
-- **TeamMember** — name, designation, image, `enabled` (frontend visibility), `order`
+- **Project** — title, descriptions, image, link, technologies, features, duration, client, icon, featured, order
+- **TeamMember** — name, designation, image, optional `profileUrl` (clickable card on `/team`), `enabled`, `order`
 - **Blog** — SEO fields, `sections[]` (`heading` \| `text` \| `image`), keywords, internal/external links, `status`
 - **ServiceRecord** — slug, category, SEO, rich `content` (benefits, process, FAQs, …), `enabled`
 - **AdminUser** — email, `passwordHash`, `role`, `enabled`
@@ -243,34 +259,36 @@ Under `app/api/site/` — e.g. `blogs`, `projects`, `team`, `contact`, `footer`,
 
 ## Admin panel
 
+The admin UI uses the same **black / gold / white** brand as the public site. Configuration is centralized in JSON (`content/theme.json`, `content/admin.json`, `content/cms-fields.json`).
+
 ### Entry & shell
 
 | Path | Role |
 |------|------|
 | `/admin` | Login page (`app/admin/page.tsx`) |
-| `/admin/dashboard` | Stats + quick actions |
+| `/admin/dashboard` | Golden stat cards + quick actions |
 | `middleware.ts` | Redirects unauthenticated users away from `/admin/*` (except login) |
 | `components/admin/layout/AdminShell.tsx` | Sidebar + header + main |
-| `AdminSidebar.tsx` | Nav links (Users visible to `super_admin` + `admin`) |
+| `AdminSidebar.tsx` | Nav from `content/admin.json` |
 | `AdminHeader.tsx` | Global search, profile, logout |
-| `AdminPermissionsContext.tsx` | Client-side permission helpers from role |
-| `AdminSearchContext.tsx` | Header search query shared with list pages |
+| `lib/admin/ui.ts` | Shared admin Tailwind tokens |
 
 ### Admin modules (UI)
 
 | Route | Feature |
 |-------|---------|
-| `/admin/dashboard` | Counts + links |
-| `/admin/projects` | CRUD projects |
-| `/admin/services` | CRUD services |
-| `/admin/team` | Cards, drag-reorder, **Visible on frontend** toggle |
-| `/admin/blogs` | SEO form + **Add block** modal (heading / paragraph / image) |
-| `/admin/contact` | Contact JSON editor |
-| `/admin/footer` | Footer + socials |
+| `/admin/dashboard` | Gold gradient stat cards (white / light-gold text) |
+| `/admin/projects` | **Card grid** mirroring `/projects` + table view; sections match frontend fields |
+| `/admin/services` | **Card grid** + full service editor (FAQs, why choose, use cases, results) |
+| `/admin/team` | Drag-reorder, visibility toggle, optional **profile link** (clickable on `/team`) |
+| `/admin/blogs` | SEO form + block editor — same JSON as `/blogs` |
+| `/admin/contact` | Contact editor + **live preview** (Contact page / footer) |
+| `/admin/footer` | Footer copy + socials + **live preview** |
 | `/admin/users` | User management (`super_admin` / `admin` only) |
 
-Shared UI: `components/admin/ui/` (`AdminButton`, `AdminInput`, `ImageUpload`, `ConfirmModal`).  
-Forms: `components/admin/forms/` (`BlogForm`, `TeamForm`, `ProjectForm`, `ServiceForm`, `UserForm`, `BlogBlockModal`).
+Shared UI: `components/admin/ui/` (`AdminButton`, `AdminInput`, `AdminFormSection`, `ImageUpload`, `ConfirmModal`).  
+Previews: `components/admin/preview/` (`AdminProjectCard`, `AdminLivePreview`).  
+Forms: `components/admin/forms/` — field hints from `content/cms-fields.json`.
 
 ### Auth flow
 
@@ -439,4 +457,4 @@ scripts/                # Seed scripts
 
 ---
 
-Updated: August 8, 2026
+Updated: August 26, 2026

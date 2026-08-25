@@ -18,7 +18,7 @@ export const aboutStory = {
   headline: "We build digital products that feel intentional.",
   lead: "NexGen Developers is a collective of engineers, designers, and marketers helping startups and local brands ship work that stands out, and actually ships. We are one studio for build, launch, and growth, not a chain of handoffs.",
   paragraphs: [
-    "We partner on AI and ML, chatbots, web and app development, and digital marketing. Less noise, more craft: clear process, honest timelines, and products people enjoy using. If a tool does not earn its place in the product, it does not make the stack.",
+    "We partner on AI and ML, chatbots, software development, and digital marketing. Less noise, more craft: clear process, honest timelines, and products people enjoy using. If a tool does not earn its place in the product, it does not make the stack.",
     "Based in Baramulla, Jammu and Kashmir, we work with clients in India and globally. Collaboration is remote-friendly. You stay close to every milestone, from first brief to launch and the weeks after go-live.",
     "Whether you need a full product build or a focused growth push, we tailor the stack and the plan to your goals, budget, and pace. Website and app packages have starting prices. SEO, AI models, and mixed work are quoted after we understand the requirement.",
     "We write the brief with you, show working slices early, and stay through launch. Demos land while change is still cheap. The aim is a product that looks premium and holds up under real traffic, real users, and real deadlines.",
@@ -202,38 +202,7 @@ export const aboutApproachMetrics = [
   { value: "12+", label: "Countries" },
 ];
 
-export const aboutFaqs = [
-  {
-    question: "Who is NexGen Developers?",
-    answer:
-      "We are a collective of engineers, designers, and marketers helping startups and local brands ship AI, chatbots, web and apps, and growth campaigns, with clear process and craft-focused delivery.",
-  },
-  {
-    question: "Where are you based, and do you work remotely?",
-    answer:
-      "We are based in Baramulla, Jammu and Kashmir, India, and work with clients globally. Collaboration is remote-friendly with regular updates across time zones.",
-  },
-  {
-    question: "What kinds of projects do you take on?",
-    answer:
-      "From landing pages and product builds to AI tools, chatbots, and digital marketing. If it helps you build, launch, or grow, we can scope it and ship it.",
-  },
-  {
-    question: "How is pricing decided?",
-    answer:
-      "Website and app packages have starting prices on the pricing page. SEO, AI models, chatbots, design, and mixed work are not a fixed rate card. We quote after a short call once the requirement is clear.",
-  },
-  {
-    question: "How do engagements usually start?",
-    answer:
-      "You share goals and constraints, we align on scope and success metrics, then move through discover, design, build, and launch with visible milestones along the way.",
-  },
-  {
-    question: "How can I get in touch?",
-    answer:
-      "Use the contact page or schedule a meeting from the site. We will reply with next steps, timeline options, and a clear proposal before any work begins.",
-  },
-];
+export { aboutFaqs } from "@/lib/seo/faqs";
 
 export const pricingOptions = [
   {

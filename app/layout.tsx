@@ -5,7 +5,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import AOSInit from "@/components/AOSInit";
 import { Toaster } from "sonner";
 import { getHomeSEO } from "@/lib/seo/page-seo";
-import { OrganizationSchema, WebsiteSchema } from "@/lib/seo/structured-data";
+import { OrganizationSchema } from "@/lib/seo/structured-data";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { getContactInfo, getFooterSettings } from "@/lib/content/store";
@@ -52,14 +52,23 @@ const spaceGrotesk = localFont({
 
 export const metadata = {
   ...getHomeSEO(),
-  verification: {
-    google: "K5WPaPu_n40Lp7BlSC2vph3oTrM3QzSlCbkCSZpA2iE",
-  },
   icons: {
-    icon: [{ url: "/logo/logo.png", type: "image/png" }],
+    icon: [
+      { url: "/logo/logo.png", type: "image/png" },
+      { url: "/logo/logo.png", sizes: "32x32", type: "image/png" },
+    ],
     shortcut: "/logo/logo.png",
     apple: "/logo/logo.png",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fefefe" },
+    { media: "(prefers-color-scheme: dark)", color: "#040303" },
+  ],
 };
 
 export default async function RootLayout({
@@ -74,13 +83,12 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${playfair.variable} ${spaceGrotesk.className} antialiased`}
       >
         <ThemeProvider>
-          <OrganizationSchema />
-          <WebsiteSchema />
+          <OrganizationSchema contact={contact} footer={footer} />
           <ScrollToTop />
           <AOSInit />
           <Toaster position="top-right" richColors />

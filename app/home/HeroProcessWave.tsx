@@ -14,7 +14,7 @@ const steps = [
 
 export default function HeroProcessWave() {
   return (
-    <div className="relative mx-auto h-[255px] w-full max-w-full overflow-x-clip overflow-y-visible sm:h-[300px] lg:h-[360px] lg:overflow-visible">
+    <div className="relative mx-auto mb-2 h-[255px] w-full max-w-full overflow-x-clip overflow-y-visible sm:h-[280px] lg:mb-0 lg:h-[240px] lg:overflow-visible">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-[8%] top-[18%] h-[70%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(230,201,166,0.38),transparent_68%)] blur-2xl"
@@ -119,10 +119,10 @@ export default function HeroProcessWave() {
             <span className="hero-orbit-rev absolute inset-[-8%] rounded-full border border-gold/25" />
             <span className="hero-logo-mark relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-gold/50 bg-[#111111]">
               <Image
-                src="/logo/nav-logo.png"
+                src="/logo/logo-02.png"
                 alt=""
-                width={588}
-                height={425}
+                width={580}
+                height={418}
                 className="relative z-10 h-auto w-[78%] object-contain transition-transform duration-500 ease-out group-hover:scale-110"
                 priority
               />

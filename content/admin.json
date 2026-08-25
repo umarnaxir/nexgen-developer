@@ -1,0 +1,53 @@
+{
+  "nav": [
+    {
+      "href": "/admin/dashboard",
+      "label": "Dashboard",
+      "icon": "LayoutDashboard"
+    },
+    {
+      "href": "/admin/projects",
+      "label": "Projects",
+      "icon": "Briefcase"
+    },
+    {
+      "href": "/admin/services",
+      "label": "Services",
+      "icon": "Layers"
+    },
+    {
+      "href": "/admin/team",
+      "label": "Team",
+      "icon": "Users"
+    },
+    {
+      "href": "/admin/blogs",
+      "label": "Blogs",
+      "icon": "BookOpen"
+    },
+    {
+      "href": "/admin/contact",
+      "label": "Contact",
+      "icon": "Phone"
+    },
+    {
+      "href": "/admin/footer",
+      "label": "Footer",
+      "icon": "Settings2"
+    },
+    {
+      "href": "/admin/users",
+      "label": "Users",
+      "icon": "UserCog",
+      "roles": ["super_admin", "admin"]
+    }
+  ],
+  "dashboard": {
+    "cardClass": "border border-gold/30 bg-[#111111] shadow-[0_24px_56px_-28px_rgba(0,0,0,0.55)] hover:border-gold/50 hover:shadow-[0_28px_64px_-24px_rgba(230,201,166,0.35)]",
+    "cardLabelClass": "text-gold",
+    "cardValueClass": "text-white",
+    "cardHintClass": "text-gold-light/70"
+  },
+  "visitSiteLabel": "Visit site",
+  "searchPlaceholder": "Search…"
+}

@@ -116,9 +116,9 @@ export function UserForm({ initial, mode }: UserFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
+      <div className="rounded-md border border-gold/25 bg-white p-5 sm:p-6">
         {isProtectedSuperAdmin ? (
-          <p className="mb-4 rounded-md border border-violet-200 bg-violet-50 px-3 py-2 text-sm text-violet-800">
+          <p className="mb-4 rounded-md border border-gold/30 bg-gold/15 px-3 py-2 text-sm text-primary">
             Super admin is a protected default account. It cannot be deleted,
             demoted, or disabled.
           </p>
@@ -157,13 +157,13 @@ export function UserForm({ initial, mode }: UserFormProps) {
             options={roleOptions}
             disabled={isProtectedSuperAdmin}
           />
-          <label className="flex items-center gap-2 pt-7 text-sm text-neutral-700 sm:col-span-2">
+          <label className="flex items-center gap-2 pt-7 text-sm text-primary sm:col-span-2">
             <input
               type="checkbox"
               checked={isProtectedSuperAdmin ? true : form.enabled}
               onChange={(e) => update("enabled", e.target.checked)}
               disabled={isProtectedSuperAdmin}
-              className="h-4 w-4 rounded border-neutral-300 text-teal-600 focus:ring-teal-500 disabled:opacity-60"
+              className="h-4 w-4 rounded border-gold/35 text-gold-dark focus:ring-gold-dark disabled:opacity-60"
             />
             Enabled (can sign in)
           </label>

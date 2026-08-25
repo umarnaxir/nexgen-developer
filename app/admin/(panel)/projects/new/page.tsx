@@ -14,7 +14,7 @@ export default function NewProjectPage() {
         actions={
           <Link
             href="/admin/projects"
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-600 hover:text-teal-700"
+            className="inline-flex items-center gap-1.5 text-sm text-text-gray hover:text-gold-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to projects

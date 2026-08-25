@@ -226,9 +226,9 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
     <>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* SEO essentials */}
-        <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-          <h2 className="text-sm font-semibold text-neutral-900">SEO essentials</h2>
-          <p className="mt-1 text-sm text-neutral-500">
+        <div className="rounded-md border border-gold/25 bg-white p-5 sm:p-6">
+          <h2 className="text-sm font-semibold text-primary">SEO essentials</h2>
+          <p className="mt-1 text-sm text-text-gray">
             These fields power search results and social previews. Keep them clear and
             keyword-focused.
           </p>
@@ -300,8 +300,8 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
         </div>
 
         {/* Featured media + publish */}
-        <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-          <h2 className="text-sm font-semibold text-neutral-900">
+        <div className="rounded-md border border-gold/25 bg-white p-5 sm:p-6">
+          <h2 className="text-sm font-semibold text-primary">
             Featured image & publishing
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -341,13 +341,13 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
         </div>
 
         {/* Content blocks */}
-        <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
+        <div className="rounded-md border border-gold/25 bg-white p-5 sm:p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h2 className="text-sm font-semibold text-neutral-900">
+              <h2 className="text-sm font-semibold text-primary">
                 Article content blocks
               </h2>
-              <p className="mt-1 text-sm text-neutral-500">
+              <p className="mt-1 text-sm text-text-gray">
                 Add headings, paragraphs, and images like a notes page. Use H2/H3 for
                 structure — important for SEO.
               </p>
@@ -363,7 +363,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
               <button
                 type="button"
                 onClick={openAddModal}
-                className="flex w-full flex-col items-center justify-center gap-2 rounded-md border border-dashed border-neutral-300 bg-neutral-50 px-4 py-10 text-sm text-neutral-500 transition hover:border-teal-300 hover:bg-teal-50/40 hover:text-teal-800"
+                className="flex w-full flex-col items-center justify-center gap-2 rounded-md border border-dashed border-gold/35 bg-background-soft px-4 py-10 text-sm text-text-gray transition hover:border-gold hover:bg-gold/10 hover:text-primary"
               >
                 <Plus className="h-5 w-5" />
                 Click to add your first content block
@@ -372,10 +372,10 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
               sections.map((section, index) => (
                 <div
                   key={section._key}
-                  className="flex items-start gap-2 rounded-md border border-neutral-200 bg-neutral-50/70 p-3"
+                  className="flex items-start gap-2 rounded-md border border-gold/25 bg-background-soft p-3"
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-text-gray/70">
                       {section.type === "heading"
                         ? `Heading H${section.headingLevel || 2}`
                         : section.type === "image"
@@ -383,7 +383,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
                           : "Paragraph"}
                     </p>
                     {section.type === "image" && section.image ? (
-                      <div className="relative mt-2 h-20 w-32 overflow-hidden rounded-md border border-neutral-200 bg-white">
+                      <div className="relative mt-2 h-20 w-32 overflow-hidden rounded-md border border-gold/25 bg-white">
                         <Image
                           src={section.image}
                           alt=""
@@ -393,7 +393,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
                         />
                       </div>
                     ) : (
-                      <p className="mt-1 line-clamp-2 text-sm text-neutral-800">
+                      <p className="mt-1 line-clamp-2 text-sm text-primary">
                         {sectionPreviewLabel(section)}
                       </p>
                     )}
@@ -445,11 +445,11 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
         </div>
 
         {/* SEO links */}
-        <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-          <h2 className="text-sm font-semibold text-neutral-900">
+        <div className="rounded-md border border-gold/25 bg-white p-5 sm:p-6">
+          <h2 className="text-sm font-semibold text-primary">
             Further reading links (SEO)
           </h2>
-          <p className="mt-1 text-sm text-neutral-500">
+          <p className="mt-1 text-sm text-text-gray">
             Shown at the end of the post. Internal links help site ranking; external
             links add authority when relevant.
           </p>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import MotionImage from "@/components/motion/MotionImage";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 interface BlogPostHeroProps {
   blog: {
@@ -17,6 +18,14 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
   return (
     <>
       <div className="mb-8" data-aos="fade-up">
+        <Breadcrumbs
+          className="mb-5"
+          items={[
+            { name: "Home", href: "/" },
+            { name: "Blog", href: "/blogs" },
+            { name: blog.title },
+          ]}
+        />
         <Link
           href="/blogs"
           className="inline-flex items-center text-silver-light light:text-gray-700 hover:text-gold light:hover:text-gold-dark font-bold group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded"
@@ -47,9 +56,11 @@ export default function BlogPostHero({ blog }: BlogPostHeroProps) {
       <div className="relative mb-12 h-64 w-full overflow-hidden rounded-xl border border-white/10 light:border-gray-200 sm:h-96">
         <MotionImage
           src={blog.images[0]}
-          alt={blog.title}
+          alt={`${blog.title} — NexGen Developers blog`}
+          title={blog.title}
           fill
           sizes="100vw"
+          priority
         />
       </div>
     </>

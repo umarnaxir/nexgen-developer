@@ -7,9 +7,9 @@ export default function TeamHero() {
   return (
     <PageHero
       eyebrow="Team"
-      title={["Meet the people", "behind NexGen."]}
+      title={["Meet the software", "team behind NexGen."]}
       highlight="NexGen."
-      description="Engineers, designers, AI specialists, and marketers, a collaborative freelance collective building digital products for startups and growing brands."
+      description="Engineers, designers, AI specialists, and marketers — a software development team building digital products for startups and growing brands."
       pills={[
         { label: "Engineers", icon: Code2 },
         { label: "Designers", icon: Palette },

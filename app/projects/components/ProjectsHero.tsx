@@ -7,9 +7,9 @@ export default function ProjectsHero() {
   return (
     <PageHero
       eyebrow="Work"
-      title={["Work that", "ships and scales."]}
-      highlight="scales."
-      description="Showcasing innovative solutions across healthcare, hospitality, nonprofit, and enterprise sectors."
+      title={["Software projects", "that ship and scale."]}
+      highlight="scale."
+      description="A software development portfolio across education, e-commerce, fitness, real estate, healthcare, and enterprise. Real products, not mockups."
       pills={[
         { label: "Healthcare", icon: HeartPulse },
         { label: "Hospitality", icon: Building2 },

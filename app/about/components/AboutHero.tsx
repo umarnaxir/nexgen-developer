@@ -7,9 +7,9 @@ export default function AboutHero() {
   return (
     <PageHero
       eyebrow="About"
-      title={["A studio built", "to launch and grow."]}
-      highlight="grow."
-      description="A creative studio helping startups and local brands build, launch, and grow. Craft, speed, and clarity in one team, from first brief to what ships after launch."
+      title={["A software development", "studio that ships."]}
+      highlight="ships."
+      description="NexGen Developers is a Baramulla software development studio helping startups and local brands with custom software, AI, chatbots, and digital marketing — from first brief to what ships after launch."
       pills={[
         { label: "Craft", icon: Lightbulb },
         { label: "Speed", icon: Rocket },

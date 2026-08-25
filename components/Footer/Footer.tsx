@@ -16,6 +16,7 @@ const aboutLinks: FooterLink[] = [
 
 const otherPageLinks: FooterLink[] = [
   { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blogs", href: "/blogs" },
@@ -129,6 +130,18 @@ export default function Footer({ contact, footer }: FooterProps) {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(230,201,166,0.12),transparent_40%)]"
       />
       <div className="section-container relative py-12 sm:py-14 lg:py-16">
+        {(footer.companyInfo || footer.craftedText) && (
+          <div className="mb-10 max-w-xl" data-aos="fade-up">
+            {footer.companyInfo ? (
+              <p className="text-base text-gold-light/80 sm:text-lg">
+                {footer.companyInfo}
+              </p>
+            ) : null}
+            {footer.craftedText ? (
+              <p className="mt-2 text-sm text-gold-light/50">{footer.craftedText}</p>
+            ) : null}
+          </div>
+        )}
         <div
           className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12"
           data-aos="fade-up"

@@ -31,6 +31,7 @@ export default function MotionImage({
           alt={alt}
           fill
           {...props}
+          title={typeof props.title === "string" ? props.title : alt}
           className={cn(
             "object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105",
             className
@@ -52,6 +53,7 @@ export default function MotionImage({
         alt={alt}
         fill={false}
         {...props}
+        title={typeof props.title === "string" ? props.title : alt}
         className={cn(
           "transition-transform duration-700 ease-out group-hover:scale-[1.03]",
           className

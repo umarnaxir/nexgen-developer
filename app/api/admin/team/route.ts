@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
       email: String(body.email || "").trim(),
       phone: String(body.phone || "").trim(),
       image: String(body.image || "/images/team/employee-no-profile.jpg"),
+      profileUrl: String(body.profileUrl || "").trim(),
       socialLinks: {
         linkedin: String(body.socialLinks?.linkedin || ""),
         twitter: String(body.socialLinks?.twitter || ""),

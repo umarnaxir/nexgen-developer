@@ -45,10 +45,10 @@ export function ConfirmModal({
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
-            className="relative w-full max-w-md rounded-md border border-neutral-200 bg-white p-5 shadow-xl sm:p-6"
+            className="relative w-full max-w-md rounded-md border border-gold/25 bg-white p-5 shadow-xl sm:p-6"
           >
-            <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+            <h3 className="text-lg font-semibold text-primary">{title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-gray">
               {description}
             </p>
             <div className="mt-6 flex justify-end gap-2">

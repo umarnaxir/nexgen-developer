@@ -118,7 +118,8 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
             >
               <MotionImage
                 src={section.image || blog.images?.[0] || "/images/blogs/ai-blog.jpg"}
-                alt={`${blog.title} - Image ${index + 1}`}
+                alt={`${blog.title} article image`}
+                title={blog.title}
                 fill
                 sizes="100vw"
               />

@@ -1,0 +1,104 @@
+{
+  "projects": {
+    "pageTitle": "Projects",
+    "frontendRoute": "/projects",
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Overview",
+        "description": "Card summary on /projects and featured strip on the home page."
+      },
+      {
+        "id": "details",
+        "title": "Project details",
+        "description": "Expanded modal on /projects — duration, client, features, full description."
+      },
+      {
+        "id": "media",
+        "title": "Media & link",
+        "description": "Cover image and live project URL."
+      },
+      {
+        "id": "display",
+        "title": "Display settings",
+        "description": "Sort order, category badge icon, and home featured flag."
+      }
+    ],
+    "fields": {
+      "title": { "label": "Title", "frontend": ["/projects card", "Home showcase"] },
+      "description": { "label": "Description", "frontend": ["/projects card"] },
+      "detailedDescription": { "label": "Detailed description", "frontend": ["/projects modal"] },
+      "image": { "label": "Cover image", "frontend": ["/projects card", "Home showcase"] },
+      "link": { "label": "Live URL", "frontend": ["/projects Visit Website button"] },
+      "technologies": { "label": "Technologies", "frontend": ["/projects card & modal"] },
+      "category": { "label": "Category", "frontend": ["/projects badge"] },
+      "features": { "label": "Key features", "frontend": ["/projects modal"] },
+      "duration": { "label": "Duration", "frontend": ["/projects card & modal"] },
+      "client": { "label": "Client", "frontend": ["/projects card & modal"] },
+      "icon": { "label": "Category icon", "frontend": ["/projects badge icon"] },
+      "featured": { "label": "Featured", "frontend": ["Home projects section"] },
+      "order": { "label": "Sort order", "frontend": ["Listing sort"] }
+    }
+  },
+  "services": {
+    "pageTitle": "Services",
+    "frontendRoute": "/services",
+    "sections": [
+      { "id": "basics", "title": "Basics", "description": "Slug, category, and visibility on /services." },
+      { "id": "content", "title": "Page content", "description": "Hero, benefits, and listing cards." },
+      { "id": "process", "title": "Process steps", "description": "Four-step workflow on service detail pages." },
+      { "id": "extended", "title": "Extended sections", "description": "Why choose, use cases, results, and FAQs on detail pages." },
+      { "id": "cta-seo", "title": "CTA & SEO", "description": "Bottom call-to-action and meta tags." }
+    ],
+    "fields": {
+      "label": { "label": "Label", "frontend": ["/services listing title"] },
+      "slug": { "label": "Slug", "frontend": ["URL path /services/{slug}"] },
+      "benefits": { "label": "Benefits", "frontend": ["/services highlights"] },
+      "whyChoose": { "label": "Why choose us", "frontend": ["Service detail page"] },
+      "useCases": { "label": "Use cases", "frontend": ["Service detail page"] },
+      "expectedResults": { "label": "Expected results", "frontend": ["Service detail page"] },
+      "faqs": { "label": "FAQs", "frontend": ["Service detail FAQ accordion"] }
+    }
+  },
+  "blogs": {
+    "pageTitle": "Blogs",
+    "frontendRoute": "/blogs",
+    "description": "Fields map directly to blog listing cards and post pages."
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "frontendRoute": "/contact-us",
+    "description": "Same fields power Contact page, footer contact column, home CTA, and JSON-LD.",
+    "fields": {
+      "email": { "frontend": ["Contact page", "Footer mailto", "Home CTA"] },
+      "phone": { "frontend": ["Contact page tel link", "Footer"] },
+      "phoneDisplay": { "frontend": ["Formatted phone label"] },
+      "address": { "frontend": ["Contact location card", "Footer address"] },
+      "addressRegion": { "frontend": ["Contact location subtitle"] },
+      "mapsLink": { "frontend": ["Location card map link"] },
+      "whatsapp": { "frontend": ["Contact socials", "Footer WhatsApp icon"] }
+    }
+  },
+  "footer": {
+    "pageTitle": "Footer",
+    "frontendRoute": "/",
+    "description": "Footer copy and social icons shown site-wide.",
+    "fields": {
+      "companyInfo": { "frontend": ["Footer tagline under logo area"] },
+      "copyrightText": { "frontend": ["Footer copyright bar — use {year}"] },
+      "craftedText": { "frontend": ["Footer crafted line"] },
+      "social": { "frontend": ["Footer + contact page social icons"] }
+    }
+  },
+  "team": {
+    "pageTitle": "Team",
+    "frontendRoute": "/team",
+    "fields": {
+      "name": { "frontend": ["/team card"] },
+      "designation": { "frontend": ["/team card subtitle"] },
+      "image": { "frontend": ["/team card photo"] },
+      "profileUrl": { "frontend": ["/team card click — optional external link"] },
+      "enabled": { "frontend": ["Visibility on /team"] }
+    }
+  }
+}

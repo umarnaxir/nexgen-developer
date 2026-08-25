@@ -11,6 +11,7 @@ import { useAdminPermissions } from "@/components/admin/layout/AdminPermissionsC
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import { ConfirmModal } from "@/components/admin/ui/ConfirmModal";
 import { adminFetch, formatAdminDate } from "@/lib/admin/client";
+import { cmsFields } from "@/lib/content/cms-fields";
 import type { Blog } from "@/lib/content/types";
 
 const PAGE_SIZE = 10;
@@ -81,8 +82,8 @@ export default function AdminBlogsPage() {
   return (
     <div>
       <PageHeader
-        title="Blogs"
-        description="Write and publish blog posts for the site."
+        title={cmsFields.blogs.pageTitle}
+        description={`${cmsFields.blogs.description} Frontend route: ${cmsFields.blogs.frontendRoute}`}
         actions={
           <Link href="/admin/blogs/new">
             <AdminButton>
@@ -93,20 +94,20 @@ export default function AdminBlogsPage() {
         }
       />
 
-      <div className="overflow-hidden rounded-md border border-neutral-200 bg-white">
+      <div className="overflow-hidden rounded-md border border-gold/25 bg-white">
         {loading ? (
-          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-neutral-500">
-            <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-text-gray">
+            <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
             Loading blogs…
           </div>
         ) : pageItems.length === 0 ? (
-          <div className="px-4 py-16 text-center text-sm text-neutral-500">
+          <div className="px-4 py-16 text-center text-sm text-text-gray">
             {search ? "No blogs match your search." : "No blogs yet."}
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="border-b border-neutral-200 bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500">
+              <thead className="border-b border-gold/25 bg-background-soft text-xs uppercase tracking-wide text-text-gray">
                 <tr>
                   <th className="px-4 py-3 font-medium">Post</th>
                   <th className="px-4 py-3 font-medium">Category</th>
@@ -115,12 +116,12 @@ export default function AdminBlogsPage() {
                   <th className="px-4 py-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100">
+              <tbody className="divide-y divide-gold/15">
                 {pageItems.map((blog) => (
-                  <tr key={blog.id} className="hover:bg-neutral-50/80">
+                  <tr key={blog.id} className="hover:bg-gold/[0.06]">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
+                        <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-background-soft">
                           {blog.image ? (
                             <Image
                               src={blog.image}
@@ -132,30 +133,30 @@ export default function AdminBlogsPage() {
                           ) : null}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-medium text-neutral-900 line-clamp-2">
+                          <p className="font-medium text-primary line-clamp-2">
                             {blog.title}
                           </p>
-                          <p className="mt-0.5 truncate text-xs text-neutral-500">
+                          <p className="mt-0.5 truncate text-xs text-text-gray">
                             {blog.author}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-neutral-600">
+                    <td className="px-4 py-3 text-text-gray">
                       {blog.category || "—"}
                     </td>
                     <td className="px-4 py-3">
                       {blog.status === "published" ? (
-                        <span className="inline-flex rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">
+                        <span className="inline-flex rounded-full bg-gold/15 px-2.5 py-0.5 text-xs font-medium text-gold-dark">
                           Published
                         </span>
                       ) : (
-                        <span className="inline-flex rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+                        <span className="inline-flex rounded-full bg-gold-light px-2.5 py-0.5 text-xs font-medium text-primary">
                           Draft
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-neutral-600">
+                    <td className="px-4 py-3 text-text-gray">
                       {formatAdminDate(blog.publishDate)}
                     </td>
                     <td className="px-4 py-3">
@@ -187,7 +188,7 @@ export default function AdminBlogsPage() {
         )}
 
         {!loading && filtered.length > PAGE_SIZE && (
-          <div className="flex items-center justify-between border-t border-neutral-200 px-4 py-3 text-sm text-neutral-600">
+          <div className="flex items-center justify-between border-t border-gold/25 px-4 py-3 text-sm text-text-gray">
             <span>
               Page {currentPage} of {totalPages} · {filtered.length} total
             </span>

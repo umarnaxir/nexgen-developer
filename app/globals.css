@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 @custom-variant light (&:is(.light *));
 
+/* Brand tokens — keep in sync with content/theme.json (source of truth). */
 :root {
   --background: #fefefe;
   --background-soft: #f8f7f5;
@@ -302,10 +303,11 @@ body {
 }
 
 .hero-highlight-word {
-  font-weight: 800;
+  font-weight: 900;
   color: var(--gold-dark);
   display: inline-block;
   letter-spacing: 0.02em;
+  -webkit-text-stroke: 0.45px currentColor;
 }
 
 .hero-service-word {
@@ -370,11 +372,14 @@ body {
 [data-admin] input,
 [data-admin] textarea,
 [data-admin] select {
-  color: #000 !important;
+  color: var(--foreground) !important;
 }
 .admin-panel input::placeholder,
-.admin-panel textarea::placeholder {
-  color: #6b7280 !important;
+.admin-panel textarea::placeholder,
+[data-admin] input::placeholder,
+[data-admin] textarea::placeholder {
+  color: var(--text-gray) !important;
+  opacity: 0.7;
 }
 
 @keyframes float {

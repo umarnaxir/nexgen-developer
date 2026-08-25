@@ -190,21 +190,21 @@ export function BlogBlockModal({
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            className="relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-xl border border-neutral-200 bg-white shadow-xl sm:rounded-md"
+            className="relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-xl border border-gold/25 bg-white shadow-xl sm:rounded-md"
           >
-            <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-3 sm:px-5">
+            <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3 sm:px-5">
               <div>
-                <h3 className="text-base font-semibold text-neutral-900 sm:text-lg">
+                <h3 className="text-base font-semibold text-primary sm:text-lg">
                   {isEdit ? "Edit content block" : "Add content block"}
                 </h3>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-text-gray">
                   Build SEO-friendly sections: headings, paragraphs, images
                 </p>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-text-gray hover:bg-background-soft"
                 aria-label="Close"
               >
                 <X className="h-4 w-4" />
@@ -240,15 +240,15 @@ export function BlogBlockModal({
                         key={item.id}
                         type="button"
                         onClick={() => chooseType(item.id)}
-                        className="rounded-md border border-neutral-200 p-4 text-left transition hover:border-teal-300 hover:bg-teal-50/40"
+                        className="rounded-md border border-gold/25 p-4 text-left transition hover:border-gold hover:bg-gold/10"
                       >
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-neutral-100 text-neutral-700">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-background-soft text-primary">
                           <Icon className="h-4 w-4" />
                         </span>
-                        <p className="mt-3 text-sm font-semibold text-neutral-900">
+                        <p className="mt-3 text-sm font-semibold text-primary">
                           {item.label}
                         </p>
-                        <p className="mt-1 text-xs text-neutral-500">{item.desc}</p>
+                        <p className="mt-1 text-xs text-text-gray">{item.desc}</p>
                       </button>
                     );
                   })}
@@ -259,7 +259,7 @@ export function BlogBlockModal({
                     <button
                       type="button"
                       onClick={() => setStep("pick")}
-                      className="text-xs font-medium text-teal-700 hover:underline"
+                      className="text-xs font-medium text-gold-dark hover:underline"
                     >
                       ← Change block type
                     </button>
@@ -291,19 +291,19 @@ export function BlogBlockModal({
 
                   {type === "text" && (
                     <>
-                      <div className="rounded-md border border-teal-200 bg-teal-50/60 p-3">
+                      <div className="rounded-md border border-gold/40 bg-gold/10 p-3">
                         <button
                           type="button"
                           onClick={() => setShowGuide((v) => !v)}
-                          className="flex w-full items-center justify-between text-left text-sm font-medium text-teal-900"
+                          className="flex w-full items-center justify-between text-left text-sm font-medium text-primary"
                         >
                           Formatting instructions
-                          <span className="text-xs text-teal-700">
+                          <span className="text-xs text-gold-dark">
                             {showGuide ? "Hide" : "Show"}
                           </span>
                         </button>
                         {showGuide && (
-                          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-teal-900/80">
+                          <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-primary/80">
                             <li>
                               <strong>Bold:</strong> select text → click Bold, or type{" "}
                               <code className="rounded bg-white/80 px-1">**your words**</code>
@@ -350,7 +350,7 @@ export function BlogBlockModal({
                       </div>
 
                       <div>
-                        <label className="mb-1.5 block text-sm font-medium text-neutral-700">
+                        <label className="mb-1.5 block text-sm font-medium text-primary">
                           Paragraph
                         </label>
                         <textarea
@@ -359,7 +359,7 @@ export function BlogBlockModal({
                           onChange={(e) => setContent(e.target.value)}
                           rows={10}
                           placeholder="Write your paragraph here. Use **bold** and [links](/path) for emphasis and SEO."
-                          className="w-full rounded-md border border-neutral-200 bg-white px-3 py-2.5 text-sm leading-relaxed text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/15"
+                          className="w-full rounded-md border border-gold/25 bg-white px-3 py-2.5 text-sm leading-relaxed text-primary outline-none transition placeholder:text-text-gray/70 focus:border-gold-dark focus:ring-2 focus:ring-gold/25"
                         />
                       </div>
                     </>
@@ -379,7 +379,7 @@ export function BlogBlockModal({
             </div>
 
             {step === "edit" && (
-              <div className="flex justify-end gap-2 border-t border-neutral-200 px-4 py-3 sm:px-5">
+              <div className="flex justify-end gap-2 border-t border-gold/25 px-4 py-3 sm:px-5">
                 <AdminButton type="button" variant="secondary" onClick={onClose}>
                   Cancel
                 </AdminButton>
@@ -439,7 +439,7 @@ export function CharCount({
     <p
       className={cn(
         "mt-1 text-[11px]",
-        ok ? "text-teal-700" : len === 0 ? "text-neutral-400" : "text-amber-700"
+        ok ? "text-gold-dark" : len === 0 ? "text-text-gray/70" : "text-primary"
       )}
     >
       {len} characters · aim {idealMin}–{idealMax} for SEO

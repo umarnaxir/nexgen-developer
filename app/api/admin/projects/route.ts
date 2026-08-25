@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
       duration: String(body.duration || "").trim(),
       client: String(body.client || "").trim(),
       icon: String(body.icon || "Globe"),
-      color: String(body.color || "bg-teal-500"),
+      color: String(body.color || "bg-gold"),
       featured: Boolean(body.featured),
       order: typeof body.order === "number" ? body.order : projects.length + 1,
     };

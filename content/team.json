@@ -14,7 +14,8 @@
     },
     "role": "member",
     "enabled": true,
-    "order": 1
+    "order": 1,
+    "profileUrl": "https://umarnazir.vercel.app/"
   },
   {
     "id": "8c685755-e772-b887-5692-e02f9a363348",
@@ -31,7 +32,8 @@
     },
     "role": "member",
     "enabled": true,
-    "order": 2
+    "order": 2,
+    "profileUrl": "https://www.linkedin.com/in/waseem049/"
   },
   {
     "id": "5f8dce87-d61f-3d3b-c3a3-2fb8a2771d20",
@@ -48,7 +50,8 @@
     },
     "role": "member",
     "enabled": true,
-    "order": 3
+    "order": 3,
+    "profileUrl": "https://www.linkedin.com/in/ishfaq24/"
   },
   {
     "id": "fbce3159-2cac-00b4-151a-412f84888162",
@@ -251,7 +254,7 @@
       "instagram": ""
     },
     "role": "member",
-    "enabled": false,
+    "enabled": true,
     "order": 15
   }
 ]

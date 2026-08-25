@@ -3,7 +3,7 @@
 import ServiceLayout from "../../../components/ServiceLayout";
 import ServicePageSchema from "@/components/seo/ServicePageSchema";
 import { getServicePageCopy, mergeServiceFaqs } from "../../../lib/get-service-page-copy";
-import type { ServiceDefinition } from "../../../config";
+import { getServiceHref, type ServiceDefinition } from "../../../config";
 
 interface DigitalMarketingServiceContentProps {
   service: ServiceDefinition;
@@ -22,6 +22,7 @@ export default function DigitalMarketingServiceContent({
     faqs: service.content.faqs,
   });
   const faqs = mergeServiceFaqs(service.content.faqs, copy.extraFaqs);
+  const path = getServiceHref(service);
 
   return (
     <>
@@ -29,6 +30,14 @@ export default function DigitalMarketingServiceContent({
         serviceName={service.content.heading}
         serviceDescription={service.content.description}
         serviceType={service.label}
+        areaServed="India"
+        path={path}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: "Digital Marketing", url: "/services/digital-marketing" },
+          { name: service.label, url: path },
+        ]}
         faqs={faqs}
       />
       <ServiceLayout

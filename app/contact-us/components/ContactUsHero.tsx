@@ -7,9 +7,9 @@ export default function ContactUsHero() {
   return (
     <PageHero
       eyebrow="Contact"
-      title={["Let's start", "a conversation."]}
-      highlight="conversation."
-      description="Tell us about your project. We'll get back within one business day."
+      title={["Contact our software", "development team."]}
+      highlight="team."
+      description="Talk to NexGen Developers about software development, AI, or marketing. Tell us about your project — we reply within one business day."
       pills={[
         { label: "1-day reply", icon: Clock },
         { label: "Clear next steps", icon: MessageSquare },

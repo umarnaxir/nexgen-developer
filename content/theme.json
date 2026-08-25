@@ -1,0 +1,44 @@
+{
+  "brand": {
+    "name": "NexGen Developers",
+    "shortName": "NexGen",
+    "adminTitle": "NexGen Admin",
+    "adminTagline": "Sign in to manage website content"
+  },
+  "logos": {
+    "mark": "/logo/logo.png",
+    "navDefault": "/logo/logo-01.png",
+    "navScrolled": "/logo/logo-02.png"
+  },
+  "colors": {
+    "background": "#fefefe",
+    "backgroundSoft": "#f8f7f5",
+    "foreground": "#20201f",
+    "primary": "#0e0d0d",
+    "primaryDeep": "#040303",
+    "primaryForeground": "#fefefe",
+    "textGray": "#464543",
+    "gold": "#e6c9a6",
+    "goldDark": "#d1ac81",
+    "goldLight": "#eae3db",
+    "goldDeep": "#c49a6c",
+    "navSolid": "#111111",
+    "border": "#e6c9a6",
+    "ring": "#d1ac81",
+    "silver": "#8a8884",
+    "silverLight": "#eae3db",
+    "silverDark": "#464543",
+    "destructive": "#dc2626"
+  },
+  "dark": {
+    "background": "#040303",
+    "backgroundSoft": "#0e0d0d",
+    "foreground": "#fefefe",
+    "primary": "#e6c9a6",
+    "primaryForeground": "#0e0d0d",
+    "mutedForeground": "#eae3db",
+    "border": "rgba(230, 201, 166, 0.28)",
+    "input": "rgba(230, 201, 166, 0.2)",
+    "ring": "#d1ac81"
+  }
+}

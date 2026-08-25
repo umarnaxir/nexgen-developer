@@ -248,15 +248,30 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
     >
       <div className="px-4 sm:px-6 lg:px-14">
         <div className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between gap-4 sm:h-20">
-        <Link href="/" className="shrink-0" aria-label="NexGen Developers home">
-          <Image
-            src="/logo/nav-logo.png"
-            alt="NexGen Developers"
-            width={588}
-            height={425}
-            className="h-10 w-auto object-contain sm:h-11"
-            priority
-          />
+        <Link href="/" className="relative shrink-0" aria-label="NexGen Developers home">
+          <span className="relative block h-10 w-[3.47rem] sm:h-11 sm:w-[3.82rem]">
+            <Image
+              src="/logo/logo-01.png"
+              alt="NexGen Developers"
+              width={580}
+              height={418}
+              className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+                scrolled ? "pointer-events-none opacity-0" : "opacity-100"
+              }`}
+              priority
+            />
+            <Image
+              src="/logo/logo-02.png"
+              alt=""
+              width={580}
+              height={418}
+              className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+                scrolled ? "opacity-100" : "pointer-events-none opacity-0"
+              }`}
+              aria-hidden={!scrolled}
+              priority
+            />
+          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

@@ -20,6 +20,8 @@ import { cn } from "@/lib/utils";
 import { useAdminSearch } from "./AdminSearchContext";
 import { ConfirmModal } from "@/components/admin/ui/ConfirmModal";
 import type { AdminRole } from "@/lib/content/types";
+import { adminConfig } from "@/lib/theme";
+import { adminUi } from "@/lib/admin/ui";
 
 type SearchHit = {
   type: string;
@@ -132,14 +134,14 @@ export default function AdminHeader({
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/95 backdrop-blur-md">
+      <header className={adminUi.header.root}>
         <div className="flex h-14 items-center gap-2 px-3 sm:h-16 sm:gap-3 sm:px-5 lg:px-8">
           <button
             type="button"
             onClick={onOpenMobileNav}
             aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileNavOpen}
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-neutral-800 transition hover:bg-neutral-100 hover:text-teal-700 active:scale-95 lg:hidden"
+            className={adminUi.header.menuBtn}
           >
             {mobileNavOpen ? (
               <ChevronLeft className="h-5 w-5" strokeWidth={2.25} />
@@ -149,7 +151,7 @@ export default function AdminHeader({
           </button>
 
           <div ref={searchRef} className="relative min-w-0 flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold-dark/70" />
             <input
               value={query}
               onChange={(e) => {
@@ -157,8 +159,8 @@ export default function AdminHeader({
                 setSearchOpen(true);
               }}
               onFocus={() => setSearchOpen(true)}
-              placeholder="Search…"
-              className="h-10 w-full rounded-md border border-neutral-200 bg-neutral-50 pl-10 pr-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-teal-500 focus:bg-white focus:ring-2 focus:ring-teal-500/15 sm:h-11 sm:pr-4"
+              placeholder={adminConfig.searchPlaceholder}
+              className={adminUi.header.search}
             />
 
             <AnimatePresence>
@@ -167,15 +169,18 @@ export default function AdminHeader({
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
-                  className="absolute left-0 right-0 top-[calc(100%+0.4rem)] z-50 max-h-[min(24rem,70vh)] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-xl"
+                  className={cn(
+                    "absolute left-0 right-0 top-[calc(100%+0.4rem)] z-50 max-h-[min(24rem,70vh)] overflow-hidden shadow-xl",
+                    adminUi.card
+                  )}
                 >
                   {searching ? (
-                    <div className="flex items-center gap-2 px-4 py-3 text-sm text-neutral-500">
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                    <div className="flex items-center gap-2 px-4 py-3 text-sm text-text-gray">
+                      <Loader2 className={adminUi.spinner} />
                       Searching…
                     </div>
                   ) : hits.length === 0 ? (
-                    <p className="px-4 py-3 text-sm text-neutral-500">
+                    <p className="px-4 py-3 text-sm text-text-gray">
                       No results for “{query.trim()}”
                     </p>
                   ) : (
@@ -185,13 +190,13 @@ export default function AdminHeader({
                           <Link
                             href={hit.href}
                             onClick={() => setSearchOpen(false)}
-                            className="flex items-start justify-between gap-3 px-4 py-2.5 transition hover:bg-teal-50"
+                            className={adminUi.header.searchHit}
                           >
                             <div className="min-w-0">
-                              <p className="truncate text-sm font-medium text-neutral-900">
+                              <p className="truncate text-sm font-medium text-primary">
                                 {hit.title}
                               </p>
-                              <p className="text-xs capitalize text-neutral-500">
+                              <p className="text-xs capitalize text-text-gray">
                                 {hit.type}
                                 {hit.meta ? ` · ${hit.meta}` : ""}
                               </p>
@@ -211,24 +216,24 @@ export default function AdminHeader({
               type="button"
               onClick={() => setProfileOpen((v) => !v)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white py-1 pl-1 pr-1.5 transition hover:border-neutral-300 hover:shadow-sm sm:pr-2.5",
-                profileOpen && "border-teal-300 ring-2 ring-teal-500/15"
+                "inline-flex items-center gap-2 rounded-md border border-gold/30 bg-white py-1 pl-1 pr-1.5 transition hover:border-gold hover:shadow-sm sm:pr-2.5",
+                profileOpen && adminUi.header.profileOpen
               )}
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-teal-600 text-xs font-semibold text-white">
+              <span className={adminUi.header.avatar}>
                 {initials || <User className="h-4 w-4" />}
               </span>
               <span className="hidden text-left md:block">
-                <span className="block max-w-[9rem] truncate text-sm font-medium text-neutral-900">
+                <span className="block max-w-[9rem] truncate text-sm font-medium text-primary">
                   {userName}
                 </span>
-                <span className="block text-[11px] text-neutral-500">
+                <span className="block text-[11px] text-text-gray">
                   {roleLabel(userRole)}
                 </span>
               </span>
               <ChevronDown
                 className={cn(
-                  "hidden h-4 w-4 text-neutral-400 transition md:block",
+                  "hidden h-4 w-4 text-text-gray transition md:block",
                   profileOpen && "rotate-180"
                 )}
               />
@@ -240,14 +245,17 @@ export default function AdminHeader({
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
-                  className="absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(16rem,calc(100vw-1.5rem))] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-xl"
+                  className={cn(
+                    "absolute right-0 top-[calc(100%+0.5rem)] z-50 w-[min(16rem,calc(100vw-1.5rem))] overflow-hidden shadow-xl",
+                    adminUi.card
+                  )}
                 >
-                  <div className="border-b border-neutral-100 px-4 py-3">
-                    <p className="truncate text-sm font-semibold text-neutral-900">
+                  <div className="border-b border-gold/15 px-4 py-3">
+                    <p className="truncate text-sm font-semibold text-primary">
                       {userName}
                     </p>
-                    <p className="truncate text-xs text-neutral-500">{userEmail}</p>
-                    <span className="mt-2 inline-flex rounded-md bg-teal-50 px-2 py-0.5 text-[11px] font-medium text-teal-700">
+                    <p className="truncate text-xs text-text-gray">{userEmail}</p>
+                    <span className={adminUi.header.roleBadge}>
                       {roleLabel(userRole)}
                     </span>
                   </div>
@@ -256,9 +264,9 @@ export default function AdminHeader({
                       <Link
                         href="/admin/users"
                         onClick={() => setProfileOpen(false)}
-                        className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-neutral-700 transition hover:bg-neutral-50"
+                        className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-primary transition hover:bg-gold/10"
                       >
-                        <Users className="h-4 w-4" />
+                        <Users className="h-4 w-4 text-gold-dark" />
                         Manage users
                       </Link>
                     )}
@@ -266,10 +274,10 @@ export default function AdminHeader({
                       href="/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-neutral-700 transition hover:bg-neutral-50"
+                      className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-primary transition hover:bg-gold/10"
                     >
-                      <ExternalLink className="h-4 w-4" />
-                      Visit site
+                      <ExternalLink className="h-4 w-4 text-gold-dark" />
+                      {adminConfig.visitSiteLabel}
                     </a>
                     <button
                       type="button"

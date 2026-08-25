@@ -9,6 +9,7 @@ import {
   Trash2,
   Loader2,
   GripVertical,
+  ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -35,6 +36,7 @@ import { useAdminPermissions } from "@/components/admin/layout/AdminPermissionsC
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import { ConfirmModal } from "@/components/admin/ui/ConfirmModal";
 import { adminFetch } from "@/lib/admin/client";
+import { cmsFields } from "@/lib/content/cms-fields";
 import { cn } from "@/lib/utils";
 import type { TeamMember } from "@/lib/content/types";
 
@@ -66,8 +68,8 @@ function SortableMemberCard({
       ref={setNodeRef}
       style={style}
       className={cn(
-        "group relative overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm transition",
-        isDragging && "z-20 scale-[1.02] border-teal-300 shadow-lg",
+        "group relative overflow-hidden rounded-md border border-gold/25 bg-white shadow-sm transition",
+        isDragging && "z-20 scale-[1.02] border-gold shadow-lg",
         member.enabled === false && "opacity-70"
       )}
     >
@@ -81,7 +83,7 @@ function SortableMemberCard({
         <GripVertical className="h-3.5 w-3.5" />
       </button>
 
-      <div className="relative aspect-[4/5] bg-neutral-100">
+      <div className="relative aspect-[4/5] bg-background-soft">
         {member.image ? (
           <Image
             src={member.image}
@@ -92,12 +94,17 @@ function SortableMemberCard({
           />
         ) : null}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+        {member.profileUrl?.trim() ? (
+          <span className="absolute left-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-gold/35 bg-black/50 text-gold backdrop-blur-sm">
+            <ExternalLink className="h-3 w-3" />
+          </span>
+        ) : null}
         <span
           className={cn(
             "absolute right-1.5 top-1.5 rounded-md px-1.5 py-0.5 text-[10px] font-medium backdrop-blur-sm",
             member.enabled !== false
-              ? "bg-teal-600/90 text-white"
-              : "bg-neutral-800/80 text-white/80"
+              ? "bg-gold-dark/90 text-white"
+              : "bg-primary/80 text-gold-light/80"
           )}
         >
           {member.enabled !== false ? "Visible" : "Hidden"}
@@ -112,7 +119,7 @@ function SortableMemberCard({
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-1.5 border-t border-neutral-100 p-1.5">
+      <div className="flex items-center justify-between gap-1.5 border-t border-gold/15 p-1.5">
         <Link href={`/admin/team/${member.id}`} className="flex-1">
           <AdminButton size="sm" variant="secondary" className="w-full px-2">
             <Pencil className="h-3.5 w-3.5" />
@@ -232,8 +239,8 @@ export default function AdminTeamPage() {
   return (
     <div>
       <PageHeader
-        title="Team"
-        description="Drag cards to rearrange the squad order on the Team page."
+        title={cmsFields.team.pageTitle}
+        description="Drag to reorder. Optional profile link makes cards clickable on /team."
         actions={
           <Link href="/admin/team/new">
             <AdminButton>
@@ -245,26 +252,26 @@ export default function AdminTeamPage() {
       />
 
       {savingOrder && (
-        <p className="mb-3 flex items-center gap-2 text-xs text-teal-700">
+        <p className="mb-3 flex items-center gap-2 text-xs text-gold-dark">
           <Loader2 className="h-3.5 w-3.5 animate-spin" />
           Saving new order…
         </p>
       )}
 
       {isSearching && (
-        <p className="mb-3 text-xs text-neutral-500">
+        <p className="mb-3 text-xs text-text-gray">
           Clear search to enable drag-and-drop reordering.
         </p>
       )}
 
-      <div className="rounded-md border border-neutral-200 bg-white p-3 sm:p-4">
+      <div className="rounded-md border border-gold/25 bg-white p-3 sm:p-4">
         {loading ? (
-          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-neutral-500">
-            <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-text-gray">
+            <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
             Loading team…
           </div>
         ) : filtered.length === 0 ? (
-          <div className="px-4 py-16 text-center text-sm text-neutral-500">
+          <div className="px-4 py-16 text-center text-sm text-text-gray">
             {search ? "No members match your search." : "No team members yet."}
           </div>
         ) : (

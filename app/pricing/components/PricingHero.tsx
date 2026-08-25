@@ -7,9 +7,9 @@ export default function PricingHero() {
   return (
     <PageHero
       eyebrow="Pricing"
-      title={["Clear packages.", "Honest timelines."]}
-      highlight="timelines."
-      description="Starting prices for websites, apps, and other services. We confirm scope and timeline before work begins. No surprises."
+      title={["Software development", "pricing, made clear."]}
+      highlight="clear."
+      description="Starting prices for software development services from NexGen Developers. We confirm scope and timeline before work begins. No surprises."
       pills={[
         { label: "Fixed starting prices", icon: BadgeCheck },
         { label: "Scope call before kickoff", icon: CalendarClock },

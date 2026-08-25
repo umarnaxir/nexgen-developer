@@ -3,17 +3,20 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { LayoutGrid, List, Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/admin/layout/PageHeader";
 import { useAdminSearch } from "@/components/admin/layout/AdminSearchContext";
 import { useAdminPermissions } from "@/components/admin/layout/AdminPermissionsContext";
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import { ConfirmModal } from "@/components/admin/ui/ConfirmModal";
+import { AdminServiceCard } from "@/components/admin/preview/AdminProjectCard";
 import { adminFetch } from "@/lib/admin/client";
+import { cmsFields } from "@/lib/content/cms-fields";
 import type { ServiceRecord } from "@/lib/content/types";
+import { cn } from "@/lib/utils";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 12;
 
 export default function AdminServicesPage() {
   const { query: search } = useAdminSearch();
@@ -21,6 +24,7 @@ export default function AdminServicesPage() {
   const [services, setServices] = useState<ServiceRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [view, setView] = useState<"cards" | "table">("cards");
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
 
@@ -82,32 +86,73 @@ export default function AdminServicesPage() {
   return (
     <div>
       <PageHeader
-        title="Services"
-        description="Manage service pages and related content."
+        title={cmsFields.services.pageTitle}
+        description={`Same data as ${cmsFields.services.frontendRoute} — cards mirror public service pages.`}
         actions={
-          <Link href="/admin/services/new">
-            <AdminButton>
-              <Plus className="h-4 w-4" />
-              Add Service
-            </AdminButton>
-          </Link>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="inline-flex rounded-md border border-gold/25 p-0.5">
+              <button
+                type="button"
+                onClick={() => setView("cards")}
+                className={cn(
+                  "inline-flex h-9 items-center gap-1.5 rounded px-2.5 text-xs font-medium transition",
+                  view === "cards"
+                    ? "bg-gold text-primary"
+                    : "text-text-gray hover:bg-gold/10"
+                )}
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                Cards
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("table")}
+                className={cn(
+                  "inline-flex h-9 items-center gap-1.5 rounded px-2.5 text-xs font-medium transition",
+                  view === "table"
+                    ? "bg-gold text-primary"
+                    : "text-text-gray hover:bg-gold/10"
+                )}
+              >
+                <List className="h-3.5 w-3.5" />
+                Table
+              </button>
+            </div>
+            <Link href="/admin/services/new">
+              <AdminButton>
+                <Plus className="h-4 w-4" />
+                Add Service
+              </AdminButton>
+            </Link>
+          </div>
         }
       />
 
-      <div className="overflow-hidden rounded-md border border-neutral-200 bg-white">
-        {loading ? (
-          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-neutral-500">
-            <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
-            Loading services…
-          </div>
-        ) : pageItems.length === 0 ? (
-          <div className="px-4 py-16 text-center text-sm text-neutral-500">
-            {search ? "No services match your search." : "No services yet."}
-          </div>
-        ) : (
+      {loading ? (
+        <div className="flex items-center justify-center gap-2 rounded-md border border-gold/25 bg-white py-16 text-sm text-text-gray">
+          <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
+          Loading services…
+        </div>
+      ) : pageItems.length === 0 ? (
+        <div className="rounded-md border border-gold/25 bg-white px-4 py-16 text-center text-sm text-text-gray">
+          {search ? "No services match your search." : "No services yet."}
+        </div>
+      ) : view === "cards" ? (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {pageItems.map((service) => (
+            <AdminServiceCard
+              key={service.id}
+              service={service}
+              canDelete={canDeleteContent}
+              onDelete={() => setDeleteId(service.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="overflow-hidden rounded-md border border-gold/25 bg-white">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[800px] text-left text-sm">
-              <thead className="border-b border-neutral-200 bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500">
+              <thead className="border-b border-gold/25 bg-background-soft text-xs uppercase tracking-wide text-text-gray">
                 <tr>
                   <th className="px-4 py-3 font-medium">Service</th>
                   <th className="px-4 py-3 font-medium">Category</th>
@@ -116,12 +161,12 @@ export default function AdminServicesPage() {
                   <th className="px-4 py-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100">
+              <tbody className="divide-y divide-gold/15">
                 {pageItems.map((service) => (
-                  <tr key={service.id} className="hover:bg-neutral-50/80">
+                  <tr key={service.id} className="hover:bg-gold/[0.06]">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
+                        <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded-lg bg-background-soft">
                           {service.content.image ? (
                             <Image
                               src={service.content.image}
@@ -133,28 +178,28 @@ export default function AdminServicesPage() {
                           ) : null}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-medium text-neutral-900 line-clamp-2">
+                          <p className="font-medium text-primary line-clamp-2">
                             {service.label}
                           </p>
-                          <p className="mt-0.5 truncate text-xs text-neutral-500">
+                          <p className="mt-0.5 truncate text-xs text-text-gray">
                             {service.slug}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 capitalize text-neutral-600">
+                    <td className="px-4 py-3 capitalize text-text-gray">
                       {service.category.replace("-", " ")}
                     </td>
-                    <td className="px-4 py-3 text-neutral-600">
+                    <td className="px-4 py-3 text-text-gray">
                       {service.parentSlug || "—"}
                     </td>
                     <td className="px-4 py-3">
                       {service.enabled ? (
-                        <span className="inline-flex rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">
+                        <span className="inline-flex rounded-full bg-gold/15 px-2.5 py-0.5 text-xs font-medium text-gold-dark">
                           Enabled
                         </span>
                       ) : (
-                        <span className="inline-flex rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
+                        <span className="inline-flex rounded-full bg-background-soft px-2.5 py-0.5 text-xs font-medium text-text-gray">
                           Disabled
                         </span>
                       )}
@@ -185,10 +230,11 @@ export default function AdminServicesPage() {
               </tbody>
             </table>
           </div>
-        )}
+        </div>
+      )}
 
-        {!loading && filtered.length > PAGE_SIZE && (
-          <div className="flex items-center justify-between border-t border-neutral-200 px-4 py-3 text-sm text-neutral-600">
+      {!loading && filtered.length > PAGE_SIZE && (
+        <div className="mt-4 flex items-center justify-between rounded-md border border-gold/25 bg-white px-4 py-3 text-sm text-text-gray">
             <span>
               Page {currentPage} of {totalPages} · {filtered.length} total
             </span>
@@ -212,7 +258,6 @@ export default function AdminServicesPage() {
             </div>
           </div>
         )}
-      </div>
 
       <ConfirmModal
         open={deleteId != null}

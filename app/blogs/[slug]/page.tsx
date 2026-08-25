@@ -3,9 +3,10 @@ import BlogPostHero from "./components/BlogPostHero";
 import BlogPostContent from "./components/BlogPostContent";
 import RelatedBlogs from "./components/RelatedBlogs";
 import BlogPostCTA from "./components/BlogPostCTA";
-import { ArticleSchema } from "@/lib/seo/structured-data";
+import { ArticleSchema, BreadcrumbSchema, WebPageSchema } from "@/lib/seo/structured-data";
 import { seoConfig } from "@/lib/seo/config";
 import { getBlogBySlug, getBlogs } from "@/lib/content/store";
+import { buildSeoDescription, buildSeoTitle } from "@/lib/seo/utils";
 import type { BlogPostType } from "./data";
 
 export const dynamic = "force-dynamic";
@@ -67,17 +68,36 @@ export default async function BlogPostPage({ params }: PageProps) {
     }));
 
   const publishedDate = new Date(blogRaw.publishDate || blog.date).toISOString();
-  const blogUrl = `${seoConfig.siteUrl}/blogs/${blog.slug}`;
+  const modifiedDate = publishedDate;
+  const path = `/blogs/${blog.slug}`;
+  const blogUrl = `${seoConfig.siteUrl}${path}`;
 
   return (
     <>
+      <WebPageSchema
+        name={buildSeoTitle(blog.title)}
+        description={buildSeoDescription(blog.excerpt)}
+        url={path}
+        datePublished={publishedDate}
+        dateModified={modifiedDate}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blogs" },
+          { name: blog.title, url: path },
+        ]}
+      />
       <ArticleSchema
         title={blog.title}
         description={blog.excerpt}
         url={blogUrl}
         publishedDate={publishedDate}
+        modifiedDate={modifiedDate}
         author={blog.author}
         publisher={seoConfig.publisher}
+        image={blog.images[0] || blogRaw.image}
+        keywords={blog.keywords}
       />
       <div className="min-h-screen">
         <article className="section-y !pt-[calc(var(--site-nav-height)+2rem)]">

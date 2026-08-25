@@ -29,7 +29,8 @@ function ServiceCard({
     >
       <MotionImage
         src={service.image}
-        alt={service.title}
+        alt={`${service.title} services by NexGen Developers`}
+        title={service.title}
         fill
         sizes={isMobile ? "88vw" : "(max-width: 1024px) 70vw, 54vw"}
         priority={index < 2}
@@ -167,9 +168,9 @@ export default function ServicesSection() {
           Services
         </span>
         <h2 className="mt-3 text-[1.9rem] font-bold leading-[1.15] tracking-[-0.03em] text-black">
-          <span className="block">Everything you need to</span>
+          <span className="block">Software development</span>
           <span className="block">
-            launch and <span className="text-gold-dark">scale.</span>
+            services to <span className="text-gold-dark">scale.</span>
           </span>
         </h2>
 
@@ -212,7 +213,7 @@ export default function ServicesSection() {
               Services
             </span>
             <h2 className="mt-3 text-[clamp(1.35rem,3.4vw,2.75rem)] font-semibold leading-tight tracking-[-0.03em] text-black">
-              Everything you need to launch and <span className="text-gold-dark">scale.</span>
+              Software development services to <span className="text-gold-dark">scale.</span>
             </h2>
           </div>
 

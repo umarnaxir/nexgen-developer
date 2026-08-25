@@ -3,7 +3,7 @@
 import ServiceLayout from "../../components/ServiceLayout";
 import ServicePageSchema from "@/components/seo/ServicePageSchema";
 import { getServicePageCopy, mergeServiceFaqs } from "../../lib/get-service-page-copy";
-import type { ServiceDefinition } from "../../config";
+import { getServiceHref, type ServiceDefinition } from "../../config";
 
 interface ServicePageContentProps {
   service: ServiceDefinition;
@@ -22,6 +22,7 @@ export default function ServicePageContent({
     faqs: service.content.faqs,
   });
   const faqs = mergeServiceFaqs(service.content.faqs, copy.extraFaqs);
+  const path = getServiceHref(service);
 
   return (
     <>
@@ -29,6 +30,13 @@ export default function ServicePageContent({
         serviceName={service.content.heading}
         serviceDescription={service.content.description}
         serviceType={service.label}
+        areaServed="India"
+        path={path}
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: service.label, url: path },
+        ]}
         faqs={faqs}
       />
       <ServiceLayout

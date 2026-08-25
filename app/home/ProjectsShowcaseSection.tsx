@@ -100,7 +100,7 @@ export default function ProjectsShowcaseSection({
               Selected Work
             </span>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-primary sm:text-3xl lg:text-4xl">
-              Projects that <span className="text-gold-dark">ship.</span>
+              Software projects that <span className="text-gold-dark">ship.</span>
             </h2>
           </div>
 

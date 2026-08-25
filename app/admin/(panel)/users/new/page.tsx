@@ -25,8 +25,8 @@ export default function NewUserPage() {
 
   if (!ready) {
     return (
-      <div className="flex items-center justify-center gap-2 py-16 text-sm text-neutral-500">
-        <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+      <div className="flex items-center justify-center gap-2 py-16 text-sm text-text-gray">
+        <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
         Checking access…
       </div>
     );
@@ -40,7 +40,7 @@ export default function NewUserPage() {
         actions={
           <Link
             href="/admin/users"
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-600 hover:text-teal-700"
+            className="inline-flex items-center gap-1.5 text-sm text-text-gray hover:text-gold-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to users

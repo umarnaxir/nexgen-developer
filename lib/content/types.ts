@@ -35,6 +35,8 @@ export type TeamMember = {
   email: string;
   phone: string;
   image: string;
+  /** Optional external URL — team card becomes clickable when set. */
+  profileUrl?: string;
   socialLinks: {
     linkedin?: string;
     twitter?: string;
