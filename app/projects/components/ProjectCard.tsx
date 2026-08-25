@@ -308,7 +308,7 @@ export default function ProjectCard({
                   rel="noopener noreferrer"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-gold-light/50 sm:flex-none"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 sm:flex-none"
                 >
                   Visit Website
                   <ExternalLink className="h-3.5 w-3.5" />

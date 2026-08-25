@@ -250,11 +250,11 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
         <div className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between gap-4 sm:h-20">
         <Link href="/" className="shrink-0" aria-label="NexGen Developers home">
           <Image
-            src="/logo/logo.png"
+            src="/logo/nav-logo.png"
             alt="NexGen Developers"
-            width={48}
-            height={48}
-            className="h-10 w-10 object-contain sm:h-11 sm:w-11"
+            width={588}
+            height={425}
+            className="h-10 w-auto object-contain sm:h-11"
             priority
           />
         </Link>

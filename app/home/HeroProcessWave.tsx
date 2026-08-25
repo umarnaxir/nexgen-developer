@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { BarChart3, Code2, Lightbulb, PenTool, Rocket } from "lucide-react";
 
 const steps = [
@@ -106,14 +108,28 @@ export default function HeroProcessWave() {
       })}
 
       <div className="absolute left-1/2 top-[46%] z-[1] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-        <div className="relative flex h-[7.25rem] w-[7.25rem] items-center justify-center sm:h-[8.5rem] sm:w-[8.5rem]">
-          <span className="hero-orbit absolute inset-[-18%] rounded-full border border-dashed border-gold/35" />
-          <span className="hero-orbit-rev absolute inset-[-8%] rounded-full border border-gold/25" />
-          <span className="absolute inset-0 rounded-full border border-gold/40 bg-white/70 shadow-[0_0_40px_rgba(230,201,166,0.45)] backdrop-blur-sm" />
-          <span className="relative text-[3.15rem] font-semibold leading-none text-gold-dark sm:text-[3.75rem]">
-            N
-          </span>
-        </div>
+        <Link
+          href="/"
+          aria-label="NexGen Developers home"
+          className="hero-logo group relative block"
+        >
+          <span className="hero-logo-pulse pointer-events-none absolute inset-[-22%] rounded-full border border-gold/40" />
+          <div className="hero-logo-float relative flex h-[7.75rem] w-[7.75rem] items-center justify-center sm:h-[9.25rem] sm:w-[9.25rem]">
+            <span className="hero-orbit absolute inset-[-18%] rounded-full border border-dashed border-gold/35" />
+            <span className="hero-orbit-rev absolute inset-[-8%] rounded-full border border-gold/25" />
+            <span className="hero-logo-mark relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-gold/50 bg-[#111111]">
+              <Image
+                src="/logo/nav-logo.png"
+                alt=""
+                width={588}
+                height={425}
+                className="relative z-10 h-auto w-[78%] object-contain transition-transform duration-500 ease-out group-hover:scale-110"
+                priority
+              />
+              <span className="hero-logo-shine" />
+            </span>
+          </div>
+        </Link>
         <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/75">
           NexGen Developers
         </p>

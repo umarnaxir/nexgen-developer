@@ -61,7 +61,7 @@ export default function TechStackSection() {
       className="section-light relative min-w-0 overflow-x-clip scroll-mt-24 section-y sm:scroll-mt-28"
       aria-label="Technology stack"
     >
-      <div className="section-container relative z-10 min-w-0 max-w-full">
+      <div className="section-container relative z-10 min-w-0">
         <div className="mb-6 flex min-w-0 flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">

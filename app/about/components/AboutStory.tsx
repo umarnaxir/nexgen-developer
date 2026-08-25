@@ -7,7 +7,7 @@ export default function AboutStory() {
       id="about-story"
       className="section-light relative overflow-hidden border-t border-black/[0.06] section-y"
     >
-      <div className="section-container relative z-10 min-w-0 w-full max-w-full">
+      <div className="section-container relative z-10 min-w-0">
         <div className="min-w-0 w-full max-w-full" data-aos="fade-up">
           <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
             {aboutStory.eyebrow}
