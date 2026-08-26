@@ -197,7 +197,7 @@ export function getBlogPostSEO({
       images,
     },
     twitter: {
-      card: "summary_large_image",
+      card: image ? "summary_large_image" : "summary",
       title,
       description,
       images: image ? [image] : undefined,
@@ -303,7 +303,7 @@ export function getServiceSEO(
       url: canonicalPath,
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: seo.title,
       description: seo.description,
     },

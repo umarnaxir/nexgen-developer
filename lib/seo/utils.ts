@@ -33,6 +33,7 @@ export interface SEOProps {
       width?: number;
       height?: number;
       alt?: string;
+      type?: string;
     }>;
     type?: "website" | "article";
     publishedTime?: string;
@@ -145,6 +146,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
     width: seoConfig.defaultOgImageWidth,
     height: seoConfig.defaultOgImageHeight,
     alt: seoConfig.defaultOgImageAlt,
+    type: seoConfig.defaultOgImageType,
   };
   const ogImages = openGraph?.images?.length
     ? openGraph.images.map((image) => ({
@@ -152,6 +154,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
         width: image.width || seoConfig.defaultOgImageWidth,
         height: image.height || seoConfig.defaultOgImageHeight,
         alt: image.alt || seoConfig.defaultOgImageAlt,
+        type: image.type || seoConfig.defaultOgImageType,
       }))
     : [brandOgImage];
 
@@ -160,8 +163,13 @@ export function generateMetadata(seo: SEOProps): Metadata {
     : buildSeoTitle(twitter?.title || title);
   const twitterDescription = buildSeoDescription(twitter?.description || description);
   const twitterImages = twitter?.images?.length
-    ? twitter.images.map((image) => (image.startsWith("http") ? image : absoluteUrl(image)))
-    : ogImages.map((image) => image.url);
+    ? twitter.images.map((image, index) => ({
+        url: image.startsWith("http") ? image : absoluteUrl(image),
+        width: ogImages[index]?.width || seoConfig.defaultOgImageWidth,
+        height: ogImages[index]?.height || seoConfig.defaultOgImageHeight,
+        alt: ogImages[index]?.alt || seoConfig.defaultOgImageAlt,
+      }))
+    : ogImages;
 
   const metadata: Metadata = {
     metadataBase: new URL(seoConfig.siteUrl),
@@ -202,7 +210,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
       ...(openGraph?.tags && { tags: openGraph.tags }),
     },
     twitter: {
-      card: twitter?.card || "summary_large_image",
+      card: twitter?.card || "summary",
       site: seoConfig.twitterHandle,
       creator: seoConfig.twitterHandle,
       title: twitterTitle,

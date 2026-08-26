@@ -34,10 +34,11 @@ export const seoConfig = {
   defaultLogoWidth: 1254,
   defaultLogoHeight: 1254,
 
-  defaultOgImage: "https://www.nexgendevelopers.in/og/og-image.png?v=20260825",
-  defaultOgImageWidth: 1200,
-  defaultOgImageHeight: 630,
+  defaultOgImage: `${siteUrl}/og/og.png?v=20260827`,
+  defaultOgImageWidth: 1254,
+  defaultOgImageHeight: 1254,
   defaultOgImageAlt: `${brand.name} — software development services in India`,
+  defaultOgImageType: "image/png",
 
   twitterHandle: "@nexgendv",
 
