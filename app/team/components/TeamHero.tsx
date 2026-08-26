@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 export default function TeamHero() {
   return (
     <PageHero
+      variant="dark"
       eyebrow="Team"
       title={["Meet the software", "team behind NexGen."]}
       highlight="NexGen."

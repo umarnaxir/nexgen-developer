@@ -226,7 +226,10 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
 
   const servicesActive = pathname.startsWith("/services");
   const isDarkHero =
-    pathname === "/about" || pathname === "/contact-us" || pathname.startsWith("/services/");
+    pathname === "/about" ||
+    pathname === "/team" ||
+    pathname === "/contact-us" ||
+    pathname.startsWith("/services/");
   const solid = scrolled || mobileOpen || isDarkHero;
 
   useEffect(() => {

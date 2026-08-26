@@ -28,7 +28,7 @@ export const teamMembers = [
   {
     name: "Mohsin Jan",
     title: "Digital Marketing Analyst",
-    image: "/images/team/mohsin-jan.jpeg",
+    image: "/images/team/mohsin.png",
   },
   {
     name: "Ishfaq Nazir",

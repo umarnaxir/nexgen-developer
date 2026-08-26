@@ -635,11 +635,51 @@ body {
   animation: shimmer 7s linear infinite;
 }
 
+@keyframes ctaMapDrift {
+  0%, 100% { transform: scale(1.04) translate3d(0, 0, 0); }
+  50% { transform: scale(1.12) translate3d(-1.4%, 0.8%, 0); }
+}
+.cta-map-drift {
+  animation: ctaMapDrift 24s ease-in-out infinite;
+  will-change: transform;
+}
+.group\/cta:hover .cta-map-drift {
+  animation-play-state: paused;
+  transform: scale(1.14);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ctaSweep {
+  0% { transform: translateX(-130%) rotate(18deg); opacity: 0; }
+  18% { opacity: 0.28; }
+  50% { opacity: 0.12; }
+  100% { transform: translateX(130%) rotate(18deg); opacity: 0; }
+}
+.cta-sweep {
+  animation: ctaSweep 9s ease-in-out infinite;
+}
+
+@keyframes ctaNodePulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.35); opacity: 1; }
+}
+.cta-node-core {
+  animation: ctaNodePulse 2.8s ease-in-out infinite;
+}
+
 @keyframes glowPulse {
   0%, 100% { opacity: 0.5; transform: scale(1); }
   50% { opacity: 0.95; transform: scale(1.08); }
 }
 .animate-glow-pulse { animation: glowPulse 4.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-map-drift,
+  .cta-sweep,
+  .cta-node-core {
+    animation: none !important;
+  }
+}
 
 @keyframes spinSlow { to { transform: rotate(360deg); } }
 .animate-spin-slow { animation: spinSlow 28s linear infinite; }

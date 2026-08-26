@@ -83,12 +83,12 @@ export default function FAQAccordion({
 
         {/* Desktop: interactive split stage */}
         <div
-          className="hidden gap-6 lg:grid lg:grid-cols-[0.95fr_1.15fr] lg:gap-8"
+          className="hidden gap-6 lg:grid lg:grid-cols-[0.95fr_1.15fr] lg:items-stretch lg:gap-8"
           data-aos="fade-up"
           data-aos-delay="80"
         >
           <div
-            className="flex flex-col gap-2"
+            className="flex h-full min-h-0 flex-col gap-2"
             role="tablist"
             aria-label="FAQ questions"
           >
@@ -105,7 +105,7 @@ export default function FAQAccordion({
                   onClick={() => setOpenIndex(index)}
                   onMouseEnter={() => setOpenIndex(index)}
                   whileTap={{ scale: 0.985 }}
-                  className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
+                  className={`group relative flex w-full flex-1 items-center gap-3 overflow-hidden rounded-xl border px-4 py-3.5 text-left transition-colors duration-300 ${
                     isOpen
                       ? "border-gold/40 bg-[#111111] text-white shadow-[0_20px_48px_-32px_rgba(0,0,0,0.4)]"
                       : "border-black/[0.06] bg-white text-black hover:border-gold/45 hover:bg-gold/10"
@@ -163,7 +163,7 @@ export default function FAQAccordion({
             id={`${baseId}-panel`}
             role="tabpanel"
             aria-labelledby={openIndex !== null ? `${baseId}-tab-${openIndex}` : undefined}
-            className="relative min-h-[320px] overflow-hidden rounded-2xl border border-gold/35 bg-[linear-gradient(155deg,#1c1710_0%,#111111_46%,#0a0a0a_100%)] p-7 shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] lg:min-h-[380px] lg:p-9"
+            className="relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-gold/35 bg-[linear-gradient(155deg,#1c1710_0%,#111111_46%,#0a0a0a_100%)] p-7 shadow-[0_28px_64px_-36px_rgba(0,0,0,0.45)] lg:min-h-[380px] lg:p-9"
           >
             <div
               aria-hidden
@@ -182,7 +182,7 @@ export default function FAQAccordion({
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative flex h-full min-h-[280px] flex-col"
+                  className="relative flex min-h-0 flex-1 flex-col"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold/90">
