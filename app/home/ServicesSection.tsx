@@ -1,65 +1,79 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
+import MotionImage from "@/components/motion/MotionImage";
 import { homeServices, type HomeService } from "./data";
 
-function ServiceCard({ service, index }: { service: HomeService; index: number }) {
+function ServiceCard({
+  service,
+  index,
+  variant = "desktop",
+}: {
+  service: HomeService;
+  index: number;
+  variant?: "mobile" | "desktop";
+}) {
   const ServiceIcon = service.icon;
+  const isMobile = variant === "mobile";
 
   return (
-    <article className="group relative h-[min(52vh,390px)] w-[90vw] min-w-[280px] max-w-[640px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] transition-[transform,box-shadow] duration-500 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_28px_60px_-24px_rgba(0,0,0,0.5)] sm:h-[min(56vh,480px)] sm:w-[70vw] sm:max-w-[720px] lg:h-[min(64vh,660px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]">
-      <Image
+    <article
+      className={
+        isMobile
+          ? "services-mobile-card group relative shrink-0 overflow-hidden rounded-2xl bg-neutral-900"
+          : "group relative h-[min(56vh,500px)] w-[70vw] max-w-[720px] shrink-0 overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.4)] transition-transform duration-500 ease-out hover:-translate-y-1 lg:h-[min(62vh,620px)] lg:w-[calc(54vw-1.5rem)] lg:max-w-[880px]"
+      }
+    >
+      <MotionImage
         src={service.image}
-        alt={service.title}
+        alt={`${service.title} services by NexGen Developers`}
+        title={service.title}
         fill
-        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 54vw"
+        sizes={isMobile ? "88vw" : "(max-width: 1024px) 70vw, 54vw"}
         priority={index < 2}
       />
 
-      {/* Readability gradient — softens on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10 transition-opacity duration-500 group-hover:opacity-90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
 
-      {/* Content pinned to bottom */}
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 sm:p-6 lg:p-8">
         <div className="flex items-start justify-between gap-3">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-110 sm:h-9 sm:w-9">
-            <ServiceIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white">
+            <ServiceIcon className="h-4 w-4" />
           </span>
-          <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-white/45">
+          <span className="text-[10px] font-medium tabular-nums tracking-[0.2em] text-white/50">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
 
-        <h3 className="mt-3 text-lg font-semibold leading-tight tracking-[-0.02em] text-white transition-transform duration-500 ease-out group-hover:translate-y-[-2px] sm:mt-4 sm:text-2xl lg:text-[1.75rem]">
+        <h3 className="mt-3 text-xl font-semibold leading-tight text-white sm:text-2xl">
           {service.title}
         </h3>
-        <p className="mt-1.5 line-clamp-2 max-w-lg text-[12px] leading-relaxed text-white/65 sm:mt-2 sm:line-clamp-3 sm:text-sm">
+        <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-white/75 sm:text-sm">
           {service.description}
         </p>
 
-        <ul className="mt-3 hidden flex-wrap gap-1.5 sm:mt-4 sm:flex">
-          {service.highlights.map((highlight) => (
-            <li key={highlight}>
-              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-white/85 backdrop-blur-sm">
-                <Sparkles className="h-2.5 w-2.5" />
-                {highlight}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {!isMobile ? (
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {service.highlights.map((highlight) => (
+              <li key={highlight}>
+                <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-white/85">
+                  <Sparkles className="h-2.5 w-2.5" />
+                  {highlight}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <Link
           href={service.href}
-          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-all duration-300 hover:gap-2.5 sm:mt-5"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white sm:mt-5"
         >
           Explore service
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
     </article>
@@ -69,45 +83,118 @@ function ServiceCard({ service, index }: { service: HomeService; index: number }
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const desktopViewportRef = useRef<HTMLDivElement>(null);
+  const desktopTrackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const mobilePinRef = useRef<HTMLDivElement>(null);
+  const mobileViewportRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     registerGsapPlugins();
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current || !pinRef.current || !trackRef.current || !viewportRef.current) {
+    if (prefersReducedMotion || window.innerWidth >= 768) return;
+    if (!sectionRef.current || !mobilePinRef.current || !mobileTrackRef.current || !mobileViewportRef.current) {
       return;
     }
 
+    gsap.set(mobileTrackRef.current, { x: 0 });
+
+    const getNavOffset = () => {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height").trim() || "5rem";
+      const probe = document.createElement("div");
+      probe.style.height = raw;
+      document.body.appendChild(probe);
+      const px = probe.getBoundingClientRect().height;
+      probe.remove();
+      return Math.ceil(px) || 80;
+    };
+
     const getScrollAmount = () => {
-      const track = trackRef.current;
-      const viewport = viewportRef.current;
+      const track = mobileTrackRef.current;
+      const viewport = mobileViewportRef.current;
       if (!track || !viewport) return 0;
       return Math.max(track.scrollWidth - viewport.offsetWidth, 0);
     };
 
-    const updateProgress = (progress: number) => {
-      if (progressRef.current) {
-        progressRef.current.style.transform = `scaleX(${Math.max(progress, 0.015)})`;
-      }
-    };
-
     const ctx = gsap.context(() => {
-      gsap.to(trackRef.current, {
+      gsap.to(mobileTrackRef.current, {
         x: () => -getScrollAmount(),
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
+          start: () => `top ${getNavOffset()}px`,
+          end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
+          pin: mobilePinRef.current,
+          scrub: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
+          onUpdate: (self) => {
+            const next = Math.round(self.progress * (homeServices.length - 1));
+            setActiveIndex((prev) => (prev === next ? prev : next));
+          },
+        },
+      });
+    }, sectionRef);
+
+    let nestedRaf = 0;
+    const refreshRaf = requestAnimationFrame(() => {
+      nestedRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    return () => {
+      cancelAnimationFrame(refreshRaf);
+      cancelAnimationFrame(nestedRaf);
+      ctx.revert();
+    };
+  }, []);
+
+  useEffect(() => {
+    registerGsapPlugins();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.innerWidth < 768) return;
+    if (!sectionRef.current || !pinRef.current || !desktopTrackRef.current || !desktopViewportRef.current) {
+      return;
+    }
+
+    const getNavOffset = () => {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height").trim() || "5rem";
+      const probe = document.createElement("div");
+      probe.style.height = raw;
+      document.body.appendChild(probe);
+      const px = probe.getBoundingClientRect().height;
+      probe.remove();
+      return Math.ceil(px) || 80;
+    };
+
+    const getScrollAmount = () => {
+      const track = desktopTrackRef.current;
+      const viewport = desktopViewportRef.current;
+      if (!track || !viewport) return 0;
+      return Math.max(track.scrollWidth - viewport.offsetWidth, 0);
+    };
+
+    const ctx = gsap.context(() => {
+      gsap.to(desktopTrackRef.current, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: () => `top ${getNavOffset()}px`,
           end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
           pin: pinRef.current,
           scrub: true,
           pinSpacing: true,
           invalidateOnRefresh: true,
           fastScrollEnd: true,
-          onUpdate: (self) => updateProgress(self.progress),
+          onUpdate: (self) => {
+            if (progressRef.current) {
+              progressRef.current.style.transform = `scaleX(${Math.max(self.progress, 0.015)})`;
+            }
+          },
         },
       });
     }, sectionRef);
@@ -119,53 +206,100 @@ export default function ServicesSection() {
     <section
       ref={sectionRef}
       id="services"
-      className="section-light relative text-black"
+      className="relative scroll-mt-[var(--site-nav-height)] bg-white text-black"
       aria-label="Services"
     >
       <div
-        ref={pinRef}
-        className="relative flex min-h-[100svh] flex-col justify-center px-4 pb-8 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:px-6 sm:pb-10 sm:pt-[calc(var(--mobile-nav-height)+1.75rem)] lg:h-[100svh] lg:px-14 lg:pb-10 lg:pt-14"
+        ref={mobilePinRef}
+        className="relative flex min-h-[calc(100svh-var(--site-nav-height))] flex-col justify-center px-4 py-6 sm:px-6 md:hidden"
       >
-        <div className="mx-auto mb-5 flex w-full max-w-7xl shrink-0 items-end justify-between gap-6 sm:mb-6">
-          <div className="max-w-2xl">
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
+        <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
+          Services
+        </span>
+        <h2 className="mt-3 text-[1.9rem] font-bold leading-[1.15] tracking-[-0.03em] text-black">
+          <span className="block">Software development</span>
+          <span className="block">
+            services to <span className="text-gold-dark">scale.</span>
+          </span>
+        </h2>
+
+        <div ref={mobileViewportRef} className="mt-6 overflow-hidden">
+          <div ref={mobileTrackRef} className="flex w-max gap-3 will-change-transform">
+            {homeServices.map((service, index) => (
+              <ServiceCard key={service.title} service={service} index={index} variant="mobile" />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 flex items-center justify-center gap-1.5" aria-hidden>
+          {homeServices.map((service, index) => (
+            <span
+              key={service.title}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === activeIndex ? "w-5 bg-gold-dark" : "w-1.5 bg-gold/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <Link
+            href="/services"
+            className="text-sm font-semibold text-gold-dark underline decoration-gold/80 decoration-2 underline-offset-[6px]"
+          >
+            View all services
+          </Link>
+        </div>
+        </div>
+      </div>
+
+      <div
+        ref={pinRef}
+        className="relative hidden h-[calc(100svh-var(--site-nav-height))] min-h-[calc(100svh-var(--site-nav-height))] px-4 py-5 sm:px-6 md:flex md:flex-col lg:px-14"
+      >
+        <div className="relative mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
+        <div className="mb-4 flex w-full shrink-0 items-end justify-between gap-6">
+          <div className="min-w-0 flex-1">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
               Services
             </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-black sm:text-4xl lg:text-5xl">
-              Everything you need to launch and scale.
+            <h2 className="mt-3 text-[clamp(1.35rem,3.4vw,2.75rem)] font-semibold leading-tight tracking-[-0.03em] text-black">
+              Software development services to <span className="text-gold-dark">scale.</span>
             </h2>
           </div>
 
-          <div className="hidden items-center gap-4 sm:flex">
+          <div className="flex items-center gap-4">
             <span className="text-sm tabular-nums text-black/45">
               {String(homeServices.length).padStart(2, "0")} services
             </span>
-            <div className="h-px w-28 overflow-hidden bg-black/10 sm:w-40">
+            <div className="h-px w-40 overflow-hidden bg-gold/30">
               <div
                 ref={progressRef}
-                className="h-full origin-left bg-black"
+                className="h-full origin-left bg-gold-dark"
                 style={{ transform: "scaleX(0.015)" }}
               />
             </div>
           </div>
         </div>
 
-        <div ref={viewportRef} className="services-viewport overflow-hidden">
-          <div ref={trackRef} className="flex w-max gap-2.5 will-change-transform sm:gap-3 lg:gap-4">
+        <div ref={desktopViewportRef} className="min-h-0 flex-1 overflow-hidden">
+          <div ref={desktopTrackRef} className="flex h-full w-max gap-4">
             {homeServices.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} />
+              <ServiceCard key={service.title} service={service} index={index} variant="desktop" />
             ))}
           </div>
         </div>
 
-        <div className="mx-auto mt-5 flex w-full max-w-7xl shrink-0 justify-end sm:mt-6">
+        <div className="mt-4 flex shrink-0 justify-end">
           <Link
             href="/services"
-            className="text-sm font-semibold text-teal-600 underline decoration-teal-500/80 decoration-2 underline-offset-[6px] transition-colors hover:text-teal-700 hover:decoration-teal-600 sm:text-[15px]"
+            className="text-[15px] font-semibold text-gold-dark underline decoration-gold/80 decoration-2 underline-offset-[6px] transition-colors hover:text-primary hover:decoration-primary"
           >
             View all services
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

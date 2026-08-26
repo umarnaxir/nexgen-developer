@@ -7,16 +7,16 @@ import { motion } from "framer-motion";
 function ChatHeaderComponent() {
   return (
     <div className="relative flex items-center px-3 py-2 border-b border-white/[0.08]">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cyan-500/[0.05] to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-gold/[0.05] to-transparent" />
 
       <div className="relative flex items-center gap-2">
         <div className="relative">
           <motion.div
-            className="absolute -inset-0.5 rounded-lg bg-cyan-400/20 blur-md"
+            className="absolute -inset-0.5 rounded-lg bg-gold/20 blur-md"
             animate={{ opacity: [0.35, 0.7, 0.35], scale: [0.95, 1.05, 0.95] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           />
-          <div className="relative flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg bg-black border border-white/10 shadow-md shadow-cyan-500/20">
+          <div className="relative flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg bg-black border border-white/10 shadow-md shadow-gold/20">
             <motion.div
               className="absolute inset-0"
               animate={{

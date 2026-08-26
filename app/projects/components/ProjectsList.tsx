@@ -12,7 +12,7 @@ export default function ProjectsList({ projects }: ProjectsListProps) {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
   return (
-    <section className="section-light section-y relative overflow-hidden border-t border-black/[0.06]">
+    <section id="projects" className="section-light section-y relative overflow-hidden border-t border-black/[0.06]">
       <div className="section-container relative">
         <div className="flex flex-col gap-5 sm:gap-6 lg:gap-7">
           {projects.map((project, index) => (

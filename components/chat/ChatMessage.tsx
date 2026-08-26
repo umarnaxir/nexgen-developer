@@ -29,7 +29,7 @@ function ChatMessageComponent({ message }: ChatMessageProps) {
         className={`flex-shrink-0 w-5.5 h-5.5 rounded-md overflow-hidden flex items-center justify-center mt-0.5 ${
           isUser
             ? "bg-gradient-to-br from-blue-500/25 to-indigo-500/25 border border-blue-400/25"
-            : "bg-black border border-cyan-400/20 shadow-[0_0_8px_rgba(34,211,238,0.12)]"
+            : "bg-black border border-gold/20 shadow-[0_0_8px_rgba(230, 201, 166,0.12)]"
         }`}
         style={{ width: 22, height: 22 }}
         initial={{ scale: 0.6, opacity: 0 }}
@@ -52,12 +52,12 @@ function ChatMessageComponent({ message }: ChatMessageProps) {
       <motion.div
         className={`relative max-w-[82%] px-2.5 py-2 text-[11.5px] leading-relaxed ${
           isUser
-            ? "rounded-xl rounded-tr-sm bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-md shadow-cyan-500/10"
+            ? "rounded-xl rounded-tr-sm bg-gradient-to-br from-gold-dark to-gold-dark text-white shadow-md shadow-gold/10"
             : "rounded-xl rounded-tl-sm bg-white/[0.045] border border-white/[0.08] text-white/85"
         }`}
       >
         {!isUser && (
-          <span className="pointer-events-none absolute inset-x-2.5 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent" />
+          <span className="pointer-events-none absolute inset-x-2.5 top-0 h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
         )}
 
         {isUser ? (
@@ -93,7 +93,7 @@ function ChatMessageComponent({ message }: ChatMessageProps) {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+                    className="text-gold hover:text-gold-light underline underline-offset-2 transition-colors"
                   >
                     {children}
                   </a>
@@ -109,7 +109,7 @@ function ChatMessageComponent({ message }: ChatMessageProps) {
                   </h4>
                 ),
                 code: ({ children }) => (
-                  <code className="text-[10px] px-1 py-0.5 rounded bg-white/10 text-cyan-300 font-mono">
+                  <code className="text-[10px] px-1 py-0.5 rounded bg-white/10 text-gold-light font-mono">
                     {children}
                   </code>
                 ),

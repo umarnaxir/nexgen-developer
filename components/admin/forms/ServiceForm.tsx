@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import {
@@ -9,8 +10,10 @@ import {
   AdminSelect,
   AdminTextarea,
 } from "@/components/admin/ui/AdminInput";
+import { AdminFormSection } from "@/components/admin/ui/AdminFormSection";
 import { ImageUpload } from "@/components/admin/ui/ImageUpload";
 import { adminFetch } from "@/lib/admin/client";
+import { cmsFields } from "@/lib/content/cms-fields";
 import type { ServiceCategory, ServiceRecord } from "@/lib/content/types";
 
 type ServiceFormProps = {
@@ -28,14 +31,10 @@ function slugify(value: string) {
 }
 
 type ProcessStep = { title: string; description: string };
+type FaqItem = { question: string; answer: string };
 
 function emptySteps(): ProcessStep[] {
-  return [
-    { title: "", description: "" },
-    { title: "", description: "" },
-    { title: "", description: "" },
-    { title: "", description: "" },
-  ];
+  return Array.from({ length: 4 }, () => ({ title: "", description: "" }));
 }
 
 function stepsFromService(service?: ServiceRecord): ProcessStep[] {
@@ -44,6 +43,13 @@ function stepsFromService(service?: ServiceRecord): ProcessStep[] {
     steps[i] = { title: p.title || "", description: p.description || "" };
   });
   return steps;
+}
+
+function linesToArray(value: string) {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
 }
 
 export function ServiceForm({ initial, mode }: ServiceFormProps) {
@@ -63,6 +69,13 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
     description: initial?.content.description || "",
     technologies: initial?.content.technologies || "",
     benefits: (initial?.content.benefits || []).join("\n"),
+    whyChoose: (initial?.content.whyChoose || []).join("\n"),
+    useCases: (initial?.content.useCases || []).join("\n"),
+    expectedResults: (initial?.content.expectedResults || []).join("\n"),
+    faqs: (initial?.content.faqs || []).map((f) => ({
+      question: f.question,
+      answer: f.answer,
+    })) as FaqItem[],
     process: stepsFromService(initial),
     ctaHeading: initial?.content.ctaHeading || "",
     ctaDescription: initial?.content.ctaDescription || "",
@@ -81,6 +94,14 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
       const process = [...prev.process];
       process[index] = { ...process[index], [key]: value };
       return { ...prev, process };
+    });
+  }
+
+  function updateFaq(index: number, key: keyof FaqItem, value: string) {
+    setForm((prev) => {
+      const faqs = [...prev.faqs];
+      faqs[index] = { ...faqs[index], [key]: value };
+      return { ...prev, faqs };
     });
   }
 
@@ -108,6 +129,10 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
         description: form.description.trim(),
         technologies: form.technologies.trim(),
         benefits: form.benefits,
+        whyChoose: form.whyChoose,
+        useCases: form.useCases,
+        expectedResults: form.expectedResults,
+        faqs: form.faqs.filter((f) => f.question.trim() || f.answer.trim()),
         process: form.process
           .map((step, index) => ({
             step: index + 1,
@@ -145,11 +170,12 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
     }
   }
 
+  const sections = cmsFields.services.sections;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-        <h2 className="text-sm font-semibold text-neutral-900">Basics</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <AdminFormSection title={sections[0].title} description={sections[0].description}>
+        <div className="grid gap-4 sm:grid-cols-2">
           <AdminInput
             label="Label"
             value={form.label}
@@ -204,21 +230,20 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
             value={form.order}
             onChange={(e) => update("order", Number(e.target.value))}
           />
-          <label className="flex items-center gap-2 pt-7 text-sm text-neutral-700 sm:col-span-2">
+          <label className="flex items-center gap-2 pt-7 text-sm text-primary sm:col-span-2">
             <input
               type="checkbox"
               checked={form.enabled}
               onChange={(e) => update("enabled", e.target.checked)}
-              className="h-4 w-4 rounded border-neutral-300 text-teal-600 focus:ring-teal-500"
+              className="h-4 w-4 rounded border-gold/35 text-gold-dark focus:ring-gold-dark"
             />
             Enabled (visible on site)
           </label>
         </div>
-      </div>
+      </AdminFormSection>
 
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-        <h2 className="text-sm font-semibold text-neutral-900">Content</h2>
-        <div className="mt-4 grid gap-4">
+      <AdminFormSection title={sections[1].title} description={sections[1].description}>
+        <div className="grid gap-4">
           <div className="sm:max-w-md">
             <ImageUpload
               label="Image"
@@ -258,15 +283,14 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
             hint="Comma-separated service slugs"
           />
         </div>
-      </div>
+      </AdminFormSection>
 
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-        <h2 className="text-sm font-semibold text-neutral-900">Process (4 steps)</h2>
-        <div className="mt-4 space-y-4">
+      <AdminFormSection title={sections[2].title} description={sections[2].description}>
+        <div className="space-y-4">
           {form.process.map((step, index) => (
             <div
               key={index}
-              className="grid gap-3 rounded-xl border border-neutral-100 bg-neutral-50/60 p-4 sm:grid-cols-2"
+              className="grid gap-3 rounded-xl border border-gold/15 bg-background-soft p-4 sm:grid-cols-2"
             >
               <AdminInput
                 label={`Step ${index + 1} title`}
@@ -283,11 +307,89 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
             </div>
           ))}
         </div>
-      </div>
+      </AdminFormSection>
 
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
-        <h2 className="text-sm font-semibold text-neutral-900">CTA & SEO</h2>
-        <div className="mt-4 grid gap-4">
+      <AdminFormSection title={sections[3].title} description={sections[3].description}>
+        <div className="grid gap-4">
+          <AdminTextarea
+            label="Why choose us"
+            hint="One point per line"
+            value={form.whyChoose}
+            onChange={(e) => update("whyChoose", e.target.value)}
+            rows={4}
+          />
+          <AdminTextarea
+            label="Use cases"
+            hint="One use case per line"
+            value={form.useCases}
+            onChange={(e) => update("useCases", e.target.value)}
+            rows={4}
+          />
+          <AdminTextarea
+            label="Expected results"
+            hint="One result per line"
+            value={form.expectedResults}
+            onChange={(e) => update("expectedResults", e.target.value)}
+            rows={4}
+          />
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-primary">FAQs</span>
+              <AdminButton
+                type="button"
+                size="sm"
+                variant="secondary"
+                onClick={() =>
+                  update("faqs", [...form.faqs, { question: "", answer: "" }])
+                }
+              >
+                <Plus className="h-3.5 w-3.5" />
+                Add FAQ
+              </AdminButton>
+            </div>
+            {form.faqs.length === 0 ? (
+              <p className="text-xs text-text-gray">No FAQs yet.</p>
+            ) : (
+              form.faqs.map((faq, index) => (
+                <div
+                  key={index}
+                  className="space-y-2 rounded-md border border-gold/20 bg-background-soft p-3"
+                >
+                  <AdminInput
+                    label={`Question ${index + 1}`}
+                    value={faq.question}
+                    onChange={(e) => updateFaq(index, "question", e.target.value)}
+                  />
+                  <AdminTextarea
+                    label="Answer"
+                    value={faq.answer}
+                    onChange={(e) => updateFaq(index, "answer", e.target.value)}
+                    rows={2}
+                  />
+                  <AdminButton
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    className="text-red-600"
+                    onClick={() =>
+                      update(
+                        "faqs",
+                        form.faqs.filter((_, i) => i !== index)
+                      )
+                    }
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                    Remove
+                  </AdminButton>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection title={sections[4].title} description={sections[4].description}>
+        <div className="grid gap-4">
           <AdminInput
             label="CTA heading"
             value={form.ctaHeading}
@@ -317,7 +419,7 @@ export function ServiceForm({ initial, mode }: ServiceFormProps) {
             hint="Comma-separated"
           />
         </div>
-      </div>
+      </AdminFormSection>
 
       <div className="flex flex-wrap gap-3">
         <AdminButton type="submit" disabled={saving}>

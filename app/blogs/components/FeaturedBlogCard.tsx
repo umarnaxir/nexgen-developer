@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface FeaturedBlogCardProps {
   blog: {
@@ -16,44 +17,51 @@ interface FeaturedBlogCardProps {
 }
 
 export default function FeaturedBlogCard({ blog }: FeaturedBlogCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <Link
-      href={`/blogs/${blog.slug}`}
-      className="group glass-card beam-border block focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 focus-visible:ring-offset-4 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
-      data-aos="fade-up"
+    <motion.div
+      whileHover={reduceMotion ? undefined : { y: -4 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.995 }}
+      transition={{ type: "spring", stiffness: 400, damping: 28 }}
     >
-      <article className="relative w-full aspect-[21/9] min-h-[280px] sm:min-h-[320px] overflow-hidden rounded-2xl">
-        <Image
-          src={blog.image}
-          alt={blog.title}
-          fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          sizes="100vw"
-          priority
-        />
-        {/* Strong gradient so text always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 md:p-10">
-          <span className="inline-block w-fit px-3 py-1 rounded-full border border-teal-400/20 bg-teal-400/10 text-teal-300 text-xs font-bold uppercase tracking-wider mb-4 backdrop-blur">
-            {blog.category}
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 max-w-4xl group-hover:text-teal-300 transition-colors">
-            {blog.title}
-          </h2>
-          <p className="text-silver-light text-base sm:text-lg max-w-2xl line-clamp-2 mb-4">
-            {blog.excerpt}
-          </p>
-          <div className="flex items-center justify-between">
-            <time className="text-sm text-silver-dark uppercase tracking-widest">
-              {blog.date}
-            </time>
-            <span className="inline-flex items-center gap-2 text-teal-300 font-bold group-hover:gap-3 transition-all duration-200">
-              Read story
-              <ArrowUpRight className="w-5 h-5" strokeWidth={2.5} />
-            </span>
+      <Link
+        href={`/blogs/${blog.slug}`}
+        className="group block overflow-hidden rounded-xl border border-gold/30 bg-white shadow-[0_16px_40px_-28px_rgba(14,13,13,0.18)] touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:rounded-[1.35rem]"
+      >
+        <article className="grid md:grid-cols-[1.15fr_1fr]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-background-soft md:aspect-auto md:min-h-[360px]">
+            <MotionImage
+              src={blog.image}
+              alt={blog.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 55vw"
+              priority
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
           </div>
-        </div>
-      </article>
-    </Link>
+          <div className="flex flex-col justify-center bg-background-soft/60 px-4 py-5 sm:px-8 sm:py-10">
+            <span className="inline-flex w-fit rounded-full border border-gold/40 bg-white px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-gold-dark sm:px-3 sm:py-1 sm:text-[11px] sm:font-semibold sm:tracking-[0.18em]">
+              {blog.category}
+            </span>
+            <h2 className="mt-3 text-xl font-medium leading-tight tracking-[-0.03em] text-primary transition-colors group-hover:text-gold-dark sm:mt-4 sm:text-3xl sm:font-semibold md:text-4xl">
+              {blog.title}
+            </h2>
+            <p className="mt-3 line-clamp-3 text-[13px] leading-relaxed text-text-gray sm:mt-4 sm:text-base">
+              {blog.excerpt}
+            </p>
+            <div className="mt-4 flex min-h-10 items-center justify-between gap-4 sm:mt-6">
+              <time className="text-[11px] uppercase tracking-[0.16em] text-text-gray">
+                {blog.date}
+              </time>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold-dark transition-all duration-200 group-hover:gap-3">
+                Read story
+                <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
+              </span>
+            </div>
+          </div>
+        </article>
+      </Link>
+    </motion.div>
   );
 }

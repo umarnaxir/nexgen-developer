@@ -52,6 +52,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
       email: body.email !== undefined ? String(body.email).trim() : current.email,
       phone: body.phone !== undefined ? String(body.phone).trim() : current.phone,
       image: body.image !== undefined ? String(body.image) : current.image,
+      profileUrl:
+        body.profileUrl !== undefined
+          ? String(body.profileUrl).trim()
+          : current.profileUrl || "",
       socialLinks: {
         linkedin:
           body.socialLinks?.linkedin !== undefined

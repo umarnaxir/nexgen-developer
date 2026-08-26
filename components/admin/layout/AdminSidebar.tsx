@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   BookOpen,
@@ -14,32 +15,23 @@ import {
   Settings2,
   Users,
   UserCog,
+  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { AdminRole } from "@/lib/content/types";
+import { adminConfig, brand, getAdminNav, logos } from "@/lib/theme";
+import { adminUi } from "@/lib/admin/ui";
 
-type NavItem = {
-  href: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  roles?: AdminRole[];
+const ICONS: Record<string, LucideIcon> = {
+  LayoutDashboard,
+  Briefcase,
+  Layers,
+  Users,
+  BookOpen,
+  Phone,
+  Settings2,
+  UserCog,
 };
-
-const NAV: NavItem[] = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/projects", label: "Projects", icon: Briefcase },
-  { href: "/admin/services", label: "Services", icon: Layers },
-  { href: "/admin/team", label: "Team", icon: Users },
-  { href: "/admin/blogs", label: "Blogs", icon: BookOpen },
-  { href: "/admin/contact", label: "Contact", icon: Phone },
-  { href: "/admin/footer", label: "Footer", icon: Settings2 },
-  {
-    href: "/admin/users",
-    label: "Users",
-    icon: UserCog,
-    roles: ["super_admin", "admin"],
-  },
-];
 
 type AdminSidebarProps = {
   userName?: string;
@@ -59,10 +51,7 @@ export default function AdminSidebar({
   onMobileOpenChange,
 }: AdminSidebarProps) {
   const pathname = usePathname();
-
-  const visibleNav = NAV.filter(
-    (item) => !item.roles || item.roles.includes(userRole)
-  );
+  const visibleNav = getAdminNav(userRole);
 
   return (
     <>
@@ -77,30 +66,53 @@ export default function AdminSidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-[100] flex flex-col bg-neutral-950 text-white transition-transform duration-300 ease-out",
-          // Mobile: full-screen drawer
+          adminUi.sidebar.root,
           "w-full max-w-none",
-          // Desktop widths
           "lg:w-64 lg:translate-x-0",
           collapsed && "lg:w-[4.5rem]",
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
-        <div className="flex items-center justify-between gap-2 border-b border-white/10 px-4 py-4 sm:px-5">
-          <div className={cn("min-w-0", collapsed && "lg:hidden")}>
-            <p className="truncate text-sm font-semibold tracking-tight text-white">
-              NexGen Admin
-            </p>
-            <p className="truncate text-xs text-white/45">
-              {userName || "Administrator"}
-            </p>
+        <div
+          className={cn(
+            "flex items-center justify-between gap-2 border-b px-4 py-4 sm:px-5",
+            adminUi.sidebar.border
+          )}
+        >
+          <div className={cn("flex min-w-0 items-center gap-2.5", collapsed && "lg:hidden")}>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-gold/30 bg-gold/10">
+              <Image
+                src={logos.mark}
+                alt={brand.name}
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
+            </span>
+            <div className="min-w-0">
+              <p className={adminUi.sidebar.brandTitle}>{brand.adminTitle}</p>
+              <p className={adminUi.sidebar.brandSub}>
+                {userName || "Administrator"}
+              </p>
+            </div>
           </div>
 
-          {/* Desktop collapse — same chevron style */}
+          {collapsed && (
+            <span className="mx-auto hidden h-9 w-9 items-center justify-center overflow-hidden rounded-md border border-gold/30 bg-gold/10 lg:inline-flex">
+              <Image
+                src={logos.mark}
+                alt={brand.name}
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
+            </span>
+          )}
+
           <button
             type="button"
             onClick={() => onCollapsedChange(!collapsed)}
-            className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-md text-white/70 transition hover:bg-white/10 hover:text-white lg:inline-flex"
+            className={adminUi.sidebar.iconBtn}
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? (
@@ -110,11 +122,10 @@ export default function AdminSidebar({
             )}
           </button>
 
-          {/* Mobile close — same ChevronLeft as collapse */}
           <button
             type="button"
             onClick={() => onMobileOpenChange(false)}
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-white transition hover:bg-white/10 active:scale-95 lg:hidden"
+            className={adminUi.sidebar.iconBtnMobile}
             aria-label="Close menu"
           >
             <ChevronLeft className="h-5 w-5" strokeWidth={2.25} />
@@ -125,17 +136,15 @@ export default function AdminSidebar({
           {visibleNav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
-            const Icon = item.icon;
+            const Icon = ICONS[item.icon] ?? LayoutDashboard;
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => onMobileOpenChange(false)}
                 className={cn(
-                  "group flex items-center gap-3 rounded-md px-3 py-3.5 text-[15px] transition sm:py-2.5 sm:text-sm",
-                  active
-                    ? "bg-teal-500/15 text-teal-300 shadow-[inset_0_0_0_1px_rgba(45,212,191,0.2)]"
-                    : "text-white/70 hover:bg-white/5 hover:text-white",
+                  adminUi.sidebar.navItem,
+                  active ? adminUi.sidebar.navActive : adminUi.sidebar.navIdle,
                   collapsed && "lg:justify-center lg:px-2"
                 )}
                 title={item.label}
@@ -147,19 +156,21 @@ export default function AdminSidebar({
           })}
         </nav>
 
-        <div className="border-t border-white/10 p-3 sm:p-2">
+        <div className={cn("border-t p-3 sm:p-2", adminUi.sidebar.border)}>
           <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-3.5 text-[15px] text-teal-300/90 transition hover:bg-teal-500/10 hover:text-teal-200 sm:py-2.5 sm:text-sm",
+              adminUi.sidebar.visit,
               collapsed && "lg:justify-center lg:px-2"
             )}
-            title="Visit site"
+            title={adminConfig.visitSiteLabel}
           >
             <ExternalLink className="h-5 w-5 shrink-0 sm:h-4 sm:w-4" />
-            <span className={cn(collapsed && "lg:hidden")}>Visit site</span>
+            <span className={cn(collapsed && "lg:hidden")}>
+              {adminConfig.visitSiteLabel}
+            </span>
           </a>
         </div>
       </aside>

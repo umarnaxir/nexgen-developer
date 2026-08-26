@@ -26,7 +26,7 @@ function ContactArt() {
     <svg viewBox="0 0 440 320" className="h-auto w-full" fill="none" aria-hidden>
       <defs>
         <radialGradient id="cs-sun" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#5eead4" stopOpacity="0.55" />
+          <stop offset="0%" stopColor="#eae3db" stopOpacity="0.55" />
           <stop offset="70%" stopColor="#99f6e4" stopOpacity="0.22" />
           <stop offset="100%" stopColor="#ccfbf1" stopOpacity="0" />
         </radialGradient>
@@ -45,21 +45,21 @@ function ContactArt() {
       </g>
       <path
         d="M68 252 C 150 236 120 166 202 172 C 252 176 252 120 300 110"
-        stroke="#2dd4bf"
+        stroke="#e6c9a6"
         strokeWidth="2.5"
         strokeDasharray="1 9"
         strokeLinecap="round"
       />
-      <circle cx="206" cy="150" r="18" stroke="#2dd4bf" strokeWidth="2" strokeDasharray="1 9" opacity="0.75" />
+      <circle cx="206" cy="150" r="18" stroke="#e6c9a6" strokeWidth="2" strokeDasharray="1 9" opacity="0.75" />
       <g transform="translate(298 64) rotate(-18)" className="animate-float">
         <polygon points="0,40 80,2 36,46" fill="url(#cs-plane)" />
-        <polygon points="36,46 80,2 54,40" fill="#14b8a6" />
+        <polygon points="36,46 80,2 54,40" fill="#d1ac81" />
         <polygon points="36,46 54,40 42,62" fill="#0f172a" />
       </g>
       <g transform="translate(252 252)">
         <path d="M0 0 C -10 -30 6 -52 22 -58 C 18 -34 10 -12 0 0Z" fill="#0f172a" />
-        <path d="M6 4 C 18 -22 44 -30 60 -28 C 44 -14 24 -2 6 4Z" fill="#14b8a6" />
-        <path d="M-4 4 C -22 -10 -30 -34 -26 -52 C -12 -34 -4 -16 -4 4Z" fill="#5eead4" />
+        <path d="M6 4 C 18 -22 44 -30 60 -28 C 44 -14 24 -2 6 4Z" fill="#d1ac81" />
+        <path d="M-4 4 C -22 -10 -30 -34 -26 -52 C -12 -34 -4 -16 -4 4Z" fill="#eae3db" />
       </g>
     </svg>
   );
@@ -254,19 +254,19 @@ export default function ContactSection({
   };
 
   const fieldWrap = isPage
-    ? "rounded-xl border border-black/[0.08] bg-white px-4 py-3.5 transition-all focus-within:border-black/20 focus-within:shadow-[0_0_0_4px_rgba(0,0,0,0.04)]"
-    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-teal-500 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(20,184,166,0.12)]";
+    ? "rounded-xl border border-gold/30 bg-white px-4 py-3.5 transition-all duration-300 hover:border-gold hover:shadow-[0_8px_24px_-16px_rgba(230,201,166,0.55)] focus-within:border-gold focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.2)]"
+    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-gold-dark focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.12)]";
 
   const labelCls = isPage
     ? "block text-[11px] font-medium uppercase tracking-[0.18em] text-black/45"
     : "block text-[13px] font-bold text-gray-800";
 
   const inputCls = isPage
-    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-black/35"
+    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-black"
     : "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
 
   const renderFieldIcon = (Icon: React.ElementType) =>
-    isPage ? null : <Icon className="h-5 w-5 shrink-0 text-teal-600" />;
+    isPage ? null : <Icon className="h-5 w-5 shrink-0 text-gold-dark" />;
 
   const renderLabel = (
     htmlFor: string,
@@ -365,7 +365,7 @@ export default function ContactSection({
               required
               className={
                 isPage
-                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-black/35 focus:ring-0 [&>svg]:text-black/40"
+                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-black focus:ring-0 [&>svg]:text-black"
                   : "h-auto border-0 bg-transparent p-0 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
               }
             />
@@ -374,7 +374,7 @@ export default function ContactSection({
       </div>
 
       <div className={`${fieldWrap} ${isPage ? "" : "flex items-start gap-3"}`}>
-        {isPage ? null : <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" />}
+        {isPage ? null : <MessageSquare className="mt-0.5 h-5 w-5 shrink-0 text-gold-dark" />}
         <div className="min-w-0 flex-1">
           {renderLabel("cf-message", "Tell us about your project")}
           <textarea
@@ -398,7 +398,7 @@ export default function ContactSection({
             : "flex flex-col-reverse items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
         }
       >
-        <p className={`flex items-center gap-2 text-xs ${isPage ? "text-black/40" : "text-gray-500"}`}>
+        <p className={`flex items-center gap-2 text-xs ${isPage ? "text-text-gray" : "text-gray-500"}`}>
           <Lock className="h-3.5 w-3.5" />
           Your information is safe with us.
         </p>
@@ -408,14 +408,14 @@ export default function ContactSection({
           disabled={isSubmitting}
           className={
             isPage
-              ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-black/90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-              : "group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(20,184,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+              ? "group inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary shadow-[0_14px_32px_-16px_rgba(230,201,166,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-dark active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+              : "group relative ml-auto flex shrink-0 items-center gap-3 overflow-hidden rounded-2xl bg-gray-900 py-2 pl-2 pr-7 shadow-[0_18px_45px_-15px_rgba(230,201,166,0.55)] transition-all duration-300 hover:bg-black active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
           }
         >
           {!isPage && (
             <>
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-teal-400/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 text-white transition-transform duration-300 group-hover:scale-105">
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gold to-gold-dark text-white transition-transform duration-300 group-hover:scale-105">
                 <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </>
@@ -433,71 +433,104 @@ export default function ContactSection({
     return (
       <section id="contact" className="section-light pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
         <div className="section-container">
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-            <div>
-              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
+          <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,65fr)_minmax(0,35fr)] lg:gap-8">
+            <div
+              className="rounded-[1.5rem] border border-gold/30 bg-white p-5 shadow-[0_24px_60px_-36px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_28px_70px_-32px_rgba(230,201,166,0.35)] sm:p-7 lg:p-8"
+              data-aos="fade-up"
+            >
+              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
                 Message
               </span>
               <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
                 Send us a note
               </h2>
+              <p className="mt-2 mb-6 text-sm leading-relaxed text-text-gray">
+                Share the brief. We reply within one business day with next steps.
+              </p>
               {formContent}
             </div>
 
-            <aside className="lg:pt-10">
-              <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-black/40">
-                Details
-              </span>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
-                Reach us
-              </h2>
+            <aside
+              className="group/details relative overflow-hidden rounded-[1.5rem] border border-gold/40 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] p-5 text-white shadow-[0_28px_70px_-32px_rgba(0,0,0,0.55)] sm:p-7 lg:p-8"
+              data-aos="fade-up"
+              data-aos-delay="80"
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.24),transparent_46%)]"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-gold-dark/20 blur-3xl transition-opacity duration-500 group-hover/details:opacity-100"
+              />
 
-              <div className="mt-8 space-y-6">
-                {contactInfo.map(({ icon: Icon, label, value, href, detail }) => {
-                  const content = (
-                    <div className="flex items-start gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-black/[0.08] bg-black/[0.03] text-black/70">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <div className="min-w-0">
-                        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/40">
-                          {label}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-black">{value}</p>
-                        {detail && (
-                          <p className="mt-0.5 text-sm leading-relaxed text-black/55">{detail}</p>
-                        )}
-                      </div>
-                    </div>
-                  );
-
-                  return href ? (
-                    <a key={label} href={href} className="block transition-opacity hover:opacity-70">
-                      {content}
-                    </a>
-                  ) : (
-                    <div key={label}>{content}</div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-10 border-t border-black/[0.06] pt-8">
-                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/40">
-                  Social
+              <div className="relative">
+                <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold">
+                  Details
+                </span>
+                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
+                  Reach us
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-gold-light/80">
+                  Phone, email, or the studio in Baramulla. Pick what is easiest.
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2.5">
-                  {socialLinks.map(({ icon: Icon, href, label }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.08] text-black/60 transition-all hover:border-black/20 hover:bg-black hover:text-white"
-                    >
-                      <Icon className="h-4 w-4" />
-                    </a>
-                  ))}
+
+                <div className="mt-8 space-y-3">
+                  {contactInfo.map(({ icon: Icon, label, value, href, detail }) => {
+                    const content = (
+                      <div className="flex items-start gap-4">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/35 bg-gold text-primary transition-transform duration-300 group-hover:scale-110">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold-light/70">
+                            {label}
+                          </p>
+                          <p className="mt-1 text-sm font-medium text-white">{value}</p>
+                          {detail && (
+                            <p className="mt-0.5 text-sm leading-relaxed text-gold-light/75">{detail}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+
+                    return href ? (
+                      <a
+                        key={label}
+                        href={href}
+                        className="group block rounded-2xl border border-gold/20 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
+                      >
+                        {content}
+                      </a>
+                    ) : (
+                      <div
+                        key={label}
+                        className="group rounded-2xl border border-gold/20 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
+                      >
+                        {content}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-8 border-t border-gold/20 pt-7">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold-light/70">
+                    Social
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2.5">
+                    {socialLinks.map(({ icon: Icon, href, label }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex h-11 w-11 items-center justify-center rounded-full bg-gold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-gold-dark"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </aside>
@@ -510,18 +543,21 @@ export default function ContactSection({
   return (
     <section id="contact" className="py-6 sm:py-10">
       <div className="section-container">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10">
+        <div
+          className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#f6f7f9] via-[#eceef1] to-[#dfe2e7] p-6 shadow-2xl sm:p-8 lg:p-10"
+          data-aos="fade-up"
+        >
           <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/80" />
 
           <div className="grid gap-8 lg:grid-cols-[1.65fr_1fr] lg:items-center lg:gap-12">
             <div>
               <div className="mb-6 text-center">
-                <span className="text-xs font-bold uppercase tracking-[0.3em] text-teal-600">
+                <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold-dark">
                   Let&apos;s Connect
                 </span>
-                <span className="mx-auto mt-2 block h-0.5 w-10 rounded-full bg-teal-500" />
+                <span className="mx-auto mt-2 block h-0.5 w-10 rounded-full bg-gold-dark" />
                 <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                  Contact <span className="text-teal-600">Us</span>
+                  Contact <span className="text-gold-dark">Us</span>
                 </h2>
                 <p className="mx-auto mt-3 max-w-md text-sm text-gray-600 sm:text-base">
                   Ready to bring your ideas to life? We&apos;re here to help.
@@ -537,15 +573,15 @@ export default function ContactSection({
 
               <div>
                 <h3 className="text-xl font-extrabold tracking-tight text-gray-900 sm:text-2xl">
-                  Get in <span className="text-teal-600">Touch</span>
+                  Get in <span className="text-gold-dark">Touch</span>
                 </h3>
-                <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-teal-500 to-teal-700" />
+                <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-gold-dark to-gold-dark" />
 
                 <div className="mt-5 space-y-4">
                   {contactInfo.map(({ icon: Icon, label, value, href }) => {
                     const inner = (
                       <>
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-900 text-teal-400 transition-transform duration-300 group-hover:scale-110">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-900 text-gold transition-transform duration-300 group-hover:scale-110">
                           <Icon className="h-5 w-5" />
                         </span>
                         <div className="min-w-0">
@@ -577,7 +613,7 @@ export default function ContactSection({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-teal-500/40 text-teal-600 transition-all duration-300 hover:scale-110 hover:border-teal-500 hover:bg-teal-500 hover:text-white"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-gold-dark/40 text-gold-dark transition-all duration-300 hover:scale-110 hover:border-gold-dark hover:bg-gold-dark hover:text-white"
                     >
                       <Icon className="h-4 w-4" />
                     </a>

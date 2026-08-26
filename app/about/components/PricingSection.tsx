@@ -22,13 +22,15 @@ export default function PricingSection() {
               className={`glass-card text-white light:text-gray-900 rounded-2xl p-4 sm:p-6 min-h-[300px] sm:min-h-[340px] flex flex-col ${
                 index === 2 ? "col-span-2" : ""
               }`}
+              data-aos="fade-up"
+              data-aos-delay={index * 80}
             >
               <h4 className="text-base sm:text-lg font-bold text-white light:text-gray-900 mb-1 sm:mb-2">{option.title}</h4>
               <p className="text-silver light:text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4">{option.description}</p>
               <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-silver-light light:text-gray-700 mt-auto">
                 {option.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-teal-300 light:text-teal-700 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-gold light:text-gold-dark flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
@@ -57,13 +59,15 @@ export default function PricingSection() {
               <div
                 key={index}
                 className="glass-card p-5 sm:p-6 rounded-2xl transition-all duration-300 cursor-default hover:scale-[1.03] hover:-translate-y-1.5"
+                data-aos="fade-up"
+                data-aos-delay={index * 80}
               >
                 <h4 className="text-lg sm:text-xl font-bold text-white light:text-gray-900 mb-2 sm:mb-3">{option.title}</h4>
                 <p className="text-silver light:text-gray-600 text-sm mb-3 sm:mb-4">{option.description}</p>
                 <ul className="space-y-2 text-sm text-silver-light light:text-gray-700">
                   {option.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-teal-300 light:text-teal-700 flex-shrink-0" />
+                      <Check className="w-4 h-4 text-gold light:text-gold-dark flex-shrink-0" />
                       {feature}
                     </li>
                   ))}

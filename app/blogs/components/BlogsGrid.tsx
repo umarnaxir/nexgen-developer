@@ -11,23 +11,20 @@ type BlogsGridProps = {
 export default function BlogsGrid({ blogs }: BlogsGridProps) {
   if (!blogs.length) {
     return (
-      <p className="text-center text-white/60">No blog posts published yet.</p>
+      <p className="text-center text-text-gray">No blog posts published yet.</p>
     );
   }
 
   const [featured, ...rest] = blogs;
 
   return (
-    <div
-      className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3"
-      data-aos="fade-up"
-    >
-      <div className="lg:col-span-3">
-        <FeaturedBlogCard blog={featured} />
+    <div className="space-y-5 sm:space-y-10">
+      <FeaturedBlogCard blog={featured} />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3 lg:gap-8">
+        {rest.map((blog, index) => (
+          <BlogCard key={blog.slug} blog={blog} index={index} />
+        ))}
       </div>
-      {rest.map((blog, index) => (
-        <BlogCard key={blog.slug} blog={blog} index={index} />
-      ))}
     </div>
   );
 }

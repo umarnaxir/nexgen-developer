@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import MotionImage from "@/components/motion/MotionImage";
 
 interface BlogCardProps {
   blog: {
@@ -17,47 +18,50 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ blog, index }: BlogCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <Link
-      href={`/blogs/${blog.slug}`}
-      className="group glass-card flex min-h-[200px] sm:min-h-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black light:focus-visible:ring-offset-white rounded-2xl overflow-hidden"
-      data-aos="fade-up"
-      data-aos-delay={index * 80}
+    <motion.div
+      whileHover={reduceMotion ? undefined : { y: -6 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+      transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      className="h-full"
     >
-      {/* Left: image */}
-      <div className="relative w-[42%] min-w-[100px] flex-shrink-0 self-stretch overflow-hidden">
-        <Image
-          src={blog.image}
-          alt={blog.title}
-          fill
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-          sizes="(max-width: 768px) 40vw, 200px"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </div>
-      {/* Right: content */}
-      <div className="flex-1 flex flex-col justify-between p-4 sm:p-5">
-        <div>
-          <span className="text-[10px] sm:text-xs font-bold text-teal-300 light:text-teal-700 uppercase tracking-[0.2em]">
+      <Link
+        href={`/blogs/${blog.slug}`}
+        className="group flex h-full flex-col overflow-hidden rounded-xl border border-gold/25 bg-white shadow-[0_16px_40px_-28px_rgba(14,13,13,0.16)] touch-manipulation transition-colors hover:border-gold/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:rounded-[1.25rem]"
+      >
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-background-soft">
+          <MotionImage
+            src={blog.image}
+            alt={blog.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <span className="absolute left-3 top-3 rounded-full border border-gold/40 bg-white/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-gold-dark backdrop-blur-sm sm:text-[11px] sm:font-semibold sm:tracking-[0.18em]">
             {blog.category}
           </span>
-          <h2 className="text-lg sm:text-xl font-bold mt-1.5 line-clamp-2 leading-snug text-white light:text-gray-900 group-hover:text-teal-300 light:group-hover:text-teal-700 transition-colors">
+        </div>
+
+        <div className="flex flex-1 flex-col p-4 sm:p-6">
+          <h2 className="text-base font-medium leading-snug tracking-tight text-primary transition-colors group-hover:text-gold-dark sm:text-xl sm:font-semibold">
             {blog.title}
           </h2>
-          <p className="text-silver light:text-gray-600 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed">
+          <p className="mt-2 line-clamp-3 flex-1 text-[13px] leading-relaxed text-text-gray sm:mt-3 sm:text-[15px]">
             {blog.excerpt}
           </p>
+          <div className="mt-4 flex min-h-10 items-center justify-between border-t border-gold/15 pt-3 sm:mt-5 sm:pt-4">
+            <time className="text-[11px] uppercase tracking-wider text-text-gray sm:text-xs">
+              {blog.date}
+            </time>
+            <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-all duration-200 group-hover:gap-2">
+              Read
+              <ArrowUpRight className="h-4 w-4 flex-shrink-0" strokeWidth={2.5} />
+            </span>
+          </div>
         </div>
-        <div className="mt-4 flex items-center justify-between">
-          <time className="text-[10px] sm:text-xs text-silver-dark light:text-gray-500 uppercase tracking-wider">
-            {blog.date}
-          </time>
-          <span className="inline-flex items-center gap-1 text-sm font-semibold text-teal-300 light:text-teal-700 group-hover:gap-2 transition-all duration-200">
-            Read
-            <ArrowUpRight className="w-4 h-4 flex-shrink-0" strokeWidth={2.5} />
-          </span>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }

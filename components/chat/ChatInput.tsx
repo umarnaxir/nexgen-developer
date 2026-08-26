@@ -56,16 +56,16 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
 
   return (
     <div className="relative px-2.5 pb-2.5 pt-1.5 border-t border-white/[0.06]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       <motion.div
         className="relative flex items-end gap-1.5 rounded-xl bg-white/[0.04] border px-2.5 py-1.5 transition-colors"
         animate={{
           borderColor: focused
-            ? "rgba(34, 211, 238, 0.35)"
+            ? "rgba(230, 201, 166, 0.35)"
             : "rgba(255, 255, 255, 0.08)",
           boxShadow: focused
-            ? "0 0 0 1px rgba(34,211,238,0.1), 0 0 16px rgba(34,211,238,0.06)"
+            ? "0 0 0 1px rgba(230, 201, 166,0.1), 0 0 16px rgba(230, 201, 166,0.06)"
             : "0 0 0 0 rgba(0,0,0,0)",
         }}
         transition={{ duration: 0.2 }}
@@ -102,9 +102,9 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
           onClick={handleSend}
           disabled={!canSend}
           className="relative flex-shrink-0 flex items-center justify-center w-6.5 h-6.5 rounded-lg
-            bg-gradient-to-br from-teal-500 to-cyan-600 text-white
+            bg-gradient-to-br from-gold-dark to-gold-dark text-white
             disabled:opacity-30 disabled:cursor-not-allowed
-            shadow-md shadow-cyan-500/20 cursor-pointer overflow-hidden"
+            shadow-md shadow-gold/20 cursor-pointer overflow-hidden"
           style={{ width: 26, height: 26 }}
           whileHover={canSend ? { scale: 1.08 } : {}}
           whileTap={canSend ? { scale: 0.92 } : {}}
@@ -112,9 +112,9 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
             canSend
               ? {
                   boxShadow: [
-                    "0 2px 8px rgba(34,211,238,0.25)",
-                    "0 2px 14px rgba(34,211,238,0.4)",
-                    "0 2px 8px rgba(34,211,238,0.25)",
+                    "0 2px 8px rgba(230, 201, 166,0.25)",
+                    "0 2px 14px rgba(230, 201, 166,0.4)",
+                    "0 2px 8px rgba(230, 201, 166,0.25)",
                   ],
                 }
               : {}

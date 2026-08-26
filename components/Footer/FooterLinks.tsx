@@ -97,12 +97,12 @@ export default function FooterLinks({ title, links, gridCols }: FooterLinksProps
             <div key={`${link.href}-${link.label}`}>
               <Link
                 href={link.href}
-                className="group relative inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-silver light:text-gray-600 py-1.5 w-fit transition-colors duration-200 hover:text-white light:hover:text-teal-700"
+                className="group relative inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-silver light:text-gray-600 py-1.5 w-fit transition-colors duration-200 hover:text-white light:hover:text-gold-dark"
               >
                 <div className="flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-200">
-                  <Icon className="w-4 h-4 text-teal-400 light:text-teal-700 group-hover:text-teal-300 light:group-hover:text-teal-700 transition-colors duration-200" />
+                  <Icon className="w-4 h-4 text-gold light:text-gold-dark group-hover:text-gold light:group-hover:text-gold-dark transition-colors duration-200" />
                 </div>
-                <span className="block transition-colors duration-200 group-hover:text-white light:group-hover:text-teal-700 group-hover:translate-x-0.5">
+                <span className="block transition-colors duration-200 group-hover:text-white light:group-hover:text-gold-dark group-hover:translate-x-0.5">
                   {link.label}
                 </span>
               </Link>

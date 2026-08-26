@@ -31,6 +31,20 @@ function parseCategory(value: unknown, fallback: ServiceCategory): ServiceCatego
   return fallback;
 }
 
+function parseFaqs(
+  value: unknown
+): { question: string; answer: string }[] {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => ({
+        question: String(item?.question || "").trim(),
+        answer: String(item?.answer || "").trim(),
+      }))
+      .filter((f) => f.question || f.answer);
+  }
+  return [];
+}
+
 function parseStringList(value: unknown, splitter: RegExp | string = /[\n,]/): string[] {
   if (Array.isArray(value)) {
     return value.map(String).map((v) => v.trim()).filter(Boolean);
@@ -173,6 +187,26 @@ export async function PUT(request: NextRequest, { params }: Params) {
             body.ctaDescription ??
             current.content.ctaDescription
         ).trim(),
+        faqs:
+          contentBody.faqs !== undefined || body.faqs !== undefined
+            ? parseFaqs(contentBody.faqs ?? body.faqs)
+            : current.content.faqs,
+        whyChoose:
+          contentBody.whyChoose !== undefined || body.whyChoose !== undefined
+            ? parseStringList(contentBody.whyChoose ?? body.whyChoose, /\n/)
+            : current.content.whyChoose,
+        useCases:
+          contentBody.useCases !== undefined || body.useCases !== undefined
+            ? parseStringList(contentBody.useCases ?? body.useCases, /\n/)
+            : current.content.useCases,
+        expectedResults:
+          contentBody.expectedResults !== undefined ||
+          body.expectedResults !== undefined
+            ? parseStringList(
+                contentBody.expectedResults ?? body.expectedResults,
+                /\n/
+              )
+            : current.content.expectedResults,
       },
     };
 

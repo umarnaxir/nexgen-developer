@@ -81,41 +81,40 @@ export default function ProjectsShowcaseSection({
   if (total === 0 || !active) return null;
 
   const title = formatTitle(active.title);
-  const techPreview = active.technologies.slice(0, 5);
 
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className="section-dark relative bg-black text-white"
+      className="relative overflow-hidden bg-white"
       aria-label="Featured projects"
     >
       <div
         ref={pinRef}
-        className="relative flex h-[100svh] flex-col px-4 pb-6 pt-[calc(var(--mobile-nav-height)+1rem)] sm:px-6 sm:pb-8 sm:pt-[calc(var(--mobile-nav-height)+1.25rem)] lg:px-14 lg:pb-10 lg:pt-12"
+        className="relative flex h-[100svh] flex-col px-4 pb-4 pt-[calc(var(--site-nav-height)+0.75rem)] sm:px-6 sm:pb-5 sm:pt-[calc(var(--site-nav-height)+1rem)] lg:px-14 lg:pb-6 lg:pt-[calc(var(--site-nav-height)+1.15rem)]"
       >
         {/* Header */}
         <div className="mx-auto flex w-full max-w-7xl shrink-0 items-end justify-between gap-4 lg:pr-12">
           <div>
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/40">
+            <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
               Selected Work
             </span>
-            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl lg:text-4xl">
-              Projects that ship.
+            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-primary sm:text-3xl lg:text-4xl">
+              Software projects that <span className="text-gold-dark">ship.</span>
             </h2>
           </div>
 
-          <span className="font-mono text-sm tabular-nums text-white/50">
-            <span className="text-white">{String(activeIndex + 1).padStart(2, "0")}</span>
-            <span className="mx-1 text-white/25">/</span>
+          <span className="font-mono text-sm tabular-nums text-text-gray">
+            <span className="text-gold-dark">{String(activeIndex + 1).padStart(2, "0")}</span>
+            <span className="mx-1 text-gold/40">/</span>
             {String(total).padStart(2, "0")}
           </span>
         </div>
 
         {/* Stage */}
-        <div className="relative mx-auto mt-4 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-5 sm:gap-4 lg:mt-8 lg:flex-row lg:gap-10 lg:pr-14">
+        <div className="relative mx-auto mt-3 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:flex-row lg:gap-8 lg:pr-14">
           {/* Image stage — stacked cards so scroll never flashes empty */}
-          <div className="relative h-[52vh] min-h-[300px] w-full flex-none overflow-hidden rounded-2xl bg-neutral-900 sm:h-[54vh] sm:min-h-[340px] lg:h-auto lg:min-h-0 lg:flex-[1.63]">
+          <div className="relative h-[52vh] min-h-[300px] w-full flex-none overflow-hidden rounded-2xl bg-gold-light sm:h-[54vh] sm:min-h-[340px] lg:h-auto lg:min-h-0 lg:flex-[1.63]">
             {featured.map((project, index) => {
               const isActive = index === activeIndex;
               const offset = index - activeIndex;
@@ -153,10 +152,15 @@ export default function ProjectsShowcaseSection({
             </span>
           </div>
 
-          {/* Right panel: scoreboard (desktop only) + content */}
-          <div className="flex min-h-0 shrink-0 flex-col lg:w-[min(36%,400px)] lg:shrink-0">
+          {/* Right panel: original on mobile, dark board on desktop */}
+          <div className="relative flex min-h-0 shrink-0 flex-col lg:w-[min(36%,400px)] lg:shrink-0 lg:overflow-hidden lg:rounded-[1.35rem] lg:border lg:border-gold/20 lg:bg-[#111111] lg:p-6 lg:text-white">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_18%_0%,rgba(230,201,166,0.18),transparent_42%),radial-gradient(circle_at_90%_100%,rgba(209,172,129,0.12),transparent_38%)] lg:block"
+            />
+
             {/* Scoreboard — desktop only */}
-            <ul className="mb-5 hidden shrink-0 flex-col gap-1.5 border-b border-white/10 pb-5 lg:flex">
+            <ul className="relative mb-5 hidden shrink-0 flex-col gap-1.5 border-b border-white/10 pb-5 lg:flex">
               {featured.map((project, index) => {
                 const isActive = index === activeIndex;
                 return (
@@ -165,13 +169,13 @@ export default function ProjectsShowcaseSection({
                       type="button"
                       onClick={() => goToIndex(index)}
                       className={`group flex w-full items-center justify-between gap-3 py-1 text-left transition-all duration-300 ${
-                        isActive ? "opacity-100" : "opacity-40 hover:opacity-70"
+                        isActive ? "opacity-100" : "opacity-40 hover:opacity-75"
                       }`}
                     >
                       <span className="flex min-w-0 items-center gap-2.5">
                         <span
                           className={`font-mono text-[10px] tabular-nums tracking-wider transition-colors ${
-                            isActive ? "text-white/60" : "text-white/30"
+                            isActive ? "text-gold" : "text-gold/45"
                           }`}
                         >
                           {String(index + 1).padStart(2, "0")}
@@ -180,7 +184,7 @@ export default function ProjectsShowcaseSection({
                           className={`truncate text-sm tracking-wide transition-all duration-300 sm:text-[15px] ${
                             isActive
                               ? "font-semibold text-white"
-                              : "font-medium text-white/70 group-hover:text-white"
+                              : "font-medium text-white/55 group-hover:text-gold"
                           }`}
                         >
                           {formatTitle(project.title)}
@@ -188,7 +192,7 @@ export default function ProjectsShowcaseSection({
                       </span>
                       <span
                         className={`h-px transition-all duration-400 ${
-                          isActive ? "w-8 bg-white" : "w-0 bg-white/0 group-hover:w-4 group-hover:bg-white/30"
+                          isActive ? "w-8 bg-gold" : "w-0 bg-gold/0 group-hover:w-4 group-hover:bg-gold/50"
                         }`}
                       />
                     </button>
@@ -197,8 +201,8 @@ export default function ProjectsShowcaseSection({
               })}
             </ul>
 
-            {/* Content — pinned to bottom on desktop */}
-            <div className="flex flex-col justify-end pt-1 lg:mt-auto lg:pt-6">
+            {/* Content — light + compact on mobile, pinned in the dark board on desktop */}
+            <div className="relative flex flex-col justify-end pt-1 lg:mt-auto lg:pt-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`copy-${active.id}`}
@@ -208,40 +212,29 @@ export default function ProjectsShowcaseSection({
                   transition={{ duration: 0.4, ease }}
                   className="flex flex-col"
                 >
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/40">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-dark lg:text-gold">
                     {active.category}
                   </p>
-                  <h3 className="mt-1.5 text-[1.45rem] font-semibold leading-[1.05] tracking-[-0.03em] text-white sm:mt-2 sm:text-3xl lg:text-[2.05rem]">
+                  <h3 className="mt-1.5 text-[1.45rem] font-semibold leading-[1.05] tracking-[-0.03em] text-primary sm:mt-2 sm:text-3xl lg:text-[2.05rem] lg:text-white">
                     {title}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/55 sm:mt-3.5 sm:line-clamp-4 sm:text-[15px]">
+                  <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-text-gray sm:mt-3.5 sm:text-[15px] lg:line-clamp-4 lg:text-white/65">
                     {active.description}
                   </p>
-
-                  <ul className="mt-2.5 flex flex-nowrap gap-1.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] sm:mt-4 sm:flex-wrap [&::-webkit-scrollbar]:hidden">
-                    {techPreview.map((tech) => (
-                      <li
-                        key={tech}
-                        className="shrink-0 rounded-full bg-white/[0.08] px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.1em] text-white/55 sm:px-2.5 sm:py-1 sm:text-[10px] sm:tracking-[0.12em]"
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
 
                   <div className="mt-3 flex flex-row items-center gap-2 sm:mt-6 sm:gap-3">
                     <a
                       href={active.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-white px-3 py-2 text-xs font-semibold text-black transition-transform hover:scale-[1.03] active:scale-[0.98] sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+                      className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
                     >
                       View live
-                      <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
                     </a>
                     <Link
                       href="/projects"
-                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-full border border-white/25 px-3 py-2 text-xs font-semibold text-white/80 transition-colors hover:border-white/45 hover:text-white sm:flex-none sm:gap-1.5 sm:border-0 sm:px-0 sm:py-0 sm:text-sm sm:underline sm:decoration-white/30 sm:decoration-2 sm:underline-offset-[6px]"
+                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-full border border-gold/50 px-3 py-2 text-xs font-semibold text-gold-dark transition-colors hover:border-gold hover:text-primary sm:flex-none sm:gap-1.5 sm:border-0 sm:px-0 sm:py-0 sm:text-sm sm:underline sm:decoration-gold sm:decoration-2 sm:underline-offset-[6px] lg:text-gold lg:hover:text-white"
                     >
                       All work
                       <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />

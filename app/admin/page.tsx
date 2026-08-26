@@ -7,6 +7,8 @@ import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import { AdminInput } from "@/components/admin/ui/AdminInput";
+import { brand, logos } from "@/lib/theme";
+import { adminUi } from "@/lib/admin/ui";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -37,47 +39,39 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-950 px-4 py-10">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(20,184,166,0.18),_transparent_55%),radial-gradient(ellipse_at_bottom,_rgba(255,255,255,0.04),_transparent_50%)]"
-      />
+    <div data-admin className={adminUi.login.page}>
+      <div aria-hidden className={adminUi.login.glow} />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            "linear-gradient(rgba(230,201,166,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(230,201,166,0.06) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
 
       <div className="relative w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg border border-white/10 bg-white/5">
+          <div className={adminUi.login.logoWrap}>
             <Image
-              src="/logo/logo.png"
-              alt="NexGen Developers"
+              src={logos.mark}
+              alt={brand.name}
               width={36}
               height={36}
               className="h-9 w-9 object-contain"
             />
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            NexGen Admin
+          <h1 className="text-2xl font-semibold tracking-tight text-gold sm:text-3xl">
+            {brand.adminTitle}
           </h1>
-          <p className="mt-2 text-sm text-white/50">
-            Sign in to manage website content
-          </p>
+          <p className="mt-2 text-sm text-gold-light/55">{brand.adminTagline}</p>
         </div>
 
-        <form
-          onSubmit={onSubmit}
-          className="rounded-lg border border-white/10 bg-white p-5 shadow-2xl shadow-black/40 sm:p-8"
-        >
+        <form onSubmit={onSubmit} className={adminUi.login.form}>
           <div className="space-y-4">
             <div className="relative">
-              <Mail className="pointer-events-none absolute left-3 top-[2.35rem] h-4 w-4 text-neutral-400" />
+              <Mail className="pointer-events-none absolute left-3 top-[2.35rem] h-4 w-4 text-gold-dark/70" />
               <AdminInput
                 label="Email"
                 type="email"
@@ -91,7 +85,7 @@ export default function AdminLoginPage() {
               />
             </div>
             <div className="relative">
-              <Lock className="pointer-events-none absolute left-3 top-[2.35rem] h-4 w-4 text-neutral-400" />
+              <Lock className="pointer-events-none absolute left-3 top-[2.35rem] h-4 w-4 text-gold-dark/70" />
               <AdminInput
                 label="Password"
                 type={showPassword ? "text" : "password"}
@@ -106,7 +100,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-2.5 top-[2.15rem] inline-flex h-8 w-8 items-center justify-center rounded-md text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-700"
+                className="absolute right-2.5 top-[2.15rem] inline-flex h-8 w-8 items-center justify-center rounded-md text-text-gray transition hover:bg-gold/15 hover:text-primary"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (

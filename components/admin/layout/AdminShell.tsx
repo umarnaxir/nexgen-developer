@@ -6,6 +6,7 @@ import AdminHeader from "./AdminHeader";
 import { AdminSearchProvider } from "./AdminSearchContext";
 import { AdminPermissionsProvider } from "./AdminPermissionsContext";
 import type { AdminRole } from "@/lib/content/types";
+import { adminUi } from "@/lib/admin/ui";
 import { cn } from "@/lib/utils";
 
 type AdminShellProps = {
@@ -27,7 +28,7 @@ export default function AdminShell({
   return (
     <AdminSearchProvider>
       <AdminPermissionsProvider role={userRole}>
-        <div className="min-h-screen overflow-x-hidden bg-neutral-100 text-neutral-900">
+        <div data-admin className={cn(adminUi.shell, "admin-panel")}>
           <AdminSidebar
             userName={userName}
             userRole={userRole}

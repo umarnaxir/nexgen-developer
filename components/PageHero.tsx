@@ -1,32 +1,91 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
-import GalaxyBackground from "@/components/GalaxyBackground";
+import MagneticButton from "@/components/ui/MagneticButton";
+import { useContactModal } from "@/components/modals/ContactModalProvider";
+
+export type PageHeroPill = {
+  label: string;
+  icon?: LucideIcon;
+};
+
+export type PageHeroCta = {
+  label: string;
+  href?: string;
+  openContact?: boolean;
+};
 
 export type PageHeroProps = {
   eyebrow: string;
-  title: string;
-  description?: string;
+  title: string | [string, string];
+  highlight?: string;
+  description: string;
   meta?: string;
-  /** `galaxy` matches the home hero. `image` keeps the photo backdrop (Team). */
-  variant?: "galaxy" | "image";
+  pills?: PageHeroPill[];
+  primaryCta?: PageHeroCta;
+  secondaryCta?: PageHeroCta;
+  variant?: "light" | "dark";
+  size?: "default" | "compact";
 };
 
-const HERO_IMAGE = "/images/hero-image.png";
+function TitleLines({
+  title,
+  highlight,
+  highlightClassName = "text-gold-dark transition-colors duration-300 hover:text-gold",
+}: {
+  title: string | [string, string];
+  highlight?: string;
+  highlightClassName?: string;
+}) {
+  const lines = Array.isArray(title) ? title : [title];
+
+  return (
+    <>
+      {lines.map((line, index) => {
+        const isLast = index === lines.length - 1;
+        if (highlight && isLast && line.includes(highlight)) {
+          const at = line.lastIndexOf(highlight);
+          return (
+            <span key={line} className="block">
+              {line.slice(0, at)}
+              <span className={highlightClassName}>{highlight}</span>
+              {line.slice(at + highlight.length)}
+            </span>
+          );
+        }
+        return (
+          <span key={line} className="block">
+            {line}
+          </span>
+        );
+      })}
+    </>
+  );
+}
 
 export default function PageHero({
   eyebrow,
   title,
+  highlight,
   description,
   meta,
-  variant = "galaxy",
+  pills = [],
+  primaryCta,
+  secondaryCta,
+  variant = "light",
+  size = "default",
 }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const sublineRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const { open: openContactModal } = useContactModal();
+  const isDark = variant === "dark";
+  const isCompact = size === "compact";
+  const heightClass = isCompact
+    ? "h-[50vh] min-h-[50vh]"
+    : "h-[70vh] min-h-[70vh]";
 
   useEffect(() => {
     registerGsapPlugins();
@@ -35,89 +94,139 @@ export default function PageHero({
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.from(headlineRef.current, { y: 64, opacity: 0, duration: 1 }).from(
-        sublineRef.current,
-        { y: 24, opacity: 0, duration: 0.75 },
-        "-=0.5"
-      );
+      if (!copyRef.current) return;
+      gsap.from(copyRef.current.children, {
+        y: 22,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  const renderCta = (cta: PageHeroCta, tone: "primary" | "outline-light" | "gold") => (
+    <MagneticButton
+      href={cta.href}
+      onClick={cta.openContact ? openContactModal : undefined}
+      variant={tone}
+      className={
+        tone === "outline-light"
+          ? "!bg-white !px-5 !py-2.5 !text-[13px]"
+          : "!px-5 !py-2.5 !text-[13px]"
+      }
+    >
+      {cta.label}
+      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+    </MagneticButton>
+  );
+
   return (
     <header
       ref={sectionRef}
-      className="section-dark relative flex h-[50vh] min-h-[50vh] flex-col justify-end overflow-hidden pb-10 pt-[calc(var(--mobile-nav-height)+1.5rem)] sm:pb-12 sm:pt-20 lg:pb-14 lg:pt-24"
+      className={
+        isDark
+          ? `relative z-0 flex ${heightClass} flex-col overflow-hidden bg-[#0e0d0d] pt-[var(--site-nav-height)] text-white`
+          : `hero-glow relative z-0 flex ${heightClass} flex-col overflow-hidden pt-[var(--site-nav-height)]`
+      }
     >
-      {variant === "image" ? (
-        <div className="absolute inset-0" aria-hidden>
-          <Image
-            src={HERO_IMAGE}
-            alt=""
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-        </div>
+      {isDark ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 top-1/4 h-[420px] w-[420px] rounded-full bg-gold/10 blur-[140px]"
+        />
       ) : (
-        <>
-          <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-            <GalaxyBackground />
-          </div>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:48px_48px]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-1/4 top-1/4 z-[1] h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-1/4 bottom-0 z-[1] h-[420px] w-[420px] rounded-full bg-white/[0.02] blur-[100px]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
-          />
-        </>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, var(--gold-light) 1px, transparent 1px), linear-gradient(to bottom, var(--gold-light) 1px, transparent 1px)",
+            backgroundSize: "52px 52px",
+          }}
+        />
       )}
 
-      <div className="section-container relative z-10">
-        <div className="w-full max-w-none">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.35em] text-white/70"
+      <div className="relative z-10 flex h-full flex-1 items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-14">
+        <div
+          ref={copyRef}
+          className="mx-auto flex w-full max-w-7xl flex-col items-start text-left md:items-center md:text-center"
+        >
+          <span
+            className={`text-[11px] font-medium uppercase tracking-[0.35em] ${
+              isDark ? "text-gold" : "text-gold-dark"
+            }`}
           >
-            <span className="h-px w-8 bg-white/40" />
             {eyebrow}
-          </motion.span>
+          </span>
 
           <h1
-            ref={headlineRef}
-            className="w-full text-[clamp(1.85rem,5.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+            className={`mt-4 w-full max-w-5xl font-semibold leading-[0.96] tracking-[-0.04em] ${
+              isCompact
+                ? "text-[clamp(1.85rem,5.4vw,3.35rem)]"
+                : "text-[clamp(2.4rem,6.5vw,4.75rem)]"
+            } ${isDark ? "text-white" : "text-primary"}`}
           >
-            {title}
+            <TitleLines
+              title={title}
+              highlight={highlight}
+              highlightClassName={
+                isDark
+                  ? "text-gold transition-colors duration-300 hover:text-gold-light"
+                  : "text-gold-dark transition-colors duration-300 hover:text-gold"
+              }
+            />
           </h1>
 
-          <div ref={sublineRef} className="mt-5 w-full max-w-5xl space-y-2 sm:mt-6">
-            {meta ? (
-              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-teal-300">
-                {meta}
-              </p>
-            ) : null}
-            {description ? (
-              <p className="text-base leading-relaxed text-white/75 sm:text-lg">{description}</p>
-            ) : null}
-          </div>
+          {meta ? (
+            <p
+              className={`mt-4 text-[11px] font-medium uppercase tracking-[0.2em] ${
+                isDark ? "text-gold/70" : "text-gold-dark"
+              }`}
+            >
+              {meta}
+            </p>
+          ) : null}
+
+          <p
+            className={`mt-5 w-full max-w-3xl text-[15px] leading-relaxed sm:text-lg ${
+              isDark ? "text-white/65" : "text-text-gray"
+            }`}
+          >
+            {description}
+          </p>
+
+          {pills.length > 0 ? (
+            <ul className="mt-5 flex flex-wrap justify-start gap-2 md:justify-center">
+              {pills.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className={`group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-medium shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 ${
+                    isDark
+                      ? "border-gold/35 bg-white/5 text-white hover:border-gold hover:bg-gold/15"
+                      : "border-gold/40 bg-white/70 text-primary hover:border-gold hover:bg-gold-light hover:shadow-[0_14px_28px_-16px_rgba(230,201,166,0.7)]"
+                  }`}
+                >
+                  {Icon ? (
+                    <Icon
+                      className="h-3.5 w-3.5 text-gold-dark transition-transform duration-300 group-hover:scale-110"
+                      strokeWidth={2}
+                    />
+                  ) : null}
+                  {label}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {primaryCta || secondaryCta ? (
+            <div className="mt-6 flex flex-wrap items-center justify-start gap-2.5 md:justify-center">
+              {primaryCta ? renderCta(primaryCta, isDark ? "gold" : "primary") : null}
+              {secondaryCta ? renderCta(secondaryCta, "outline-light") : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </header>

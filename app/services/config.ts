@@ -29,6 +29,8 @@ export interface ServiceContent {
  useCases?: string[];
  /** Expected results / outcomes */
  expectedResults?: string[];
+ /** Short hero lead shown under the heading */
+ lead?: string;
 }
 
 export interface ServiceDefinition {
@@ -74,9 +76,9 @@ const WEBSITE_DEVELOPMENT: ServiceDefinition = {
  label: "Website Development",
  icon: "Globe",
  seo: {
- title: "Website Development Services",
+ title: "Website Software Development Services",
  description:
- "Custom responsive websites, web apps, and enterprise solutions with React, Next.js, Node.js, and Python. SEO-ready builds and ongoing support.",
+ "Custom software development for business websites with React and Next.js. SEO-ready builds for startups. Request a quote from NexGen Developers today.",
  keywords: [
  "website development",
  "web development services",
@@ -154,9 +156,9 @@ const APP_DEVELOPMENT: ServiceDefinition = {
  label: "App Development",
  icon: "Smartphone",
  seo: {
- title: "Mobile App Development Services",
+ title: "Mobile Software Development Services",
  description:
- "iOS and Android apps with React Native and Flutter — from concept to App Store and Play Store, plus ongoing support.",
+ "Mobile software development for iOS and Android with React Native and Flutter. From MVP to store launch. Get a project quote from NexGen Developers today.",
  keywords: [
  "mobile app development",
  "iOS app development",
@@ -233,9 +235,9 @@ const AI_ML: ServiceDefinition = {
  label: "AI & ML Solutions",
  icon: "Cpu",
  seo: {
- title: "AI & Machine Learning Solutions",
+ title: "AI Software Development Services",
  description:
- "Custom AI/ML for predictive analytics, NLP, computer vision, and automation — designed, trained, and deployed for measurable business results.",
+ "Custom AI software development for automation, NLP, and analytics. We design, train, and deploy models. Talk to NexGen Developers about your use case.",
  keywords: [
  "AI solutions",
  "artificial intelligence development",
@@ -316,7 +318,7 @@ const CHATBOT_DEVELOPMENT: ServiceDefinition = {
  seo: {
  title: "AI Chatbot Development Services",
  description:
- "AI chatbots for customer support and automation with NLP, multi-channel integration, and continuous optimization after launch.",
+ "AI chatbot software development for sites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start your project with NexGen Developers.",
  keywords: [
  "chatbot development",
  "AI chatbot",
@@ -393,9 +395,9 @@ const MAINTENANCE_SUPPORT: ServiceDefinition = {
  label: "Maintenance & Support",
  icon: "Wrench",
  seo: {
- title: "Website & App Maintenance",
+ title: "Software Maintenance and Support Plans",
  description:
- "24/7 website and app maintenance — updates, security patches, bug fixes, monitoring, and performance support for peace of mind.",
+ "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep products stable after launch. Choose a NexGen Developers support plan.",
  keywords: [
  "website maintenance",
  "app maintenance",
@@ -471,9 +473,9 @@ const DEPLOYMENT_DEVOPS: ServiceDefinition = {
  label: "Deployment & DevOps",
  icon: "Server",
  seo: {
- title: "DevOps & Cloud Deployment",
+ title: "DevOps and Cloud Deployment Help",
  description:
- "CI/CD pipelines, Docker, and cloud deployment on AWS, Azure, or GCP — secure, scalable releases with monitoring and handover.",
+ "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, monitoring, and handover. Launch software securely with NexGen Developers today.",
  keywords: [
  "DevOps services",
  "cloud deployment",
@@ -552,9 +554,9 @@ const DIGITAL_MARKETING: ServiceDefinition = {
  label: "Digital Marketing",
  icon: "TrendingUp",
  seo: {
- title: "Digital Marketing Services",
+ title: "Digital Marketing Agency in India",
  description:
- "SEO, social media, Google Ads, and Meta Ads — full-funnel digital marketing to grow traffic, leads, and conversions.",
+ "Digital marketing for software products: SEO, social, Google Ads, and Meta Ads. Grow traffic and qualified leads. Book a strategy call with NexGen Developers.",
  keywords: [
  "digital marketing",
  "digital marketing agency",
@@ -633,9 +635,9 @@ const SEO_SERVICE: SubServiceDefinition = {
  label: "SEO",
  icon: "Search",
  seo: {
- title: "SEO Services",
+ title: "SEO Services for Organic Growth",
  description:
- "Professional SEO: on-page, off-page, keyword research, and technical SEO. Rank higher and grow organic traffic.",
+ "SEO services for software products and higher Google rankings. Technical SEO, content, and white-hat links. Request an SEO audit from NexGen Developers.",
  keywords: [
  "SEO services",
  "search engine optimization",
@@ -696,9 +698,9 @@ const SOCIAL_MEDIA_MARKETING: SubServiceDefinition = {
  label: "Social Media Marketing",
  icon: "Share2",
  seo: {
- title: "Social Media Marketing",
+ title: "Social Media Marketing Services",
  description:
- "Social media strategy, content, and ads for Facebook, Instagram, LinkedIn, and more. Build community and grow engagement.",
+ "Social media marketing for Facebook, Instagram, and LinkedIn. Strategy, content, community, and ads. Grow your brand with NexGen Developers this month.",
  keywords: [
  "social media marketing",
  "Facebook marketing",
@@ -759,9 +761,9 @@ const GRAPHIC_DESIGNING: SubServiceDefinition = {
  label: "Graphic Designing",
  icon: "Palette",
  seo: {
- title: "Graphic Design Services",
+ title: "Graphic Design and Branding Help",
  description:
- "Logo design, brand identity, social graphics, and marketing materials. Professional design that strengthens your brand.",
+ "Graphic design for logos, brand identity, social graphics, and campaigns. Professional visuals that convert. Brief NexGen Developers on your brand today.",
  keywords: [
  "graphic design",
  "logo design",
@@ -822,9 +824,9 @@ const GOOGLE_ADS: SubServiceDefinition = {
  label: "Google Ads",
  icon: "MousePointerClick",
  seo: {
- title: "Google Ads Management",
+ title: "Google Ads Management Services",
  description:
- "Google Ads setup and management: Search, Display, YouTube. Maximize ROI with expert PPC campaigns.",
+ "Google Ads management for Search, Display, YouTube, and Shopping. Conversion tracking and ROI-focused PPC. Launch campaigns with NexGen Developers now.",
  keywords: [
  "Google Ads",
  "PPC management",
@@ -885,9 +887,9 @@ const META_ADS: SubServiceDefinition = {
  label: "Meta Ads",
  icon: "Facebook",
  seo: {
- title: "Meta Ads Management",
+ title: "Meta Facebook Ads Management Help",
  description:
- "Facebook and Instagram ad management. Reach your audience with targeted Meta (Facebook & Instagram) campaigns.",
+ "Meta Ads management for Facebook and Instagram. Audience targeting, creative tests, and pixel tracking. Start paid social with NexGen Developers today.",
  keywords: [
  "Meta Ads",
  "Facebook Ads",

@@ -1,21 +1,23 @@
 /**
  * Reusable SEO Schema component for service pages.
- * Renders FAQ + Service JSON-LD for rich snippets.
+ * Renders WebPage, Breadcrumb, Service, and FAQ JSON-LD.
  */
 
 import { FAQSchema } from "@/lib/seo/faq-schema";
-import { ServiceSchema } from "@/lib/seo/structured-data";
+import { buildSeoDescription, buildSeoTitle } from "@/lib/seo/utils";
+import {
+  BreadcrumbSchema,
+  ServiceSchema,
+  WebPageSchema,
+} from "@/lib/seo/structured-data";
 
 interface ServicePageSchemaProps {
-  /** Service name for Service schema */
   serviceName: string;
-  /** Service description for Service schema */
   serviceDescription: string;
-  /** Optional service type (e.g. "Web Development") */
   serviceType?: string;
-  /** Optional area served */
   areaServed?: string;
-  /** FAQs for FAQPage schema (minimum 5 recommended) */
+  path: string;
+  breadcrumbs: Array<{ name: string; url: string }>;
   faqs: { question: string; answer: string }[];
 }
 
@@ -23,16 +25,25 @@ export default function ServicePageSchema({
   serviceName,
   serviceDescription,
   serviceType,
-  areaServed,
+  areaServed = "India",
+  path,
+  breadcrumbs,
   faqs,
 }: ServicePageSchemaProps) {
   return (
     <>
+      <WebPageSchema
+        name={buildSeoTitle(serviceName)}
+        description={buildSeoDescription(serviceDescription)}
+        url={path}
+      />
+      <BreadcrumbSchema items={breadcrumbs} />
       <ServiceSchema
         name={serviceName}
         description={serviceDescription}
         serviceType={serviceType}
         areaServed={areaServed}
+        url={path}
       />
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
     </>

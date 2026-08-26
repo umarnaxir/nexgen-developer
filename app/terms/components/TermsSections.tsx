@@ -10,7 +10,7 @@ export default function TermsSections() {
         <p className="mb-3 sm:mb-4">
           In these Terms, the following definitions apply:
         </p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-gold-dark">
           <li><strong className="text-black">&quot;Service&quot;</strong> means our website, our blog, and all related features and pages.</li>
           <li><strong className="text-black">&quot;NexGen&quot;</strong> means our service-based team of freelance developers and designers, helping startups and local brands with AI/ML, chatbots, web &amp; app development, and digital marketing.</li>
           <li><strong className="text-black">&quot;Services&quot;</strong> means the development, design, marketing, and support services we provide to clients under separate service agreements.</li>
@@ -34,7 +34,7 @@ export default function TermsSections() {
         <p className="mb-3 sm:mb-4">
           Permission is granted to temporarily download one copy of the materials on NexGen&apos;s website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
         </p>
-        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-teal-600">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-1.5 sm:space-y-2 mb-3 sm:mb-4 marker:text-gold-dark">
           <li>Modify or copy the materials</li>
           <li>Use the materials for any commercial purpose or for any public display (commercial or non-commercial)</li>
           <li>Attempt to decompile or reverse engineer any software contained on NexGen&apos;s website</li>

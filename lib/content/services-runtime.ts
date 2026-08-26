@@ -19,6 +19,7 @@ export function serviceToDefinition(service: ServiceRecord) {
       ctaDescription: service.content.ctaDescription,
       useCases: service.content.useCases,
       expectedResults: service.content.expectedResults,
+      lead: service.content.lead,
     },
     relatedSlugs: service.relatedSlugs,
   };

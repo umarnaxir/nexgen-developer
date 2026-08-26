@@ -1,18 +1,80 @@
 import BlogsGrid from "./components/BlogsGrid";
+import BlogsHero from "./components/BlogsHero";
 import { getBlogsSEO } from "@/lib/seo/page-seo";
 import { getBlogs } from "@/lib/content/store";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import Link from "next/link";
 
 export const metadata = getBlogsSEO();
 export const dynamic = "force-dynamic";
 
-export default async function BlogsPage() {
+type PageProps = {
+  searchParams: Promise<{ category?: string }>;
+};
+
+export default async function BlogsPage({ searchParams }: PageProps) {
+  const { category } = await searchParams;
   const blogs = await getBlogs();
+  const categories = Array.from(new Set(blogs.map((blog) => blog.category))).sort();
+  const activeCategory = category?.trim() || "";
+  const filtered = activeCategory
+    ? blogs.filter(
+        (blog) => blog.category.toLowerCase() === activeCategory.toLowerCase()
+      )
+    : blogs;
+  const visible = filtered.length > 0 ? filtered : blogs;
 
   return (
     <div className="min-h-screen">
-      <section className="pb-20 pt-10 lg:pb-28 lg:pt-14">
-        <div className="section-container">
-          <BlogsGrid blogs={blogs} />
+      <PageJsonLd
+        path="/blogs"
+        title="Software Development Insights Blog"
+        description="Read the NexGen Developers blog on software development, AI, SEO, and product delivery. Practical guides for startups. Explore the latest articles today."
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blogs" },
+        ]}
+      />
+      <BlogsHero />
+      <section
+        id="blog-list"
+        className="min-w-0 overflow-x-hidden pb-12 pt-8 sm:pb-20 sm:pt-12 lg:pb-28"
+      >
+        <div className="px-4 sm:px-6 lg:px-14">
+          <div className="mx-auto w-full min-w-0 max-w-7xl">
+          {categories.length > 1 ? (
+            <div className="mb-5 flex w-full min-w-0 gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] sm:mb-8 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+              <Link
+                href="/blogs"
+                className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
+                  !activeCategory
+                    ? "border-gold bg-gold-light text-primary"
+                    : "border-gold/30 bg-white text-text-gray hover:border-gold/60"
+                }`}
+              >
+                All
+              </Link>
+              {categories.map((item) => {
+                const isActive = item.toLowerCase() === activeCategory.toLowerCase();
+                return (
+                  <Link
+                    key={item}
+                    href={`/blogs?category=${encodeURIComponent(item)}`}
+                    className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
+                      isActive
+                        ? "border-gold bg-gold-light text-primary"
+                        : "border-gold/30 bg-white text-text-gray hover:border-gold/60"
+                    }`}
+                  >
+                    {item}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
+
+          <BlogsGrid blogs={visible} />
+          </div>
         </div>
       </section>
     </div>

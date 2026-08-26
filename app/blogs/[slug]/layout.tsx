@@ -14,25 +14,30 @@ export async function generateMetadata({
   const blog = await getBlogBySlug(slug);
 
   if (!blog || blog.status !== "published") {
-    return getBlogPostSEO({
-      title: "Blog Post Not Found",
-      description: "The blog post you are looking for could not be found.",
-      slug,
-      publishedDate: new Date().toISOString(),
-    });
+    return {
+      ...getBlogPostSEO({
+        title: "Blog Post Not Found",
+        description: "The blog post you are looking for could not be found.",
+        slug,
+        publishedDate: new Date().toISOString(),
+      }),
+      robots: { index: false, follow: false },
+    };
   }
 
   const publishedDate = new Date(blog.publishDate || blog.date).toISOString();
 
   return getBlogPostSEO({
-    title: blog.title,
-    description: blog.excerpt,
+    title: blog.seoTitle || blog.title,
+    exactTitle: Boolean(blog.exactSeoTitle),
+    description: blog.description || blog.excerpt,
     slug: blog.slug,
-    image: blog.images?.[0] || blog.image,
     publishedDate,
+    modifiedDate: publishedDate,
     author: blog.author,
     category: blog.category,
     keywords: blog.keywords,
+    image: blog.image,
   });
 }
 

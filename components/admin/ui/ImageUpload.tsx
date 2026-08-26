@@ -52,10 +52,10 @@ export function ImageUpload({
 
   return (
     <div className={cn("space-y-2", className)}>
-      <span className="text-sm font-medium text-neutral-700">{label}</span>
+      <span className="text-sm font-medium text-primary">{label}</span>
       <div
         className={cn(
-          "overflow-hidden rounded-md border border-dashed border-neutral-300 bg-neutral-50",
+          "overflow-hidden rounded-md border border-dashed border-gold/35 bg-background-soft",
           compact ? "w-[7.5rem] sm:w-36" : "w-full"
         )}
       >
@@ -97,14 +97,14 @@ export function ImageUpload({
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
             className={cn(
-              "flex w-full flex-col items-center justify-center gap-1.5 text-neutral-500 transition hover:bg-neutral-100",
+              "flex w-full flex-col items-center justify-center gap-1.5 text-text-gray transition hover:bg-gold/10 hover:text-gold-dark",
               compact ? "aspect-[3/4] px-2" : "aspect-[16/10]"
             )}
           >
             {uploading ? (
               <Loader2
                 className={cn(
-                  "animate-spin text-teal-600",
+                  "animate-spin text-gold-dark",
                   compact ? "h-5 w-5" : "h-6 w-6"
                 )}
               />

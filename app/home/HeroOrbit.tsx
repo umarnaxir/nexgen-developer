@@ -26,7 +26,7 @@ function ServiceCardBox({
  <div className="glass-card group flex w-full items-center justify-between gap-3 rounded-2xl p-4">
  <div className="min-w-0">
  <div className="flex items-start gap-3">
- <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-teal-400/20 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700 transition-all duration-300 group-hover:scale-110 group-hover:bg-teal-400/20 light:group-hover:bg-teal-100">
+ <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gold/20 light:border-gold-light bg-gold/10 light:bg-gold-light text-gold light:text-gold-dark transition-all duration-300 group-hover:scale-110 group-hover:bg-gold/20 light:group-hover:bg-gold-light">
  <Icon className="h-5 w-5" />
  </span>
  <h4 className="text-sm font-bold leading-tight text-white light:text-gray-900">{title}</h4>
@@ -34,7 +34,7 @@ function ServiceCardBox({
  <p className="mt-2 text-xs leading-snug text-silver-dark light:text-gray-500">{desc}</p>
  </div>
  {showArrow && (
- <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/5 light:bg-gray-100 text-silver light:text-gray-600 transition-colors duration-300 group-hover:border-teal-400/40 group-hover:text-teal-300">
+ <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/5 light:bg-gray-100 text-silver light:text-gray-600 transition-colors duration-300 group-hover:border-gold/40 group-hover:text-gold">
  <ChevronRight className="h-4 w-4" />
  </span>
  )}
@@ -52,7 +52,7 @@ function IconBadge({
 }) {
  return (
  <span
- className={`absolute flex h-11 w-11 items-center justify-center rounded-2xl border border-teal-400/25 light:border-teal-200 bg-teal-400/10 light:bg-teal-50 text-teal-300 light:text-teal-700 shadow-[0_0_20px_rgba(20,184,166,0.25)] backdrop-blur ${className}`}
+ className={`absolute flex h-11 w-11 items-center justify-center rounded-2xl border border-gold/25 light:border-gold-light bg-gold/10 light:bg-gold-light text-gold light:text-gold-dark shadow-[0_0_20px_rgba(230,201,166,0.25)] backdrop-blur ${className}`}
  >
  <Icon className="h-5 w-5" />
  </span>
@@ -69,9 +69,9 @@ function GrowthCard() {
  Turning Ideas Into Impactful
  <br className="hidden sm:block" /> Digital Solutions
  </p>
- <p className="mt-1.5 text-xs font-semibold text-teal-300 light:text-teal-700">Let&apos;s grow together</p>
+ <p className="mt-1.5 text-xs font-semibold text-gold light:text-gold-dark">Let&apos;s grow together</p>
  </div>
- <svg viewBox="0 0 120 50" className="h-12 w-28 shrink-0 text-teal-400" fill="none">
+ <svg viewBox="0 0 120 50" className="h-12 w-28 shrink-0 text-gold" fill="none">
  <path
  d="M2 44 C20 40 28 34 40 30 C54 25 60 32 74 22 C88 12 100 16 116 4"
  stroke="currentColor"
@@ -98,7 +98,7 @@ function OrbitDot({
  return (
  <span className={`absolute inset-0 ${margin} ${spin}`}>
  <span
- className={`absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-300 shadow-[0_0_14px_rgba(45,212,191,0.95)] ${size}`}
+ className={`absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold shadow-[0_0_14px_rgba(45,212,191,0.95)] ${size}`}
  />
  </span>
  );
@@ -120,9 +120,9 @@ function Sphere({ className = "" }: { className?: string }) {
  />
 
  {/* orbit rings */}
- <span className="absolute inset-0 -m-6 rounded-full border border-teal-400/25 animate-spin-slow" />
- <span className="absolute inset-0 -m-14 rounded-full border border-dashed border-teal-400/20 animate-spin-slow-rev" />
- <span className="absolute inset-0 -m-24 rounded-full border border-teal-400/10 animate-spin-slow" />
+ <span className="absolute inset-0 -m-6 rounded-full border border-gold/25 animate-spin-slow" />
+ <span className="absolute inset-0 -m-14 rounded-full border border-dashed border-gold/20 animate-spin-slow-rev" />
+ <span className="absolute inset-0 -m-24 rounded-full border border-gold/10 animate-spin-slow" />
 
  {/* revolving particles */}
  <OrbitDot spin="animate-orbit" margin="-m-6" size="h-2.5 w-2.5" />
@@ -132,8 +132,8 @@ function Sphere({ className = "" }: { className?: string }) {
  {/* sphere, stays a black orb with dark-teal sheen in BOTH themes
  (light:bg-black sits under the opacity gradient so the light page
  no longer bleeds through and washes it to silver) */}
- <div className="relative flex h-full w-full items-center justify-center rounded-full border border-white/10 light:border-teal-700/40 bg-gradient-to-br from-teal-500/30 via-teal-700/15 to-black light:bg-black backdrop-blur animate-sphere-pulse">
- <span className="select-none bg-gradient-to-br from-teal-200 to-teal-500 bg-clip-text font-black leading-none text-transparent">
+ <div className="relative flex h-full w-full items-center justify-center rounded-full border border-white/10 light:border-gold-dark/40 bg-gradient-to-br from-gold-dark/30 via-gold-dark/15 to-black light:bg-black backdrop-blur animate-sphere-pulse">
+ <span className="select-none bg-gradient-to-br from-gold-light to-gold-dark bg-clip-text font-black leading-none text-transparent">
  N
  </span>
  {/* glossy highlight */}
@@ -149,13 +149,13 @@ export function HeroSphereMobile() {
  return (
  <div data-aos="fade-down">
  <h2 className="mb-6 text-center text-xl font-extrabold tracking-tight">
- <span className="bg-gradient-to-r from-teal-200 via-teal-400 to-teal-600 light:from-teal-600 light:via-teal-700 light:to-teal-800 bg-clip-text text-transparent">
+ <span className="bg-gradient-to-r from-gold-light via-gold to-gold-dark light:from-gold-dark light:via-gold-dark light:to-gold-dark bg-clip-text text-transparent">
  NexGen Developers
  </span>
  </h2>
  <div className="relative mx-auto h-64 w-64">
  {/* soft glow behind sphere */}
- <span className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-500/20 blur-3xl" />
+ <span className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-dark/20 blur-3xl" />
  <Sphere className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 text-[80px]" />
  {/* floating icon badges */}
  <IconBadge icon={serviceCards[0].icon} className="left-1 top-8" />
@@ -189,7 +189,7 @@ export default function HeroOrbit() {
  <div data-aos="fade-left" data-aos-delay="150">
  {/* Brand heading */}
  <h2 className="mb-6 text-center text-2xl font-extrabold tracking-tight sm:text-3xl">
- <span className="bg-gradient-to-r from-teal-200 via-teal-400 to-teal-600 light:from-teal-600 light:via-teal-700 light:to-teal-800 bg-clip-text text-transparent">
+ <span className="bg-gradient-to-r from-gold-light via-gold to-gold-dark light:from-gold-dark light:via-gold-dark light:to-gold-dark bg-clip-text text-transparent">
  NexGen Developers
  </span>
  </h2>
@@ -198,7 +198,7 @@ export default function HeroOrbit() {
  <div className="relative mx-auto h-[500px] w-full max-w-[600px]">
  {/* dashed connectors */}
  <svg
- className="absolute inset-0 h-full w-full text-teal-400/40"
+ className="absolute inset-0 h-full w-full text-gold/40"
  viewBox="0 0 620 560"
  fill="none"
  preserveAspectRatio="none"
@@ -211,7 +211,7 @@ export default function HeroOrbit() {
  <path d="M310 280 C410 320 450 350 480 365" />
  <path d="M310 280 C320 380 320 420 320 470" />
  </g>
- <g fill="#2dd4bf">
+ <g fill="#e6c9a6">
  <circle cx="240" cy="208" r="4" />
  <circle cx="392" cy="206" r="4" />
  <circle cx="222" cy="322" r="4" />

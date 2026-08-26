@@ -56,22 +56,19 @@ function StatItem({
       ref={itemRef}
       data-aos="fade-up"
       data-aos-delay={index * 60}
-      className={`group relative overflow-hidden rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6 ${
-        dark
-          ? "border border-white/[0.08] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.5)] hover:border-teal-500/25"
-          : "border border-black/[0.06] bg-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.14)] hover:border-teal-500/20 hover:shadow-[0_28px_64px_-36px_rgba(0,0,0,0.18)]"
-      }`}
+      className="group relative overflow-hidden rounded-xl border border-gold/35 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] p-5 text-white shadow-[0_20px_56px_-40px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/55 sm:p-6"
     >
-      <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-teal-500/[0.06] opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.22),transparent_46%)]" />
+      <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gold/25 opacity-80 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
 
-      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-teal-500/20 bg-teal-500/10 text-teal-600 transition-transform duration-300 group-hover:scale-105">
+      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-gold/35 bg-gold text-black transition-transform duration-300 group-hover:scale-105">
         <Icon className="h-5 w-5" />
       </span>
 
-      <p className="text-3xl font-semibold tabular-nums tracking-[-0.03em] text-black sm:text-4xl">
+      <p className="text-3xl font-semibold tabular-nums tracking-[-0.03em] text-gold sm:text-4xl">
         <span ref={valueRef}>0{suffix}</span>
       </p>
-      <p className="mt-1.5 text-[13px] leading-snug text-black/50">{label}</p>
+      <p className="mt-1.5 text-[13px] leading-snug text-white/70">{label}</p>
     </div>
   );
 }
@@ -86,14 +83,15 @@ export default function StatsBar({ tone = "light" }: StatsBarProps) {
 
   return (
     <section
-      className={`${dark ? "section-dark" : "section-light"} section-y`}
+      className={`${dark ? "section-light" : "section-light"} section-y`}
       aria-label="Company stats"
     >
-      <div className="section-container">
+      <div className="px-4 sm:px-6 lg:px-14">
+        <div className="mx-auto w-full max-w-7xl">
         <div className="mb-10 max-w-xl sm:mb-12" data-aos="fade-up">
           <h2
             className={`text-2xl font-semibold tracking-[-0.03em] sm:text-3xl lg:text-4xl ${
-              dark ? "text-white" : "text-black"
+              dark ? "text-primary" : "text-black"
             }`}
           >
             Results that speak for themselves.
@@ -104,6 +102,7 @@ export default function StatsBar({ tone = "light" }: StatsBarProps) {
           {stats.map((stat, index) => (
             <StatItem key={stat.label} {...stat} index={index} dark={dark} />
           ))}
+        </div>
         </div>
       </div>
     </section>

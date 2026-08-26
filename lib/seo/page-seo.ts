@@ -1,207 +1,186 @@
 import { Metadata } from "next";
 import { generateMetadata } from "./utils";
-import { seoConfig } from "./config";
 
-/**
- * Home Page SEO
- */
+const brandOg = {
+  type: "website" as const,
+};
+
 export function getHomeSEO(): Metadata {
   return generateMetadata({
-    title: "Build, Launch & Grow Your Business",
+    title: "Software Development Agency India",
     description:
-      "NexGen Developers helps startups and local brands build, launch, and grow with AI/ML, chatbots, web & app development, and digital marketing.",
+      "Hire NexGen Developers for software development services in India. Custom products, AI, and growth support for startups. Request your free quote today.",
     keywords: [
-      "freelance developers",
-      "web development services",
-      "AI ML solutions",
-      "chatbot development",
-      "digital marketing",
-      "startup development",
-      "build launch grow",
+      "software development services",
+      "software development company India",
+      "custom software development",
+      "software development agency",
+      "AI software development",
+      "startup software development",
+      "Baramulla software developers",
     ],
     canonical: "/",
     openGraph: {
-      type: "website",
-      title: "Build, Launch & Grow Your Business",
+      ...brandOg,
+      title: "Software Development Agency India",
       description:
-        "NexGen Developers helps startups and local brands build, launch, and grow with AI/ML, chatbots, web & app development, and digital marketing.",
+        "Hire NexGen Developers for software development services in India. Custom products, AI, and growth support for startups. Request your free quote today.",
       url: "/",
     },
   });
 }
 
-/**
- * About Page SEO
- */
 export function getAboutSEO(): Metadata {
   return generateMetadata({
-    title: "About Us",
+    title: "About Our Software Development Team",
     description:
-      "Learn about NexGen Developers — freelancers specializing in AI/ML, web & app development, chatbots, SEO, and digital marketing for startups and brands.",
+      "Meet NexGen Developers, a software development studio in Baramulla for startups. Engineers, designers, and marketers in one team. Start a project now.",
     keywords: [
-      "about nexgen developers",
-      "freelance team",
-      "web developers",
-      "AI developers",
-      "app developers",
+      "about NexGen Developers",
+      "software development team India",
+      "software development studio",
+      "Baramulla software developers",
+      "startup technology partner",
     ],
     canonical: "/about",
     openGraph: {
-      type: "website",
-      title: "About Us",
+      ...brandOg,
+      title: "About Our Software Development Team",
       description:
-        "Learn about NexGen Developers — freelancers specializing in AI/ML, web & app development, chatbots, SEO, and digital marketing.",
+        "Meet NexGen Developers, a software development studio in Baramulla for startups. Engineers, designers, and marketers in one team. Start a project now.",
       url: "/about",
     },
   });
 }
 
-/**
- * Services Page SEO
- */
 export function getServicesSEO(): Metadata {
   return generateMetadata({
-    title: "Our Services",
+    title: "Software Development Services in India",
     description:
-      "Web development, mobile apps, AI/ML, chatbots, SEO, digital marketing, DevOps, and design — full-service solutions from NexGen Developers.",
+      "Professional software development services in India: custom products, AI, chatbots, SEO, and marketing. Compare offerings and request your quote today.",
     keywords: [
-      "web development services",
-      "mobile app development",
-      "AI ML services",
+      "software development services",
+      "software development services India",
+      "custom software development",
+      "AI software development",
       "chatbot development",
-      "SEO services",
-      "digital marketing",
-      "graphic design services",
+      "digital marketing services",
+      "DevOps services",
     ],
     canonical: "/services",
     openGraph: {
-      type: "website",
-      title: "Our Services",
+      ...brandOg,
+      title: "Software Development Services in India",
       description:
-        "Web development, mobile apps, AI/ML, chatbots, SEO, digital marketing, DevOps, and design from NexGen Developers.",
+        "Professional software development services in India: custom products, AI, chatbots, SEO, and marketing. Compare offerings and request your quote today.",
       url: "/services",
     },
   });
 }
 
-/**
- * Team Page SEO
- */
 export function getTeamSEO(): Metadata {
   return generateMetadata({
-    title: "Our Team",
+    title: "Meet Our Software Development Team",
     description:
-      "Meet the NexGen Developers team — skilled freelancers in web development, AI/ML, app development, SEO, and digital marketing.",
+      "Meet the NexGen Developers software development team of engineers, designers, and marketers building products for startups. Work with our studio this week.",
     keywords: [
-      "nexgen developers team",
-      "freelance developers",
-      "web developers",
-      "AI developers",
-      "app developers",
+      "software development team",
+      "NexGen Developers team",
+      "software engineers India",
+      "hire software developers",
     ],
     canonical: "/team",
     openGraph: {
-      type: "website",
-      title: "Our Team",
+      ...brandOg,
+      title: "Meet Our Software Development Team",
       description:
-        "Meet the NexGen Developers team — skilled freelancers in web development, AI/ML, app development, and digital marketing.",
+        "Meet the NexGen Developers software development team of engineers, designers, and marketers building products for startups. Work with our studio this week.",
       url: "/team",
     },
   });
 }
 
-/**
- * Projects Page SEO
- */
 export function getProjectsSEO(): Metadata {
   return generateMetadata({
-    title: "Our Projects",
+    title: "Our Software Development Projects",
     description:
-      "Explore NexGen Developers’ portfolio — websites, mobile apps, AI/ML solutions, chatbots, and digital marketing work for real clients.",
+      "Browse NexGen Developers software development projects across education, e-commerce, fitness, and enterprise. View the work, then start your project today.",
     keywords: [
-      "nexgen developers portfolio",
-      "web development projects",
-      "app development projects",
-      "AI ML projects",
-      "chatbot projects",
+      "software development projects",
+      "software development portfolio",
+      "NexGen Developers work",
+      "custom software examples",
     ],
     canonical: "/projects",
     openGraph: {
-      type: "website",
-      title: "Our Projects",
+      ...brandOg,
+      title: "Our Software Development Projects",
       description:
-        "Explore NexGen Developers’ portfolio — websites, mobile apps, AI/ML solutions, chatbots, and digital marketing campaigns.",
+        "Browse NexGen Developers software development projects across education, e-commerce, fitness, and enterprise. View the work, then start your project today.",
       url: "/projects",
     },
   });
 }
 
-/**
- * Blogs Page SEO
- */
 export function getBlogsSEO(): Metadata {
   return generateMetadata({
-    title: "Blog",
+    title: "Software Development Insights Blog",
     description:
-      "Articles on web development, AI/ML, chatbots, SEO, apps, and digital marketing — practical tips from NexGen Developers.",
+      "Read the NexGen Developers blog on software development, AI, SEO, and product delivery. Practical guides for startups. Explore the latest articles today.",
     keywords: [
-      "web development blog",
-      "AI ML blog",
+      "software development blog",
+      "AI software articles",
       "SEO blog",
-      "app development blog",
-      "digital marketing blog",
+      "product delivery guides",
     ],
     canonical: "/blogs",
     openGraph: {
-      type: "website",
-      title: "Blog",
+      ...brandOg,
+      title: "Software Development Insights Blog",
       description:
-        "Articles on web development, AI/ML, chatbots, SEO, apps, and digital marketing from NexGen Developers.",
+        "Read the NexGen Developers blog on software development, AI, SEO, and product delivery. Practical guides for startups. Explore the latest articles today.",
       url: "/blogs",
     },
   });
 }
 
-/**
- * Blog Post SEO (Dynamic)
- */
 export function getBlogPostSEO({
   title,
+  exactTitle,
   description,
   slug,
-  image,
   publishedDate,
   modifiedDate,
   author,
   category,
   keywords: postKeywords,
+  image,
 }: {
   title: string;
+  exactTitle?: boolean;
   description: string;
   slug: string;
-  image?: string;
   publishedDate: string;
   modifiedDate?: string;
   author?: string;
   category?: string;
   keywords?: string[];
+  image?: string;
 }): Metadata {
   const url = `/blogs/${slug}`;
-  const ogImage = image
-    ? image.startsWith("http")
-      ? image
-      : `${seoConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`
-    : seoConfig.defaultOgImage;
-
   const keywords = [
     category || "blog",
-    "nexgen developers",
-    ...(title.toLowerCase().split(" ") || []),
+    "software development",
+    "NexGen Developers",
     ...(postKeywords || []),
   ];
+  const images = image
+    ? [{ url: image, alt: title, width: 1200, height: 630 }]
+    : undefined;
 
   return generateMetadata({
     title,
+    exactTitle,
     description,
     keywords,
     canonical: url,
@@ -210,171 +189,123 @@ export function getBlogPostSEO({
       title,
       description,
       url,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
       publishedTime: publishedDate,
       ...(modifiedDate && { modifiedTime: modifiedDate }),
       ...(author && { authors: [author] }),
       ...(category && { section: category }),
+      tags: keywords,
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: image ? [image] : undefined,
     },
   });
 }
 
-/**
- * Pricing Page SEO
- */
 export function getPricingSEO(): Metadata {
   return generateMetadata({
-    title: "Transparent Pricing",
+    title: "Software Development Pricing Plans",
     description:
-      "Clear pricing for Essential, Growth, Premium, and Enterprise plans — choose the right package for your website or product.",
+      "See transparent software development pricing from NexGen Developers. Essential, Growth, and Premium plans with clear timelines. Get a tailored quote today.",
     keywords: [
-      "pricing",
-      "web development pricing",
-      "website packages",
-      "essential plan",
-      "growth plan",
-      "premium plan",
-      "enterprise solution",
+      "software development pricing",
+      "software development cost India",
+      "custom software packages",
+      "startup software pricing",
     ],
     canonical: "/pricing",
     openGraph: {
-      type: "website",
-      title: "Transparent Pricing",
+      ...brandOg,
+      title: "Software Development Pricing Plans",
       description:
-        "Clear pricing for Essential, Growth, Premium, and Enterprise plans from NexGen Developers.",
+        "See transparent software development pricing from NexGen Developers. Essential, Growth, and Premium plans with clear timelines. Get a tailored quote today.",
       url: "/pricing",
     },
   });
 }
 
-/**
- * Privacy Page SEO
- */
 export function getPrivacySEO(): Metadata {
   return generateMetadata({
-    title: "Privacy Policy",
+    title: "Privacy Policy and Data Practices",
     description:
-      "How NexGen Developers collects, uses, and protects your personal information when you use our website and services.",
-    keywords: ["privacy policy", "data protection", "privacy"],
+      "Read how NexGen Developers collects, uses, and protects your data. Our privacy policy covers the site, blog, and software project inquiries. Contact us anytime.",
+    keywords: ["privacy policy", "data protection", "NexGen Developers privacy"],
     canonical: "/privacy",
-    robots: {
-      index: true,
-      follow: true,
-    },
     openGraph: {
-      type: "website",
-      title: "Privacy Policy",
+      ...brandOg,
+      title: "Privacy Policy and Data Practices",
       description:
-        "How NexGen Developers collects, uses, and protects your personal information.",
+        "Read how NexGen Developers collects, uses, and protects your data. Our privacy policy covers the site, blog, and software project inquiries. Contact us anytime.",
       url: "/privacy",
     },
   });
 }
 
-/**
- * Terms Page SEO
- */
 export function getTermsSEO(): Metadata {
   return generateMetadata({
-    title: "Terms of Service",
+    title: "Terms of Service and Usage Rules",
     description:
-      "Terms of service for using NexGen Developers — freelancers helping startups and brands build, launch, and grow online.",
-    keywords: ["terms of service", "terms and conditions", "legal"],
+      "Review NexGen Developers terms of service for the website and client software work. Clear rules before you hire our development studio. Read the full terms now.",
+    keywords: ["terms of service", "NexGen Developers terms", "software development agreement"],
     canonical: "/terms",
-    robots: {
-      index: true,
-      follow: true,
-    },
     openGraph: {
-      type: "website",
-      title: "Terms of Service",
+      ...brandOg,
+      title: "Terms of Service and Usage Rules",
       description:
-        "Terms of service for using NexGen Developers’ website and client services.",
+        "Review NexGen Developers terms of service for the website and client software work. Clear rules before you hire our development studio. Read the full terms now.",
       url: "/terms",
     },
   });
 }
 
-/**
- * Contact Us Page SEO
- */
 export function getContactUsSEO(): Metadata {
   return generateMetadata({
-    title: "Contact Us",
+    title: "Contact Our Software Development Team",
     description:
-      "Contact NexGen Developers — a remote freelance team. Send a message or connect on social to discuss your next project.",
+      "Contact NexGen Developers in Baramulla for software development services. Email, WhatsApp, or send a brief. We reply within one business day. Start now.",
     keywords: [
-      "contact nexgen developers",
-      "freelance contact",
-      "get in touch",
-      "remote team",
+      "contact NexGen Developers",
+      "hire software developers India",
+      "software development quote",
+      "Baramulla software studio",
     ],
     canonical: "/contact-us",
     openGraph: {
-      type: "website",
-      title: "Contact Us",
+      ...brandOg,
+      title: "Contact Our Software Development Team",
       description:
-        "Contact NexGen Developers — a remote freelance team ready to discuss your next project.",
+        "Contact NexGen Developers in Baramulla for software development services. Email, WhatsApp, or send a brief. We reply within one business day. Start now.",
       url: "/contact-us",
     },
   });
 }
 
-/**
- * Service Page SEO (dynamic: top-level or digital-marketing sub)
- */
 export function getServiceSEO(
   canonicalPath: string,
   seo: {
     title: string;
     description: string;
     keywords: string[];
-  },
-  ogImage?: string
+  }
 ): Metadata {
-  const imageUrl = ogImage
-    ? ogImage.startsWith("http")
-      ? ogImage
-      : `${seoConfig.siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`
-    : seoConfig.defaultOgImage;
-
   return generateMetadata({
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
     canonical: canonicalPath,
     openGraph: {
-      type: "website",
+      ...brandOg,
       title: seo.title,
       description: seo.description,
       url: canonicalPath,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: seo.title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
-      images: [imageUrl],
     },
   });
 }

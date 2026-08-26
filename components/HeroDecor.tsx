@@ -30,13 +30,13 @@ export default function HeroDecor() {
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {/* Ambient glows */}
-      <div className="absolute inset-x-0 -top-20 h-[300px] bg-teal-500/[0.18] blur-[120px] animate-glow-pulse" />
-      <div className="absolute -left-24 bottom-0 h-[300px] w-[300px] rounded-full bg-teal-600/[0.14] blur-[110px]" />
-      <div className="absolute -right-20 top-1/4 h-[260px] w-[260px] rounded-full bg-teal-400/[0.12] blur-[100px]" />
+      <div className="absolute inset-x-0 -top-20 h-[300px] bg-gold-dark/[0.18] blur-[120px] animate-glow-pulse" />
+      <div className="absolute -left-24 bottom-0 h-[300px] w-[300px] rounded-full bg-gold-dark/[0.14] blur-[110px]" />
+      <div className="absolute -right-20 top-1/4 h-[260px] w-[260px] rounded-full bg-gold/[0.12] blur-[100px]" />
 
       {/* Floating orb (parallax) */}
       <div
-        className="absolute right-1/4 top-1/3 h-28 w-28 rounded-full bg-gradient-to-br from-teal-300/40 to-teal-600/10 blur-2xl transition-transform duration-300 ease-out"
+        className="absolute right-1/4 top-1/3 h-28 w-28 rounded-full bg-gradient-to-br from-gold/40 to-gold-dark/10 blur-2xl transition-transform duration-300 ease-out"
         style={{ transform: `translate(${offset.x * 40}px, ${offset.y * 40}px)` }}
       />
 

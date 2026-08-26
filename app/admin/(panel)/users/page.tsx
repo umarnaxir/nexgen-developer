@@ -12,18 +12,15 @@ import { AdminButton } from "@/components/admin/ui/AdminButton";
 import { ConfirmModal } from "@/components/admin/ui/ConfirmModal";
 import type { SafeAdminUser } from "@/components/admin/forms/UserForm";
 import { adminFetch } from "@/lib/admin/client";
+import { adminUi } from "@/lib/admin/ui";
 import type { AdminRole } from "@/lib/content/types";
 
 const PAGE_SIZE = 10;
 
 function roleBadge(role: AdminRole) {
-  if (role === "super_admin") {
-    return "bg-violet-50 text-violet-700";
-  }
-  if (role === "admin") {
-    return "bg-sky-50 text-sky-700";
-  }
-  return "bg-neutral-100 text-neutral-600";
+  if (role === "super_admin") return adminUi.badge.roleSuper;
+  if (role === "admin") return adminUi.badge.roleAdmin;
+  return adminUi.badge.roleEditor;
 }
 
 function roleLabel(role: AdminRole) {
@@ -132,20 +129,20 @@ export default function AdminUsersPage() {
         }
       />
 
-      <div className="overflow-hidden rounded-md border border-neutral-200 bg-white">
+      <div className="overflow-hidden rounded-md border border-gold/25 bg-white">
         {loading ? (
-          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-neutral-500">
-            <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+          <div className="flex items-center justify-center gap-2 px-4 py-16 text-sm text-text-gray">
+            <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
             Loading users…
           </div>
         ) : pageItems.length === 0 ? (
-          <div className="px-4 py-16 text-center text-sm text-neutral-500">
+          <div className="px-4 py-16 text-center text-sm text-text-gray">
             {search ? "No users match your search." : "No users yet."}
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px] text-left text-sm">
-              <thead className="border-b border-neutral-200 bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500">
+              <thead className="border-b border-gold/25 bg-background-soft text-xs uppercase tracking-wide text-text-gray">
                 <tr>
                   <th className="px-4 py-3 font-medium">User</th>
                   <th className="px-4 py-3 font-medium">Role</th>
@@ -153,36 +150,32 @@ export default function AdminUsersPage() {
                   <th className="px-4 py-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100">
+              <tbody className="divide-y divide-gold/15">
                 {pageItems.map((user) => {
                   const canEdit = canModifyUser(user.role);
                   const canRemove = canDeleteUser(user.role);
                   return (
-                    <tr key={user.id} className="hover:bg-neutral-50/80">
+                    <tr key={user.id} className="hover:bg-gold/[0.06]">
                       <td className="px-4 py-3">
                         <div>
-                          <p className="font-medium text-neutral-900">{user.name}</p>
-                          <p className="mt-0.5 text-xs text-neutral-500">
+                          <p className="font-medium text-primary">{user.name}</p>
+                          <p className="mt-0.5 text-xs text-text-gray">
                             {user.email}
                           </p>
                         </div>
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${roleBadge(user.role)}`}
+                          className={roleBadge(user.role)}
                         >
                           {roleLabel(user.role)}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         {user.enabled ? (
-                          <span className="inline-flex rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">
-                            Enabled
-                          </span>
+                          <span className={adminUi.badge.active}>Enabled</span>
                         ) : (
-                          <span className="inline-flex rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
-                            Disabled
-                          </span>
+                          <span className={adminUi.badge.muted}>Disabled</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
@@ -195,7 +188,7 @@ export default function AdminUsersPage() {
                               </AdminButton>
                             </Link>
                           ) : (
-                            <span className="px-2 text-xs text-neutral-400">
+                            <span className="px-2 text-xs text-text-gray/70">
                               Protected
                             </span>
                           )}
@@ -221,7 +214,7 @@ export default function AdminUsersPage() {
         )}
 
         {!loading && filtered.length > PAGE_SIZE && (
-          <div className="flex items-center justify-between border-t border-neutral-200 px-4 py-3 text-sm text-neutral-600">
+          <div className="flex items-center justify-between border-t border-gold/25 px-4 py-3 text-sm text-text-gray">
             <span>
               Page {currentPage} of {totalPages} · {filtered.length} total
             </span>

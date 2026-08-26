@@ -1,8 +1,10 @@
 import ProjectsHero from "./components/ProjectsHero";
 import ProjectsList from "./components/ProjectsList";
-import FAQSection from "@/app/home/FAQSection";
+import PageFAQ from "@/components/seo/PageFAQ";
 import { getProjectsSEO } from "@/lib/seo/page-seo";
 import { getProjects } from "@/lib/content/store";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { projectsFaqs } from "@/lib/seo/faqs";
 
 export const metadata = getProjectsSEO();
 export const dynamic = "force-dynamic";
@@ -12,9 +14,23 @@ export default async function ProjectsPage() {
 
   return (
     <main className="min-h-screen">
+      <PageJsonLd
+        path="/projects"
+        title="Our Software Development Projects"
+        description="Browse NexGen Developers software development projects across education, e-commerce, fitness, and enterprise. View the work, then start your project today."
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Projects", url: "/projects" },
+        ]}
+        faqs={projectsFaqs}
+      />
       <ProjectsHero />
       <ProjectsList projects={projects} />
-      <FAQSection />
+      <PageFAQ
+        faqs={projectsFaqs}
+        title="Questions about our work"
+        description="How to read the portfolio, request a similar build, and start a project."
+      />
     </main>
   );
 }

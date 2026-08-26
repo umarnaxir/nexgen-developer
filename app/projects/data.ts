@@ -215,7 +215,7 @@ export const projects = [
     duration: "1 - 2 months",
     client: "PlaceHub",
     icon: MapPin,
-    color: "bg-teal-500"
+    color: "bg-gold-dark"
   },
   {
   id: 5,

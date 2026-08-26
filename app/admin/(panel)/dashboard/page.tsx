@@ -10,6 +10,8 @@ import {
 import { canManageUsers, getSession } from "@/lib/admin/auth";
 import { getContentStats } from "@/lib/content/store";
 import { PageHeader } from "@/components/admin/layout/PageHeader";
+import { adminUi } from "@/lib/admin/ui";
+import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -22,53 +24,46 @@ export default async function AdminDashboardPage() {
     value: string | number;
     hint: string;
     href: string;
-    tone: string;
   }[] = [
     {
       label: "Projects",
       value: stats.projects,
-      hint: `${stats.featuredProjects} featured`,
+      hint: `${stats.featuredProjects} featured on home`,
       href: "/admin/projects",
-      tone: "from-teal-500/15 to-teal-500/5",
     },
     {
       label: "Services",
       value: stats.services,
-      hint: `${stats.servicesActive} active`,
+      hint: `${stats.servicesActive} active pages`,
       href: "/admin/services",
-      tone: "from-emerald-500/15 to-emerald-500/5",
     },
     {
       label: "Blogs",
       value: stats.blogs,
       hint: `${stats.blogsPublished} published`,
       href: "/admin/blogs",
-      tone: "from-amber-500/15 to-amber-500/5",
     },
     {
       label: "Team",
       value: stats.team,
-      hint: `${stats.teamActive} active`,
+      hint: `${stats.teamActive} visible members`,
       href: "/admin/team",
-      tone: "from-sky-500/15 to-sky-500/5",
     },
     ...(canUsers
       ? [
           {
             label: "Users",
             value: stats.users,
-            hint: `${stats.usersActive} active`,
+            hint: `${stats.usersActive} active accounts`,
             href: "/admin/users",
-            tone: "from-violet-500/15 to-violet-500/5",
           },
         ]
       : []),
     {
       label: "Contact",
       value: "Edit",
-      hint: "Company details",
+      hint: "Contact page & footer details",
       href: "/admin/contact",
-      tone: "from-rose-500/15 to-rose-500/5",
     },
   ];
 
@@ -92,27 +87,17 @@ export default async function AdminDashboardPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {cards.map((card) => (
-          <Link
-            key={card.label}
-            href={card.href}
-            className={`group rounded-md border border-neutral-200 bg-gradient-to-br ${card.tone} p-5 transition duration-200 hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-md active:scale-[0.97] active:border-teal-400 sm:p-7`}
-          >
-            <p className="text-xs font-medium text-neutral-600 sm:text-sm">
-              {card.label}
-            </p>
-            <p className="mt-3 text-xl font-semibold tracking-tight text-neutral-900 sm:mt-4 sm:text-3xl">
-              {card.value}
-            </p>
-            <p className="mt-2 line-clamp-1 text-[11px] text-neutral-500 sm:text-xs">
-              {card.hint}
-            </p>
+          <Link key={card.label} href={card.href} className={adminUi.dashboardCard}>
+            <p className={adminUi.dashboardCardLabel}>{card.label}</p>
+            <p className={adminUi.dashboardCardValue}>{card.value}</p>
+            <p className={adminUi.dashboardCardHint}>{card.hint}</p>
           </Link>
         ))}
       </div>
 
-      <div className="mt-6 rounded-md border border-neutral-200 bg-white p-5 sm:mt-8 sm:p-7">
-        <h2 className="text-lg font-semibold text-neutral-900">Quick actions</h2>
-        <p className="mt-1 text-sm text-neutral-500">
+      <div className={cn("mt-6 p-5 sm:mt-8 sm:p-7", adminUi.card)}>
+        <h2 className="text-lg font-semibold text-primary">Quick actions</h2>
+        <p className="mt-1 text-sm text-text-gray">
           Jump into a content module to add or update site data.
         </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -122,9 +107,12 @@ export default async function AdminDashboardPage() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="flex items-center gap-3 rounded-md border border-neutral-200 px-4 py-3.5 text-sm font-medium text-neutral-700 transition hover:border-teal-300 hover:bg-teal-50/50 hover:text-teal-800 active:scale-[0.98]"
+                className={cn(
+                  "flex items-center gap-3 rounded-md border border-gold/25 px-4 py-3.5 text-sm font-medium text-primary transition active:scale-[0.98]",
+                  adminUi.softHover
+                )}
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-neutral-100 text-neutral-700">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-gold/15 text-gold-dark">
                   <Icon className="h-4 w-4" />
                 </span>
                 {link.label}

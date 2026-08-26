@@ -5,6 +5,7 @@ import {
   MessageSquare,
   TrendingUp,
   Infinity,
+  Server,
   type LucideIcon,
 } from "lucide-react";
 
@@ -23,6 +24,15 @@ export type HomeService = {
   icon: LucideIcon;
   href: string;
   image: string;
+  highlights: string[];
+};
+
+export type HeroService = {
+  title: string;
+  description: string;
+  ctaLabel: string;
+  icon: LucideIcon;
+  href: string;
   highlights: string[];
 };
 
@@ -126,6 +136,105 @@ export const homeServices: HomeService[] = [
   },
 ];
 
+export const heroServices: HeroService[] = [
+  {
+    title: "Web Development",
+    description:
+      "High-performance websites crafted with clean code, modern design and conversion-focused experiences that drive results.",
+    ctaLabel: "Build My Website",
+    icon: Globe,
+    href: "/services/website-development",
+    highlights: [
+      "Custom Websites",
+      "E-Commerce Solutions",
+      "CMS Development",
+      "Performance Optimized",
+      "SEO Ready",
+    ],
+  },
+  {
+    title: "Mobile Applications",
+    description:
+      "Native and cross-platform apps designed for speed, usability and scale — from first tap to long-term growth.",
+    ctaLabel: "Build My App",
+    icon: Smartphone,
+    href: "/services/app-development",
+    highlights: [
+      "iOS & Android",
+      "Cross Platform",
+      "Offline Support",
+      "Push Notifications",
+      "Scalable Backend",
+    ],
+  },
+  {
+    title: "AI & Machine Learning",
+    description:
+      "Intelligent systems that automate operations, surface insights and help your team make faster, better decisions.",
+    ctaLabel: "Explore AI Solutions",
+    icon: BrainCircuit,
+    href: "/services/ai-ml",
+    highlights: [
+      "Custom Models",
+      "Process Automation",
+      "Predictive Insights",
+      "Data Pipelines",
+      "ML Ops",
+    ],
+  },
+  {
+    title: "AI Chatbots",
+    description:
+      "Conversational AI that answers customers instantly, qualifies leads and works around the clock across your channels.",
+    ctaLabel: "Build My Chatbot",
+    icon: MessageSquare,
+    href: "/services/chatbot-development",
+    highlights: [
+      "24/7 Support",
+      "Multi-channel",
+      "NLP Powered",
+      "Lead Qualification",
+      "Easy Integration",
+    ],
+  },
+  {
+    title: "Digital Growth",
+    description:
+      "SEO, paid media and content strategies that increase visibility, generate qualified leads and grow your brand.",
+    ctaLabel: "Grow My Brand",
+    icon: TrendingUp,
+    href: "/services/digital-marketing",
+    highlights: [
+      "SEO & Content",
+      "Paid Campaigns",
+      "Analytics Ready",
+      "Brand Reach",
+      "Conversion Funnels",
+    ],
+  },
+  {
+    title: "Deployment & DevOps",
+    description:
+      "Cloud infrastructure, CI/CD and monitoring that keep products shipping reliably with zero-drama releases.",
+    ctaLabel: "Ship With Confidence",
+    icon: Server,
+    href: "/services/deployment-devops",
+    highlights: [
+      "CI/CD Pipelines",
+      "Cloud Native",
+      "Auto Scaling",
+      "Zero Downtime",
+      "Observability",
+    ],
+  },
+];
+
+export const heroAvatars = [
+  { src: "/images/team/me.JPG", alt: "NexGen team member" },
+  { src: "/images/team/waseem.jpeg", alt: "NexGen team member" },
+  { src: "/images/team/faizan.png", alt: "NexGen team member" },
+];
+
 export const footerExtraLinks = [{ label: "Team", href: "/team" }];
 
 /** @deprecated Prefer getContactInfo() from @/lib/content/store */
@@ -134,6 +243,6 @@ export const footerContactPhone = "+916006161726";
 export const footerContactEmail = "workwithnexgen@gmail.com";
 /** @deprecated Prefer getContactInfo() from @/lib/content/store */
 export const footerAddress = {
-  region: "Kashmir, India",
+  region: "Jammu and Kashmir, India",
   line: "Baramulla, Jammu and Kashmir, India",
 };

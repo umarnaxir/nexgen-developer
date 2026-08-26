@@ -9,8 +9,13 @@ import {
   AdminSelect,
   AdminTextarea,
 } from "@/components/admin/ui/AdminInput";
+import {
+  AdminFieldMeta,
+  AdminFormSection,
+} from "@/components/admin/ui/AdminFormSection";
 import { ImageUpload } from "@/components/admin/ui/ImageUpload";
 import { adminFetch } from "@/lib/admin/client";
+import { cmsFields, getCmsMeta } from "@/lib/content/cms-fields";
 import { PROJECT_ICON_OPTIONS } from "@/lib/content/project-icons";
 import type { Project } from "@/lib/content/types";
 
@@ -41,7 +46,6 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
     description: initial?.description || "",
     detailedDescription: initial?.detailedDescription || "",
     image: initial?.image || "",
-    gallery: (initial?.gallery || []).join("\n"),
     link: initial?.link || "",
     technologies: (initial?.technologies || []).join(", "),
     category: initial?.category || "",
@@ -49,7 +53,6 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
     duration: initial?.duration || "",
     client: initial?.client || "",
     icon: initial?.icon || "Globe",
-    color: initial?.color || "bg-teal-500",
     featured: initial?.featured || false,
     order: initial?.order ?? 1,
   });
@@ -72,7 +75,7 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
         description: form.description.trim(),
         detailedDescription: form.detailedDescription.trim(),
         image: form.image,
-        gallery: linesToArray(form.gallery),
+        gallery: initial?.gallery || [],
         link: form.link.trim(),
         technologies: csvToArray(form.technologies),
         category: form.category.trim(),
@@ -80,7 +83,7 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
         duration: form.duration.trim(),
         client: form.client.trim(),
         icon: form.icon,
-        color: form.color.trim(),
+        color: initial?.color || "bg-gold",
         featured: form.featured,
         order: Number(form.order) || 1,
       };
@@ -108,9 +111,14 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
     }
   }
 
+  const sections = cmsFields.projects.sections;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-md border border-neutral-200 bg-white p-5 sm:p-6">
+      <AdminFormSection
+        title={sections[0].title}
+        description={sections[0].description}
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <AdminInput
@@ -118,6 +126,10 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
               value={form.title}
               onChange={(e) => update("title", e.target.value)}
               required
+            />
+            <AdminFieldMeta
+              paths={getCmsMeta("projects", "title")?.frontend || []}
+              className="mt-1"
             />
           </div>
           <div className="sm:col-span-2">
@@ -127,7 +139,33 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
               onChange={(e) => update("description", e.target.value)}
               rows={3}
             />
+            <AdminFieldMeta
+              paths={getCmsMeta("projects", "description")?.frontend || []}
+              className="mt-1"
+            />
           </div>
+          <AdminInput
+            label="Category"
+            value={form.category}
+            onChange={(e) => update("category", e.target.value)}
+          />
+          <AdminSelect
+            label="Category icon"
+            value={form.icon}
+            onChange={(e) => update("icon", e.target.value)}
+            options={PROJECT_ICON_OPTIONS.map((name) => ({
+              value: name,
+              label: name,
+            }))}
+          />
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection
+        title={sections[1].title}
+        description={sections[1].description}
+      >
+        <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <AdminTextarea
               label="Detailed description"
@@ -137,45 +175,8 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
             />
           </div>
           <div className="sm:col-span-2">
-            <ImageUpload
-              label="Image"
-              folder="projects"
-              value={form.image}
-              onChange={(url) => update("image", url)}
-            />
-          </div>
-          <div className="sm:col-span-2">
             <AdminTextarea
-              label="Gallery URLs"
-              hint="One image URL per line (optional)"
-              value={form.gallery}
-              onChange={(e) => update("gallery", e.target.value)}
-              rows={3}
-            />
-          </div>
-          <AdminInput
-            label="Link"
-            value={form.link}
-            onChange={(e) => update("link", e.target.value)}
-            placeholder="https://"
-          />
-          <AdminInput
-            label="Category"
-            value={form.category}
-            onChange={(e) => update("category", e.target.value)}
-          />
-          <div className="sm:col-span-2">
-            <AdminInput
-              label="Technologies"
-              hint="Comma-separated"
-              value={form.technologies}
-              onChange={(e) => update("technologies", e.target.value)}
-              placeholder="Next.js, TypeScript, MongoDB"
-            />
-          </div>
-          <div className="sm:col-span-2">
-            <AdminTextarea
-              label="Features"
+              label="Key features"
               hint="One feature per line"
               value={form.features}
               onChange={(e) => update("features", e.target.value)}
@@ -193,39 +194,59 @@ export function ProjectForm({ initial, mode }: ProjectFormProps) {
             value={form.client}
             onChange={(e) => update("client", e.target.value)}
           />
-          <AdminSelect
-            label="Icon"
-            value={form.icon}
-            onChange={(e) => update("icon", e.target.value)}
-            options={PROJECT_ICON_OPTIONS.map((name) => ({
-              value: name,
-              label: name,
-            }))}
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection
+        title={sections[2].title}
+        description={sections[2].description}
+      >
+        <div className="grid gap-4">
+          <ImageUpload
+            label="Cover image"
+            folder="projects"
+            value={form.image}
+            onChange={(url) => update("image", url)}
           />
           <AdminInput
-            label="Color"
-            value={form.color}
-            onChange={(e) => update("color", e.target.value)}
-            placeholder="bg-teal-500"
+            label="Live project URL"
+            value={form.link}
+            onChange={(e) => update("link", e.target.value)}
+            placeholder="https://"
           />
           <AdminInput
-            label="Order"
+            label="Technologies"
+            hint="Comma-separated — shown as tags on /projects"
+            value={form.technologies}
+            onChange={(e) => update("technologies", e.target.value)}
+            placeholder="Next.js, TypeScript, MongoDB"
+          />
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection
+        title={sections[3].title}
+        description={sections[3].description}
+      >
+        <div className="grid gap-4 sm:grid-cols-2">
+          <AdminInput
+            label="Sort order"
             type="number"
             min={0}
             value={form.order}
             onChange={(e) => update("order", Number(e.target.value))}
           />
-          <label className="flex items-center gap-2 pt-7 text-sm text-neutral-700">
+          <label className="flex items-center gap-2 pt-7 text-sm text-primary">
             <input
               type="checkbox"
               checked={form.featured}
               onChange={(e) => update("featured", e.target.checked)}
-              className="h-4 w-4 rounded border-neutral-300 text-teal-600 focus:ring-teal-500"
+              className="h-4 w-4 rounded border-gold/35 text-gold-dark focus:ring-gold-dark"
             />
-            Featured project
+            Featured on home page
           </label>
         </div>
-      </div>
+      </AdminFormSection>
 
       <div className="flex flex-wrap gap-3">
         <AdminButton type="submit" disabled={saving}>

@@ -87,7 +87,7 @@ export default function FeaturedWorkSection() {
       duration: "1 - 2 months",
       client: "PlaceHub",
       icon: MapPin,
-      color: "bg-teal-500",
+      color: "bg-gold-dark",
       slug: generateSlug("PlaceHub - Property Discovery Platform")
     },
     {
@@ -357,7 +357,7 @@ export default function FeaturedWorkSection() {
           data-aos="zoom-in"
         >
           <span className="eyebrow">
-            <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
+            <span className="h-1.5 w-1.5 rounded-full bg-gold" />
             Featured Work
           </span>
           <h2 className="mt-5 text-4xl sm:text-5xl font-extrabold px-2 sm:px-4">
@@ -412,7 +412,7 @@ export default function FeaturedWorkSection() {
             {/* Left: Play/Pause Button */}
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 backdrop-blur transition-all duration-300 hover:border-teal-400/40 light:hover:border-teal-200 hover:text-teal-300 light:hover:text-teal-700"
+              className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 backdrop-blur transition-all duration-300 hover:border-gold/40 light:hover:border-gold-light hover:text-gold light:hover:text-gold-dark"
               aria-label={isAutoPlaying ? "Pause carousel" : "Play carousel"}
             >
               {isAutoPlaying ? (
@@ -433,14 +433,14 @@ export default function FeaturedWorkSection() {
             <div className="flex items-center gap-2">
               <button
                 onClick={prevSlide}
-                className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 backdrop-blur transition-all duration-300 hover:border-teal-400/40 light:hover:border-teal-200 hover:bg-teal-400/10 light:hover:bg-teal-50 hover:text-teal-300 light:hover:text-teal-700"
+                className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 backdrop-blur transition-all duration-300 hover:border-gold/40 light:hover:border-gold-light hover:bg-gold/10 light:hover:bg-gold-light hover:text-gold light:hover:text-gold-dark"
                 aria-label="Previous project"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/30 transition-all duration-300 hover:from-teal-400 hover:to-teal-500 active:scale-95"
+                className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/30 transition-all duration-300 hover:from-gold hover:to-gold-dark active:scale-95"
                 aria-label="Next project"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -455,7 +455,7 @@ export default function FeaturedWorkSection() {
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={`rounded-full transition-all duration-300 ${index === currentIndex
-                    ? 'w-7 h-1.5 bg-gradient-to-r from-teal-400 to-teal-500'
+                    ? 'w-7 h-1.5 bg-gradient-to-r from-gold to-gold-dark'
                     : 'w-1.5 h-1.5 bg-white/20 light:bg-gray-300 hover:bg-white/40 light:hover:bg-gray-400'
                   }`}
                 aria-label={`Go to slide ${index + 1}`}

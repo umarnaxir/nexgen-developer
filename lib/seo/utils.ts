@@ -1,16 +1,14 @@
 import { Metadata } from "next";
-import { seoConfig } from "./config";
+import { absoluteUrl, seoConfig } from "./config";
 
 /** Google typically shows ~50–60 chars for titles. */
 export const SEO_TITLE_MAX = 60;
 /** Google typically shows ~150–160 chars for meta descriptions. */
 export const SEO_DESCRIPTION_MAX = 160;
 
-/**
- * SEO Metadata Type
- */
 export interface SEOProps {
   title?: string;
+  exactTitle?: boolean;
   description?: string;
   keywords?: string[];
   canonical?: string;
@@ -60,7 +58,6 @@ function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/** Remove brand suffix/prefix so we never double-append site name. */
 export function stripSiteBrand(title: string): string {
   const brand = escapeRegExp(seoConfig.siteName);
   return title
@@ -70,7 +67,7 @@ export function stripSiteBrand(title: string): string {
     .trim();
 }
 
-function truncateAtWord(value: string, max: number): string {
+export function truncateAtWord(value: string, max: number): string {
   const trimmed = value.trim();
   if (trimmed.length <= max) return trimmed;
   const slice = trimmed.slice(0, max - 1);
@@ -81,8 +78,7 @@ function truncateAtWord(value: string, max: number): string {
 
 /**
  * Build a single title tag: "Page Title | NexGen Developers"
- * - Never duplicates the brand
- * - Keeps length within SEO_TITLE_MAX when possible
+ * Primary keyword stays at the start of the page title.
  */
 export function buildSeoTitle(title?: string): string {
   if (!title?.trim()) return seoConfig.defaultTitle;
@@ -102,12 +98,23 @@ export function buildSeoDescription(description?: string): string {
   return truncateAtWord(description || seoConfig.defaultDescription, SEO_DESCRIPTION_MAX);
 }
 
-/**
- * Generate complete metadata object for Next.js
- */
+function uniqueKeywords(keywords?: string[]): string[] {
+  const merged = [...seoConfig.defaultKeywords.slice(0, 2), ...(keywords || [])];
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const keyword of merged) {
+    const key = keyword.trim().toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(keyword.trim());
+  }
+  return result.slice(0, 24);
+}
+
 export function generateMetadata(seo: SEOProps): Metadata {
   const {
     title,
+    exactTitle = false,
     description,
     keywords,
     canonical,
@@ -119,43 +126,42 @@ export function generateMetadata(seo: SEOProps): Metadata {
     nofollow = false,
   } = seo;
 
-  const canonicalUrl = canonical
-    ? canonical.startsWith("http")
-      ? canonical
-      : `${seoConfig.siteUrl}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-    : seoConfig.siteUrl;
-
-  const fullTitle = buildSeoTitle(title);
+  const canonicalUrl = canonical ? absoluteUrl(canonical) : seoConfig.siteUrl;
+  const fullTitle = exactTitle ? title || seoConfig.defaultTitle : buildSeoTitle(title);
   const metaDescription = buildSeoDescription(description);
-
-  const metaKeywords = keywords
-    ? [...Array.from(seoConfig.defaultKeywords), ...keywords]
-    : Array.from(seoConfig.defaultKeywords);
-
+  const metaKeywords = uniqueKeywords(keywords);
   const metaRobots = robots ? { ...robots } : { ...seoConfig.defaultRobots };
 
   if (noindex) metaRobots.index = false;
   if (nofollow) metaRobots.follow = false;
 
-  const ogTitle = buildSeoTitle(openGraph?.title || title);
+  const ogTitle = exactTitle
+    ? openGraph?.title || title || seoConfig.defaultTitle
+    : buildSeoTitle(openGraph?.title || title);
   const ogDescription = buildSeoDescription(openGraph?.description || description);
-  const ogUrl = openGraph?.url
-    ? openGraph.url.startsWith("http")
-      ? openGraph.url
-      : `${seoConfig.siteUrl}${openGraph.url.startsWith("/") ? openGraph.url : `/${openGraph.url}`}`
-    : canonicalUrl;
-  const ogImages = openGraph?.images || [
-    {
-      url: seoConfig.defaultOgImage,
-      width: seoConfig.defaultOgImageWidth,
-      height: seoConfig.defaultOgImageHeight,
-      alt: seoConfig.defaultOgImageAlt,
-    },
-  ];
+  const ogUrl = openGraph?.url ? absoluteUrl(openGraph.url) : canonicalUrl;
+  const brandOgImage = {
+    url: seoConfig.defaultOgImage,
+    width: seoConfig.defaultOgImageWidth,
+    height: seoConfig.defaultOgImageHeight,
+    alt: seoConfig.defaultOgImageAlt,
+  };
+  const ogImages = openGraph?.images?.length
+    ? openGraph.images.map((image) => ({
+        url: image.url.startsWith("http") ? image.url : absoluteUrl(image.url),
+        width: image.width || seoConfig.defaultOgImageWidth,
+        height: image.height || seoConfig.defaultOgImageHeight,
+        alt: image.alt || seoConfig.defaultOgImageAlt,
+      }))
+    : [brandOgImage];
 
-  const twitterTitle = buildSeoTitle(twitter?.title || title);
+  const twitterTitle = exactTitle
+    ? twitter?.title || title || seoConfig.defaultTitle
+    : buildSeoTitle(twitter?.title || title);
   const twitterDescription = buildSeoDescription(twitter?.description || description);
-  const twitterImages = twitter?.images || [seoConfig.defaultOgImage];
+  const twitterImages = twitter?.images?.length
+    ? twitter.images.map((image) => (image.startsWith("http") ? image : absoluteUrl(image)))
+    : ogImages.map((image) => image.url);
 
   const metadata: Metadata = {
     metadataBase: new URL(seoConfig.siteUrl),
@@ -166,8 +172,20 @@ export function generateMetadata(seo: SEOProps): Metadata {
     creator: seoConfig.publisher,
     publisher: seoConfig.publisher,
     robots: metaRobots,
+    category: "technology",
+    applicationName: seoConfig.siteName,
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     alternates: {
       canonical: alternates?.canonical || canonicalUrl,
+      languages: {
+        "en-IN": canonicalUrl,
+        "x-default": canonicalUrl,
+      },
     },
     openGraph: {
       type: openGraph?.type || "website",
@@ -175,12 +193,8 @@ export function generateMetadata(seo: SEOProps): Metadata {
       title: ogTitle,
       description: ogDescription,
       siteName: seoConfig.siteName,
-      images: ogImages.map((img) => ({
-        url: img.url.startsWith("http") ? img.url : `${seoConfig.siteUrl}${img.url}`,
-        width: img.width || seoConfig.defaultOgImageWidth,
-        height: img.height || seoConfig.defaultOgImageHeight,
-        alt: img.alt || seoConfig.defaultOgImageAlt,
-      })),
+      locale: seoConfig.locale,
+      images: ogImages,
       ...(openGraph?.publishedTime && { publishedTime: openGraph.publishedTime }),
       ...(openGraph?.modifiedTime && { modifiedTime: openGraph.modifiedTime }),
       ...(openGraph?.authors && { authors: openGraph.authors }),
@@ -193,24 +207,23 @@ export function generateMetadata(seo: SEOProps): Metadata {
       creator: seoConfig.twitterHandle,
       title: twitterTitle,
       description: twitterDescription,
-      images: twitterImages.map((img) =>
-        img.startsWith("http") ? img : `${seoConfig.siteUrl}${img}`
-      ),
+      images: twitterImages,
     },
     verification: seoConfig.verification,
+    other: {
+      "geo.region": "IN-JK",
+      "geo.placename": seoConfig.contact.addressLocality,
+      "geo.position": `${seoConfig.contact.geo.latitude};${seoConfig.contact.geo.longitude}`,
+      ICBM: `${seoConfig.contact.geo.latitude}, ${seoConfig.contact.geo.longitude}`,
+    },
   };
 
   return metadata;
 }
 
-/**
- * Helper function to get page-specific SEO
- */
 export function getPageSEO(page: string, overrides?: Partial<SEOProps>): Metadata {
-  const baseSEO: SEOProps = {
+  return generateMetadata({
     canonical: `/${page}`,
     ...overrides,
-  };
-
-  return generateMetadata(baseSEO);
+  });
 }

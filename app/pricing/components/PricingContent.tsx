@@ -1,25 +1,36 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import type { PricingServiceType } from "../data";
 import PricingServiceSelector from "./PricingServiceSelector";
-import PricingHero from "./PricingHero";
 import PricingCards from "./PricingCards";
-import EnterpriseSection from "./EnterpriseSection";
-import ContactCTA from "@/app/about/components/ContactCTA";
+import PricingServiceIntro, { EnterpriseSection } from "./EnterpriseSection";
 
 export default function PricingContent() {
-  const [selectedService, setSelectedService] = useState<PricingServiceType>("website");
+  const [selectedService, setSelectedService] =
+    useState<PricingServiceType>("website");
 
   return (
     <>
-      <PricingHero service={selectedService} />
-      <PricingServiceSelector currentService={selectedService} onSelect={setSelectedService} />
-      <PricingCards service={selectedService} />
-      <EnterpriseSection service={selectedService} />
-      <div className="mt-16 border-t border-white/10 pt-8 md:mt-20 light:border-gray-200">
-        <ContactCTA variant="embedded" />
-      </div>
+      <PricingServiceSelector
+        currentService={selectedService}
+        onSelect={setSelectedService}
+      />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={selectedService}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <PricingServiceIntro service={selectedService} />
+          <PricingCards service={selectedService} />
+          <EnterpriseSection service={selectedService} />
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }

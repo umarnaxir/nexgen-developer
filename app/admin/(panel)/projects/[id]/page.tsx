@@ -51,7 +51,7 @@ export default function EditProjectPage() {
         actions={
           <Link
             href="/admin/projects"
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-600 hover:text-teal-700"
+            className="inline-flex items-center gap-1.5 text-sm text-text-gray hover:text-gold-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to projects
@@ -60,12 +60,12 @@ export default function EditProjectPage() {
       />
 
       {loading ? (
-        <div className="flex items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white py-16 text-sm text-neutral-500">
-          <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+        <div className="flex items-center justify-center gap-2 rounded-md border border-gold/25 bg-white py-16 text-sm text-text-gray">
+          <Loader2 className="h-4 w-4 animate-spin text-gold-dark" />
           Loading project…
         </div>
       ) : error || !project ? (
-        <div className="rounded-md border border-neutral-200 bg-white px-5 py-12 text-center text-sm text-neutral-600">
+        <div className="rounded-md border border-gold/25 bg-white px-5 py-12 text-center text-sm text-text-gray">
           {error || "Project not found."}
         </div>
       ) : (

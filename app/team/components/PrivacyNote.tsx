@@ -8,11 +8,11 @@ export default function PrivacyNote() {
       <div className="section-container">
         <div
           data-aos="fade-up"
-          className="relative overflow-hidden rounded-xl border border-teal-500/20 bg-teal-500/[0.08] p-6 sm:p-8"
+          className="relative overflow-hidden rounded-xl border border-gold-dark/20 bg-gold-dark/[0.08] p-6 sm:p-8"
         >
-          <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-teal-400/15 blur-3xl" />
+          <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gold/15 blur-3xl" />
           <div className="relative flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-teal-500/25 bg-teal-500/10 text-teal-700">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold-dark/25 bg-gold-dark/10 text-gold-dark">
               <Lock className="h-5 w-5" />
             </span>
             <div>
