@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { getHomeSEO } from "@/lib/seo/page-seo";
 import { OrganizationSchema } from "@/lib/seo/structured-data";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { GoogleTagManager, GoogleTagManagerNoscript } from "@/components/GoogleTagManager";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { getContactInfo, getFooterSettings } from "@/lib/content/store";
 import { getSession } from "@/lib/admin/auth";
@@ -84,9 +85,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        <GoogleTagManager />
+      </head>
       <body
         className={`${spaceGrotesk.variable} ${playfair.variable} ${spaceGrotesk.className} antialiased`}
       >
+        <GoogleTagManagerNoscript />
         <ThemeProvider>
           <OrganizationSchema contact={contact} footer={footer} />
           <ScrollToTop />
