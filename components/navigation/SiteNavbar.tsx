@@ -203,9 +203,17 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
   }, [pathname, closeAll]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    const html = document.documentElement;
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      html.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      html.style.overflow = "";
+    }
     return () => {
       document.body.style.overflow = "";
+      html.style.overflow = "";
     };
   }, [mobileOpen]);
 
@@ -240,7 +248,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
   return (
     <header
       ref={navRef}
-      className={`fixed inset-x-0 top-0 z-[9990] transition-[background-color,border-color,box-shadow] duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[9990] overflow-visible transition-[background-color,border-color,box-shadow] duration-300 ${
         solid
           ? "border-b border-gold/25 bg-[#111111] shadow-[0_12px_40px_-24px_rgba(4,3,3,0.55)]"
           : "border-b border-transparent bg-transparent"
@@ -408,12 +416,11 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
       <div
         className={`lg:hidden ${
           mobileOpen ? "pointer-events-auto visible opacity-100" : "pointer-events-none invisible opacity-0"
-        } fixed inset-x-0 bottom-0 top-[4.5rem] bg-[#111111] transition-opacity duration-300 sm:top-20`}
+        } fixed inset-x-0 bottom-0 top-[var(--site-nav-height)] z-[9991] flex min-h-0 flex-col overflow-hidden bg-[#111111] transition-opacity duration-300`}
         aria-hidden={!mobileOpen}
       >
-        <div className="px-4 sm:px-6 lg:px-14">
-        <div className="mx-auto flex h-full w-full max-w-7xl flex-col overflow-y-auto pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4">
-          <nav aria-label="Mobile">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain px-4 pt-4 touch-pan-y [-webkit-overflow-scrolling:touch] sm:px-6">
+          <nav aria-label="Mobile" className="mx-auto w-full max-w-7xl pb-6">
             <ul className="space-y-1">
               {sidebarLinks.map((link) => {
                 if (link.href === "/services") {
@@ -433,7 +440,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
                           type="button"
                           aria-expanded={mobileServicesOpen}
                           onClick={() => setMobileServicesOpen((open) => !open)}
-                          className="flex h-11 w-11 items-center justify-center text-gold"
+                          className="flex h-11 w-11 shrink-0 items-center justify-center text-gold"
                         >
                           <ChevronDown
                             className={`h-5 w-5 transition-transform ${
@@ -489,7 +496,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
             </ul>
           </nav>
 
-          <div className="mt-auto border-t border-gold/25 pt-5">
+          <div className="mx-auto mt-auto w-full max-w-7xl shrink-0 border-t border-gold/25 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5">
             {isAdminLoggedIn ? (
               <Link
                 href="/admin/dashboard"
@@ -513,7 +520,6 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
               </button>
             )}
           </div>
-        </div>
         </div>
       </div>
     </header>

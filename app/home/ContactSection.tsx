@@ -262,7 +262,7 @@ export default function ContactSection({
     : "block text-[13px] font-bold text-gray-800";
 
   const inputCls = isPage
-    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-gold-dark"
+    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-black"
     : "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
 
   const renderFieldIcon = (Icon: React.ElementType) =>
@@ -365,7 +365,7 @@ export default function ContactSection({
               required
               className={
                 isPage
-                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-gold-dark focus:ring-0 [&>svg]:text-gold-dark"
+                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-black focus:ring-0 [&>svg]:text-black"
                   : "h-auto border-0 bg-transparent p-0 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
               }
             />

@@ -78,6 +78,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
           : body.excerpt !== undefined
             ? String(body.excerpt).trim()
             : current.description,
+      seoTitle:
+        body.seoTitle !== undefined
+          ? String(body.seoTitle).trim() || undefined
+          : current.seoTitle,
       date: body.date !== undefined ? String(body.date).trim() : current.date,
       publishDate:
         body.publishDate !== undefined

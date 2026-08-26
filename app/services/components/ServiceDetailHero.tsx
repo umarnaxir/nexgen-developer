@@ -120,21 +120,21 @@ export default function ServiceDetailHero({
                 {techLine}
               </p>
             ) : null}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-nowrap items-center gap-2 sm:gap-3">
               <MagneticButton
                 onClick={openContactModal}
                 variant="gold"
-                className="!px-7 !py-3.5 !text-[13px]"
+                className="!px-4 !py-2 !text-[12px] sm:!px-7 sm:!py-3.5 sm:!text-[13px]"
               >
                 Start a project
-                <ArrowUpRight className="h-4 w-4" />
+                <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </MagneticButton>
               <a
                 href="#overview"
-                className="group inline-flex items-center justify-center gap-2 px-2 py-2 text-sm font-medium text-white/70 transition-colors hover:text-gold"
+                className="group inline-flex shrink-0 items-center justify-center gap-1.5 px-1.5 py-2 text-[12px] font-medium text-white/70 transition-colors hover:text-gold sm:gap-2 sm:px-2 sm:text-sm"
               >
                 Read the brief
-                <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+                <ArrowDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5 sm:h-4 sm:w-4" />
               </a>
             </div>
           </div>

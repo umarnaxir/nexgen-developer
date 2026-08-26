@@ -86,33 +86,35 @@ function ProcessCard({
         </span>
       </div>
 
-      <h3
-        className={`relative mt-8 text-[1.35rem] font-semibold tracking-[-0.03em] sm:text-[1.45rem] ${
-          goldCard ? "text-primary" : "text-white"
-        }`}
-      >
-        {item.title}
-      </h3>
-      <p
-        className={`relative mt-2 text-[13px] leading-relaxed sm:text-sm ${
-          goldCard ? "text-primary/70" : "text-white/60"
-        }`}
-      >
-        {item.text}
-      </p>
+      <div className="relative mt-auto flex flex-col lg:mt-8 lg:flex-1">
+        <h3
+          className={`relative text-[1.35rem] font-semibold tracking-[-0.03em] sm:text-[1.45rem] ${
+            goldCard ? "text-primary" : "text-white"
+          }`}
+        >
+          {item.title}
+        </h3>
+        <p
+          className={`relative mt-2 text-[13px] leading-relaxed sm:text-sm ${
+            goldCard ? "text-primary/70" : "text-white/60"
+          }`}
+        >
+          {item.text}
+        </p>
 
-      <ul className="relative mt-auto flex flex-col gap-1.5 pt-6">
-        {item.outcomes.slice(0, 2).map((outcome) => (
-          <li
-            key={outcome}
-            className={`text-[11px] font-medium ${
-              goldCard ? "text-primary/80" : "text-gold"
-            }`}
-          >
-            {outcome}
-          </li>
-        ))}
-      </ul>
+        <ul className="relative mt-6 flex flex-col gap-1.5 lg:mt-auto lg:pt-6">
+          {item.outcomes.slice(0, 2).map((outcome) => (
+            <li
+              key={outcome}
+              className={`text-[11px] font-medium ${
+                goldCard ? "text-primary/80" : "text-gold"
+              }`}
+            >
+              {outcome}
+            </li>
+          ))}
+        </ul>
+      </div>
     </motion.article>
   );
 }

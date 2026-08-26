@@ -133,12 +133,22 @@ export default function Footer({ contact, footer }: FooterProps) {
         {(footer.companyInfo || footer.craftedText) && (
           <div className="mb-10 max-w-xl" data-aos="fade-up">
             {footer.companyInfo ? (
-              <p className="text-base text-gold-light/80 sm:text-lg">
+              <p className="text-base font-bold text-gold sm:text-lg sm:leading-snug">
                 {footer.companyInfo}
               </p>
             ) : null}
             {footer.craftedText ? (
-              <p className="mt-2 text-sm text-gold-light/50">{footer.craftedText}</p>
+              <p className="mt-2 text-sm font-medium text-gold">
+                {footer.craftedText.split(/(Kashmir)/i).map((part, index) =>
+                  part.toLowerCase() === "kashmir" ? (
+                    <span key={`${part}-${index}`} className="font-bold text-gold">
+                      {part}
+                    </span>
+                  ) : (
+                    <span key={`${part}-${index}`}>{part}</span>
+                  )
+                )}
+              </p>
             ) : null}
           </div>
         )}

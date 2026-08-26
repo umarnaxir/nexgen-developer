@@ -7,6 +7,7 @@ import {
   Heading2,
   ImagePlus,
   Link2,
+  List,
   Type,
   X,
 } from "lucide-react";
@@ -19,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 export type EditableSection = BlogSection & { _key: string };
 
-type BlockType = "heading" | "text" | "image";
+type BlockType = "heading" | "text" | "image" | "list";
 
 type BlogBlockModalProps = {
   open: boolean;
@@ -67,6 +68,10 @@ export function BlogBlockModal({
   );
   const [content, setContent] = useState(initial?.content || "");
   const [image, setImage] = useState(initial?.image || "");
+  const [listItems, setListItems] = useState(
+    (initial?.items || []).join("\n")
+  );
+  const [ordered, setOrdered] = useState(Boolean(initial?.ordered));
   const [showGuide, setShowGuide] = useState(true);
   const textRef = useRef<HTMLTextAreaElement>(null);
 
@@ -79,6 +84,8 @@ export function BlogBlockModal({
       setHeadingLevel(initial.headingLevel || 2);
       setContent(initial.content || "");
       setImage(initial.image || "");
+      setListItems((initial.items || []).join("\n"));
+      setOrdered(Boolean(initial.ordered));
     } else {
       setStep("pick");
       setType("text");
@@ -86,6 +93,8 @@ export function BlogBlockModal({
       setHeadingLevel(2);
       setContent("");
       setImage("");
+      setListItems("");
+      setOrdered(false);
     }
   }, [open, initial]);
 
@@ -157,6 +166,25 @@ export function BlogBlockModal({
       return;
     }
 
+    if (type === "list") {
+      const items = listItems
+        .split("\n")
+        .map((item) => item.replace(/^\s*([*\-]|\d+[.)])\s+/, "").trim())
+        .filter(Boolean);
+      if (!items.length) {
+        toast.error("Add at least one list item");
+        return;
+      }
+      onSave({
+        _key: initial?._key || makeKey(),
+        type: "list",
+        items,
+        ordered,
+      });
+      onClose();
+      return;
+    }
+
     if (!content.trim()) {
       toast.error("Paragraph content is required");
       return;
@@ -213,7 +241,7 @@ export function BlogBlockModal({
 
             <div className="overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
               {step === "pick" ? (
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {[
                     {
                       id: "heading" as const,
@@ -226,6 +254,12 @@ export function BlogBlockModal({
                       label: "Paragraph",
                       desc: "Body text with bold & links",
                       icon: Type,
+                    },
+                    {
+                      id: "list" as const,
+                      label: "List",
+                      desc: "Bullets or numbered items",
+                      icon: List,
                     },
                     {
                       id: "image" as const,
@@ -374,6 +408,37 @@ export function BlogBlockModal({
                       size="compact"
                     />
                   )}
+
+                  {type === "list" && (
+                    <>
+                      <AdminSelect
+                        label="List type"
+                        value={ordered ? "ordered" : "bullet"}
+                        onChange={(e) =>
+                          setOrdered(e.target.value === "ordered")
+                        }
+                        options={[
+                          { value: "bullet", label: "Bullet list" },
+                          { value: "ordered", label: "Numbered list" },
+                        ]}
+                      />
+                      <div>
+                        <label className="mb-1.5 block text-sm font-medium text-primary">
+                          List items
+                        </label>
+                        <textarea
+                          value={listItems}
+                          onChange={(e) => setListItems(e.target.value)}
+                          rows={8}
+                          placeholder={"One item per line\nSupports **bold** and [links](/path)"}
+                          className="w-full rounded-md border border-gold/25 bg-white px-3 py-2.5 text-sm leading-relaxed text-primary outline-none transition placeholder:text-text-gray/70 focus:border-gold-dark focus:ring-2 focus:ring-gold/25"
+                        />
+                        <p className="mt-1 text-xs text-text-gray">
+                          One item per line. You can use **bold** and [label](/path).
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -400,6 +465,10 @@ export function sectionPreviewLabel(section: EditableSection) {
     return `H${section.headingLevel || 2}: ${section.heading || "Untitled"}`;
   }
   if (section.type === "image") return "Image block";
+  if (section.type === "list") {
+    const count = (section.items || []).length;
+    return `${section.ordered ? "Numbered" : "Bullet"} list (${count} items)`;
+  }
   const text = section.content || "";
   return text.length > 80 ? `${text.slice(0, 80)}…` : text || "Empty paragraph";
 }
@@ -409,6 +478,7 @@ export function sectionsToContent(sections: EditableSection[]) {
     .map((s) => {
       if (s.type === "heading") return s.heading || "";
       if (s.type === "text") return s.content || "";
+      if (s.type === "list") return (s.items || []).join(" ");
       return "";
     })
     .filter(Boolean)

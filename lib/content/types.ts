@@ -49,12 +49,21 @@ export type TeamMember = {
 };
 
 export type BlogSection = {
-  type: "text" | "image" | "heading";
+  type: "text" | "image" | "heading" | "list" | "table";
   content?: string;
   heading?: string;
   headingLevel?: 1 | 2 | 3;
   image?: string;
+  alt?: string;
+  items?: string[];
+  ordered?: boolean;
+  headers?: string[];
+  rows?: string[][];
 };
+
+export type BlogLink = { href: string; text: string };
+
+export type BlogFaq = { question: string; answer: string };
 
 export type Blog = {
   id: string;
@@ -62,6 +71,10 @@ export type Blog = {
   slug: string;
   excerpt: string;
   description: string;
+  /** Optional search-result title. Falls back to `title` (H1). */
+  seoTitle?: string;
+  /** Preserve the provided SEO title exactly without auto-branding/truncation. */
+  exactSeoTitle?: boolean;
   date: string;
   publishDate: string;
   category: string;
@@ -74,6 +87,8 @@ export type Blog = {
   keywords: string[];
   internalLink: { href: string; text: string };
   externalLink: { href: string; text: string };
+  relatedLinks?: BlogLink[];
+  faqs?: BlogFaq[];
   status: "draft" | "published";
 };
 

@@ -50,6 +50,8 @@ export function getServicePageCopy(slug: string, source: ServiceCopySource): Ser
   return SERVICE_DETAIL_COPY[slug] ?? fallbackCopy(source);
 }
 
+const MAX_SERVICE_FAQS = 5;
+
 export function mergeServiceFaqs(base: ServiceFaq[] | undefined, extra: ServiceFaq[]): ServiceFaq[] {
   const merged: ServiceFaq[] = [];
   const seen = new Set<string>();
@@ -58,6 +60,7 @@ export function mergeServiceFaqs(base: ServiceFaq[] | undefined, extra: ServiceF
     if (!key || seen.has(key)) continue;
     seen.add(key);
     merged.push(item);
+    if (merged.length >= MAX_SERVICE_FAQS) break;
   }
   return merged;
 }

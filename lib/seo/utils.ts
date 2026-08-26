@@ -8,6 +8,7 @@ export const SEO_DESCRIPTION_MAX = 160;
 
 export interface SEOProps {
   title?: string;
+  exactTitle?: boolean;
   description?: string;
   keywords?: string[];
   canonical?: string;
@@ -113,6 +114,7 @@ function uniqueKeywords(keywords?: string[]): string[] {
 export function generateMetadata(seo: SEOProps): Metadata {
   const {
     title,
+    exactTitle = false,
     description,
     keywords,
     canonical,
@@ -125,7 +127,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
   } = seo;
 
   const canonicalUrl = canonical ? absoluteUrl(canonical) : seoConfig.siteUrl;
-  const fullTitle = buildSeoTitle(title);
+  const fullTitle = exactTitle ? title || seoConfig.defaultTitle : buildSeoTitle(title);
   const metaDescription = buildSeoDescription(description);
   const metaKeywords = uniqueKeywords(keywords);
   const metaRobots = robots ? { ...robots } : { ...seoConfig.defaultRobots };
@@ -133,7 +135,9 @@ export function generateMetadata(seo: SEOProps): Metadata {
   if (noindex) metaRobots.index = false;
   if (nofollow) metaRobots.follow = false;
 
-  const ogTitle = buildSeoTitle(openGraph?.title || title);
+  const ogTitle = exactTitle
+    ? openGraph?.title || title || seoConfig.defaultTitle
+    : buildSeoTitle(openGraph?.title || title);
   const ogDescription = buildSeoDescription(openGraph?.description || description);
   const ogUrl = openGraph?.url ? absoluteUrl(openGraph.url) : canonicalUrl;
   const brandOgImage = {
@@ -151,7 +155,9 @@ export function generateMetadata(seo: SEOProps): Metadata {
       }))
     : [brandOgImage];
 
-  const twitterTitle = buildSeoTitle(twitter?.title || title);
+  const twitterTitle = exactTitle
+    ? twitter?.title || title || seoConfig.defaultTitle
+    : buildSeoTitle(twitter?.title || title);
   const twitterDescription = buildSeoDescription(twitter?.description || description);
   const twitterImages = twitter?.images?.length
     ? twitter.images.map((image) => (image.startsWith("http") ? image : absoluteUrl(image)))

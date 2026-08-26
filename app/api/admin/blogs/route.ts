@@ -64,6 +64,7 @@ export async function POST(request: NextRequest) {
       slug,
       excerpt: String(body.excerpt || body.description || "").trim(),
       description: String(body.description || body.excerpt || "").trim(),
+      seoTitle: String(body.seoTitle || "").trim() || undefined,
       date,
       publishDate,
       category: String(body.category || "General").trim(),

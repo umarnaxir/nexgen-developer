@@ -28,7 +28,8 @@ export async function generateMetadata({
   const publishedDate = new Date(blog.publishDate || blog.date).toISOString();
 
   return getBlogPostSEO({
-    title: blog.title,
+    title: blog.seoTitle || blog.title,
+    exactTitle: Boolean(blog.exactSeoTitle),
     description: blog.description || blog.excerpt,
     slug: blog.slug,
     publishedDate,

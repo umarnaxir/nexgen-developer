@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import BlogPostHero from "./components/BlogPostHero";
 import BlogPostContent from "./components/BlogPostContent";
-import RelatedBlogs from "./components/RelatedBlogs";
-import BlogPostCTA from "./components/BlogPostCTA";
+import BlogPostSidebar from "./components/BlogPostSidebar";
+import GetStartedCTA from "@/components/GetStartedCTA";
 import { ArticleSchema, BreadcrumbSchema, WebPageSchema } from "@/lib/seo/structured-data";
 import { seoConfig } from "@/lib/seo/config";
 import { getBlogBySlug, getBlogs } from "@/lib/content/store";
 import { buildSeoDescription, buildSeoTitle } from "@/lib/seo/utils";
-import type { BlogPostType } from "./data";
+import { buildBlogToc, type BlogPostType } from "./data";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +32,8 @@ function toBlogPostType(blog: Awaited<ReturnType<typeof getBlogBySlug>>): BlogPo
       text: "Explore our services",
     },
     externalLink: blog.externalLink || { href: "", text: "" },
+    relatedLinks: blog.relatedLinks,
+    faqs: blog.faqs,
     sections:
       blog.sections?.length > 0
         ? blog.sections
@@ -55,17 +57,39 @@ export default async function BlogPostPage({ params }: PageProps) {
   const blog = toBlogPostType(blogRaw);
   if (!blog) notFound();
 
-  const relatedBlogs = allBlogs
-    .filter((b) => b.slug !== slug)
-    .slice(0, 3)
-    .map((b) => ({
-      title: b.title,
-      slug: b.slug,
-      excerpt: b.excerpt,
-      date: b.date,
-      category: b.category,
-      image: b.image,
-    }));
+  const others = allBlogs.filter((item) => item.slug !== slug);
+  const sameCategory = others.filter((item) => item.category === blog.category);
+  const rest = others.filter((item) => item.category !== blog.category);
+  const relatedBlogs = [...sameCategory, ...rest].slice(0, 4).map((item) => ({
+    title: item.title,
+    slug: item.slug,
+    excerpt: item.excerpt,
+    date: item.date,
+    category: item.category,
+    image: item.image,
+  }));
+
+  const categories = Array.from(new Set(allBlogs.map((item) => item.category))).sort();
+  const toc = buildBlogToc(blog.sections);
+
+  const usefulLinks: { href: string; text: string; external?: boolean }[] = [];
+  const seenHrefs = new Set<string>();
+  const pushLink = (href: string, text: string, external?: boolean) => {
+    if (!href || !text || seenHrefs.has(href)) return;
+    seenHrefs.add(href);
+    usefulLinks.push({ href, text, external });
+  };
+
+  for (const link of blog.relatedLinks || []) {
+    pushLink(link.href, link.text);
+  }
+  pushLink(blog.internalLink.href, blog.internalLink.text);
+  if (blog.externalLink.href && blog.externalLink.text) {
+    pushLink(blog.externalLink.href, blog.externalLink.text, true);
+  }
+  pushLink("/services", "Explore our services");
+  pushLink("/contact-us", "Contact NexGen Developers");
+  pushLink("/blogs", "All blog articles");
 
   const publishedDate = new Date(blogRaw.publishDate || blog.date).toISOString();
   const modifiedDate = publishedDate;
@@ -75,7 +99,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <>
       <WebPageSchema
-        name={buildSeoTitle(blog.title)}
+        name={buildSeoTitle(blogRaw.seoTitle || blog.title)}
         description={buildSeoDescription(blog.excerpt)}
         url={path}
         datePublished={publishedDate}
@@ -89,7 +113,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         ]}
       />
       <ArticleSchema
-        title={blog.title}
+        title={blogRaw.seoTitle || blog.title}
         description={blog.excerpt}
         url={blogUrl}
         publishedDate={publishedDate}
@@ -100,14 +124,29 @@ export default async function BlogPostPage({ params }: PageProps) {
         keywords={blog.keywords}
       />
       <div className="min-h-screen">
-        <article className="section-y !pt-[calc(var(--site-nav-height)+2rem)]">
-          <div className="section-container">
-            <BlogPostHero blog={blog} />
-            <BlogPostContent blog={blog} />
-            <RelatedBlogs relatedBlogs={relatedBlogs} />
-            <BlogPostCTA />
+        <article className="min-w-0 pt-[calc(var(--site-nav-height)+2.5rem)] pb-8 sm:pt-[calc(var(--site-nav-height)+2.75rem)] sm:pb-10 lg:pt-[calc(var(--site-nav-height)+3rem)] lg:pb-12">
+          <div className="px-4 sm:px-6 lg:px-14">
+            <div className="mx-auto grid w-full min-w-0 max-w-7xl items-start gap-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12">
+              <div className="min-w-0 w-full">
+                <BlogPostHero blog={blog} />
+                <BlogPostContent blog={blog} />
+              </div>
+              <BlogPostSidebar
+                category={blog.category}
+                categories={categories}
+                toc={toc}
+                relatedBlogs={relatedBlogs}
+                usefulLinks={usefulLinks}
+                keywords={blog.keywords}
+              />
+            </div>
           </div>
         </article>
+        <GetStartedCTA
+          eyebrow="Have a project in mind?"
+          heading="Ready to turn this into a product?"
+          description="Tell us what you want to build. We'll help with websites, apps, SEO, and custom software from first brief to launch."
+        />
       </div>
     </>
   );

@@ -248,10 +248,12 @@ body {
 
 .process-mobile-card {
   position: relative;
-  flex: 0 0 auto;
-  width: min(84vw, 320px);
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
   min-height: 340px;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .services-tabs-scroller {
@@ -308,6 +310,34 @@ body {
   display: inline-block;
   letter-spacing: 0.02em;
   -webkit-text-stroke: 0.45px currentColor;
+}
+
+.hero-type-cursor {
+  display: inline-block;
+  width: 0.085em;
+  height: 0.82em;
+  margin-left: 0.06em;
+  background: currentColor;
+  transform: translateY(0.06em);
+  animation: hero-type-blink 0.72s steps(1) infinite;
+}
+
+@keyframes hero-type-blink {
+  0%,
+  46% {
+    opacity: 1;
+  }
+  47%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-type-cursor {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 .hero-service-word {

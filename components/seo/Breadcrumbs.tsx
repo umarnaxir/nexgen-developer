@@ -17,16 +17,19 @@ export default function Breadcrumbs({
   light?: boolean;
 }) {
   return (
-    <nav aria-label="Breadcrumb" className={cn("mb-4", className)}>
-      <ol className="flex flex-wrap items-center gap-1 text-[11px] font-medium uppercase tracking-[0.18em]">
+    <nav aria-label="Breadcrumb" className={cn("mb-4 min-w-0 max-w-full", className)}>
+      <ol className="flex min-w-0 max-w-full flex-wrap items-center gap-1 text-[10px] font-medium uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.18em]">
         {items.map((item, index) => {
           const last = index === items.length - 1;
           return (
-            <li key={`${item.name}-${index}`} className="flex items-center gap-1">
+            <li
+              key={`${item.name}-${index}`}
+              className={cn("flex min-w-0 items-center gap-1", last && "max-w-full")}
+            >
               {index > 0 ? (
                 <ChevronRight
                   className={cn(
-                    "h-3 w-3",
+                    "h-3 w-3 shrink-0",
                     light ? "text-white/35" : "text-black/30"
                   )}
                   aria-hidden
@@ -34,7 +37,10 @@ export default function Breadcrumbs({
               ) : null}
               {last || !item.href ? (
                 <span
-                  className={light ? "text-gold/90" : "text-gold-dark"}
+                  className={cn(
+                    "min-w-0 truncate",
+                    light ? "text-gold/90" : "text-gold-dark"
+                  )}
                   aria-current="page"
                 >
                   {item.name}

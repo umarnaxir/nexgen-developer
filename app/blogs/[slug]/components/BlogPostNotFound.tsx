@@ -4,11 +4,16 @@ import Link from "next/link";
 
 export default function BlogPostNotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="glass-card rounded-2xl p-10 text-center">
-        <h1 className="text-4xl font-bold text-white light:text-gray-900 mb-4">Blog Post Not Found</h1>
-        <p className="text-silver light:text-gray-600 mb-8">The blog post you're looking for doesn't exist.</p>
-        <Link href="/blogs" className="text-gold light:text-gold-dark font-bold hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded">
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="rounded-2xl border border-gold/25 bg-white p-10 text-center shadow-[0_16px_40px_-28px_rgba(14,13,13,0.16)]">
+        <h1 className="mb-4 text-4xl font-semibold tracking-[-0.03em] text-primary">
+          Blog Post Not Found
+        </h1>
+        <p className="mb-8 text-text-gray">The blog post you&apos;re looking for doesn&apos;t exist.</p>
+        <Link
+          href="/blogs"
+          className="font-semibold text-gold-dark hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 rounded"
+        >
           ← Back to Blogs
         </Link>
       </div>

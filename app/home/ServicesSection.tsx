@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import MotionImage from "@/components/motion/MotionImage";
 import { homeServices, type HomeService } from "./data";
 
@@ -86,8 +86,71 @@ export default function ServicesSection() {
   const desktopViewportRef = useRef<HTMLDivElement>(null);
   const desktopTrackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  const mobileScrollerRef = useRef<HTMLDivElement>(null);
+  const mobilePinRef = useRef<HTMLDivElement>(null);
+  const mobileViewportRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    registerGsapPlugins();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || window.innerWidth >= 768) return;
+    if (!sectionRef.current || !mobilePinRef.current || !mobileTrackRef.current || !mobileViewportRef.current) {
+      return;
+    }
+
+    gsap.set(mobileTrackRef.current, { x: 0 });
+
+    const getNavOffset = () => {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height").trim() || "5rem";
+      const probe = document.createElement("div");
+      probe.style.height = raw;
+      document.body.appendChild(probe);
+      const px = probe.getBoundingClientRect().height;
+      probe.remove();
+      return Math.ceil(px) || 80;
+    };
+
+    const getScrollAmount = () => {
+      const track = mobileTrackRef.current;
+      const viewport = mobileViewportRef.current;
+      if (!track || !viewport) return 0;
+      return Math.max(track.scrollWidth - viewport.offsetWidth, 0);
+    };
+
+    const ctx = gsap.context(() => {
+      gsap.to(mobileTrackRef.current, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: () => `top ${getNavOffset()}px`,
+          end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
+          pin: mobilePinRef.current,
+          scrub: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
+          onUpdate: (self) => {
+            const next = Math.round(self.progress * (homeServices.length - 1));
+            setActiveIndex((prev) => (prev === next ? prev : next));
+          },
+        },
+      });
+    }, sectionRef);
+
+    let nestedRaf = 0;
+    const refreshRaf = requestAnimationFrame(() => {
+      nestedRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    return () => {
+      cancelAnimationFrame(refreshRaf);
+      cancelAnimationFrame(nestedRaf);
+      ctx.revert();
+    };
+  }, []);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -139,22 +202,6 @@ export default function ServicesSection() {
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const scroller = mobileScrollerRef.current;
-    if (!scroller) return;
-
-    const onScroll = () => {
-      const card = scroller.querySelector("article");
-      const width = card instanceof HTMLElement ? card.offsetWidth + 12 : scroller.clientWidth;
-      if (!width) return;
-      const next = Math.round(scroller.scrollLeft / width);
-      setActiveIndex(Math.min(Math.max(next, 0), homeServices.length - 1));
-    };
-
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-    return () => scroller.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <section
       ref={sectionRef}
@@ -162,8 +209,11 @@ export default function ServicesSection() {
       className="relative scroll-mt-[var(--site-nav-height)] bg-white text-black"
       aria-label="Services"
     >
-      <div className="px-4 py-6 sm:px-6 md:hidden lg:px-14">
-        <div className="mx-auto w-full max-w-7xl" data-aos="fade-up">
+      <div
+        ref={mobilePinRef}
+        className="relative flex min-h-[calc(100svh-var(--site-nav-height))] flex-col justify-center px-4 py-6 sm:px-6 md:hidden"
+      >
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
         <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
           Services
         </span>
@@ -174,10 +224,12 @@ export default function ServicesSection() {
           </span>
         </h2>
 
-        <div ref={mobileScrollerRef} className="services-mobile-scroller mt-6">
-          {homeServices.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} variant="mobile" />
-          ))}
+        <div ref={mobileViewportRef} className="mt-6 overflow-hidden">
+          <div ref={mobileTrackRef} className="flex w-max gap-3 will-change-transform">
+            {homeServices.map((service, index) => (
+              <ServiceCard key={service.title} service={service} index={index} variant="mobile" />
+            ))}
+          </div>
         </div>
 
         <div className="mt-4 flex items-center justify-center gap-1.5" aria-hidden>

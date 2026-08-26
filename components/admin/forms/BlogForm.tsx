@@ -89,6 +89,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
     author: initial?.author || "NexGen Developers Team",
     readTime: initial?.readTime || "5 min read",
     keywords: (initial?.keywords || []).join(", "),
+    seoTitle: initial?.seoTitle || "",
     internalHref: initial?.internalLink?.href || "/services",
     internalText: initial?.internalLink?.text || "Explore our services",
     externalHref: initial?.externalLink?.href || "",
@@ -176,6 +177,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
         slug: form.slug.trim() || slugify(form.title),
         excerpt: form.description.trim(),
         description: form.description.trim(),
+        seoTitle: form.seoTitle.trim(),
         image: form.image,
         images: galleryImages,
         content,
@@ -236,7 +238,7 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <AdminInput
-                label="SEO / page title"
+                label="Headline (H1)"
                 value={form.title}
                 onChange={(e) => {
                   const title = e.target.value;
@@ -245,10 +247,23 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
                     update("slug", slugify(title));
                   }
                 }}
-                placeholder="Primary keyword near the start"
+                placeholder="The article heading readers see on the page"
                 required
               />
-              <CharCount value={form.title} idealMin={45} idealMax={60} />
+            </div>
+
+            <div className="sm:col-span-2">
+              <AdminInput
+                label="Meta title (optional)"
+                value={form.seoTitle}
+                onChange={(e) => update("seoTitle", e.target.value)}
+                placeholder="Primary keyword for Google — leave blank to use the headline"
+              />
+              <CharCount
+                value={form.seoTitle || form.title}
+                idealMin={45}
+                idealMax={60}
+              />
             </div>
 
             <div className="sm:col-span-2">
@@ -376,10 +391,14 @@ export function BlogForm({ initial, mode }: BlogFormProps) {
                 >
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] font-semibold uppercase tracking-wider text-text-gray/70">
-                      {section.type === "heading"
+                        {section.type === "heading"
                         ? `Heading H${section.headingLevel || 2}`
                         : section.type === "image"
                           ? "Image"
+                          : section.type === "list"
+                            ? section.ordered
+                              ? "Numbered list"
+                              : "Bullet list"
                           : "Paragraph"}
                     </p>
                     {section.type === "image" && section.image ? (

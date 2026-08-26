@@ -146,6 +146,7 @@ export function getBlogsSEO(): Metadata {
 
 export function getBlogPostSEO({
   title,
+  exactTitle,
   description,
   slug,
   publishedDate,
@@ -156,6 +157,7 @@ export function getBlogPostSEO({
   image,
 }: {
   title: string;
+  exactTitle?: boolean;
   description: string;
   slug: string;
   publishedDate: string;
@@ -178,6 +180,7 @@ export function getBlogPostSEO({
 
   return generateMetadata({
     title,
+    exactTitle,
     description,
     keywords,
     canonical: url,
