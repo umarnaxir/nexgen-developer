@@ -225,8 +225,9 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
   }, []);
 
   const servicesActive = pathname.startsWith("/services");
-  const isServiceDetail = pathname.startsWith("/services/");
-  const solid = scrolled || mobileOpen || isServiceDetail;
+  const isDarkHero =
+    pathname === "/about" || pathname === "/contact-us" || pathname.startsWith("/services/");
+  const solid = scrolled || mobileOpen || isDarkHero;
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -264,7 +265,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
               width={580}
               height={418}
               className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
-                scrolled ? "pointer-events-none opacity-0" : "opacity-100"
+                solid ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
               priority
             />
@@ -274,9 +275,9 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
               width={580}
               height={418}
               className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
-                scrolled ? "opacity-100" : "pointer-events-none opacity-0"
+                solid ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
-              aria-hidden={!scrolled}
+              aria-hidden={!solid}
               priority
             />
           </span>

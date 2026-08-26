@@ -1,4 +1,5 @@
 import BlogsGrid from "./components/BlogsGrid";
+import BlogsHero from "./components/BlogsHero";
 import { getBlogsSEO } from "@/lib/seo/page-seo";
 import { getBlogs } from "@/lib/content/store";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
@@ -34,29 +35,13 @@ export default async function BlogsPage({ searchParams }: PageProps) {
           { name: "Blog", url: "/blogs" },
         ]}
       />
-      <section className="min-w-0 overflow-x-hidden pb-12 pt-[calc(var(--site-nav-height)+1.5rem)] sm:pb-20 sm:pt-[calc(var(--site-nav-height)+2.5rem)] lg:pb-28">
+      <BlogsHero />
+      <section
+        id="blog-list"
+        className="min-w-0 overflow-x-hidden pb-12 pt-8 sm:pb-20 sm:pt-12 lg:pb-28"
+      >
         <div className="px-4 sm:px-6 lg:px-14">
           <div className="mx-auto w-full min-w-0 max-w-7xl">
-          <header className="mb-5 max-w-3xl sm:mb-8">
-            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-gold-dark sm:text-[11px] sm:tracking-[0.35em]">
-              Blog
-            </p>
-            <h1 className="mt-2 text-[1.75rem] font-medium tracking-[-0.04em] text-primary sm:mt-3 sm:text-5xl sm:font-semibold">
-              Software development insights
-            </h1>
-            <p className="mt-3 text-sm leading-relaxed text-text-gray sm:mt-4 sm:text-lg">
-              Practical guides from NexGen Developers on software development, AI, search, chatbots, and design — written from shipped work. Need implementation? See{" "}
-              <Link href="/services" className="text-gold-dark underline-offset-2 hover:underline">
-                our services
-              </Link>{" "}
-              or{" "}
-              <Link href="/contact-us" className="text-gold-dark underline-offset-2 hover:underline">
-                contact the team
-              </Link>
-              .
-            </p>
-          </header>
-
           {categories.length > 1 ? (
             <div className="mb-5 flex w-full min-w-0 gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] sm:mb-8 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
               <Link

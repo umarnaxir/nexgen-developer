@@ -14,7 +14,7 @@ function CapabilityCard({
   className?: string;
 }) {
   const Icon = item.icon;
-  const goldCard = index % 2 === 1;
+  const goldCard = index === 1 || index === 2;
 
   return (
     <motion.article
@@ -24,8 +24,8 @@ function CapabilityCard({
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={`group relative flex min-h-[280px] flex-col overflow-hidden rounded-[1.35rem] border p-6 sm:min-h-[320px] sm:p-7 ${
         goldCard
-          ? "border-gold/40 bg-gold text-primary shadow-[0_24px_56px_-32px_rgba(209,172,129,0.55)]"
-          : "border-gold/30 bg-[linear-gradient(155deg,#1c1710_0%,#111111_42%,#0a0a0a_100%)] text-white shadow-[0_24px_56px_-32px_rgba(0,0,0,0.55)]"
+          ? "about-gold-diagonal border-gold/50 text-primary shadow-[0_24px_56px_-32px_rgba(209,172,129,0.55)]"
+          : "border-gold/30 bg-[#111111] text-white shadow-[0_24px_56px_-32px_rgba(0,0,0,0.55)]"
       } ${className}`}
     >
       <div
@@ -33,7 +33,7 @@ function CapabilityCard({
         className={`pointer-events-none absolute inset-0 ${
           goldCard
             ? "bg-[radial-gradient(circle_at_100%_0%,rgba(14,13,13,0.08),transparent_46%)]"
-            : "bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.22),transparent_46%)]"
+            : "bg-[radial-gradient(circle_at_100%_0%,rgba(230,201,166,0.18),transparent_46%)]"
         }`}
       />
 
@@ -127,8 +127,7 @@ export default function AboutCapabilities() {
             What we ship.
           </h2>
           <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-black/50">
-            Four practices, one studio. Cards alternate black and gold, the same language as
-            the rest of the site.
+            Four practices, one studio.
           </p>
         </div>
 

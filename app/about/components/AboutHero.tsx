@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 export default function AboutHero() {
   return (
     <PageHero
+      variant="dark"
       eyebrow="About"
       title={["A software development", "studio that ships."]}
       highlight="ships."

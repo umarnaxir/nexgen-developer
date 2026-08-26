@@ -6,10 +6,11 @@ import PageHero from "@/components/PageHero";
 export default function ContactUsHero() {
   return (
     <PageHero
+      variant="dark"
       eyebrow="Contact"
-      title={["Contact our software", "development team."]}
+      title={["Contact our NexGen", "Developers team."]}
       highlight="team."
-      description="Talk to NexGen Developers about software development, AI, or marketing. Tell us about your project — we reply within one business day."
+      description="Talk to NexGen Developers about software development, AI, or marketing. Tell us about your project. We reply within one business day."
       pills={[
         { label: "1-day reply", icon: Clock },
         { label: "Clear next steps", icon: MessageSquare },

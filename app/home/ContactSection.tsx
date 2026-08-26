@@ -433,7 +433,7 @@ export default function ContactSection({
     return (
       <section id="contact" className="section-light pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
         <div className="section-container">
-          <div className="grid items-stretch gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+          <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,65fr)_minmax(0,35fr)] lg:gap-8">
             <div
               className="rounded-[1.5rem] border border-gold/30 bg-white p-5 shadow-[0_24px_60px_-36px_rgba(0,0,0,0.18)] transition-shadow duration-300 hover:shadow-[0_28px_70px_-32px_rgba(230,201,166,0.35)] sm:p-7 lg:p-8"
               data-aos="fade-up"
