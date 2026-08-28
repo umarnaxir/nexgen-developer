@@ -94,7 +94,7 @@ export default function ProjectsShowcaseSection({
         className="relative flex h-[100svh] flex-col px-4 pb-4 pt-[calc(var(--site-nav-height)+0.75rem)] sm:px-6 sm:pb-5 sm:pt-[calc(var(--site-nav-height)+1rem)] lg:px-14 lg:pb-6 lg:pt-[calc(var(--site-nav-height)+1.15rem)]"
       >
         {/* Header */}
-        <div className="mx-auto flex w-full max-w-7xl shrink-0 items-end justify-between gap-4 lg:pr-12">
+        <div className="mx-auto flex w-full max-w-7xl shrink-0 items-end justify-between gap-4">
           <div>
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
               Selected Work
@@ -112,7 +112,7 @@ export default function ProjectsShowcaseSection({
         </div>
 
         {/* Stage */}
-        <div className="relative mx-auto mt-3 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:flex-row lg:gap-8 lg:pr-14">
+        <div className="relative mx-auto mt-3 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:flex-row lg:gap-8">
           {/* Image stage — stacked cards so scroll never flashes empty */}
           <div className="relative h-[52vh] min-h-[300px] w-full flex-none overflow-hidden rounded-2xl bg-gold-light sm:h-[54vh] sm:min-h-[340px] lg:h-auto lg:min-h-0 lg:flex-[1.63]">
             {featured.map((project, index) => {

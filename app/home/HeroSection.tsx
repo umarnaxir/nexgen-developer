@@ -8,39 +8,76 @@ import { useContactModal } from "@/components/modals/ContactModalProvider";
 import HeroStageVisual from "./HeroStageVisual";
 import HeroServicesPanel from "./HeroServicesPanel";
 
-const HERO_TITLE = "Turn Ideas Into Premium Digital Products That Grow";
+const HERO_TITLE = "Turn Ideas Into Premium Digital Products That Grow.";
 
 const TITLE_LEAD = ["Turn", "Ideas", "Into"] as const;
 const TITLE_ACCENT = ["Premium", "Digital", "Products"] as const;
-const TITLE_CLOSE = ["That", "Grow"] as const;
+const TITLE_CLOSE = ["That", "Grow."] as const;
 
 const EYEBROW_ITEMS = ["Product studio", "Kashmir", "shipping worldwide"] as const;
 
 function HeroTitle() {
   return (
-    <h1 className="max-w-[40rem] font-bold tracking-[-0.042em] text-primary">
+    <h1 className="max-w-[46rem] font-bold tracking-[-0.042em] text-primary">
       <span className="sr-only">{HERO_TITLE}</span>
       <span
         aria-hidden
-        className="block text-[clamp(1.7rem,7.2vw,2.75rem)] leading-[1.14] sm:text-[clamp(1.95rem,4.2vw+0.7rem,2.75rem)]"
+        className="hero-title-visual block leading-[1.14]"
       >
-        {TITLE_LEAD.map((word) => (
-          <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom">
-            <span className="hero-title-word inline-block will-change-transform">{word}</span>
-          </span>
-        ))}
-        <span className="mt-1 block">
+        <span className="hero-title-line">
+          {TITLE_LEAD.map((word) => (
+            <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom last-of-type:mr-0">
+              <span className="hero-title-word inline-block will-change-transform">{word}</span>
+            </span>
+          ))}
+        </span>
+        <span className="hero-title-accent-row">
           {TITLE_ACCENT.map((word) => (
-            <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom">
+            <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom last-of-type:mr-0">
               <span className="hero-title-word hero-title-accent inline-block will-change-transform">
                 {word}
               </span>
             </span>
           ))}
+          <span className="hero-title-underline-wrap" data-hero-underline aria-hidden>
+            <svg
+              className="hero-title-underline"
+              viewBox="0 0 400 20"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="hero-underline-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#b89264" stopOpacity="0.25" />
+                  <stop offset="12%" stopColor="#d1ac81" />
+                  <stop offset="48%" stopColor="#f0d7b4" />
+                  <stop offset="78%" stopColor="#d1ac81" />
+                  <stop offset="100%" stopColor="#b89264" stopOpacity="0.35" />
+                </linearGradient>
+              </defs>
+              <path
+                className="hero-title-underline-stroke"
+                d="M3 13.2 C 58 6.2, 112 16.8, 178 10.4 S 302 5.2, 397 13.6"
+                fill="none"
+                stroke="url(#hero-underline-grad)"
+                strokeWidth="3.1"
+                strokeLinecap="round"
+                pathLength="1"
+              />
+              <path
+                className="hero-title-underline-spark"
+                d="M3 13.2 C 58 6.2, 112 16.8, 178 10.4 S 302 5.2, 397 13.6"
+                fill="none"
+                stroke="#fff6e8"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                pathLength="1"
+              />
+            </svg>
+          </span>
         </span>
-        <span className="mt-1 block">
+        <span className="hero-title-line mt-1">
           {TITLE_CLOSE.map((word) => (
-            <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom">
+            <span key={word} className="hero-title-mask mr-[0.28em] inline-block overflow-hidden align-bottom last-of-type:mr-0">
               <span className="hero-title-word inline-block will-change-transform">{word}</span>
             </span>
           ))}
