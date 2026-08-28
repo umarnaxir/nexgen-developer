@@ -32,9 +32,9 @@ export default function ChatWindow(_props: ChatWindowProps) {
         max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh]
         flex flex-col
         rounded-xl overflow-hidden
-        bg-[#070b10]/92 backdrop-blur-2xl
-        border border-white/[0.1]
-        shadow-2xl shadow-black/50"
+        bg-black
+        border border-gold/20
+        shadow-2xl shadow-black/80"
       initial={{ opacity: 0, scale: 0.94, y: 40 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96, y: 32 }}
@@ -49,7 +49,7 @@ export default function ChatWindow(_props: ChatWindowProps) {
           animate={{ opacity: [0.35, 0.55, 0.35], scale: [1, 1.08, 1] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(230, 201, 166,0.05),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(230,201,166,0.05),_transparent_55%)]" />
       </div>
 
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent z-10" />

@@ -13,6 +13,8 @@ export default function PricingContent() {
 
   return (
     <>
+      <PricingServiceIntro service={selectedService} />
+
       <PricingServiceSelector
         currentService={selectedService}
         onSelect={setSelectedService}
@@ -26,7 +28,6 @@ export default function PricingContent() {
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          <PricingServiceIntro service={selectedService} />
           <PricingCards service={selectedService} />
           <EnterpriseSection service={selectedService} />
         </motion.div>

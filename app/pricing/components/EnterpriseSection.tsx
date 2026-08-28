@@ -18,28 +18,13 @@ interface PricingServiceIntroProps {
 }
 
 export default function PricingServiceIntro({ service }: PricingServiceIntroProps) {
-  const { intro, note } = getPricingForService(service);
+  const { intro } = getPricingForService(service);
 
   return (
-    <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+    <div className="mx-auto mb-6 max-w-3xl text-center sm:mb-8">
       <p className="text-base leading-relaxed text-neutral-600 sm:text-lg">
         {intro}
       </p>
-      {note ? (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.4 }}
-          className="mx-auto mt-5 inline-flex max-w-2xl items-start gap-3 rounded-2xl border border-gold-light/70 bg-gradient-to-r from-gold-light/90 to-white px-5 py-4 text-left shadow-[0_12px_40px_-24px_rgba(230,201,166,0.45)]"
-        >
-          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gold-dark text-primary">
-            <Sparkles className="h-4 w-4" strokeWidth={2} />
-          </span>
-          <p className="text-sm leading-relaxed text-gold-dark/85 sm:text-[15px]">
-            {note}
-          </p>
-        </motion.div>
-      ) : null}
     </div>
   );
 }

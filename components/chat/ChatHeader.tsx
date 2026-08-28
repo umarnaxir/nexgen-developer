@@ -46,11 +46,11 @@ function ChatHeaderComponent() {
           </h3>
           <div className="flex items-center gap-1 mt-0.5">
             <motion.span
-              className="w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_4px_rgba(52,211,153,0.8)]"
+              className="w-1 h-1 rounded-full bg-gold shadow-[0_0_4px_rgba(230,201,166,0.8)]"
               animate={{ scale: [1, 1.35, 1], opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             />
-            <span className="text-[9px] text-emerald-300/70 font-medium">
+            <span className="text-[9px] text-gold/70 font-medium">
               Online · Ready to help
             </span>
           </div>

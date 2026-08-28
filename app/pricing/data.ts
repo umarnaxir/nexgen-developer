@@ -17,7 +17,6 @@ export interface PricingPlan {
 export interface ServicePricingData {
   plans: PricingPlan[];
   intro: string;
-  note?: string;
   enterpriseNote: string;
 }
 
@@ -183,7 +182,6 @@ export function getPricingForService(
         plans: appPricingPlans,
         intro:
           "App builds take longer than websites. Design, development, testing, and store launch all need time. Timelines below are typical for a well-scoped product.",
-        note: "Premium apps often run around 5 months from kickoff to launch, depending on features and approvals.",
         enterpriseNote:
           "Building a multi-platform or enterprise app, or adding AI on top? We scope a custom timeline and quote once the requirement is agreed.",
       };
@@ -192,7 +190,6 @@ export function getPricingForService(
         plans: otherPricingPlans,
         intro:
           "SEO, AI models, chatbots, design, and marketing are not listed as fixed prices. We quote after a short call once the requirement is clear.",
-        note: "These cards are starting scopes only. Final pricing is based on requirements, not a published rate card.",
         enterpriseNote:
           "Need SEO plus AI, or a mixed campaign? Send the brief and we will price the work to that scope. Nothing is locked in until we agree the requirement.",
       };
@@ -202,7 +199,6 @@ export function getPricingForService(
         plans: pricingPlans,
         intro:
           "Website packages are fixed starting prices. Final scope is confirmed on a short call. No surprises.",
-        note: "50% advance to start, 50% at deployment. See our Terms for payment details.",
         enterpriseNote:
           "Need a custom or enterprise website, or extras like SEO and AI? We scope pricing around the actual requirement, not a one-size rate.",
       };

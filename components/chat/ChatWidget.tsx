@@ -18,7 +18,7 @@ export default function ChatWidget() {
         {isOpen && (
           <Suspense
             fallback={
-              <div className="fixed z-50 bottom-20 right-4 w-[360px] h-[560px] max-sm:left-3 max-sm:right-3 max-sm:bottom-[4.75rem] max-sm:w-auto max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh] rounded-xl bg-[#070b10]/92 backdrop-blur-2xl border border-white/[0.1] flex items-center justify-center">
+              <div className="fixed z-50 bottom-20 right-4 w-[360px] h-[560px] max-sm:left-3 max-sm:right-3 max-sm:bottom-[4.75rem] max-sm:w-auto max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh] rounded-xl bg-black border border-gold/20 flex items-center justify-center">
                 <motion.div
                   className="w-6 h-6 border-2 border-gold/30 border-t-gold rounded-full"
                   animate={{ rotate: 360 }}
@@ -50,12 +50,12 @@ export default function ChatWidget() {
         initial={false}
         animate={
           isOpen
-            ? { boxShadow: "0 10px 15px -3px rgb(20 184 166 / 0.25)" }
+            ? { boxShadow: "0 10px 18px -3px rgb(209 172 129 / 0.4)" }
             : {
                 boxShadow: [
-                  "0 0 12px 2px rgb(34 211 238 / 0.35), 0 0 28px 6px rgb(34 211 238 / 0.15)",
-                  "0 0 22px 6px rgb(34 211 238 / 0.7), 0 0 48px 14px rgb(34 211 238 / 0.35)",
-                  "0 0 12px 2px rgb(34 211 238 / 0.35), 0 0 28px 6px rgb(34 211 238 / 0.15)",
+                  "0 0 12px 2px rgb(230 201 166 / 0.35), 0 0 28px 6px rgb(230 201 166 / 0.15)",
+                  "0 0 22px 6px rgb(230 201 166 / 0.65), 0 0 48px 14px rgb(230 201 166 / 0.3)",
+                  "0 0 12px 2px rgb(230 201 166 / 0.35), 0 0 28px 6px rgb(230 201 166 / 0.15)",
                 ],
               }
         }
@@ -85,13 +85,12 @@ export default function ChatWidget() {
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              {/* Icon with brightness pulse so the cyan eyes feel alive */}
               <motion.div
                 className="absolute inset-0"
                 animate={{
                   filter: [
                     "brightness(1) saturate(1)",
-                    "brightness(1.35) saturate(1.4)",
+                    "brightness(1.25) saturate(1.15)",
                     "brightness(1) saturate(1)",
                   ],
                 }}
@@ -107,10 +106,9 @@ export default function ChatWidget() {
                 />
               </motion.div>
 
-              {/* Soft cyan wash over the eye area */}
               <motion.span
-                className="pointer-events-none absolute inset-[18%] rounded-full bg-gold/25 blur-md"
-                animate={{ opacity: [0.2, 0.65, 0.2], scale: [0.85, 1.05, 0.85] }}
+                className="pointer-events-none absolute inset-[18%] rounded-full bg-gold/30 blur-md"
+                animate={{ opacity: [0.2, 0.55, 0.2], scale: [0.85, 1.05, 0.85] }}
                 transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
