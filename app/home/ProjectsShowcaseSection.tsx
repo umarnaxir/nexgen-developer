@@ -91,16 +91,16 @@ export default function ProjectsShowcaseSection({
     >
       <div
         ref={pinRef}
-        className="relative flex h-[100svh] flex-col px-4 pb-4 pt-[calc(var(--site-nav-height)+0.75rem)] sm:px-6 sm:pb-5 sm:pt-[calc(var(--site-nav-height)+1rem)] lg:px-14 lg:pb-6 lg:pt-[calc(var(--site-nav-height)+1.15rem)]"
+        className="page-gutter relative flex min-h-[min(100svh,54rem)] flex-col pb-4 pt-[calc(var(--site-nav-height)+0.75rem)] sm:pb-5 sm:pt-[calc(var(--site-nav-height)+1rem)] lg:pb-6 lg:pt-[calc(var(--site-nav-height)+1.15rem)]"
       >
         {/* Header */}
-        <div className="mx-auto flex w-full max-w-7xl shrink-0 items-end justify-between gap-4">
-          <div>
+        <div className="content-cap flex shrink-0 items-end justify-between gap-4">
+          <div className="min-w-0">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
               Selected Work
             </span>
-            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-primary sm:text-3xl lg:text-4xl">
-              Software projects that <span className="text-gold-dark">ship.</span>
+            <h2 className="mt-2 text-fluid-h2 font-semibold text-primary">
+              Projects that <span className="text-gold-dark">ship.</span>
             </h2>
           </div>
 
@@ -112,9 +112,13 @@ export default function ProjectsShowcaseSection({
         </div>
 
         {/* Stage */}
-        <div className="relative mx-auto mt-3 flex min-h-0 w-full max-w-7xl flex-1 flex-col gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:flex-row lg:gap-8">
-          {/* Image stage — stacked cards so scroll never flashes empty */}
-          <div className="relative h-[52vh] min-h-[300px] w-full flex-none overflow-hidden rounded-2xl bg-gold-light sm:h-[54vh] sm:min-h-[340px] lg:h-auto lg:min-h-0 lg:flex-[1.63]">
+        <div className="content-cap relative mt-3 flex min-h-0 flex-1 flex-col gap-3 sm:mt-4 sm:gap-4 lg:mt-5 lg:flex-row lg:gap-8">
+          {/*
+            Image stage — stacked cards so scroll never flashes empty. It takes
+            whatever height is left over rather than a fixed slice of the
+            viewport, so the copy below it is never cut off on short screens.
+          */}
+          <div className="relative min-h-[9rem] w-full flex-1 overflow-hidden rounded-2xl bg-gold-light lg:h-auto lg:min-h-0 lg:flex-[1.63]">
             {featured.map((project, index) => {
               const isActive = index === activeIndex;
               const offset = index - activeIndex;
@@ -159,8 +163,12 @@ export default function ProjectsShowcaseSection({
               className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(circle_at_18%_0%,rgba(230,201,166,0.18),transparent_42%),radial-gradient(circle_at_90%_100%,rgba(209,172,129,0.12),transparent_38%)] lg:block"
             />
 
-            {/* Scoreboard — desktop only */}
-            <ul className="relative mb-5 hidden shrink-0 flex-col gap-1.5 border-b border-white/10 pb-5 lg:flex">
+            {/*
+              Scoreboard — desktop only. Allowed to shrink and scroll internally
+              so a short laptop viewport eats into the list rather than pushing
+              the project copy out of the clipped panel.
+            */}
+            <ul className="relative mb-5 hidden flex-col gap-1.5 border-b border-white/10 pb-5 lg:flex lg:min-h-0 lg:overflow-y-auto">
               {featured.map((project, index) => {
                 const isActive = index === activeIndex;
                 return (
@@ -202,7 +210,7 @@ export default function ProjectsShowcaseSection({
             </ul>
 
             {/* Content — light + compact on mobile, pinned in the dark board on desktop */}
-            <div className="relative flex flex-col justify-end pt-1 lg:mt-auto lg:pt-6">
+            <div className="relative flex shrink-0 flex-col justify-end pt-1 lg:mt-auto lg:pt-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`copy-${active.id}`}
@@ -215,7 +223,7 @@ export default function ProjectsShowcaseSection({
                   <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold-dark lg:text-gold">
                     {active.category}
                   </p>
-                  <h3 className="mt-1.5 text-[1.45rem] font-semibold leading-[1.05] tracking-[-0.03em] text-primary sm:mt-2 sm:text-3xl lg:text-[2.05rem] lg:text-white">
+                  <h3 className="mt-1.5 text-[clamp(1.45rem,1.175rem+1.364vw,2.05rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-primary sm:mt-2 lg:text-white">
                     {title}
                   </h3>
                   <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-text-gray sm:mt-3.5 sm:text-[15px] lg:line-clamp-4 lg:text-white/65">
@@ -227,14 +235,14 @@ export default function ProjectsShowcaseSection({
                       href={active.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+                      className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold pointer-coarse:min-h-11 sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
                     >
                       View live
                       <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
                     </a>
                     <Link
                       href="/projects"
-                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-full border border-gold/50 px-3 py-2 text-xs font-semibold text-gold-dark transition-colors hover:border-gold hover:text-primary sm:flex-none sm:gap-1.5 sm:border-0 sm:px-0 sm:py-0 sm:text-sm sm:underline sm:decoration-gold sm:decoration-2 sm:underline-offset-[6px] lg:text-gold lg:hover:text-white"
+                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-full border border-gold/50 px-3 py-2 text-xs font-semibold text-gold-dark transition-colors hover:border-gold hover:text-primary pointer-coarse:min-h-11 sm:flex-none sm:gap-1.5 sm:border-0 sm:px-0 sm:py-0 sm:text-sm sm:underline sm:decoration-gold sm:decoration-2 sm:underline-offset-[6px] lg:text-gold lg:hover:text-white"
                     >
                       All work
                       <ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />

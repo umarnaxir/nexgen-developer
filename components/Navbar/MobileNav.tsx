@@ -56,17 +56,17 @@ export default function MobileNav({
 
   return (
     <div
-      className="lg:hidden fixed left-0 right-0 top-0 bottom-0 z-[99] h-[100vh] min-h-[100vh] w-[100vw] bg-black light:bg-white overflow-y-auto animate-mobile-nav-in"
+      className="lg:hidden fixed inset-0 z-[99] overflow-y-auto bg-black light:bg-white animate-mobile-nav-in"
     >
       {/* Top bar with logo and close button */}
-      <div className="sticky top-0 z-10 flex items-center justify-between h-20 px-4 sm:px-6 bg-black/80 light:bg-white border-b border-white/[0.06] light:border-gray-200 backdrop-blur-xl shrink-0">
+      <div className="sticky top-0 z-10 flex h-[var(--site-nav-height)] shrink-0 items-center justify-between border-b border-white/[0.06] bg-black/80 px-4 backdrop-blur-xl light:border-gray-200 light:bg-white sm:px-6">
         <div onClick={onClose}>
           <NavLogo light />
         </div>
         <Hamburger isOpen={true} onClick={onClose} spinOnMount light />
       </div>
 
-      <div className="flex min-h-[calc(100vh-5rem)] w-[100vw] flex-col px-3 pb-8 pt-2 sm:px-6">
+      <div className="flex min-h-[calc(100dvh-var(--site-nav-height))] w-full flex-col px-3 pb-8 pt-2 sm:px-6">
         <div className="w-full space-y-1">
           <NavLinks links={links} isMobile onLinkClick={onLinkClick} />
         </div>

@@ -112,7 +112,7 @@ export default function GetInTouchModal({ isOpen, onClose }: GetInTouchModalProp
       aria-label="Get in touch"
     >
       <div
-        className="relative grid max-h-[92vh] w-full max-w-3xl grid-cols-1 overflow-hidden overflow-y-auto rounded-2xl border border-gold/30 bg-[#111111] shadow-[0_28px_80px_-28px_rgba(0,0,0,0.75)] md:grid-cols-[0.85fr_1fr]"
+        className="relative grid max-h-[calc(100dvh-2rem)] min-h-0 w-full max-w-3xl grid-cols-1 overflow-hidden overflow-y-auto overscroll-contain rounded-2xl border border-gold/30 bg-[#111111] shadow-[0_28px_80px_-28px_rgba(0,0,0,0.75)] md:grid-cols-[0.85fr_1fr]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Left: black + gold reach-us panel, desktop only */}
@@ -200,7 +200,7 @@ export default function GetInTouchModal({ isOpen, onClose }: GetInTouchModalProp
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gold">Get Started</span>
             <span className="h-px flex-1 bg-gold/30" />
           </div>
-          <h2 className="relative text-2xl font-extrabold text-white sm:text-3xl">
+          <h2 className="relative text-[clamp(1.5rem,1.16rem+1.7vw,1.875rem)] font-extrabold text-white">
             Let&apos;s <span className="text-gold">connect!</span>
           </h2>
           <p className="relative mt-1.5 text-sm leading-relaxed text-white/55">

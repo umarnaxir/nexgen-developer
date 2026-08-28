@@ -125,8 +125,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       />
       <div className="min-h-screen">
         <article className="min-w-0 pt-[calc(var(--site-nav-height)+2.5rem)] pb-8 sm:pt-[calc(var(--site-nav-height)+2.75rem)] sm:pb-10 lg:pt-[calc(var(--site-nav-height)+3rem)] lg:pb-12">
-          <div className="px-4 sm:px-6 lg:px-14">
-            <div className="mx-auto grid w-full min-w-0 max-w-7xl items-start gap-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12">
+          <div className="page-gutter">
+            <div className="content-cap grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12">
               <div className="min-w-0 w-full">
                 <BlogPostHero blog={blog} />
                 <BlogPostContent blog={blog} />

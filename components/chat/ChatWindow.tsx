@@ -25,11 +25,9 @@ export default function ChatWindow(_props: ChatWindowProps) {
 
   return (
     <motion.div
-      className="fixed z-50
-        bottom-20 right-4
-        w-[360px] h-[560px]
-        max-sm:left-3 max-sm:right-3 max-sm:bottom-[4.75rem] max-sm:w-auto
-        max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh]
+      className="fixed bottom-20 right-4 z-50
+        h-[min(35rem,calc(100dvh-7rem))] max-h-[calc(100dvh-7rem)]
+        w-[min(22.5rem,calc(100dvw-2rem))]
         flex flex-col
         rounded-xl overflow-hidden
         bg-black

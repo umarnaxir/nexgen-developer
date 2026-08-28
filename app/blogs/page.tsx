@@ -40,13 +40,13 @@ export default async function BlogsPage({ searchParams }: PageProps) {
         id="blog-list"
         className="min-w-0 overflow-x-hidden pb-12 pt-8 sm:pb-20 sm:pt-12 lg:pb-28"
       >
-        <div className="px-4 sm:px-6 lg:px-14">
-          <div className="mx-auto w-full min-w-0 max-w-7xl">
+        <div className="page-gutter">
+          <div className="content-cap">
           {categories.length > 1 ? (
             <div className="mb-5 flex w-full min-w-0 gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] sm:mb-8 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
               <Link
                 href="/blogs"
-                className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
+                className={`tap-target shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
                   !activeCategory
                     ? "border-gold bg-gold-light text-primary"
                     : "border-gold/30 bg-white text-text-gray hover:border-gold/60"
@@ -60,7 +60,7 @@ export default async function BlogsPage({ searchParams }: PageProps) {
                   <Link
                     key={item}
                     href={`/blogs?category=${encodeURIComponent(item)}`}
-                    className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
+                    className={`tap-target shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium touch-manipulation transition-colors sm:text-[12px] ${
                       isActive
                         ? "border-gold bg-gold-light text-primary"
                         : "border-gold/30 bg-white text-text-gray hover:border-gold/60"

@@ -39,7 +39,7 @@ function HeroTitle() {
               </span>
             </span>
           ))}
-          <span className="hero-title-underline-wrap" data-hero-underline aria-hidden>
+              <span className="hero-title-underline-wrap hidden sm:block" data-hero-underline aria-hidden>
             <svg
               className="hero-title-underline"
               viewBox="0 0 400 20"
@@ -251,7 +251,7 @@ export default function HeroSection() {
         </svg>
       </div>
 
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col px-4 sm:px-6 lg:px-14">
+      <div className="page-gutter relative z-10 flex min-h-0 flex-1 flex-col">
         <div
           data-hero-stage
           className="pointer-events-none absolute right-4 top-0 z-10 hidden w-[min(44vw,25.5rem)] lg:right-4 lg:block xl:right-6 xl:w-[min(40vw,26.5rem)]"
@@ -261,7 +261,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
+        <div className="content-cap relative flex min-h-0 flex-1 flex-col">
           <div className="min-h-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(20rem,40%)] lg:items-start">
             <div className="max-w-[40rem] lg:pt-5">
               <HeroEyebrow />
@@ -275,10 +275,10 @@ export default function HeroSection() {
                 From first sketch to launch and growth — we help startups and local brands with AI, chatbots, web & app development, and digital marketing that looks premium and performs.
               </p>
 
-              <div data-hero-copy className="mt-5 hidden w-full flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center lg:flex">
+              <div data-hero-copy className="mt-5 hidden w-full grid-cols-2 gap-2.5 sm:mt-5 sm:flex sm:flex-wrap sm:items-center">
                 <MagneticButton
                   onClick={openContactModal}
-                  className="!px-5 !py-2.5 !text-[13px]"
+                  className="!w-full !min-w-0 !px-2 !py-2.5 !text-[13px] sm:!w-auto sm:!px-5"
                 >
                   Start a Project
                   <ArrowRight className="h-3.5 w-3.5" />
@@ -286,7 +286,7 @@ export default function HeroSection() {
                 <MagneticButton
                   href="/projects"
                   variant="outline-light"
-                  className="!border-gold-dark !bg-transparent !px-5 !py-2.5 !text-[13px] !text-gold-dark hover:!bg-gold hover:!text-primary"
+                  className="!w-full !min-w-0 !border-gold-dark !bg-transparent !px-2 !py-2.5 !text-[13px] !text-gold-dark hover:!bg-gold hover:!text-primary sm:!w-auto sm:!px-5"
                 >
                   View our work
                   <ArrowRight className="h-3.5 w-3.5" />

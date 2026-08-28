@@ -117,7 +117,7 @@ export default function ServicePageNav({ items }: ServicePageNavProps) {
                     window.history.replaceState(null, "", url);
                     scrollToSection(item.id);
                   }}
-                  className={`relative shrink-0 rounded-full px-3.5 py-1.5 text-[12px] font-medium tracking-[-0.01em] transition-colors sm:px-4 sm:text-[13px] ${
+                  className={`tap-target relative shrink-0 rounded-full px-3.5 py-1.5 text-[12px] font-medium tracking-[-0.01em] transition-colors sm:px-4 sm:text-[13px] ${
                     isActive ? "text-white" : "text-black/45 hover:text-black"
                   }`}
                 >

@@ -59,7 +59,7 @@ export function EnterpriseSection({ service }: EnterpriseSectionProps) {
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
             Need something bigger?
           </p>
-          <h2 className="mt-3 text-[1.85rem] font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-[clamp(1.85rem,1.4rem+2.2vw,2.25rem)] font-semibold tracking-tight text-white">
             Custom work, priced to your brief.
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-gold-light/85 sm:text-base">
@@ -89,7 +89,7 @@ export function EnterpriseSection({ service }: EnterpriseSectionProps) {
           onClick={openContactModal}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
-          className="group inline-flex min-h-[3.75rem] shrink-0 items-center justify-center gap-2.5 rounded-2xl bg-gold px-8 py-5 text-base font-semibold text-primary shadow-[0_18px_40px_-16px_rgba(230,201,166,0.7)] transition-colors hover:bg-gold-dark sm:min-w-[17rem]"
+          className="group inline-flex min-h-[3.75rem] w-full items-center justify-center gap-2.5 rounded-2xl bg-gold px-6 py-4 text-center text-base font-semibold leading-snug text-primary shadow-[0_18px_40px_-16px_rgba(230,201,166,0.7)] transition-colors hover:bg-gold-dark sm:w-auto sm:min-w-[17rem] sm:shrink-0 sm:px-8 sm:py-5"
         >
           Tell us your requirements
           <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

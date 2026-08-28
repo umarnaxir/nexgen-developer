@@ -73,7 +73,7 @@ export default function ServiceDetailHero({
   return (
     <header
       ref={sectionRef}
-      className="relative flex min-h-[min(92vh,900px)] flex-col overflow-hidden bg-[#0e0d0d] text-white"
+      className="relative flex min-h-[min(92svh,56.25rem)] flex-col overflow-hidden bg-[#0e0d0d] text-white"
     >
       <div
         aria-hidden
@@ -86,11 +86,11 @@ export default function ServiceDetailHero({
         Service
       </span>
 
-      <div className="relative z-10 flex flex-1 flex-col justify-end px-4 pb-0 pt-[calc(var(--site-nav-height)+1.5rem)] sm:px-6 lg:px-14">
-        <div ref={copyRef} className="mx-auto flex w-full max-w-7xl flex-col pb-10 sm:pb-12 lg:pb-14">
+      <div className="page-gutter relative z-10 flex flex-1 flex-col justify-end pb-0 pt-[calc(var(--site-nav-height)+1.5rem)]">
+        <div ref={copyRef} className="content-cap flex flex-col pb-10 sm:pb-12 lg:pb-14">
           <Link
             href="/services"
-            className="group inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.26em] text-gold/80 transition-all duration-300 hover:gap-3 hover:text-gold"
+            className="tap-target group inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.26em] text-gold/80 transition-all duration-300 hover:gap-3 hover:text-gold"
           >
             <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-0.5" />
             All services
@@ -116,7 +116,7 @@ export default function ServiceDetailHero({
               {lead}
             </p>
             {techLine ? (
-              <p className="text-[12px] font-medium tracking-[0.04em] text-gold/70 sm:text-[13px]">
+              <p className="break-words text-[12px] font-medium tracking-[0.04em] text-gold/70 sm:text-[13px]">
                 {techLine}
               </p>
             ) : null}
@@ -124,14 +124,14 @@ export default function ServiceDetailHero({
               <MagneticButton
                 onClick={openContactModal}
                 variant="gold"
-                className="!px-4 !py-2 !text-[12px] sm:!px-7 sm:!py-3.5 sm:!text-[13px]"
+                className="!px-4 !py-2 !text-[12px] pointer-coarse:min-h-11 sm:!px-7 sm:!py-3.5 sm:!text-[13px]"
               >
                 Start a project
                 <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </MagneticButton>
               <a
                 href="#overview"
-                className="group inline-flex shrink-0 items-center justify-center gap-1.5 px-1.5 py-2 text-[12px] font-medium text-white/70 transition-colors hover:text-gold sm:gap-2 sm:px-2 sm:text-sm"
+                className="group inline-flex shrink-0 items-center justify-center gap-1.5 px-1.5 py-2 text-[12px] font-medium text-white/70 transition-colors hover:text-gold pointer-coarse:min-h-11 sm:gap-2 sm:px-2 sm:text-sm"
               >
                 Read the brief
                 <ArrowDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5 sm:h-4 sm:w-4" />
@@ -142,8 +142,8 @@ export default function ServiceDetailHero({
       </div>
 
       {stats.length > 0 ? (
-        <div className="relative z-10 border-t border-white/10 px-4 sm:px-6 lg:px-14">
-          <div ref={statsRef} className="mx-auto grid w-full max-w-7xl grid-cols-2 lg:grid-cols-4">
+        <div className="page-gutter relative z-10 border-t border-white/10">
+          <div ref={statsRef} className="content-cap grid grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -153,7 +153,7 @@ export default function ServiceDetailHero({
                   index % 2 === 1 ? "border-l border-white/10" : ""
                 } ${index >= 2 ? "border-t border-white/10 lg:border-t-0" : ""} lg:border-l lg:border-white/10 lg:first:border-l-0`}
               >
-                <p className="text-xl font-semibold tracking-[-0.04em] text-gold transition-transform duration-300 sm:text-2xl">
+                <p className="text-fluid-h3 font-semibold tracking-[-0.04em] text-gold transition-transform duration-300">
                   {stat.value}
                 </p>
                 <p className="mt-1 text-[12px] leading-snug text-white/50 transition-colors duration-300 group-hover:text-white/75 sm:text-[13px]">

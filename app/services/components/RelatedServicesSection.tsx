@@ -36,7 +36,7 @@ function RelatedServiceCard({
       viewport={{ once: true, amount: 0.25 }}
       whileHover={reduceMotion ? undefined : { scale: 1.02 }}
       transition={{ duration: 0.4, delay: index * 0.05, ease }}
-      className="h-[340px] w-full shrink-0 snap-start sm:h-[380px] sm:w-[calc((100%-1rem)/2)] lg:h-[400px] lg:w-[calc((100%-3rem)/4)]"
+      className="min-h-[20rem] h-auto w-full shrink-0 snap-start sm:min-h-[22rem] sm:w-[calc((100%-1rem)/2)] lg:min-h-[24rem] lg:w-[calc((100%-3rem)/4)]"
     >
       <Link
         href={getServiceHref(service)}
@@ -152,7 +152,7 @@ export default function RelatedServicesSection({ services }: RelatedServicesSect
           </div>
           <Link
             href="/services"
-            className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-black/60 transition-all duration-300 hover:gap-2.5 hover:text-black"
+            className="tap-target group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-black/60 transition-all duration-300 hover:gap-2.5 hover:text-black"
           >
             All services
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

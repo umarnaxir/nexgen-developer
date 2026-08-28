@@ -7,9 +7,9 @@ export default function ServicesHero() {
   return (
     <PageHero
       eyebrow="Services"
-      title={["Software development", "services that scale."]}
+      title={"Services that scale."}
       highlight="scale."
-      description="Professional software development services in India. Custom products, AI, chatbots, SEO, and digital marketing in one studio. We ship work that looks premium and performs in the real world."
+      description="Professional software development services in India and all over the world. Custom products, AI, chatbots, SEO, and digital marketing in one studio. We ship work that looks premium and performs in the real world."
       pills={[
         { label: "Web & Apps", icon: Globe },
         { label: "AI & Chatbots", icon: Bot },

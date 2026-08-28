@@ -56,7 +56,7 @@ function CapabilityCard({
 
       <div className="relative mt-8 flex flex-1 flex-col">
         <h3
-          className={`text-xl font-semibold tracking-[-0.02em] sm:text-2xl ${
+          className={`text-fluid-h3 font-semibold tracking-[-0.02em] ${
             goldCard ? "text-primary" : "text-white"
           }`}
         >

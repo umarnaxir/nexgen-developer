@@ -33,7 +33,7 @@ export default function TermsSection({ icon: Icon, title, children, delay = 0, i
           <Icon className="h-5 w-5" />
         </div>
         <div className="min-w-0 flex-1">
-          <h2 className="text-xl font-semibold tracking-[-0.02em] text-black sm:text-2xl">{title}</h2>
+          <h2 className="text-fluid-h3 font-semibold tracking-[-0.02em] text-black">{title}</h2>
           <div className="mt-3 space-y-3 text-[15px] leading-relaxed text-black/60 sm:text-base [&_strong]:font-semibold [&_strong]:text-black">
             {children}
           </div>

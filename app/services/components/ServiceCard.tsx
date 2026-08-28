@@ -67,7 +67,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
 
         <Link
           href={service.href}
-          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-all duration-300 hover:gap-2.5 sm:mt-5"
+          className="tap-target mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-all duration-300 hover:gap-2.5 sm:mt-5"
         >
           Explore service
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

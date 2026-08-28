@@ -18,7 +18,7 @@ export default function ChatWidget() {
         {isOpen && (
           <Suspense
             fallback={
-              <div className="fixed z-50 bottom-20 right-4 w-[360px] h-[560px] max-sm:left-3 max-sm:right-3 max-sm:bottom-[4.75rem] max-sm:w-auto max-sm:h-[min(520px,calc(100dvh-6.5rem))] max-sm:max-h-[78dvh] rounded-xl bg-black border border-gold/20 flex items-center justify-center">
+              <div className="fixed bottom-20 right-4 z-50 flex h-[min(35rem,calc(100dvh-7rem))] max-h-[calc(100dvh-7rem)] w-[min(22.5rem,calc(100dvw-2rem))] items-center justify-center rounded-xl border border-gold/20 bg-black">
                 <motion.div
                   className="w-6 h-6 border-2 border-gold/30 border-t-gold rounded-full"
                   animate={{ rotate: 360 }}
@@ -35,8 +35,8 @@ export default function ChatWidget() {
       {/* Floating Toggle Button */}
       <motion.button
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`fixed bottom-5 right-5 z-50
-          w-14 h-14 rounded-full
+        className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-50
+          flex h-14 w-14 rounded-full
           flex items-center justify-center
           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black
           cursor-pointer ${

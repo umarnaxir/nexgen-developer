@@ -38,8 +38,8 @@ export default function GetStartedCTA({
   const { open: openContactModal } = useContactModal();
 
   return (
-    <section className={cn("section-light relative px-4 pb-10 pt-4 sm:px-6 sm:pb-14 lg:px-14 lg:pb-16", className)}>
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#111111] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.55)] sm:rounded-[1.75rem]">
+    <section className={cn("section-light page-gutter relative pb-10 pt-4 sm:pb-14 lg:pb-16", className)}>
+      <div className="content-cap relative overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#111111] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.55)] sm:rounded-[1.75rem]">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(230,201,166,0.14),transparent_46%)]"
@@ -87,7 +87,7 @@ export default function GetStartedCTA({
             {secondaryLink ? (
               <Link
                 href={secondaryLink.href}
-                className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-gold"
+                className="tap-target text-[12px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-gold"
               >
                 {secondaryLink.label}
               </Link>

@@ -102,7 +102,7 @@ export default function ProjectCard({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 24 }}
             transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 mx-auto flex h-[70vh] max-h-[70vh] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-2xl border border-gold/35 bg-[#111111] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.85)] sm:w-full"
+            className="relative z-10 mx-auto flex h-auto min-h-[min(24rem,calc(100dvh-2rem))] max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-5xl flex-col overflow-hidden rounded-2xl border border-gold/35 bg-[#111111] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.85)] sm:w-full"
           >
             <div
               aria-hidden
@@ -136,7 +136,7 @@ export default function ProjectCard({
             <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6">
               <h2
                 id={`project-modal-title-${project.id}`}
-                className="text-xl font-semibold leading-snug tracking-[-0.03em] text-white sm:text-2xl lg:text-[1.75rem]"
+                className="text-[clamp(1.25rem,1rem+1.25vw,1.75rem)] font-semibold leading-snug tracking-[-0.03em] text-white"
               >
                 {project.title}
               </h2>
@@ -266,7 +266,7 @@ export default function ProjectCard({
 
             <div className="flex flex-1 flex-col p-5 sm:p-7 lg:p-8">
               <div className="mb-5">
-                <h2 className="text-xl font-semibold leading-snug tracking-[-0.03em] text-black sm:text-2xl lg:text-[1.75rem]">
+                <h2 className="text-[clamp(1.25rem,1rem+1.25vw,1.75rem)] font-semibold leading-snug tracking-[-0.03em] text-black">
                   {project.title}
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-black/55">{project.description}</p>

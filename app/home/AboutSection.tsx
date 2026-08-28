@@ -24,7 +24,7 @@ export default function AboutSection() {
           </div>
 
           <div className="max-w-xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-primary sm:text-4xl">
+            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.03em] text-primary">
               A studio obsessed with <span className="text-gold-dark">craft.</span>
             </h2>
             <p className="mt-6 text-base leading-relaxed text-text-gray sm:text-lg">

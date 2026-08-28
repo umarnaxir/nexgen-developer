@@ -93,9 +93,9 @@ export default function ServicesList({ services }: ServicesListProps) {
     >
       <div
         ref={pinRef}
-        className="relative flex h-auto min-h-[100svh] flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:h-[92vh] lg:px-14 lg:py-10"
+        className="page-gutter relative flex min-h-[min(48rem,max(30rem,calc(100svh-var(--site-nav-height))))] flex-col justify-center py-8 sm:py-10 lg:min-h-[min(48rem,max(34rem,calc(92svh-var(--site-nav-height))))] lg:py-10"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
+        <div className="content-cap flex flex-1 flex-col justify-center">
         <div className="mb-5 flex w-full shrink-0 flex-col gap-4 sm:mb-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-text-gray">
@@ -103,7 +103,7 @@ export default function ServicesList({ services }: ServicesListProps) {
             </span>
             <h2
               id="services-list-heading"
-              className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-primary sm:text-4xl lg:text-5xl"
+              className="mt-4 text-fluid-h1 font-semibold tracking-[-0.03em] text-primary"
             >
               Our services
             </h2>
@@ -124,7 +124,7 @@ export default function ServicesList({ services }: ServicesListProps) {
                   aria-controls={`tabpanel-${category}`}
                   id={`tab-${category}`}
                   onClick={() => setActiveTab(category)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 pointer-coarse:min-h-11 ${
                     activeTab === category
                       ? "bg-gold text-primary"
                       : "border border-gold/35 bg-gold/10 text-text-gray hover:border-gold hover:text-gold-dark"

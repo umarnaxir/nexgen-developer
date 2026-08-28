@@ -61,7 +61,7 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
                     {step.meta}
                   </p>
                 ) : null}
-                <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-black transition-colors duration-300 group-hover:text-gold-dark sm:text-2xl">
+                <h3 className="mt-1 text-fluid-h3 font-semibold tracking-[-0.03em] text-black transition-colors duration-300 group-hover:text-gold-dark">
                   {step.title}
                 </h3>
                 <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-black/55 sm:text-base">

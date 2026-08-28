@@ -253,17 +253,23 @@ export default function ContactSection({
     }
   };
 
+  /*
+   * The visible control is the wrapper, but the tappable element is the input.
+   * Vertical padding is therefore moved off the wrapper and onto the (fully
+   * transparent, border-less) input, which leaves the rendered box exactly the
+   * same height while giving the input a ~44px touch target.
+   */
   const fieldWrap = isPage
-    ? "rounded-xl border border-gold/30 bg-white px-4 py-3.5 transition-all duration-300 hover:border-gold hover:shadow-[0_8px_24px_-16px_rgba(230,201,166,0.55)] focus-within:border-gold focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.2)]"
-    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-3 transition-all duration-300 hover:border-gray-400/80 focus-within:border-gold-dark focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.12)]";
+    ? "rounded-xl border border-gold/30 bg-white px-4 py-1.5 transition-all duration-300 hover:border-gold hover:shadow-[0_8px_24px_-16px_rgba(230,201,166,0.55)] focus-within:border-gold focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.2)]"
+    : "group flex items-center gap-3 rounded-2xl border border-gray-300/70 bg-white/60 px-4 py-1 transition-all duration-300 hover:border-gray-400/80 focus-within:border-gold-dark focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(230,201,166,0.12)]";
 
   const labelCls = isPage
     ? "block text-[11px] font-medium uppercase tracking-[0.18em] text-black/45"
     : "block text-[13px] font-bold text-gray-800";
 
   const inputCls = isPage
-    ? "w-full border-0 bg-transparent p-0 text-sm text-black outline-none placeholder:text-black"
-    : "w-full border-0 bg-transparent p-0 text-sm text-gray-900 outline-none placeholder:text-gray-400";
+    ? "w-full border-0 bg-transparent px-0 py-2 text-sm text-black outline-none placeholder:text-black"
+    : "w-full border-0 bg-transparent px-0 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400";
 
   const renderFieldIcon = (Icon: React.ElementType) =>
     isPage ? null : <Icon className="h-5 w-5 shrink-0 text-gold-dark" />;
@@ -365,8 +371,8 @@ export default function ContactSection({
               required
               className={
                 isPage
-                  ? "h-auto border-0 bg-transparent p-0 text-sm text-black shadow-none data-[placeholder]:text-black focus:ring-0 [&>svg]:text-black"
-                  : "h-auto border-0 bg-transparent p-0 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
+                  ? "h-auto border-0 bg-transparent px-0 py-2 text-sm text-black shadow-none data-[placeholder]:text-black focus:ring-0 [&>svg]:text-black"
+                  : "h-auto border-0 bg-transparent px-0 py-2 text-sm text-gray-900 shadow-none data-[placeholder]:text-gray-400 focus:ring-0 [&>svg]:text-gray-500"
               }
             />
           </div>
@@ -441,7 +447,7 @@ export default function ContactSection({
               <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
                 Message
               </span>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl">
+              <h2 className="mt-3 text-[clamp(1.5rem,1.16rem+1.7vw,1.875rem)] font-semibold tracking-[-0.03em] text-black">
                 Send us a note
               </h2>
               <p className="mt-2 mb-6 text-sm leading-relaxed text-text-gray">
@@ -468,7 +474,7 @@ export default function ContactSection({
                 <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold">
                   Details
                 </span>
-                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
+                <h2 className="mt-3 text-[clamp(1.5rem,1.16rem+1.7vw,1.875rem)] font-semibold tracking-[-0.03em] text-white">
                   Reach us
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-gold-light/80">
@@ -486,7 +492,7 @@ export default function ContactSection({
                           <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-gold-light/70">
                             {label}
                           </p>
-                          <p className="mt-1 text-sm font-medium text-white">{value}</p>
+                          <p className="mt-1 break-words text-sm font-medium text-white">{value}</p>
                           {detail && (
                             <p className="mt-0.5 text-sm leading-relaxed text-gold-light/75">{detail}</p>
                           )}
@@ -556,10 +562,10 @@ export default function ContactSection({
                   Let&apos;s Connect
                 </span>
                 <span className="mx-auto mt-2 block h-0.5 w-10 rounded-full bg-gold-dark" />
-                <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+                <h2 className="mt-4 text-[clamp(2.25rem,1.5rem+3.75vw,3rem)] font-extrabold tracking-tight text-gray-900">
                   Contact <span className="text-gold-dark">Us</span>
                 </h2>
-                <p className="mx-auto mt-3 max-w-md text-sm text-gray-600 sm:text-base">
+                <p className="mx-auto mt-3 max-w-md text-fluid-body text-gray-600">
                   Ready to bring your ideas to life? We&apos;re here to help.
                 </p>
               </div>
@@ -572,7 +578,7 @@ export default function ContactSection({
               </div>
 
               <div>
-                <h3 className="text-xl font-extrabold tracking-tight text-gray-900 sm:text-2xl">
+                <h3 className="text-fluid-h3 font-extrabold tracking-tight text-gray-900">
                   Get in <span className="text-gold-dark">Touch</span>
                 </h3>
                 <span className="mt-2 block h-1 w-12 rounded-full bg-gradient-to-r from-gold-dark to-gold-dark" />
@@ -586,7 +592,7 @@ export default function ContactSection({
                         </span>
                         <div className="min-w-0">
                           <p className="font-bold text-gray-900">{label}</p>
-                          <p className="truncate text-sm text-gray-600">{value}</p>
+                          <p className="break-words text-sm text-gray-600">{value}</p>
                         </div>
                       </>
                     );

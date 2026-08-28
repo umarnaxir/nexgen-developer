@@ -83,9 +83,14 @@ export default function PageHero({
   const { open: openContactModal } = useContactModal();
   const isDark = variant === "dark";
   const isCompact = size === "compact";
+  /*
+   * Minimum height only: a locked `h-[70vh]` cut the eyebrow/title/CTAs off on
+   * short viewports (phones with browser chrome, 1366x625 laptops). The upper
+   * bound keeps the hero from stretching on very tall 2K/4K displays.
+   */
   const heightClass = isCompact
-    ? "h-[50vh] min-h-[50vh]"
-    : "h-[70vh] min-h-[70vh]";
+    ? "min-h-[min(50svh,34rem)]"
+    : "min-h-[min(70svh,48rem)]";
 
   useEffect(() => {
     registerGsapPlugins();
@@ -114,8 +119,8 @@ export default function PageHero({
       variant={tone}
       className={
         tone === "outline-light"
-          ? "!bg-white !px-5 !py-2.5 !text-[13px]"
-          : "!px-5 !py-2.5 !text-[13px]"
+          ? "!w-full !min-w-0 !bg-white !px-2 !py-2.5 !text-[13px] sm:!w-auto sm:!px-5"
+          : "!w-full !min-w-0 !px-2 !py-2.5 !text-[13px] sm:!w-auto sm:!px-5"
       }
     >
       {cta.label}
@@ -149,10 +154,10 @@ export default function PageHero({
         />
       )}
 
-      <div className="relative z-10 flex h-full flex-1 items-center px-4 py-6 sm:px-6 sm:py-8 lg:px-14">
+      <div className="page-gutter relative z-10 flex flex-1 items-center py-[clamp(1.5rem,4vh,2.5rem)]">
         <div
           ref={copyRef}
-          className="mx-auto flex w-full max-w-7xl flex-col items-start text-left md:items-center md:text-center"
+          className="content-cap flex flex-col items-start text-left md:items-center md:text-center"
         >
           <span
             className={`text-[11px] font-medium uppercase tracking-[0.35em] ${
@@ -163,10 +168,10 @@ export default function PageHero({
           </span>
 
           <h1
-            className={`mt-4 w-full max-w-5xl font-semibold leading-[0.96] tracking-[-0.04em] ${
+            className={`mt-4 w-full max-w-5xl text-balance font-semibold leading-[0.96] tracking-[-0.04em] ${
               isCompact
                 ? "text-[clamp(1.85rem,5.4vw,3.35rem)]"
-                : "text-[clamp(2.4rem,6.5vw,4.75rem)]"
+                : "text-[clamp(2rem,9vw,3.6rem)] sm:text-fluid-display"
             } ${isDark ? "text-white" : "text-primary"}`}
           >
             <TitleLines
@@ -191,7 +196,7 @@ export default function PageHero({
           ) : null}
 
           <p
-            className={`mt-5 w-full max-w-3xl text-[15px] leading-relaxed sm:text-lg ${
+            className={`mt-5 w-full max-w-3xl text-fluid-lead ${
               isDark ? "text-white/65" : "text-text-gray"
             }`}
           >
@@ -199,11 +204,13 @@ export default function PageHero({
           </p>
 
           {pills.length > 0 ? (
-            <ul className="mt-5 flex flex-wrap justify-start gap-2 md:justify-center">
-              {pills.map(({ label, icon: Icon }) => (
+            <ul className="mt-5 grid w-full grid-cols-2 justify-center gap-2 sm:flex sm:w-auto sm:flex-wrap md:justify-center">
+              {pills.map(({ label, icon: Icon }, index) => (
                 <li
                   key={label}
-                  className={`group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12px] font-medium shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 ${
+                  className={`group inline-flex w-full items-center justify-center gap-2 rounded-full border px-3 py-1.5 text-center text-[12px] font-medium shadow-[0_8px_24px_-16px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 sm:w-auto sm:justify-start sm:text-left ${
+                    pills.length % 2 === 1 && index === pills.length - 1 ? "col-span-2" : ""
+                  } ${
                     isDark
                       ? "border-gold/35 bg-white/5 text-white hover:border-gold hover:bg-gold/15"
                       : "border-gold/40 bg-white/70 text-primary hover:border-gold hover:bg-gold-light hover:shadow-[0_14px_28px_-16px_rgba(230,201,166,0.7)]"
@@ -222,7 +229,7 @@ export default function PageHero({
           ) : null}
 
           {primaryCta || secondaryCta ? (
-            <div className="mt-6 flex flex-wrap items-center justify-start gap-2.5 md:justify-center">
+            <div className="mt-6 grid w-full grid-cols-2 items-center gap-2.5 sm:flex sm:w-auto sm:flex-wrap md:justify-center">
               {primaryCta ? renderCta(primaryCta, isDark ? "gold" : "primary") : null}
               {secondaryCta ? renderCta(secondaryCta, "outline-light") : null}
             </div>

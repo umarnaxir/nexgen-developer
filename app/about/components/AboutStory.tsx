@@ -40,13 +40,13 @@ export default function AboutStory() {
           <div className="mt-10 flex flex-wrap gap-5">
             <Link
               href="/team"
-              className="text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
+              className="tap-target text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
             >
               Meet the team
             </Link>
             <Link
               href="/services"
-              className="text-sm font-semibold text-black/45 transition-colors hover:text-black"
+              className="tap-target text-sm font-semibold text-black/45 transition-colors hover:text-black"
             >
               View services
             </Link>

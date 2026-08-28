@@ -48,9 +48,9 @@ export default function HomeCtaSection({ contact }: HomeCtaSectionProps) {
   };
 
   return (
-    <section className="relative bg-white px-4 pb-8 pt-2 sm:px-6 sm:pb-10 lg:px-14 lg:pb-12">
+    <section className="page-gutter relative bg-white pb-8 pt-2 sm:pb-10 lg:pb-12">
       <motion.div
-        className="group/cta relative mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-gold/20 bg-[#040303] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.55)] transition-[border-color,box-shadow] duration-500 hover:border-gold/55 hover:shadow-[0_32px_90px_-28px_rgba(230,201,166,0.45)] sm:rounded-[1.75rem]"
+        className="group/cta content-cap relative overflow-hidden rounded-[1.5rem] border border-gold/20 bg-[#040303] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.55)] transition-[border-color,box-shadow] duration-500 hover:border-gold/55 hover:shadow-[0_32px_90px_-28px_rgba(230,201,166,0.45)] sm:rounded-[1.75rem]"
         onMouseMove={onMove}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => {
@@ -209,7 +209,7 @@ export default function HomeCtaSection({ contact }: HomeCtaSectionProps) {
             </MagneticButton>
             <Link
               href="/contact-us"
-              className="group/link inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-gold"
+              className="tap-target group/link inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-gold"
             >
               Talk to us
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5" />

@@ -65,7 +65,7 @@ function StatItem({
         <Icon className="h-5 w-5" />
       </span>
 
-      <p className="text-3xl font-semibold tabular-nums tracking-[-0.03em] text-gold sm:text-4xl">
+      <p className="text-[clamp(1.875rem,1.5rem+1.17vw,2.25rem)] font-semibold tabular-nums tracking-[-0.03em] text-gold">
         <span ref={valueRef}>0{suffix}</span>
       </p>
       <p className="mt-1.5 text-[13px] leading-snug text-white/70">{label}</p>
@@ -86,11 +86,11 @@ export default function StatsBar({ tone = "light" }: StatsBarProps) {
       className={`${dark ? "section-light" : "section-light"} section-y`}
       aria-label="Company stats"
     >
-      <div className="px-4 sm:px-6 lg:px-14">
-        <div className="mx-auto w-full max-w-7xl">
+      <div className="page-gutter">
+        <div className="content-cap">
         <div className="mb-10 max-w-xl sm:mb-12" data-aos="fade-up">
           <h2
-            className={`text-2xl font-semibold tracking-[-0.03em] sm:text-3xl lg:text-4xl ${
+            className={`text-fluid-h2 font-semibold tracking-[-0.03em] ${
               dark ? "text-primary" : "text-black"
             }`}
           >

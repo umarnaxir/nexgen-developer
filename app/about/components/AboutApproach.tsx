@@ -151,7 +151,7 @@ export default function AboutApproach() {
             <h2 className="mt-3 text-[clamp(1.9rem,4.8vw,3.15rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-primary">
               How a project <span className="text-gold-dark">moves.</span>
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-text-gray sm:text-base">
+            <p className="mt-3 text-fluid-body text-text-gray">
               Five clear stages from first conversation to sustained growth.
             </p>
           </div>
@@ -209,7 +209,7 @@ export default function AboutApproach() {
                       index % 2 === 1 ? "border-l border-white/10" : ""
                     } ${index >= 2 ? "border-t border-white/10 sm:border-t-0" : ""} sm:border-l sm:border-white/10 sm:first:border-l-0`}
                   >
-                    <p className="text-xl font-semibold tabular-nums tracking-[-0.04em] text-gold sm:text-2xl">
+                    <p className="text-fluid-h3 font-semibold tabular-nums tracking-[-0.04em] text-gold">
                       {metricsInView ? (
                         <>
                           <CountUp to={amount} />

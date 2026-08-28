@@ -117,6 +117,8 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-default select-none items-center rounded-md py-1.5 pl-2 pr-8 text-sm text-silver-light light:text-gray-900 outline-none focus:bg-white/[0.06] focus:text-white light:focus:bg-gold-light light:focus:text-gold-dark data-[highlighted]:bg-white/[0.06] data-[highlighted]:text-white light:data-[highlighted]:bg-gold-light light:data-[highlighted]:text-gold-dark data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      // Roomier rows on touch devices so options are comfortable to tap.
+      "pointer-coarse:min-h-11 pointer-coarse:py-2.5",
       className
     )}
     {...props}

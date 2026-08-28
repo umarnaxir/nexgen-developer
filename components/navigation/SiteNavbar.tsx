@@ -258,8 +258,8 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="px-4 sm:px-6 lg:px-14">
-        <div className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between gap-4 sm:h-20">
+      <div className="page-gutter">
+        <div className="content-cap flex h-[var(--site-nav-height)] items-center justify-between gap-4">
         <Link href="/" className="relative shrink-0" aria-label="NexGen Developers home">
           <span className="relative block h-10 w-[3.47rem] sm:h-11 sm:w-[3.82rem]">
             <Image
@@ -317,7 +317,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
                     role="navigation"
                     aria-label="Services"
                     aria-hidden={!servicesOpen}
-                    className={`absolute left-1/2 top-full z-50 w-[min(54rem,calc(100vw-2.5rem))] origin-top -translate-x-1/2 pt-3 xl:w-[58rem] ${
+                    className={`fixed left-1/2 top-[var(--site-nav-height)] z-50 w-[min(54rem,calc(100dvw-2*var(--page-gutter)))] origin-top -translate-x-1/2 pt-3 xl:w-[58rem] ${
                       servicesOpen
                         ? "pointer-events-auto visible translate-y-0 opacity-100"
                         : "pointer-events-none invisible -translate-y-1.5 opacity-0"
@@ -359,7 +359,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
                       <div className="flex items-center justify-between gap-4 border-t border-gold/20 bg-white/[0.04] px-8 py-3.5">
                         <Link
                           href="/services"
-                          className="group/all inline-flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors hover:text-gold-light"
+                          className="tap-target group/all inline-flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors hover:text-gold-light"
                         >
                           View all services
                           <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5" />
@@ -423,8 +423,8 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
         } fixed inset-x-0 bottom-0 top-[var(--site-nav-height)] z-[9991] flex min-h-0 flex-col overflow-hidden bg-[#111111] transition-opacity duration-300`}
         aria-hidden={!mobileOpen}
       >
-        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain px-4 pt-4 touch-pan-y [-webkit-overflow-scrolling:touch] sm:px-6">
-          <nav aria-label="Mobile" className="mx-auto w-full max-w-7xl pb-6">
+        <div className="page-gutter flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-y-contain pt-4 touch-pan-y [-webkit-overflow-scrolling:touch]">
+          <nav aria-label="Mobile" className="content-cap pb-6">
             <ul className="space-y-1">
               {sidebarLinks.map((link) => {
                 if (link.href === "/services") {
@@ -434,7 +434,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
                         <Link
                           href="/services"
                           onClick={closeAll}
-                          className={`flex-1 py-3 text-2xl tracking-[-0.03em] ${
+                          className={`flex-1 py-3 text-[clamp(1.3rem,5.5vw,1.5rem)] tracking-[-0.03em] ${
                             servicesActive ? "font-bold text-gold" : "font-semibold text-white/80"
                           }`}
                         >
@@ -488,7 +488,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
                     <Link
                       href={link.href}
                       onClick={closeAll}
-                      className={`block py-3 text-2xl tracking-[-0.03em] ${
+                      className={`block py-3 text-[clamp(1.3rem,5.5vw,1.5rem)] tracking-[-0.03em] ${
                         active ? "font-bold text-gold" : "font-semibold text-white/80"
                       }`}
                     >
@@ -500,7 +500,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
             </ul>
           </nav>
 
-          <div className="mx-auto mt-auto w-full max-w-7xl shrink-0 border-t border-gold/25 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5">
+          <div className="content-cap mt-auto shrink-0 border-t border-gold/25 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5">
             {isAdminLoggedIn ? (
               <Link
                 href="/admin/dashboard"

@@ -27,8 +27,8 @@ export default function AboutValues() {
       className="relative overflow-hidden bg-white text-black"
       aria-label="How we decide"
     >
-      <div className="relative px-4 py-6 sm:px-6 sm:py-8 lg:px-14 lg:py-8">
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="page-gutter relative py-6 sm:py-8">
+        <div className="content-cap">
         <div data-aos="fade-up">
           <h2 className="text-[clamp(1.45rem,4.2vw,2.45rem)] font-semibold tracking-[-0.03em] text-black">
             How we decide.

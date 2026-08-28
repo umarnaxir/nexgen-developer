@@ -43,24 +43,20 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
   const modalContent = (
     <>
       {/* Backdrop - Fixed and Blurred, with horizontal padding on mobile */}
+      {/*
+        Sized purely by `inset-0`. Explicit 100vw/100vh were removed: 100vw
+        ignores the scrollbar (creating horizontal overflow on desktop) and
+        100vh overshoots the visible area on mobile browsers with dynamic
+        toolbars.
+      */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/50 backdrop-blur-lg z-[9999] flex items-center justify-center px-5 py-4 sm:p-6"
-        style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          width: '100vw',
-          height: '100vh',
-          margin: 0
-        }}
+        className="fixed inset-0 z-[9999] m-0 flex items-center justify-center bg-black/50 px-5 py-4 backdrop-blur-lg sm:p-6"
       >
         {/* Modal Content - Centered, touch-friendly on mobile */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`glass !bg-[#0a0c0d]/95 light:!bg-white rounded-2xl shadow-2xl w-full ${sizeClasses[size]} ${size === "auth" ? "min-h-[400px] sm:min-h-[600px] flex" : "flex flex-col"} max-h-[85vh] sm:max-h-[90vh] overflow-hidden relative mx-auto touch-manipulation`}
+          className={`glass !bg-[#0a0c0d]/95 light:!bg-white rounded-2xl shadow-2xl w-full ${sizeClasses[size]} ${size === "auth" ? "min-h-[min(25rem,calc(100dvh-2rem))] sm:min-h-[min(37.5rem,calc(100dvh-3rem))] flex" : "flex flex-col"} max-h-[calc(100dvh-2rem)] overflow-hidden relative mx-auto touch-manipulation sm:max-h-[calc(100dvh-3rem)]`}
           style={{ margin: 'auto' }}
         >
           {size === "auth" ? (
@@ -84,7 +80,7 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
                 {/* Header with Close Button - responsive px for mobile */}
                 <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/[0.08] light:border-gray-200 flex-shrink-0">
                   {title && (
-                    <h2 className="text-xl sm:text-2xl font-bold text-white light:text-gray-900">{title}</h2>
+                    <h2 className="text-fluid-h3 font-bold text-white light:text-gray-900">{title}</h2>
                   )}
                   <button
                     onClick={onClose}
@@ -106,7 +102,7 @@ export default function Modal({ isOpen, onClose, children, title, size = "defaul
               {/* Header with Close Button - responsive px for mobile */}
               <div className="sticky top-0 bg-[#0a0c0d]/95 light:bg-white border-b border-white/[0.08] light:border-gray-200 backdrop-blur-xl px-5 sm:px-6 py-4 flex items-center justify-between z-10 w-full flex-shrink-0">
                 {title && (
-                  <h2 className="text-xl sm:text-2xl font-bold text-white light:text-gray-900">{title}</h2>
+                  <h2 className="text-fluid-h3 font-bold text-white light:text-gray-900">{title}</h2>
                 )}
                 <button
                   onClick={onClose}

@@ -7,7 +7,7 @@ export default function PricingHero() {
   return (
     <PageHero
       eyebrow="Pricing"
-      title={["Software development", "pricing, made clear."]}
+      title="Pricing, Made Clear."
       highlight="clear."
       description="Starting prices for software development services from NexGen Developers. We confirm scope and timeline before work begins. No surprises."
       pills={[

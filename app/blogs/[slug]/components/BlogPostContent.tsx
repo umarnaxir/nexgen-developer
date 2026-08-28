@@ -196,7 +196,7 @@ function TextBlock({ content }: { content: string }) {
       {blocks.map((paragraph, index) => (
         <p
           key={`${paragraph.slice(0, 24)}-${index}`}
-          className="mb-4 text-[15px] font-normal leading-relaxed text-text-gray sm:mb-6 sm:text-lg"
+          className="mb-4 text-fluid-lead font-normal text-text-gray sm:mb-6"
         >
           {paragraph.split("\n").map((line, lineIndex, lines) => (
             <span key={`${lineIndex}-${line.slice(0, 12)}`}>
@@ -225,10 +225,10 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
               id={headingId}
               className={`mb-3 mt-7 scroll-mt-[calc(var(--site-nav-height)+0.75rem)] font-medium tracking-[-0.03em] text-primary sm:mb-5 sm:mt-10 sm:font-semibold ${
                 section.headingLevel === 1
-                  ? "text-2xl sm:text-4xl"
+                  ? "text-[clamp(1.5rem,0.9rem+3vw,2.25rem)]"
                   : section.headingLevel === 2
-                    ? "text-xl sm:text-3xl"
-                    : "text-lg sm:text-2xl"
+                    ? "text-[clamp(1.25rem,0.75rem+2.5vw,1.875rem)]"
+                    : "text-fluid-h3"
               }`}
             >
               {section.heading}
@@ -261,7 +261,7 @@ export default function BlogPostContent({ blog }: BlogPostContentProps) {
           return (
             <ListTag
               key={index}
-              className={`mb-4 space-y-1.5 pl-5 text-[15px] leading-relaxed text-text-gray sm:mb-6 sm:space-y-2 sm:pl-6 sm:text-lg ${
+              className={`mb-4 space-y-1.5 pl-5 text-fluid-lead text-text-gray sm:mb-6 sm:space-y-2 sm:pl-6 ${
                 section.ordered ? "list-decimal" : "list-disc"
               }`}
             >

@@ -48,14 +48,14 @@ export default function FAQAccordion({
         className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-dark/[0.06] blur-[110px]"
       />
 
-      <div className="relative px-4 sm:px-6 lg:px-14">
-        <div className="relative mx-auto w-full max-w-7xl">
+      <div className="page-gutter relative">
+        <div className="content-cap relative">
         <div
           className="mb-6 flex flex-col gap-4 sm:mb-8 lg:flex-row lg:items-end lg:justify-between"
           data-aos="fade-up"
         >
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-semibold tracking-[-0.03em] text-black sm:text-3xl lg:text-4xl">
+            <h2 className="text-fluid-h2 font-semibold tracking-[-0.03em] text-black">
               {title}
             </h2>
             {description ? (
@@ -201,7 +201,7 @@ export default function FAQAccordion({
                     className="mt-5 h-px origin-left bg-gradient-to-r from-gold/70 via-gold/20 to-transparent"
                   />
 
-                  <h3 className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl">
+                  <h3 className="mt-6 text-fluid-h3 font-semibold leading-snug tracking-[-0.02em] text-white">
                     {active.question}
                   </h3>
 

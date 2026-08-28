@@ -114,7 +114,7 @@ export default function ClientReviewsSection() {
 
       <div className="section-container relative">
         <div className="mb-6 max-w-2xl sm:mb-8" data-aos="fade-up">
-          <h2 className="text-2xl font-semibold tracking-[-0.03em] text-primary sm:text-3xl lg:text-4xl">
+          <h2 className="text-fluid-h2 font-semibold tracking-[-0.03em] text-primary">
             Client <span className="text-gold-dark">Reviews</span>
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-text-gray">

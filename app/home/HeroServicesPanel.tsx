@@ -48,7 +48,7 @@ export default function HeroServicesPanel() {
                     type="button"
                     onClick={() => setActiveIndex(index)}
                     aria-pressed={isActive}
-                    className={`flex w-max shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-left transition-colors duration-200 lg:w-full lg:min-w-0 lg:gap-2.5 lg:rounded-lg lg:px-2.5 lg:py-2 ${
+                    className={`tap-target flex w-max shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-left transition-colors duration-200 lg:w-full lg:min-w-0 lg:gap-2.5 lg:rounded-lg lg:px-2.5 lg:py-2 ${
                       isActive
                         ? "bg-gold/20 text-gold lg:bg-gradient-to-r lg:from-gold/20 lg:to-transparent"
                         : "bg-white/[0.05] text-white/70 hover:bg-white/[0.04] hover:text-white lg:bg-transparent lg:text-white/60"
@@ -116,7 +116,7 @@ export default function HeroServicesPanel() {
                 </p>
                 <Link
                   href={active.href}
-                  className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-gold-dark transition-colors hover:text-gold"
+                  className="tap-target mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-gold-dark transition-colors hover:text-gold"
                 >
                   {active.ctaLabel}
                   <ArrowUpRight className="h-3.5 w-3.5" />

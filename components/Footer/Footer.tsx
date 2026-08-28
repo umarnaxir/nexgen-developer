@@ -39,12 +39,12 @@ function FooterColumn({
     <div>
       <h3 className="mb-4 text-sm font-semibold text-white">{title}</h3>
       <nav aria-label={title}>
-        <ul className="flex flex-col gap-2.5">
+        <ul className="flex flex-col gap-2.5 pointer-coarse:gap-1">
           {links.map((link) => (
             <li key={`${link.href}-${link.label}`}>
               <Link
                 href={link.href}
-                className="break-words text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold"
+                className="flex items-center break-words text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold pointer-coarse:min-h-9"
               >
                 {link.label}
               </Link>
@@ -161,12 +161,12 @@ export default function Footer({ contact, footer }: FooterProps) {
           <div>
             <h3 className="mb-4 text-sm font-semibold text-white">Services</h3>
             <nav aria-label="Services">
-              <ul className="flex flex-col gap-2.5">
+              <ul className="flex flex-col gap-2.5 pointer-coarse:gap-1">
                 {services.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold"
+                      className="flex items-center text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold pointer-coarse:min-h-9"
                     >
                       {link.label}
                     </Link>
@@ -181,12 +181,12 @@ export default function Footer({ contact, footer }: FooterProps) {
           <div>
             <h3 className="mb-4 text-sm font-semibold text-white">Contact Us</h3>
             <nav aria-label="Contact Us">
-              <ul className="flex flex-col gap-2.5">
+              <ul className="flex flex-col gap-2.5 pointer-coarse:gap-1">
                 {contactLinks.map((link) => (
                   <li key={`${link.href}-${link.label}`}>
                     <Link
                       href={link.href}
-                      className="break-words text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold"
+                      className="flex items-center break-words text-[13px] leading-snug text-gold-light/70 transition-colors duration-200 hover:text-gold pointer-coarse:min-h-9"
                     >
                       {link.label}
                     </Link>
@@ -226,14 +226,19 @@ export default function Footer({ contact, footer }: FooterProps) {
       </div>
 
       <div className="relative border-t border-gold/15">
-        <div className="section-container flex flex-wrap items-center justify-center gap-x-3 gap-y-2 py-5 text-[12px] text-gold-light/45">
+        {/* Extra bottom room on small screens so the floating chat button never
+            sits on top of the legal links. */}
+        <div className="section-container flex flex-wrap items-center justify-center gap-x-3 gap-y-2 py-5 text-[12px] text-gold-light/45 max-sm:pb-24">
           <p>{copyright}</p>
           {legalLinks.map((link) => (
             <span key={link.href} className="inline-flex items-center gap-3">
               <span className="text-gold/30" aria-hidden>
                 |
               </span>
-              <Link href={link.href} className="transition-colors hover:text-gold">
+              <Link
+                href={link.href}
+                className="flex items-center transition-colors hover:text-gold pointer-coarse:min-h-9"
+              >
                 {link.label}
               </Link>
             </span>

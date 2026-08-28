@@ -44,7 +44,7 @@ export default function FeaturedBlogCard({ blog }: FeaturedBlogCardProps) {
             <span className="inline-flex w-fit rounded-full border border-gold/40 bg-white px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-gold-dark sm:px-3 sm:py-1 sm:text-[11px] sm:font-semibold sm:tracking-[0.18em]">
               {blog.category}
             </span>
-            <h2 className="mt-3 text-xl font-medium leading-tight tracking-[-0.03em] text-primary transition-colors group-hover:text-gold-dark sm:mt-4 sm:text-3xl sm:font-semibold md:text-4xl">
+            <h2 className="mt-3 text-[clamp(1.25rem,0.54rem+3.57vw,2.25rem)] font-medium leading-tight tracking-[-0.03em] text-primary transition-colors group-hover:text-gold-dark sm:mt-4 sm:font-semibold">
               {blog.title}
             </h2>
             <p className="mt-3 line-clamp-3 text-[13px] leading-relaxed text-text-gray sm:mt-4 sm:text-base">

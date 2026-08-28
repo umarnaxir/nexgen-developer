@@ -48,7 +48,7 @@ function ServiceCard({
           </span>
         </div>
 
-        <h3 className="mt-3 text-xl font-semibold leading-tight text-white sm:text-2xl">
+        <h3 className="mt-3 text-fluid-h3 font-semibold leading-tight text-white">
           {service.title}
         </h3>
         <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-white/75 sm:text-sm">
@@ -70,7 +70,7 @@ function ServiceCard({
 
         <Link
           href={service.href}
-          className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white sm:mt-5"
+          className="tap-target mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white sm:mt-5"
         >
           Explore service
           <ArrowUpRight className="h-3.5 w-3.5" />
@@ -211,13 +211,13 @@ export default function ServicesSection() {
     >
       <div
         ref={mobilePinRef}
-        className="relative flex min-h-[calc(100svh-var(--site-nav-height))] flex-col justify-center px-4 py-6 sm:px-6 md:hidden"
+        className="page-gutter relative flex min-h-[min(48rem,max(30rem,calc(100svh-var(--site-nav-height))))] flex-col justify-center py-6 md:hidden"
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
+        <div className="content-cap flex flex-1 flex-col justify-center">
         <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
           Services
         </span>
-        <h2 className="mt-3 text-[1.9rem] font-bold leading-[1.15] tracking-[-0.03em] text-black">
+        <h2 className="mt-3 text-[clamp(1.5rem,7vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.03em] text-black">
           <span className="block">Software development</span>
           <span className="block">
             services to <span className="text-gold-dark">scale.</span>
@@ -246,7 +246,7 @@ export default function ServicesSection() {
         <div className="mt-6 flex justify-end">
           <Link
             href="/services"
-            className="text-sm font-semibold text-gold-dark underline decoration-gold/80 decoration-2 underline-offset-[6px]"
+            className="tap-target text-sm font-semibold text-gold-dark underline decoration-gold/80 decoration-2 underline-offset-[6px]"
           >
             View all services
           </Link>
@@ -256,9 +256,9 @@ export default function ServicesSection() {
 
       <div
         ref={pinRef}
-        className="relative hidden h-[calc(100svh-var(--site-nav-height))] min-h-[calc(100svh-var(--site-nav-height))] px-4 py-5 sm:px-6 md:flex md:flex-col lg:px-14"
+        className="page-gutter relative hidden min-h-[min(48rem,max(30rem,calc(100svh-var(--site-nav-height))))] py-5 md:flex md:flex-col"
       >
-        <div className="relative mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col">
+        <div className="content-cap relative flex min-h-0 flex-1 flex-col">
         <div className="mb-4 flex w-full shrink-0 items-end justify-between gap-6">
           <div className="min-w-0 flex-1">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold-dark">
