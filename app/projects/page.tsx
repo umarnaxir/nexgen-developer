@@ -1,12 +1,14 @@
 import ProjectsHero from "./components/ProjectsHero";
 import ProjectsList from "./components/ProjectsList";
 import PageFAQ from "@/components/seo/PageFAQ";
-import { getProjectsSEO } from "@/lib/seo/page-seo";
+import { getProjectsSEO, projectsSeoCopy } from "@/lib/seo/page-seo";
 import { getProjects } from "@/lib/content/store";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { projectsFaqs } from "@/lib/seo/faqs";
 
-export const metadata = getProjectsSEO();
+export function generateMetadata() {
+  return getProjectsSEO();
+}
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {
@@ -16,8 +18,10 @@ export default async function ProjectsPage() {
     <main className="min-h-screen">
       <PageJsonLd
         path="/projects"
-        title="Our Software Development Projects"
-        description="Browse NexGen Developers software development projects across education, e-commerce, fitness, and enterprise. View the work, then start your project today."
+        title={projectsSeoCopy.title}
+        description={projectsSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Projects", url: "/projects" },

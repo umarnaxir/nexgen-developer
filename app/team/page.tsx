@@ -3,12 +3,14 @@ import TeamGrid from "./components/TeamGrid";
 import PrivacyNote from "./components/PrivacyNote";
 import GetStartedCTA from "@/components/GetStartedCTA";
 import PageFAQ from "@/components/seo/PageFAQ";
-import { getTeamSEO } from "@/lib/seo/page-seo";
+import { getTeamSEO, teamSeoCopy } from "@/lib/seo/page-seo";
 import { getTeamMembers } from "@/lib/content/store";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { teamFaqs } from "@/lib/seo/faqs";
 
-export const metadata = getTeamSEO();
+export function generateMetadata() {
+  return getTeamSEO();
+}
 export const dynamic = "force-dynamic";
 
 export default async function TeamPage() {
@@ -18,8 +20,10 @@ export default async function TeamPage() {
     <main className="min-h-screen">
       <PageJsonLd
         path="/team"
-        title="Meet Our Software Development Team"
-        description="Meet the NexGen Developers software development team of engineers, designers, and marketers building products for startups. Work with our studio this week."
+        title={teamSeoCopy.title}
+        description={teamSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Team", url: "/team" },

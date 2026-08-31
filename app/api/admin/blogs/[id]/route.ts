@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { canDeleteContent, getSession } from "@/lib/admin/auth";
-import { getBlogs, slugify, writeContent } from "@/lib/content/store";
+import { getBlogs, uniqueSlug, writeContent } from "@/lib/content/store";
 import type { Blog } from "@/lib/content/types";
 
 function revalidateBlogPaths(slug?: string) {
@@ -47,11 +47,11 @@ export async function PUT(request: NextRequest, { params }: Params) {
       body.title !== undefined ? String(body.title).trim() : current.title;
     let slug =
       body.slug !== undefined
-        ? String(body.slug).trim() || slugify(title)
+        ? uniqueSlug(
+            String(body.slug).trim() || title,
+            blogs.filter((b) => b.id !== id).map((b) => b.slug)
+          )
         : current.slug;
-
-    const slugConflict = blogs.find((b) => b.slug === slug && b.id !== id);
-    if (slugConflict) slug = `${slug}-${Date.now()}`;
 
     const content =
       body.content !== undefined ? String(body.content).trim() : current.content;

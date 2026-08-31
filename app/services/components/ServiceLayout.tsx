@@ -10,9 +10,7 @@ import ServiceUseCasesSection from "./ServiceUseCasesSection";
 import ServiceStackSection from "./ServiceStackSection";
 import ServiceProcessSection from "./ServiceProcessSection";
 import ServiceBenefitsSection from "./ServiceBenefitsSection";
-import RelatedServicesSection from "./RelatedServicesSection";
 import { getServicePageCopy, mergeServiceFaqs } from "../lib/get-service-page-copy";
-import type { ServiceDefinition } from "../config";
 import type { ServiceNavItem } from "./ServicePageNav";
 
 interface ServiceLayoutProps {
@@ -23,8 +21,6 @@ interface ServiceLayoutProps {
   process: { step: number; title: string; description: string }[];
   ctaHeading: string;
   ctaDescription: string;
-  relatedServices?: ServiceDefinition[];
-  currentSlug?: string;
   image?: string;
   faqs?: { question: string; answer: string }[];
   expectedResults?: string[];
@@ -41,15 +37,12 @@ export default function ServiceLayout({
   process: processSteps,
   ctaHeading,
   ctaDescription,
-  relatedServices = [],
-  currentSlug,
   faqs = [],
   expectedResults = [],
   technologies,
   whyChoose,
   useCases,
 }: ServiceLayoutProps) {
-  const filteredRelated = relatedServices.filter((s) => s.slug !== currentSlug);
   const copy = getServicePageCopy(slug, {
     description,
     benefits,
@@ -109,10 +102,6 @@ export default function ServiceLayout({
           description="Straight answers about scope, process, timeline, and what working together looks like."
           className="!scroll-mt-[calc(var(--site-nav-height)+var(--service-page-nav-height)+0.5rem)]"
         />
-      ) : null}
-
-      {filteredRelated.length > 0 ? (
-        <RelatedServicesSection services={filteredRelated} />
       ) : null}
 
       <GetStartedCTA

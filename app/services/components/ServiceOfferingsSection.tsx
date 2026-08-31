@@ -1,6 +1,7 @@
 "use client";
 
 import { ServiceReveal, ServiceRow } from "./ServiceMotion";
+import LinkedCopy from "./LinkedCopy";
 import type { ServiceOffering } from "../lib/service-detail-copy";
 
 interface ServiceOfferingsSectionProps {
@@ -40,7 +41,9 @@ export default function ServiceOfferingsSection({ offerings }: ServiceOfferingsS
               <h3 className="text-lg font-semibold tracking-[-0.02em] text-black transition-colors duration-300 group-hover:text-gold-dark sm:text-xl">
                 {item.title}
               </h3>
-              <p className="text-[15px] leading-relaxed text-black/55">{item.description}</p>
+              <p className="text-[15px] leading-relaxed text-black/55">
+                <LinkedCopy text={item.description} />
+              </p>
             </ServiceRow>
           ))}
         </div>

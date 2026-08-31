@@ -16,6 +16,7 @@ import NavLogo from "./NavLogo";
 import Hamburger from "./Hamburger";
 import type { NavLinkItem } from "./Navbar";
 import XIcon from "@/components/icons/XIcon";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -31,7 +32,7 @@ const contactItems = [
 ];
 
 const socialLinks = [
-  { icon: MessageCircle, href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.", label: "WhatsApp" },
+  { icon: MessageCircle, href: null, label: "WhatsApp" },
   { icon: XIcon, href: "https://x.com/nexgendv", label: "X" },
   { icon: Linkedin, href: "https://www.linkedin.com/company/105880683/", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/nexgendv?igsh=MTJiczF6aDNxbjB2eg%3D%3D&utm_source=qr", label: "Instagram" },
@@ -88,18 +89,30 @@ export default function MobileNav({
           </div>
 
           <div className="flex items-center gap-3 pt-1">
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 transition-all duration-300 hover:border-gold/50 hover:bg-gold-dark hover:text-white active:scale-95"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socialLinks.map(({ icon: Icon, href, label }) => {
+              const className =
+                "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-silver-light light:text-gray-700 transition-all duration-300 hover:border-gold/50 hover:bg-gold-dark hover:text-white active:scale-95";
+              const icon = <Icon className="h-4 w-4" />;
+              if (!href) {
+                return (
+                  <WhatsAppLink key={label} aria-label={label} className={className}>
+                    {icon}
+                  </WhatsAppLink>
+                );
+              }
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={className}
+                >
+                  {icon}
+                </a>
+              );
+            })}
           </div>
         </div>
 

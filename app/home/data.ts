@@ -42,7 +42,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: "Exceptional IAS Academy",
     tagline: "A coaching platform built to convert visitors into enrolled students.",
     image: "/images/projects/exceptionalias.png",
-    link: "https://exceptionaliasacademy.vercel.app/",
+    link: "https://www.exceptionaliasacademy.com/",
     category: "Education",
   },
   {

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
 import { getSession } from "@/lib/admin/auth";
-import { getBlogs, slugify, writeContent } from "@/lib/content/store";
+import { getBlogs, uniqueSlug, writeContent } from "@/lib/content/store";
 import type { Blog } from "@/lib/content/types";
 
 function revalidateBlogPaths(slug?: string) {
@@ -43,9 +43,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Title is required." }, { status: 400 });
     }
 
-    let slug = String(body.slug || "").trim() || slugify(title);
-    const existing = blogs.find((b) => b.slug === slug);
-    if (existing) slug = `${slug}-${Date.now()}`;
+    const slug = uniqueSlug(String(body.slug || "").trim() || title, blogs.map((b) => b.slug));
 
     const content = String(body.content || "").trim();
     const image = String(body.image || body.featuredImage || "");

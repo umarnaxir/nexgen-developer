@@ -37,8 +37,8 @@ function isBoldToken(value: string) {
 
 function hrefForStep(title: string): string | undefined {
   const t = title.toLowerCase();
-  if (t.includes("seo")) return "/services/digital-marketing/seo";
-  if (t.includes("social")) return "/services/digital-marketing/social-media-marketing";
+  if (t.includes("seo")) return "/services/search-engine-optimization";
+  if (t.includes("social")) return "/services/social-media-marketing";
   if (t.includes("digital marketing") || t.includes("ads")) return "/services/digital-marketing";
   if (t.includes("e-commerce") || t.includes("website")) return "/services/website-development";
   if (t.includes("mobile") || t.includes("app")) return "/services/app-development";

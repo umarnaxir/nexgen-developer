@@ -7,12 +7,10 @@ import { getServiceHref, type ServiceDefinition } from "../../config";
 
 interface ServicePageContentProps {
   service: ServiceDefinition;
-  relatedServices: ServiceDefinition[];
 }
 
 export default function ServicePageContent({
   service,
-  relatedServices,
 }: ServicePageContentProps) {
   const copy = getServicePageCopy(service.slug, {
     description: service.content.description,
@@ -29,6 +27,8 @@ export default function ServicePageContent({
       <ServicePageSchema
         serviceName={service.content.heading}
         serviceDescription={service.content.description}
+        pageTitle={service.seo.title}
+        pageDescription={service.seo.description}
         serviceType={service.label}
         areaServed="India"
         path={path}
@@ -47,8 +47,6 @@ export default function ServicePageContent({
         process={service.content.process}
         ctaHeading={service.content.ctaHeading}
         ctaDescription={service.content.ctaDescription}
-        relatedServices={relatedServices}
-        currentSlug={service.slug}
         image={service.content.image}
         faqs={service.content.faqs}
         expectedResults={service.content.expectedResults}

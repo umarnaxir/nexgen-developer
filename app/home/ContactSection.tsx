@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import Select from "@/components/ui/Select";
 import XIcon from "@/components/icons/XIcon";
+import WhatsAppLink from "@/components/WhatsAppLink";
+import { isWhatsAppHref, normalizeWhatsAppHref } from "@/lib/whatsapp";
 import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
 /** Stylized paper-plane illustration for the home contact card. */
@@ -524,18 +526,35 @@ export default function ContactSection({
                     Social
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2.5">
-                    {socialLinks.map(({ icon: Icon, href, label }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={label}
-                        className="flex h-11 w-11 items-center justify-center rounded-full bg-gold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-gold-dark"
-                      >
-                        <Icon className="h-4 w-4" />
-                      </a>
-                    ))}
+                    {socialLinks.map(({ icon: Icon, href, label }) => {
+                      const className =
+                        "flex h-11 w-11 items-center justify-center rounded-full bg-gold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-gold-dark";
+                      const icon = <Icon className="h-4 w-4" />;
+                      if (isWhatsAppHref(href)) {
+                        return (
+                          <WhatsAppLink
+                            key={label}
+                            href={normalizeWhatsAppHref(href)}
+                            aria-label={label}
+                            className={className}
+                          >
+                            {icon}
+                          </WhatsAppLink>
+                        );
+                      }
+                      return (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={label}
+                          className={className}
+                        >
+                          {icon}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

@@ -45,7 +45,7 @@ export default function LayoutWrapper({
         }`}
       >
         <div className="page-with-navbar relative z-10 min-w-0">
-          <main className={`min-w-0 flex-1 ${isBlogPost ? "" : "overflow-x-clip"}`}>{children}</main>
+          <div className={`min-w-0 flex-1 ${isBlogPost ? "" : "overflow-x-clip"}`}>{children}</div>
           <Footer contact={contact} footer={footer} />
           {SHOW_WHATSAPP_BUTTON && <WhatsAppButton />}
         </div>

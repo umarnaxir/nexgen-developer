@@ -17,6 +17,8 @@ export function PageJsonLd({
   datePublished,
   dateModified,
   offers,
+  exactTitle = false,
+  exactDescription = false,
 }: {
   path: string;
   title: string;
@@ -26,9 +28,13 @@ export function PageJsonLd({
   datePublished?: string;
   dateModified?: string;
   offers?: Array<{ name: string; price: string; description: string }>;
+  exactTitle?: boolean;
+  exactDescription?: boolean;
 }) {
-  const pageTitle = buildSeoTitle(title);
-  const pageDescription = buildSeoDescription(description);
+  const pageTitle = exactTitle ? title : buildSeoTitle(title);
+  const pageDescription = exactDescription
+    ? description.trim()
+    : buildSeoDescription(description);
 
   return (
     <>

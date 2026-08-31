@@ -1,6 +1,7 @@
 "use client";
 
 import { ServiceReveal, ServiceRow } from "./ServiceMotion";
+import LinkedCopy from "./LinkedCopy";
 import type { ServiceUseCase } from "../lib/service-detail-copy";
 
 interface ServiceUseCasesSectionProps {
@@ -38,7 +39,7 @@ export default function ServiceUseCasesSection({ useCases }: ServiceUseCasesSect
                 {item.title}
               </h3>
               <p className="mt-1.5 text-[14px] leading-relaxed text-black/55 sm:text-[15px]">
-                {item.description}
+                <LinkedCopy text={item.description} />
               </p>
             </ServiceRow>
           ))}

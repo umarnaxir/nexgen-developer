@@ -1,14 +1,17 @@
 import ServicesHero from "./components/ServicesHero";
+import ServicesIntro from "./components/ServicesIntro";
 import ServicesList from "./components/ServicesList";
 import StatsBar from "@/components/StatsBar";
 import PageFAQ from "@/components/seo/PageFAQ";
 import GetStartedCTA from "@/components/GetStartedCTA";
-import { getServicesSEO } from "@/lib/seo/page-seo";
+import { getServicesSEO, servicesSeoCopy } from "@/lib/seo/page-seo";
 import { getServicesForListingServer } from "@/lib/content/services-server";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { servicesIndexFaqs } from "@/lib/seo/faqs";
 
-export const metadata = getServicesSEO();
+export function generateMetadata() {
+  return getServicesSEO();
+}
 export const dynamic = "force-dynamic";
 
 export default function ServicesPage() {
@@ -18,15 +21,18 @@ export default function ServicesPage() {
     <main className="min-h-screen" role="main">
       <PageJsonLd
         path="/services"
-        title="Software Development Services in India"
-        description="Professional software development services in India: custom products, AI, chatbots, SEO, and marketing. Compare offerings and request your quote today."
+        title={servicesSeoCopy.title}
+        description={servicesSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Services", url: "/services" },
         ]}
         faqs={servicesIndexFaqs}
       />
-      <ServicesHero />
+      <ServicesHero title={servicesSeoCopy.title} />
+      <ServicesIntro />
       <ServicesList services={services} />
       <StatsBar />
       <PageFAQ

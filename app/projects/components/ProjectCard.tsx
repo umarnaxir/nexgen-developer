@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { createPortal } from "react-dom";
 import { resolveProjectIcon } from "@/lib/content/project-icons";
+import { isExternalHref, projectLiveHref } from "@/lib/utils";
 
 export type ProjectData = {
   id: number;
@@ -51,6 +52,7 @@ export default function ProjectCard({
       : project.icon;
   const imageLeft = index % 2 === 0;
   const [mounted, setMounted] = useState(false);
+  const liveHref = projectLiveHref(project.link);
 
   useEffect(() => {
     setMounted(true);
@@ -202,15 +204,18 @@ export default function ProjectCard({
             </div>
 
             <div className="relative flex shrink-0 flex-wrap gap-2.5 border-t border-gold/25 px-5 py-4 sm:px-7">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-gold-dark sm:flex-none"
-              >
-                Visit Website
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
+              {liveHref ? (
+                <a
+                  href={liveHref}
+                  {...(isExternalHref(liveHref)
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-gold-dark sm:flex-none"
+                >
+                  Visit Website
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              ) : null}
               <button
                 type="button"
                 onClick={onToggleExpand}
@@ -303,17 +308,20 @@ export default function ProjectCard({
               </div>
 
               <div className="mt-auto flex flex-wrap gap-2.5 border-t border-black/[0.06] pt-5">
-                <motion.a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 sm:flex-none"
-                >
-                  Visit Website
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </motion.a>
+                {liveHref ? (
+                  <motion.a
+                    href={liveHref}
+                    {...(isExternalHref(liveHref)
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 sm:flex-none"
+                  >
+                    Visit Website
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </motion.a>
+                ) : null}
                 <motion.button
                   type="button"
                   onClick={onToggleExpand}

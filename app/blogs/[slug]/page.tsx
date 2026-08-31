@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         image={blog.images[0] || blogRaw.image}
         keywords={blog.keywords}
       />
-      <div className="min-h-screen">
+      <main className="min-h-screen">
         <article className="min-w-0 pt-[calc(var(--site-nav-height)+2.5rem)] pb-8 sm:pt-[calc(var(--site-nav-height)+2.75rem)] sm:pb-10 lg:pt-[calc(var(--site-nav-height)+3rem)] lg:pb-12">
           <div className="page-gutter">
             <div className="content-cap grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12">
@@ -147,7 +147,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           heading="Ready to turn this into a product?"
           description="Tell us what you want to build. We'll help with websites, apps, SEO, and custom software from first brief to launch."
         />
-      </div>
+      </main>
     </>
   );
 }

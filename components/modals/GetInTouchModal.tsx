@@ -15,6 +15,7 @@ import {
   Facebook,
 } from "lucide-react";
 import XIcon from "@/components/icons/XIcon";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 interface GetInTouchModalProps {
   isOpen: boolean;
@@ -26,7 +27,7 @@ const PHONE_TEL = "+916006161726";
 const EMAIL = "workwithnexgen@gmail.com";
 
 const socials = [
-  { icon: MessageCircle, href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.", label: "WhatsApp" },
+  { icon: MessageCircle, href: null, label: "WhatsApp" },
   { icon: XIcon, href: "https://x.com/nexgendv", label: "X" },
   { icon: Linkedin, href: "https://www.linkedin.com/company/105880683/", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/nexgendv?igsh=MTJiczF6aDNxbjB2eg%3D%3D&utm_source=qr", label: "Instagram" },
@@ -166,18 +167,30 @@ export default function GetInTouchModal({ isOpen, onClose }: GetInTouchModalProp
           <div className="relative mt-4">
             <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/70">Follow Us</span>
             <div className="mt-3 flex flex-wrap items-center gap-2.5">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:scale-110 hover:bg-[#d1ac81]"
-                >
-                  <Icon className="h-5 w-5 text-black" strokeWidth={2} />
-                </a>
-              ))}
+              {socials.map(({ icon: Icon, href, label }) => {
+                const className =
+                  "flex h-11 w-11 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:scale-110 hover:bg-[#d1ac81]";
+                const icon = <Icon className="h-5 w-5 text-black" strokeWidth={2} />;
+                if (!href) {
+                  return (
+                    <WhatsAppLink key={label} aria-label={label} className={className}>
+                      {icon}
+                    </WhatsAppLink>
+                  );
+                }
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={className}
+                  >
+                    {icon}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

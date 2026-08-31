@@ -17,6 +17,8 @@ export default function ThemeProvider({
       defaultTheme="light"
       forcedTheme="light"
       enableSystem={false}
+      enableColorScheme={false}
+      disableTransitionOnChange
       themes={["light"]}
       storageKey="theme"
       {...props}

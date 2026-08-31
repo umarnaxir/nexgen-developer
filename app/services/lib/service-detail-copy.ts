@@ -24,9 +24,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "website-development": {
     lead: "Conversion-ready websites and web apps — designed, engineered, and launched as a system, not a brochure.",
     intro: [
-      "A website should do more than exist online. It should load quickly, explain your offer clearly, capture demand, and stay maintainable as you add pages, products, and integrations. We plan and build websites as full systems: information architecture, interface, backend, CMS, analytics, and the operational pieces that keep marketing and sales moving.",
-      "Most engagements start with how people actually arrive, browse, and convert. We map that journey, then implement it in a modern stack — typically Next.js and React on the front, Node.js or Python on the API, and a database chosen for how you will query and grow the data. SEO, accessibility, and Core Web Vitals are designed in, not patched after launch.",
-      "You leave with a documented codebase, a launch checklist (redirects, tracking, search console, environments), and a site your team can update without treating us as a bottleneck. When you do want us on retainer, the same team that shipped it can keep iterating.",
+      "A website should do more than exist online. It should load quickly, explain your offer clearly, capture demand, and stay maintainable as you add pages, products, and integrations. We plan and build websites as full systems: information architecture, interface, backend, CMS, analytics, and the operational pieces that keep marketing and sales moving — the same bar we describe in our guide to [professional websites for businesses in Kashmir](/blogs/professional-website-for-business-kashmir).",
+      "Most engagements start with how people actually arrive, browse, and convert. We map that journey, then implement it in a modern stack — typically [Next.js](https://nextjs.org) and [React](https://react.dev) on the front, Node.js or Python on the API, and a database chosen for how you will query and grow the data. [SEO](/services/search-engine-optimization), accessibility, and Core Web Vitals are designed in, not patched after launch.",
+      "You leave with a documented codebase, a launch checklist (redirects, tracking, search console, environments), and a site your team can update without treating us as a bottleneck. Budget ranges are in [website development cost in Kashmir](/blogs/website-development-cost-kashmir); implementation detail is in [web development best practices](/blogs/best-practices-for-web-development). When you do want us on retainer, the same team that shipped it can keep iterating through [maintenance and support](/services/maintenance-support).",
     ],
     pillars: [
       {
@@ -57,12 +57,12 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
       {
         title: "Web applications and portals",
         description:
-          "Authenticated dashboards, customer portals, and internal tools with roles, audit-friendly data models, and APIs that other systems can trust.",
+          "Authenticated dashboards, customer portals, and internal tools with roles, audit-friendly data models, and APIs that other systems can trust. When the product is not a marketing site, see [custom software development in Kashmir](/blogs/custom-software-development-company-kashmir).",
       },
       {
         title: "E-commerce and checkout",
         description:
-          "Catalogs, carts, and payments (Stripe, PayPal, and regional gateways) with inventory, tax, and fulfilment hooks designed around how you actually sell.",
+          "Catalogs, carts, and payments (Stripe, PayPal, and regional gateways) with inventory, tax, and fulfilment hooks designed around how you actually sell. Regional context is in [starting an e-commerce business in Jammu & Kashmir](/blogs/ecommerce-business-jammu-kashmir).",
       },
       {
         title: "CMS and content operations",
@@ -165,9 +165,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "app-development": {
     lead: "iOS and Android products with native feel, store-ready delivery, and a backend that can grow with your users.",
     intro: [
-      "Mobile apps fail when they are treated as a thin skin over a website, or when two native teams drift out of sync. We design and build apps as products: navigation, empty states, permissions, offline behaviour, notifications, and the API contracts that keep the client honest.",
-      "Cross-platform (React Native or Flutter) is the default when you want one codebase, one release train, and consistent features on both stores. We go native (Swift/Kotlin) when the experience or hardware access genuinely needs it. Either way, we plan store listings, privacy, and review guidelines from the start — not the week you hoped to ship.",
-      "After launch we stay on OS upgrades, crash reports, and the feature roadmap. An app is not done at 1.0; it is done when it is stable in the stores and you have a way to ship 1.1 without a fire drill.",
+      "Mobile apps fail when they are treated as a thin skin over a [website](/services/website-development), or when two native teams drift out of sync. We design and build apps as products: navigation, empty states, permissions, offline behaviour, notifications, and the API contracts that keep the client honest. If the open question is still website vs app vs custom software, start with [that comparison](/blogs/website-vs-mobile-app-vs-custom-software).",
+      "Cross-platform ([React Native](https://reactnative.dev) or [Flutter](https://flutter.dev)) is the default when you want one codebase, one release train, and consistent features on both stores. We go native (Swift/Kotlin) when the experience or hardware access genuinely needs it. Either way, we plan store listings, privacy, and review guidelines from the start — not the week you hoped to ship.",
+      "After launch we stay on OS upgrades, crash reports, and the feature roadmap. An app is not done at 1.0; it is done when it is stable in the stores and you have a way to ship 1.1 without a fire drill. If you are still choosing platforms, start with [Android vs iOS](/blogs/android-vs-ios-app-development) and our notes on [app development cost in India](/blogs/mobile-app-development-cost-india).",
     ],
     pillars: [
       {
@@ -288,9 +288,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "ai-ml": {
     lead: "Applied AI and machine learning that ships to production — with data, evaluation, and integration, not a slide deck of possibilities.",
     intro: [
-      "Useful AI is a product decision: a job to be done, a data path, a quality bar, and a place in your existing software. We start there. Then we choose models, APIs, or custom training based on accuracy, latency, cost, and where your data is allowed to live.",
-      "That can mean a retrieval-augmented assistant on your documents, a vision pipeline on factory or medical images, a forecast on operational data, or a recommendation layer in your app. We build the boring pieces that make it real: pipelines, eval sets, fallbacks, human review, and monitoring when the model drifts.",
-      "We will tell you when a rules engine or a well-prompted API beats a custom model. The goal is a measurable lift in time, cost, or quality — not an AI feature for the announcement.",
+      "Useful AI is a product decision: a job to be done, a data path, a quality bar, and a place in your existing software. We start there. Then we choose models, APIs, or custom training — often in [PyTorch](https://pytorch.org) or via documented LLM APIs such as [OpenAI](https://platform.openai.com/docs) — based on accuracy, latency, cost, and where your data is allowed to live.",
+      "That can mean a retrieval-augmented assistant on your documents, a vision pipeline on factory or medical images, a forecast on operational data, or a recommendation layer in your [mobile app](/services/app-development). We build the boring pieces that make it real: pipelines, eval sets, fallbacks, human review, and monitoring when the model drifts.",
+      "We will tell you when a rules engine or a well-prompted API beats a custom model. The goal is a measurable lift in time, cost, or quality — not an AI feature for the announcement. For a practical primer, read [getting started with AI/ML in your business](/blogs/getting-started-with-ai-ml-in-your-business) and our overview of [AI automation for businesses in India](/blogs/ai-automation-services-businesses-india).",
     ],
     pillars: [
       {
@@ -405,9 +405,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "chatbot-development": {
     lead: "Conversational systems that resolve real work — on your site, WhatsApp, and tools — with handoff and analytics, not a widget that shrugs.",
     intro: [
-      "A chatbot is a support and sales channel. It needs intents (or grounded generation), guardrails, a path to a human, and a place in CRM. We design the conversation the way we design product UX: jobs to be done, failure states, and tone that matches your brand without pretending to be a person.",
-      "We implement on the channels your customers already use — site widget, WhatsApp, Messenger, Slack — with one conversation layer and adapters per surface. Knowledge comes from your FAQs, docs, and systems of record, refreshed on a schedule you control.",
-      "After go-live we tune from transcripts. The first version will miss things; that is expected. What matters is a loop: review misses, add coverage, tighten prompts or flows, and keep the bot from freelancing on topics it should not touch.",
+      "A chatbot is a support and sales channel. It needs intents (or grounded generation), guardrails, a path to a human, and a place in CRM. We design the conversation the way we design product UX: jobs to be done, failure states, and tone that matches your brand without pretending to be a person. The same discipline is covered in [the future of chatbots in customer service](/blogs/future-of-chatbots-in-customer-service).",
+      "We implement on the channels your customers already use — site widget, [WhatsApp Business Platform](https://business.whatsapp.com/products/business-platform), Messenger, Slack — with one conversation layer and adapters per surface. Knowledge comes from your FAQs, docs, and systems of record, refreshed on a schedule you control. Heavier model work lives with our [AI and ML team](/services/ai-ml).",
+      "After go-live we tune from transcripts. The first version will miss things; that is expected. What matters is a loop: review misses, add coverage, tighten prompts or flows, and keep the bot from freelancing on topics it should not touch. For language understanding we follow current [NLP](https://www.ibm.com/topics/natural-language-processing) practice rather than a single vendor slogan.",
     ],
     pillars: [
       {
@@ -433,7 +433,7 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
       {
         title: "Support and FAQ bots",
         description:
-          "Deflect repetitive tickets with accurate, on-brand answers and a clean escalate path when the user is stuck or unhappy.",
+          "Deflect repetitive tickets with accurate, on-brand answers and a clean escalate path when the user is stuck or unhappy. Many teams pair this with a [website](/services/website-development) widget so help is on the same domain as the product.",
       },
       {
         title: "Lead qualification",
@@ -522,9 +522,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "maintenance-support": {
     lead: "Quiet reliability: patching, monitoring, backups, and a human who already knows your stack when something breaks.",
     intro: [
-      "Software does not stay shipped. Dependencies age, browsers change, plugins get CVEs, and the person who “knew the server” leaves. Maintenance is the practice of keeping production boring — updates, observability, backups you have actually restored, and a response path with names and clocks on it.",
-      "We onboard existing products as well as the ones we built. That starts with an inventory: environments, secrets, third parties, and the incidents you already fear. Then we put monitoring, patch windows, and a backlog for the small fixes that never make it into a project SOW.",
-      "You get reporting you can show a founder or a board: uptime, changes shipped, risks accepted, and what we recommend next. The point is not tickets for theatre. It is fewer surprises and a longer life for the product you already paid to build.",
+      "Software does not stay shipped. Dependencies age, browsers change, plugins get [CVEs](https://www.cve.org), and the person who “knew the server” leaves. Maintenance is the practice of keeping production boring — updates, observability, backups you have actually restored, and a response path with names and clocks on it.",
+      "We onboard existing products as well as the ones we built. That starts with an inventory: environments, secrets, third parties, and the incidents you already fear. Then we put monitoring, patch windows, and a backlog for the small fixes that never make it into a project SOW — including the [website](/services/website-development) or [app](/services/app-development) already in production.",
+      "You get reporting you can show a founder or a board: uptime, changes shipped, risks accepted, and what we recommend next. The point is not tickets for theatre. It is fewer surprises and a longer life for the product you already paid to build. Release risk is handled next door in [DevOps and cloud deployment](/services/deployment-devops).",
     ],
     pillars: [
       {
@@ -555,7 +555,7 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
       {
         title: "Security and patching",
         description:
-          "CVE watch, dependency bots, secret rotation habits, and hardening tickets prioritized by exploitability — not by whoever shouted last.",
+          "CVE watch, dependency bots, secret rotation habits, and hardening tickets prioritized by exploitability — not by whoever shouted last. We map work against the [OWASP Top 10](https://owasp.org/www-project-top-ten/) where it applies.",
       },
       {
         title: "Performance and database care",
@@ -638,9 +638,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "deployment-devops": {
     lead: "Environments, pipelines, and cloud that make releases dull — in the best way — with security and handover included.",
     intro: [
-      "DevOps is how software becomes a service your team can ship twice a week without a ceremony. We design environments, CI/CD, containers where they help, and the cloud accounts underneath — with least privilege, secrets management, and observability from the first production deploy.",
-      "We work with AWS, Azure, GCP, and app platforms like Vercel when they are the right size for the problem. Kubernetes is a tool, not a personality. You get infrastructure as code, a pipeline that runs tests and can roll back, and documentation a new engineer can follow on day three.",
-      "Migrations are planned with a cutover window and a reverse path. The success metric is not “we used the trendy orchestrator.” It is that your next release is boring and your bill is explainable.",
+      "DevOps is how software becomes a service your team can ship twice a week without a ceremony. We design environments, CI/CD, containers where they help, and the cloud accounts underneath — with least privilege, secrets management, and observability from the first production deploy. See [building scalable applications](/blogs/building-scalable-applications-complete-guide) for the product-side of that same problem.",
+      "We work with [AWS](https://aws.amazon.com), Azure, GCP, and app platforms like Vercel when they are the right size for the problem. [Docker](https://docs.docker.com) and Kubernetes are tools, not a personality. You get infrastructure as code, a pipeline that runs tests and can roll back, and documentation a new engineer can follow on day three.",
+      "Migrations are planned with a cutover window and a reverse path. The success metric is not “we used the trendy orchestrator.” It is that your next release is boring and your bill is explainable — whether we are shipping a [website](/services/website-development) or a [mobile app](/services/app-development).",
     ],
     pillars: [
       {
@@ -754,9 +754,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "digital-marketing": {
     lead: "Full-funnel digital marketing — SEO, paid, social, and creative — planned around pipeline, not vanity charts.",
     intro: [
-      "Traffic is easy to buy and hard to make valuable. We build marketing systems: the search and content that compound, the ads that convert, the social that keeps you present, and the measurement that tells you which of those deserves more budget next month.",
-      "You do not have to buy every channel on day one. We often start with the constraint that is hurting you most — a site that cannot rank, ads with no tracking, or a brand that looks different in every creative — then expand when the numbers justify it.",
-      "Reporting is in the language of your business: leads, cost per opportunity, revenue, assisted conversions. We will still show impressions when they matter for brand. We will not hide behind them when you asked for pipeline.",
+      "Traffic is easy to buy and hard to make valuable. We build marketing systems: the [search](/services/search-engine-optimization) and content that compound, the ads that convert, the [social](/services/social-media-marketing) that keeps you present, and the measurement that tells you which of those deserves more budget next month.",
+      "You do not have to buy every channel on day one. We often start with the constraint that is hurting you most — a site that cannot rank, ads with no tracking, or a brand that looks different in every creative — then expand when the numbers justify it. For a regional view of visibility work, see [how to rank a business in Jammu & Kashmir](/blogs/how-to-rank-business-jammu-kashmir).",
+      "Reporting is in the language of your business: leads, cost per opportunity, revenue, assisted conversions. We will still show impressions when they matter for brand. We will not hide behind them when you asked for pipeline. Tracking usually sits in [Google Analytics](https://marketingplatform.google.com/about/analytics/) and the ad platforms you already own.",
     ],
     pillars: [
       {
@@ -811,7 +811,7 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
       },
     ],
     useCases: [
-      { title: "B2B pipeline", description: "Search + LinkedIn/content + landing proof for longer sales cycles." },
+      { title: "B2B pipeline", description: "Search + [LinkedIn](https://business.linkedin.com/marketing-solutions) content + landing proof for longer sales cycles." },
       { title: "E-commerce", description: "Shopping, retargeting, and SEO category pages measured on contribution margin, not just ROAS screenshots." },
       { title: "Local services", description: "Maps, local SEO, and ads that do not waste budget 400km outside the service area." },
       { title: "SaaS", description: "Product-led content, comparison pages, and paid that respects trial-to-paid reality." },
@@ -868,12 +868,12 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
       },
     ],
   },
-  seo: {
+  "search-engine-optimization": {
     lead: "Search that compounds: technical health, pages that match intent, and authority you will not have to disavow later.",
     intro: [
-      "SEO is still how a lot of high-intent demand shows up — but it only works if the site can be crawled, the pages answer the query, and other sites have a reason to reference you. We run those three together: technical, content, and off-site, with a backlog you can see.",
-      "We start with an audit that is a punch list, not a 90-page souvenir. Quick wins (indexation, titles, internal links, speed) ship first. Content and digital PR run on a horizon that matches how stubborn your SERPs are.",
-      "Reporting is rankings where they matter, qualified organic traffic, and conversions from organic — not a screenshot of a single keyword in position three. If you need local, we treat Maps and the profile as a product, not a side quest.",
+      "SEO is still how a lot of high-intent demand shows up — but it only works if the site can be crawled, the pages answer the query, and other sites have a reason to reference you. We run those three together: technical, content, and off-site, with a backlog you can see. The playbook matches [SEO strategies that actually work](/blogs/seo-strategies-that-actually-work).",
+      "We start with an audit that is a punch list, not a 90-page souvenir. Quick wins (indexation, titles, internal links, speed) ship first — often on the [website](/services/website-development) we also maintain. Content and digital PR run on a horizon that matches how stubborn your SERPs are. We follow [Google Search Central](https://developers.google.com/search) guidance rather than folklore.",
+      "Reporting is rankings where they matter, qualified organic traffic, and conversions from organic — not a screenshot of a single keyword in position three. If you need local, we treat Maps and the profile as a product, not a side quest. Kashmir and J&K businesses can start with our [local SEO](/blogs/local-seo-services-kashmir) notes. Markup uses [Schema.org](https://schema.org) where it earns rich results.",
     ],
     pillars: [
       { title: "Technical that unblocks", text: "Crawl, index, speed, and structure. Content cannot rank if the engine cannot use the page." },
@@ -979,12 +979,12 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "social-media-marketing": {
     lead: "Social that sounds like your brand — planned, designed, and optionally paid — on the platforms your buyers actually open.",
     intro: [
-      "Social is not “posting.” It is a mix of content systems, community behaviour, and sometimes ads. We pick platforms from audience and offer, then build a calendar your team can live with. Inconsistent brilliance loses to consistent, on-brand, slightly boring excellence.",
-      "Creative is native to each network: how people scroll there, what they sound like, what gets muted. We write captions and design (or motion) that belong on the feed, then report on the actions you care about — site visits, leads, saves, not only follower count.",
-      "If paid social is in the mix, it shares the same message architecture as organic so you are not running two companies in public. Community replies are part of the work; a feed with no comments strategy is a broadcast nobody asked for.",
+      "Social is not “posting.” It is a mix of content systems, community behaviour, and sometimes ads. We pick platforms from audience and offer, then build a calendar your team can live with. Inconsistent brilliance loses to consistent, on-brand, slightly boring excellence. Creative systems usually come from [graphic design](/services/graphic-designing).",
+      "Creative is native to each network: how people scroll there, what they sound like, what gets muted. We write captions and design (or motion) that belong on the feed, then report on the actions you care about — site visits, leads, saves, not only follower count. Platform rules live in [Meta Business](https://www.facebook.com/business) for Facebook and Instagram.",
+      "If paid social is in the mix, it shares the same message architecture as organic so you are not running two companies in public — that paid layer is [Meta Ads](/services/meta-ads). Community replies are part of the work; a feed with no comments strategy is a broadcast nobody asked for. E-commerce brands often pair this with [social for online stores](/blogs/ecommerce-business-jammu-kashmir).",
     ],
     pillars: [
-      { title: "Platforms with a job", text: "LinkedIn is not Instagram. We brief each channel as its own product surface." },
+      { title: "Platforms with a job", text: "[Instagram](https://business.instagram.com) is not LinkedIn. We brief each channel as its own product surface." },
       { title: "A calendar you can keep", text: "Volume matched to capacity and quality. Burnout is not a strategy." },
       { title: "Organic + paid as one story", text: "When we run ads, they extend the same pillars — they do not invent a second brand." },
     ],
@@ -1087,9 +1087,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "graphic-designing": {
     lead: "Brand and campaign design with systems — logos, social, product UI, and motion — so you stop reinventing the look every Thursday.",
     intro: [
-      "Design is how people decide whether you look like a real company in half a second. We build the identity and the working files behind it: logo, type, colour, components, and the templates your team will actually use in Canva or Figma next week.",
-      "Campaign work (ads, landing visuals, decks, packaging) sits on that system so paid and organic do not look like different vendors. We work in Figma and Adobe, deliver web and print specs, and include revision rounds in the quote so “one more tweak” is a defined process.",
-      "If you need UI for a product, we design with implementation in mind — spacing, states, and a handoff developers will not have to interpret like archaeology. Motion and short video are available when the channel needs movement, not decoration.",
+      "Design is how people decide whether you look like a real company in half a second. We build the identity and the working files behind it: logo, type, colour, components, and the templates your team will actually use in [Canva](https://www.canva.com) or [Figma](https://www.figma.com) next week.",
+      "Campaign work (ads, landing visuals, decks, packaging) sits on that system so paid and organic do not look like different vendors. We work in Figma and Adobe, deliver web and print specs, and include revision rounds in the quote so “one more tweak” is a defined process. Trends we watch are in [graphic design trends for 2025](/blogs/graphic-design-trends).",
+      "If you need UI for a product, we design with implementation in mind — spacing, states, and a handoff developers will not have to interpret like archaeology. Motion and short video are available when the channel needs movement, not decoration. Marketing pages usually ship with [website development](/services/website-development); social templates with [social media marketing](/services/social-media-marketing).",
     ],
     pillars: [
       { title: "Systems, not one-offs", text: "A kit that scales to ads, decks, and product. Consistency is a cost-saver." },
@@ -1195,9 +1195,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "google-ads": {
     lead: "Google Ads as an acquisition system: structure, tracking, creative, and landing pages — managed for efficient growth, not dashboard theatre.",
     intro: [
-      "Search is intent you can buy. Display and YouTube are attention you can rent. Performance Max is a machine you can feed. None of it works if conversion tracking is a myth, if the account is a pile of duplicate keywords, or if the landing page argues with the ad.",
-      "We build (or rebuild) accounts around your economics: target CPA/ROAS, margins, and sales cycle. Query mapping, negatives, assets, and experiments are the weekly work. Shopping and PMax get product feed hygiene, not “set and pray.”",
-      "You own the account. We explain changes in language a founder can follow. When something is learning, we say it is learning — we do not dress a 40-click sample as a strategy insight.",
+      "Search is intent you can buy. Display and YouTube are attention you can rent. Performance Max is a machine you can feed. None of it works if conversion tracking is a myth, if the account is a pile of duplicate keywords, or if the landing page argues with the ad. We work inside [Google Ads](https://ads.google.com/home/) the way the product is actually structured.",
+      "We build (or rebuild) accounts around your economics: target CPA/ROAS, margins, and sales cycle. Query mapping, negatives, assets, and experiments are the weekly work. Shopping and PMax get product feed hygiene, not “set and pray.” Conversion actions follow [Google’s conversion tracking](https://support.google.com/google-ads/answer/1722022) setup, not a guess.",
+      "You own the account. We explain changes in language a founder can follow. When something is learning, we say it is learning — we do not dress a 40-click sample as a strategy insight. Organic demand is still a [SEO](/services/search-engine-optimization) problem; the page behind the ad is often a [website](/services/website-development) we also ship. For budget ranges, see [SEO pricing in Kashmir](/blogs/seo-pricing-cost-kashmir) when search and paid sit in the same plan.",
     ],
     pillars: [
       { title: "Tracking first", text: "If we cannot measure the conversion, we will not scale. Tag, consent, and CRM as needed." },
@@ -1303,9 +1303,9 @@ export const SERVICE_DETAIL_COPY: Record<string, ServiceDetailCopy> = {
   "meta-ads": {
     lead: "Facebook and Instagram acquisition with creative testing, clean events, and audiences that are not a graveyard of interests from 2019.",
     intro: [
-      "Meta is a creative and signal business. The algorithm needs events it can trust and ads people stop on. We set up (or repair) the pixel, CAPI, and events, then run a testing system: hooks, formats, offers — while the targeting gets simpler, not more baroque.",
-      "We map prospecting, retargeting, and retention to how your funnel actually works. Lead forms versus landing pages is a trade-off we will make explicit (volume vs quality). Catalog and Advantage+ shopping are used when the feed and margin can support them.",
-      "Reporting is cost per result you agreed to, plus creative commentary: what we killed, what we scaled, what we are filming or designing next. You should never wonder whether anyone is looking at the ads besides the algorithm.",
+      "Meta is a creative and signal business. The algorithm needs events it can trust and ads people stop on. We set up (or repair) the [Meta Pixel](https://www.facebook.com/business/tools/meta-pixel), Conversions API, and events, then run a testing system: hooks, formats, offers — while the targeting gets simpler, not more baroque. Creative volume usually comes from [graphic design](/services/graphic-designing).",
+      "We map prospecting, retargeting, and retention to how your funnel actually works. Lead forms versus landing pages is a trade-off we will make explicit (volume vs quality). Catalog and Advantage+ shopping are used when the feed and margin can support them. Campaign types follow [Meta Ads](https://www.facebook.com/business/ads) documentation, not a 2019 interest stack.",
+      "Reporting is cost per result you agreed to, plus creative commentary: what we killed, what we scaled, what we are filming or designing next. You should never wonder whether anyone is looking at the ads besides the algorithm. Organic posting stays with [social media marketing](/services/social-media-marketing); search capture with [Google Ads](/services/google-ads).",
     ],
     pillars: [
       { title: "Events before spend", text: "Pixel + CAPI, de-duped, matching the conversion that pays the bills." },

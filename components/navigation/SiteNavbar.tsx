@@ -66,23 +66,23 @@ const SERVICE_META: Record<string, { icon: LucideIcon; blurb: string }> = {
     icon: TrendingUp,
     blurb: "Full-funnel campaigns that grow demand",
   },
-  "/services/digital-marketing/seo": {
+  "/services/search-engine-optimization": {
     icon: Search,
     blurb: "Rank higher and capture organic traffic",
   },
-  "/services/digital-marketing/social-media-marketing": {
+  "/services/social-media-marketing": {
     icon: Share2,
     blurb: "Content and community that convert",
   },
-  "/services/digital-marketing/graphic-designing": {
+  "/services/graphic-designing": {
     icon: Palette,
     blurb: "Brand, visual identity, and creative assets",
   },
-  "/services/digital-marketing/google-ads": {
+  "/services/google-ads": {
     icon: MousePointerClick,
     blurb: "Search and performance campaigns",
   },
-  "/services/digital-marketing/meta-ads": {
+  "/services/meta-ads": {
     icon: Facebook,
     blurb: "Facebook and Instagram advertising",
   },

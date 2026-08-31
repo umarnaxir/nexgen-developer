@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Facebook, Github, Instagram, Linkedin, MessageCircle, Youtube } from "lucide-react";
 import XIcon from "@/components/icons/XIcon";
+import WhatsAppLink from "@/components/WhatsAppLink";
+import { isWhatsAppHref, normalizeWhatsAppHref } from "@/lib/whatsapp";
 import { getAllServicePagesForFooter } from "@/app/services/config";
 import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
@@ -208,6 +210,23 @@ export default function Footer({ contact, footer }: FooterProps) {
           >
             {socialLinks.map((item) => {
               const Icon = item.icon;
+              const className =
+                "flex h-12 w-12 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-[#d1ac81] sm:h-14 sm:w-14";
+              const icon = (
+                <Icon className="h-5 w-5 text-black sm:h-6 sm:w-6" strokeWidth={2} />
+              );
+              if (isWhatsAppHref(item.href)) {
+                return (
+                  <WhatsAppLink
+                    key={item.label}
+                    href={normalizeWhatsAppHref(item.href)}
+                    aria-label={item.label}
+                    className={className}
+                  >
+                    {icon}
+                  </WhatsAppLink>
+                );
+              }
               return (
                 <a
                   key={item.label}
@@ -215,9 +234,9 @@ export default function Footer({ contact, footer }: FooterProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-[#d1ac81] sm:h-14 sm:w-14"
+                  className={className}
                 >
-                  <Icon className="h-5 w-5 text-black sm:h-6 sm:w-6" strokeWidth={2} />
+                  {icon}
                 </a>
               );
             })}

@@ -10,6 +10,7 @@ export interface SEOProps {
   title?: string;
   exactTitle?: boolean;
   description?: string;
+  exactDescription?: boolean;
   keywords?: string[];
   canonical?: string;
   robots?: {
@@ -117,6 +118,7 @@ export function generateMetadata(seo: SEOProps): Metadata {
     title,
     exactTitle = false,
     description,
+    exactDescription = false,
     keywords,
     canonical,
     robots,
@@ -129,7 +131,9 @@ export function generateMetadata(seo: SEOProps): Metadata {
 
   const canonicalUrl = canonical ? absoluteUrl(canonical) : seoConfig.siteUrl;
   const fullTitle = exactTitle ? title || seoConfig.defaultTitle : buildSeoTitle(title);
-  const metaDescription = buildSeoDescription(description);
+  const metaDescription = exactDescription
+    ? (description || seoConfig.defaultDescription).trim()
+    : buildSeoDescription(description);
   const metaKeywords = uniqueKeywords(keywords);
   const metaRobots = robots ? { ...robots } : { ...seoConfig.defaultRobots };
 
@@ -139,7 +143,9 @@ export function generateMetadata(seo: SEOProps): Metadata {
   const ogTitle = exactTitle
     ? openGraph?.title || title || seoConfig.defaultTitle
     : buildSeoTitle(openGraph?.title || title);
-  const ogDescription = buildSeoDescription(openGraph?.description || description);
+  const ogDescription = exactDescription
+    ? (openGraph?.description || description || seoConfig.defaultDescription).trim()
+    : buildSeoDescription(openGraph?.description || description);
   const ogUrl = openGraph?.url ? absoluteUrl(openGraph.url) : canonicalUrl;
   const brandOgImage = {
     url: seoConfig.defaultOgImage,
@@ -161,7 +167,9 @@ export function generateMetadata(seo: SEOProps): Metadata {
   const twitterTitle = exactTitle
     ? twitter?.title || title || seoConfig.defaultTitle
     : buildSeoTitle(twitter?.title || title);
-  const twitterDescription = buildSeoDescription(twitter?.description || description);
+  const twitterDescription = exactDescription
+    ? (twitter?.description || description || seoConfig.defaultDescription).trim()
+    : buildSeoDescription(twitter?.description || description);
   const twitterImages = twitter?.images?.length
     ? twitter.images.map((image, index) => ({
         url: image.startsWith("http") ? image : absoluteUrl(image),
@@ -190,10 +198,6 @@ export function generateMetadata(seo: SEOProps): Metadata {
     },
     alternates: {
       canonical: alternates?.canonical || canonicalUrl,
-      languages: {
-        "en-IN": canonicalUrl,
-        "x-default": canonicalUrl,
-      },
     },
     openGraph: {
       type: openGraph?.type || "website",

@@ -1,12 +1,14 @@
 import PricingContent from "./components/PricingContent";
 import PricingHero from "./components/PricingHero";
 import PageFAQ from "@/components/seo/PageFAQ";
-import { getPricingSEO } from "@/lib/seo/page-seo";
+import { getPricingSEO, pricingSeoCopy } from "@/lib/seo/page-seo";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { pricingFaqs } from "@/lib/seo/faqs";
 import { pricingPlans } from "./data";
 
-export const metadata = getPricingSEO();
+export function generateMetadata() {
+  return getPricingSEO();
+}
 
 const websiteOffers = pricingPlans
   .filter((plan) => plan.price.startsWith("$"))
@@ -21,8 +23,10 @@ export default function PricingPage() {
     <main className="min-h-screen bg-[#f6f6f4] text-neutral-900">
       <PageJsonLd
         path="/pricing"
-        title="Software Development Pricing Plans"
-        description="See transparent software development pricing from NexGen Developers. Essential, Growth, and Premium plans with clear timelines. Get a tailored quote today."
+        title={pricingSeoCopy.title}
+        description={pricingSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Pricing", url: "/pricing" },

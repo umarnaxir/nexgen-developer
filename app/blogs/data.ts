@@ -9,7 +9,7 @@ export const blogs = [
   },
   {
     title: "Best Practices for Web Development in 2026",
-    slug: "best-practices-for-web-development-in-2025",
+    slug: "best-practices-for-web-development",
     excerpt: "Discover the latest trends and best practices in web development to create modern, responsive websites in 2026.",
     date: "January 15, 2026",
     category: "Web Development",
@@ -41,7 +41,7 @@ export const blogs = [
   },
   {
     title: "Graphic Design Trends for 2026",
-    slug: "graphic-design-trends-for-2025",
+    slug: "graphic-design-trends",
     excerpt: "Stay ahead of the curve with the latest graphic design trends that will shape the visual landscape in 2026.",
     date: "December 22, 2025",
     category: "Design",
