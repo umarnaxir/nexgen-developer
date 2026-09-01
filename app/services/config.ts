@@ -237,7 +237,7 @@ const AI_ML: ServiceDefinition = {
  seo: {
  title: "AI & Machine Learning Development Services | NexGen Developers",
  description:
- "Custom AI and ML development for automation, NLP, and analytics. We design, train, and deploy production-ready models. Talk to NexGen Developers about your use case.",
+ "Custom AI and ML development for automation, NLP, and analytics. We design and deploy production models. Talk to NexGen Developers.",
  keywords: [
  "AI solutions",
  "artificial intelligence development",
@@ -318,7 +318,7 @@ const CHATBOT_DEVELOPMENT: ServiceDefinition = {
  seo: {
  title: "AI Chatbot Development Services | NexGen Developers",
  description:
- "AI chatbot development for websites, WhatsApp, and customer support. NLP, CRM integrations, and 24/7 coverage. Start your chatbot project with NexGen Developers.",
+ "AI chatbot development for websites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start with NexGen Developers.",
  keywords: [
  "chatbot development",
  "AI chatbot",
@@ -397,7 +397,7 @@ const MAINTENANCE_SUPPORT: ServiceDefinition = {
  seo: {
  title: "Website & App Maintenance Services | NexGen Developers",
  description:
- "Ongoing software maintenance with updates, security patches, monitoring, and bug fixes. Keep your product stable after launch. Choose a NexGen Developers support plan.",
+ "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep your product stable with NexGen Developers.",
  keywords: [
  "website maintenance",
  "app maintenance",
@@ -475,7 +475,7 @@ const DEPLOYMENT_DEVOPS: ServiceDefinition = {
  seo: {
  title: "DevOps & Cloud Deployment Services | NexGen Developers",
  description:
- "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, monitoring, and handover. Launch your software securely with NexGen Developers today.",
+ "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, and monitoring. Launch securely with NexGen Developers.",
  keywords: [
  "DevOps services",
  "cloud deployment",
@@ -556,7 +556,7 @@ const DIGITAL_MARKETING: ServiceDefinition = {
  seo: {
  title: "Digital Marketing Agency in India | NexGen Developers",
  description:
- "Full-funnel digital marketing for growing brands: strategy, content, and campaign management across search and social. Book a strategy call with NexGen Developers.",
+ "Full-funnel digital marketing: strategy, content, and campaigns across search and social. Book a strategy call with NexGen Developers.",
  keywords: [
  "digital marketing",
  "digital marketing agency",

@@ -3,8 +3,8 @@ import { absoluteUrl, seoConfig } from "./config";
 
 /** Google typically shows ~50–60 chars for titles. */
 export const SEO_TITLE_MAX = 60;
-/** Google typically shows ~150–160 chars for meta descriptions. */
-export const SEO_DESCRIPTION_MAX = 160;
+/** Keep meta descriptions just under 155 characters for SERP display. */
+export const SEO_DESCRIPTION_MAX = 154;
 
 export interface SEOProps {
   title?: string;
@@ -131,9 +131,10 @@ export function generateMetadata(seo: SEOProps): Metadata {
 
   const canonicalUrl = canonical ? absoluteUrl(canonical) : seoConfig.siteUrl;
   const fullTitle = exactTitle ? title || seoConfig.defaultTitle : buildSeoTitle(title);
-  const metaDescription = exactDescription
-    ? (description || seoConfig.defaultDescription).trim()
-    : buildSeoDescription(description);
+  const metaDescription = truncateAtWord(
+    (description || seoConfig.defaultDescription).trim(),
+    SEO_DESCRIPTION_MAX
+  );
   const metaKeywords = uniqueKeywords(keywords);
   const metaRobots = robots ? { ...robots } : { ...seoConfig.defaultRobots };
 
@@ -143,9 +144,10 @@ export function generateMetadata(seo: SEOProps): Metadata {
   const ogTitle = exactTitle
     ? openGraph?.title || title || seoConfig.defaultTitle
     : buildSeoTitle(openGraph?.title || title);
-  const ogDescription = exactDescription
-    ? (openGraph?.description || description || seoConfig.defaultDescription).trim()
-    : buildSeoDescription(openGraph?.description || description);
+  const ogDescription = truncateAtWord(
+    (openGraph?.description || description || seoConfig.defaultDescription).trim(),
+    SEO_DESCRIPTION_MAX
+  );
   const ogUrl = openGraph?.url ? absoluteUrl(openGraph.url) : canonicalUrl;
   const brandOgImage = {
     url: seoConfig.defaultOgImage,
@@ -167,9 +169,10 @@ export function generateMetadata(seo: SEOProps): Metadata {
   const twitterTitle = exactTitle
     ? twitter?.title || title || seoConfig.defaultTitle
     : buildSeoTitle(twitter?.title || title);
-  const twitterDescription = exactDescription
-    ? (twitter?.description || description || seoConfig.defaultDescription).trim()
-    : buildSeoDescription(twitter?.description || description);
+  const twitterDescription = truncateAtWord(
+    (twitter?.description || description || seoConfig.defaultDescription).trim(),
+    SEO_DESCRIPTION_MAX
+  );
   const twitterImages = twitter?.images?.length
     ? twitter.images.map((image, index) => ({
         url: image.startsWith("http") ? image : absoluteUrl(image),

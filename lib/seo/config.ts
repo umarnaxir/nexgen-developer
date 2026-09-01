@@ -18,7 +18,7 @@ export const seoConfig = {
 
   defaultTitle: `${brand.name} | Web, App, AI & Marketing Studio in India`,
   defaultDescription:
-    "NexGen Developers builds websites, apps, AI tools, and marketing campaigns for startups and local brands. Based in Kashmir, serving clients worldwide. Start your project today.",
+    "NexGen Developers builds websites, apps, AI tools, and marketing campaigns for startups and local brands. Based in Kashmir. Start your project today.",
   defaultKeywords: [
     brand.name,
     "software development services",

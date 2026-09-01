@@ -8,25 +8,25 @@ const brandOg = {
 export const homeSeoCopy = {
   title: "NexGen Developers | Web, App, AI & Marketing Studio in India",
   description:
-    "NexGen Developers builds websites, apps, AI tools, and marketing campaigns for startups and local brands. Based in Kashmir, serving clients worldwide. Start your project today.",
+    "NexGen Developers builds websites, apps, AI tools, and marketing campaigns for startups and local brands. Based in Kashmir. Start your project today.",
 } as const;
 
 export const servicesSeoCopy = {
   title: "All Software Development & Marketing Services - NexGen Developers",
   description:
-    "Compare NexGen Developers' full service list: websites, apps, AI/ML, chatbots, DevOps, SEO, and paid marketing. Find the right service for your project and get a free quote.",
+    "Compare NexGen Developers services: websites, apps, AI/ML, chatbots, DevOps, SEO, and ads. Find the right fit and get a free quote.",
 } as const;
 
 export const aboutSeoCopy = {
   title: "About NexGen Developers | Web, App & AI Studio in Kashmir",
   description:
-    "NexGen Developers is a collective of engineers, designers, and marketers helping startups and local brands build, launch, and grow. Learn about our process and team.",
+    "NexGen Developers is a studio of engineers, designers, and marketers helping startups and local brands build, launch, and grow.",
 } as const;
 
 export const teamSeoCopy = {
   title: "Meet Our Team | NexGen Developers",
   description:
-    "Meet the engineers, designers, AI specialists, and marketers behind NexGen Developers — a collaborative freelance collective building digital products for growing brands.",
+    "Meet the engineers, designers, AI specialists, and marketers at NexGen Developers building digital products for growing brands.",
 } as const;
 
 export const projectsSeoCopy = {
@@ -44,7 +44,7 @@ export const blogsSeoCopy = {
 export const pricingSeoCopy = {
   title: "Pricing & Engagement Models | NexGen Developers",
   description:
-    "Project-based, hourly, or retainer — see how NexGen Developers prices website, app, AI, and marketing engagements. Get a transparent quote for your project today.",
+    "See how NexGen Developers prices website, app, AI, and marketing work—project, hourly, or retainer. Get a clear quote today.",
 } as const;
 
 export const privacySeoCopy = {
