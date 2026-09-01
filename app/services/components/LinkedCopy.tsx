@@ -6,6 +6,8 @@ const LINK_CLASS =
 
 /** Renders [label](url) in service copy without changing surrounding typography. */
 export default function LinkedCopy({ text }: { text: string }) {
+  if (!text) return null;
+
   const nodes: ReactNode[] = [];
   const pattern = /\[([^\]]+)\]\(([^)]+)\)/g;
   let lastIndex = 0;
