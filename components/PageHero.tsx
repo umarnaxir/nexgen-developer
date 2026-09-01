@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useContactModal } from "@/components/modals/ContactModalProvider";
 
@@ -78,8 +76,6 @@ export default function PageHero({
   variant = "light",
   size = "default",
 }: PageHeroProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const copyRef = useRef<HTMLDivElement>(null);
   const { open: openContactModal } = useContactModal();
   const isDark = variant === "dark";
   const isCompact = size === "compact";
@@ -91,26 +87,6 @@ export default function PageHero({
   const heightClass = isCompact
     ? "min-h-[min(50svh,34rem)]"
     : "min-h-[min(70svh,48rem)]";
-
-  useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      if (!copyRef.current) return;
-      gsap.from(copyRef.current.children, {
-        y: 22,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.08,
-        ease: "power3.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const renderCta = (cta: PageHeroCta, tone: "primary" | "outline-light" | "gold") => (
     <MagneticButton
@@ -130,7 +106,6 @@ export default function PageHero({
 
   return (
     <header
-      ref={sectionRef}
       className={
         isDark
           ? `relative z-0 flex ${heightClass} flex-col overflow-hidden bg-[#0e0d0d] pt-[var(--site-nav-height)] text-white`
@@ -155,10 +130,7 @@ export default function PageHero({
       )}
 
       <div className="page-gutter relative z-10 flex flex-1 items-center py-[clamp(1.5rem,4vh,2.5rem)]">
-        <div
-          ref={copyRef}
-          className="content-cap flex flex-col items-start text-left md:items-center md:text-center"
-        >
+        <div className="hero-copy-in content-cap flex flex-col items-start text-left md:items-center md:text-center">
           <span
             className={`text-[11px] font-medium uppercase tracking-[0.35em] ${
               isDark ? "text-gold" : "text-gold-dark"

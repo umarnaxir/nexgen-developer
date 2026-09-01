@@ -10,7 +10,7 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import { GoogleTagManager, GoogleTagManagerNoscript } from "@/components/GoogleTagManager";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { getContactInfo, getFooterSettings } from "@/lib/content/store";
-import { getSession } from "@/lib/admin/auth";
+import Footer from "@/components/Footer/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -65,6 +65,8 @@ export function generateMetadata() {
   };
 }
 
+export const revalidate = 3600;
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -79,10 +81,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [contact, footer, session] = await Promise.all([
+  const [contact, footer] = await Promise.all([
     getContactInfo(),
     getFooterSettings(),
-    getSession(),
   ]);
 
   return (
@@ -98,9 +99,7 @@ export default async function RootLayout({
           <AOSInit />
           <Toaster position="top-right" richColors />
           <LayoutWrapper
-            contact={contact}
-            footer={footer}
-            isAdminLoggedIn={Boolean(session)}
+            footer={<Footer contact={contact} footer={footer} />}
           >
             {children}
           </LayoutWrapper>

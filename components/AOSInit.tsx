@@ -2,37 +2,57 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 /**
- * Global AOS — once:true, smooth ease.
- * Skipped on pin/GSAP-heavy sections by simply not adding data-aos there
- * (Selected Work pin, home Services pin, service-detail GSAP hero).
+ * Load AOS after idle so it is not in the main JS payload Googlebot downloads.
  */
 export default function AOSInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    AOS.init({
-      duration: 780,
-      once: true,
-      offset: 64,
-      delay: 0,
-      easing: "ease-out-cubic",
-      mirror: false,
-      anchorPlacement: "top-bottom",
-      disable: () =>
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    void document.fonts?.ready.then(() => AOS.refreshHard());
+    let cancelled = false;
+
+    const load = async () => {
+      const [{ default: AOS }] = await Promise.all([
+        import("aos"),
+        import("aos/dist/aos.css"),
+      ]);
+      if (cancelled) return;
+      AOS.init({
+        duration: 780,
+        once: true,
+        offset: 64,
+        delay: 0,
+        easing: "ease-out-cubic",
+        mirror: false,
+        anchorPlacement: "top-bottom",
+      });
+      void document.fonts?.ready.then(() => {
+        if (!cancelled) AOS.refreshHard();
+      });
+    };
+
+    const w = window;
+    const idleId =
+      typeof w.requestIdleCallback === "function"
+        ? w.requestIdleCallback(() => void load(), { timeout: 2500 })
+        : w.setTimeout(() => void load(), 1);
+
+    return () => {
+      cancelled = true;
+      if (typeof w.requestIdleCallback === "function") {
+        w.cancelIdleCallback(idleId as number);
+      } else {
+        w.clearTimeout(idleId as number);
+      }
+    };
   }, []);
 
   useEffect(() => {
     const id = window.setTimeout(() => {
-      AOS.refreshHard();
+      void import("aos").then(({ default: AOS }) => AOS.refreshHard());
     }, 80);
     return () => window.clearTimeout(id);
   }, [pathname]);

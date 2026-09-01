@@ -1,32 +1,50 @@
 "use client";
 
+import { useEffect, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import SiteNavigation from "@/components/navigation/SiteNavigation";
-import Footer from "@/components/Footer/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
 import ContactModalProvider from "@/components/modals/ContactModalProvider";
-import type { ContactInfo, FooterSettings } from "@/lib/content/types";
 
 const ChatWidget = dynamic(() => import("@/components/chat/ChatWidget"), {
   ssr: false,
 });
 
-interface LayoutWrapperProps {
-  children: React.ReactNode;
-  contact: ContactInfo;
-  footer: FooterSettings;
-  isAdminLoggedIn?: boolean;
+function DeferredChatWidget() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const enable = () => setReady(true);
+    const w = window;
+    const idleId =
+      typeof w.requestIdleCallback === "function"
+        ? w.requestIdleCallback(enable, { timeout: 4000 })
+        : w.setTimeout(enable, 2500);
+
+    w.addEventListener("pointerdown", enable, { once: true, passive: true });
+    w.addEventListener("keydown", enable, { once: true });
+
+    return () => {
+      if (typeof w.requestIdleCallback === "function") {
+        w.cancelIdleCallback(idleId as number);
+      } else {
+        w.clearTimeout(idleId as number);
+      }
+      w.removeEventListener("pointerdown", enable);
+      w.removeEventListener("keydown", enable);
+    };
+  }, []);
+
+  if (!ready) return null;
+  return <ChatWidget />;
 }
 
-const SHOW_WHATSAPP_BUTTON = false;
+interface LayoutWrapperProps {
+  children: ReactNode;
+  footer: ReactNode;
+}
 
-export default function LayoutWrapper({
-  children,
-  contact,
-  footer,
-  isAdminLoggedIn = false,
-}: LayoutWrapperProps) {
+export default function LayoutWrapper({ children, footer }: LayoutWrapperProps) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
   const isBlogPost = Boolean(pathname?.startsWith("/blogs/") && pathname.length > "/blogs/".length);
@@ -37,7 +55,7 @@ export default function LayoutWrapper({
 
   return (
     <ContactModalProvider>
-      <SiteNavigation isAdminLoggedIn={isAdminLoggedIn} />
+      <SiteNavigation />
       <div
         id="layout-root"
         className={`page-bg relative min-h-screen min-w-0 bg-background text-foreground ${
@@ -46,11 +64,10 @@ export default function LayoutWrapper({
       >
         <div className="page-with-navbar relative z-10 min-w-0">
           <div className={`min-w-0 flex-1 ${isBlogPost ? "" : "overflow-x-clip"}`}>{children}</div>
-          <Footer contact={contact} footer={footer} />
-          {SHOW_WHATSAPP_BUTTON && <WhatsAppButton />}
+          {footer}
         </div>
       </div>
-      <ChatWidget />
+      <DeferredChatWidget />
     </ContactModalProvider>
   );
 }

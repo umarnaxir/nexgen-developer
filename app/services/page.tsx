@@ -12,7 +12,7 @@ import { servicesIndexFaqs } from "@/lib/seo/faqs";
 export function generateMetadata() {
   return getServicesSEO();
 }
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default function ServicesPage() {
   const services = getServicesForListingServer();

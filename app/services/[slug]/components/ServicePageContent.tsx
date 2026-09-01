@@ -1,5 +1,3 @@
-"use client";
-
 import ServiceLayout from "../../components/ServiceLayout";
 import ServicePageSchema from "@/components/seo/ServicePageSchema";
 import { getServicePageCopy, mergeServiceFaqs } from "../../lib/get-service-page-copy";

@@ -9,7 +9,12 @@ import { getBlogBySlug, getBlogs } from "@/lib/content/store";
 import { buildSeoDescription, buildSeoTitle } from "@/lib/seo/utils";
 import { buildBlogToc, type BlogPostType } from "./data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const blogs = await getBlogs();
+  return blogs.map((blog) => ({ slug: blog.slug }));
+}
 
 type PageProps = {
   params: Promise<{ slug: string }>;

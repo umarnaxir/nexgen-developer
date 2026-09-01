@@ -11,6 +11,8 @@ export function generateMetadata() {
   return getTermsSEO();
 }
 
+export const revalidate = 3600;
+
 export default function TermsPage() {
   return (
     <main className="min-h-screen">

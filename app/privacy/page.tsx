@@ -11,6 +11,8 @@ export function generateMetadata() {
   return getPrivacySEO();
 }
 
+export const revalidate = 3600;
+
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen">

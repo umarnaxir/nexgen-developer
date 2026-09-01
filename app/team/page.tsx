@@ -11,7 +11,7 @@ import { teamFaqs } from "@/lib/seo/faqs";
 export function generateMetadata() {
   return getTeamSEO();
 }
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function TeamPage() {
   const teamMembers = await getTeamMembers();

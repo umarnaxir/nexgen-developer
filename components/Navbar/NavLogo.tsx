@@ -12,14 +12,15 @@ export default function NavLogo({
   scrolled?: boolean;
 }) {
   return (
-    <Link href="/" className="flex items-center gap-3 shrink-0 py-1 sm:py-1.5 hover:scale-105 active:scale-95 transition-transform duration-300">
-      <span className="relative block h-10 w-[3.47rem] sm:h-11 sm:w-[3.82rem]">
+    <Link href="/" className="relative z-20 flex shrink-0 items-center gap-3 py-1 transition-transform duration-300 hover:scale-105 active:scale-95 sm:py-1.5">
+      <span className="relative block h-9 w-[3.12rem] overflow-hidden">
         <Image
           src="/logo/logo-01.png"
           alt="NexGen Developers"
           width={580}
           height={418}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+          sizes="50px"
+          className={`absolute inset-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
             scrolled ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
           priority
@@ -29,7 +30,8 @@ export default function NavLogo({
           alt=""
           width={580}
           height={418}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+          sizes="50px"
+          className={`absolute inset-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
             scrolled ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
           aria-hidden={!scrolled}

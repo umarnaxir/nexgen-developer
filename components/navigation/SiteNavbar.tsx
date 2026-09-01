@@ -26,10 +26,6 @@ import { useContactModal } from "@/components/modals/ContactModalProvider";
 import { getServicesNavItems, type NavServiceItem } from "@/app/services/config";
 import { sidebarLinks } from "./nav-config";
 
-type SiteNavbarProps = {
-  isAdminLoggedIn?: boolean;
-};
-
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -143,7 +139,7 @@ function ServiceMenuLink({
 }
 
 function navItemClass(active: boolean, solid: boolean) {
-  return `relative px-2.5 py-1.5 text-[13px] tracking-[-0.01em] transition-colors duration-200 ${
+  return `relative px-2.5 py-1 text-[13px] tracking-[-0.01em] transition-colors duration-200 ${
     active
       ? "font-bold text-gold after:absolute after:inset-x-1 after:bottom-0 after:h-[1.5px] after:bg-gold"
       : solid
@@ -152,12 +148,13 @@ function navItemClass(active: boolean, solid: boolean) {
   }`;
 }
 
-export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps) {
+export default function SiteNavbar() {
   const pathname = usePathname();
   const { open: openContactModal } = useContactModal();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(pathname.startsWith("/services"));
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -224,6 +221,20 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/admin/auth/me", { credentials: "include" })
+      .then((res) => {
+        if (!cancelled) setIsAdminLoggedIn(res.ok);
+      })
+      .catch(() => {
+        if (!cancelled) setIsAdminLoggedIn(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const servicesActive = pathname.startsWith("/services");
   const isDarkHero =
     pathname === "/about" ||
@@ -260,14 +271,15 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
     >
       <div className="page-gutter">
         <div className="content-cap flex h-[var(--site-nav-height)] items-center justify-between gap-4">
-        <Link href="/" className="relative shrink-0" aria-label="NexGen Developers home">
-          <span className="relative block h-10 w-[3.47rem] sm:h-11 sm:w-[3.82rem]">
+        <Link href="/" className="relative z-20 shrink-0" aria-label="NexGen Developers home">
+          <span className="relative block h-9 w-[3.12rem] overflow-hidden">
             <Image
               src="/logo/logo-01.png"
               alt="NexGen Developers"
               width={580}
               height={418}
-              className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+              sizes="50px"
+              className={`absolute inset-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                 solid ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
               priority
@@ -277,7 +289,8 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
               alt=""
               width={580}
               height={418}
-              className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
+              sizes="50px"
+              className={`absolute inset-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                 solid ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
               aria-hidden={!solid}
@@ -390,7 +403,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
           {isAdminLoggedIn ? (
             <Link
               href="/admin/dashboard"
-              className="btn-gold inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold"
+              className="btn-gold inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold"
             >
               Admin
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -399,7 +412,7 @@ export default function SiteNavbar({ isAdminLoggedIn = false }: SiteNavbarProps)
             <button
               type="button"
               onClick={openContactModal}
-              className="btn-gold inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold"
+              className="btn-gold inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold"
             >
               Start a project
               <ArrowUpRight className="h-3.5 w-3.5" />

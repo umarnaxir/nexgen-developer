@@ -8,7 +8,7 @@ import Link from "next/link";
 export function generateMetadata() {
   return getBlogsSEO();
 }
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type PageProps = {
   searchParams: Promise<{ category?: string }>;

@@ -9,7 +9,7 @@ import { contactFaqs } from "@/lib/seo/faqs";
 export function generateMetadata() {
   return getContactUsSEO();
 }
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function ContactUsPage() {
   const [contact, footer] = await Promise.all([

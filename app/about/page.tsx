@@ -15,6 +15,8 @@ export function generateMetadata() {
   return getAboutSEO();
 }
 
+export const revalidate = 3600;
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen">

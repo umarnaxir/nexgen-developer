@@ -26,7 +26,7 @@ export default function Hamburger({
   return (
     <button
       onClick={onClick}
-      className="relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-background rounded-md shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200"
+      className="relative flex h-9 w-9 items-center justify-center rounded-md shrink-0 transition-transform duration-200 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold/60 focus:ring-offset-2 focus:ring-offset-background"
       aria-label={isOpen ? "Close menu" : "Open menu"}
     >
       <div

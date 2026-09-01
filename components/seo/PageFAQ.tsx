@@ -1,5 +1,3 @@
-"use client";
-
 import FAQAccordion from "@/components/FAQAccordion";
 import type { FAQItem } from "@/lib/seo/faq-schema";
 

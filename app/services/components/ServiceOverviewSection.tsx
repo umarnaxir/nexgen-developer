@@ -24,7 +24,7 @@ export default function ServiceOverviewSection({
       className="service-section-anchor section-light border-t border-black/[0.06] section-y"
     >
       <div className="section-container">
-        <div className="mx-auto max-w-3xl lg:mx-0 lg:max-w-4xl">
+        <div className="w-full min-w-0">
           <ServiceReveal>
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Overview

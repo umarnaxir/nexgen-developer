@@ -10,6 +10,8 @@ export function generateMetadata() {
   return getPricingSEO();
 }
 
+export const revalidate = 3600;
+
 const websiteOffers = pricingPlans
   .filter((plan) => plan.price.startsWith("$"))
   .map((plan) => ({
