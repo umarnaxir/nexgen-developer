@@ -1,5 +1,3 @@
-"use client";
-
 import { Shield, Database, Eye, Lock, Share2, Cookie, UserCheck, FileText } from "lucide-react";
 import PrivacySection from "./PrivacySection";
 

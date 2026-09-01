@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ServiceReveal } from "./ServiceMotion";
+import LinkedCopy from "./LinkedCopy";
 import type { ServiceProcessStep } from "../lib/service-detail-copy";
 
 interface ServiceProcessSectionProps {
@@ -65,7 +66,7 @@ export default function ServiceProcessSection({ steps }: ServiceProcessSectionPr
                   {step.title}
                 </h3>
                 <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-black/55 sm:text-base">
-                  {step.description}
+                  <LinkedCopy text={step.description} />
                 </p>
               </div>
             </motion.li>

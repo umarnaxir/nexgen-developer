@@ -1,12 +1,14 @@
 import BlogsGrid from "./components/BlogsGrid";
 import BlogsHero from "./components/BlogsHero";
-import { getBlogsSEO } from "@/lib/seo/page-seo";
+import { getBlogsSEO, blogsSeoCopy } from "@/lib/seo/page-seo";
 import { getBlogs } from "@/lib/content/store";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import Link from "next/link";
 
-export const metadata = getBlogsSEO();
-export const dynamic = "force-dynamic";
+export function generateMetadata() {
+  return getBlogsSEO();
+}
+export const revalidate = 3600;
 
 type PageProps = {
   searchParams: Promise<{ category?: string }>;
@@ -25,11 +27,13 @@ export default async function BlogsPage({ searchParams }: PageProps) {
   const visible = filtered.length > 0 ? filtered : blogs;
 
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <PageJsonLd
         path="/blogs"
-        title="Software Development Insights Blog"
-        description="Read the NexGen Developers blog on software development, AI, SEO, and product delivery. Practical guides for startups. Explore the latest articles today."
+        title={blogsSeoCopy.title}
+        description={blogsSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Blog", url: "/blogs" },
@@ -77,6 +81,6 @@ export default async function BlogsPage({ searchParams }: PageProps) {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -44,3 +44,13 @@ export function sanitizeInput(input: string, maxLength: number = 500): string {
   }
   return sanitized;
 }
+
+/** Empty or whitespace-only project live URLs are treated as missing. */
+export function projectLiveHref(link?: string | null): string | null {
+  const value = (link ?? "").trim();
+  return value || null;
+}
+
+export function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}

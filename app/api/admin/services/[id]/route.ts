@@ -16,11 +16,7 @@ function revalidateServicePaths(service?: ServiceRecord) {
   revalidatePath("/");
   revalidatePath("/services");
   if (service) {
-    if (service.parentSlug === "digital-marketing") {
-      revalidatePath(`/services/digital-marketing/${service.slug}`);
-    } else {
-      revalidatePath(`/services/${service.slug}`);
-    }
+    revalidatePath(`/services/${service.slug}`);
   }
 }
 
@@ -113,7 +109,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
       body.label !== undefined ? String(body.label).trim() : current.label;
     const slug =
       body.slug !== undefined
-        ? String(body.slug).trim() || slugify(label)
+        ? slugify(String(body.slug).trim() || label)
         : current.slug;
 
     const parentRaw =

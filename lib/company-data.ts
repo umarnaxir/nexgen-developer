@@ -118,7 +118,7 @@ export const companyData = {
       description: "A coaching platform built to convert visitors into enrolled students.",
       category: "Education",
       technologies: ["Next.js", "TypeScript", "NestJS", "MongoDB"],
-      link: "https://exceptionaliasacademy.vercel.app/",
+      link: "https://www.exceptionaliasacademy.com/",
     },
     {
       title: "ShoesHub Poonch",
@@ -167,7 +167,7 @@ export const companyData = {
       description: "A nonprofit website highlighting mission, team, and donation support.",
       category: "Nonprofit",
       technologies: ["Next.js", "React", "TypeScript", "Payment Gateway"],
-      link: "https://kindnesstowardshumanity.in",
+      link: "/projects",
     },
     {
       title: "Code2Concept",

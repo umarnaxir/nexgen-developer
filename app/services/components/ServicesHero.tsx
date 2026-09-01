@@ -1,23 +1,28 @@
 "use client";
 
-import { Bot, Globe, Megaphone, Wrench } from "lucide-react";
+import { Bot, Cloud, Globe, Megaphone } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
-export default function ServicesHero() {
+type ServicesHeroProps = {
+  title: string;
+};
+
+export default function ServicesHero({ title }: ServicesHeroProps) {
   return (
     <PageHero
       eyebrow="Services"
-      title={"Services that scale."}
-      highlight="scale."
-      description="Professional software development services in India and all over the world. Custom products, AI, chatbots, SEO, and digital marketing in one studio. We ship work that looks premium and performs in the real world."
+      title={title}
+      highlight="NexGen Developers"
+      description="Compare NexGen Developers’ full software development and marketing services: websites, apps, AI/ML, chatbots, DevOps, SEO, and paid campaigns. One studio for build, launch, and growth — get a free quote when you are ready."
       pills={[
-        { label: "Web & Apps", icon: Globe },
-        { label: "AI & Chatbots", icon: Bot },
-        { label: "Growth", icon: Megaphone },
-        { label: "Care", icon: Wrench },
+        { label: "Development", icon: Globe },
+        { label: "AI & ML", icon: Bot },
+        { label: "DevOps", icon: Cloud },
+        { label: "Marketing", icon: Megaphone },
       ]}
       primaryCta={{ label: "Start a project", openContact: true }}
       secondaryCta={{ label: "Browse services", href: "#services-list" }}
+      size="compact"
     />
   );
 }

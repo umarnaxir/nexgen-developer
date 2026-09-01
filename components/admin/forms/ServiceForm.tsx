@@ -25,9 +25,12 @@ function slugify(value: string) {
   return value
     .toLowerCase()
     .trim()
+    .replace(/\b(?:in|for)[- ](?:19|20)\d{2}\b/g, "")
+    .replace(/\b(?:19|20)\d{2}\b/g, "")
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 type ProcessStep = { title: string; description: string };

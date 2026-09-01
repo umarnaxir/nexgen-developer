@@ -6,7 +6,7 @@ import { Calendar, ExternalLink, Pencil, Star, Trash2, Users } from "lucide-reac
 import { resolveProjectIcon } from "@/lib/content/project-icons";
 import { AdminButton } from "@/components/admin/ui/AdminButton";
 import type { Project } from "@/lib/content/types";
-import { cn } from "@/lib/utils";
+import { cn, isExternalHref, projectLiveHref } from "@/lib/utils";
 
 type AdminProjectCardProps = {
   project: Project;
@@ -22,6 +22,7 @@ export function AdminProjectCard({
   onDelete,
 }: AdminProjectCardProps) {
   const Icon = resolveProjectIcon(project.icon);
+  const liveHref = projectLiveHref(project.link);
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-gold/25 bg-white shadow-[0_24px_64px_-40px_rgba(230,201,166,0.45)] transition hover:-translate-y-0.5 hover:border-gold hover:shadow-[0_28px_72px_-36px_rgba(230,201,166,0.65)]">
@@ -95,16 +96,26 @@ export function AdminProjectCard({
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2 border-t border-gold/15 pt-4">
-          {project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-medium text-gold-dark hover:text-primary"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              Live site
-            </a>
+          {liveHref ? (
+            isExternalHref(liveHref) ? (
+              <a
+                href={liveHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-medium text-gold-dark hover:text-primary"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+                Live site
+              </a>
+            ) : (
+              <Link
+                href={liveHref}
+                className="inline-flex items-center gap-1 text-xs font-medium text-gold-dark hover:text-primary"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+                Live site
+              </Link>
+            )
           ) : null}
           <div className="ml-auto flex gap-2">
             <Link href={`/admin/projects/${project.id}`}>
@@ -149,10 +160,7 @@ export function AdminServiceCard({
   canDelete,
   onDelete,
 }: AdminServiceCardProps) {
-  const href =
-    service.parentSlug === "digital-marketing"
-      ? `/services/digital-marketing/${service.slug}`
-      : `/services/${service.slug}`;
+  const href = `/services/${service.slug}`;
 
   return (
     <article className="overflow-hidden rounded-2xl border border-gold/25 bg-white shadow-sm transition hover:border-gold hover:shadow-md">

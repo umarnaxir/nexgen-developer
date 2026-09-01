@@ -1,168 +1,172 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
-import type { ServiceCategory, ServiceListingItem } from "../config";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { ServiceListingItem } from "../config";
 import ServiceCard from "./ServiceCard";
+import { cn } from "@/lib/utils";
 
-const CATEGORY_LABELS: Record<ServiceCategory, string> = {
-  development: "Development",
-  "digital-marketing": "Digital Marketing",
-  support: "Support",
+type ListingCategory = "development" | "devops" | "digital-marketing";
+
+const CATEGORIES: { id: ListingCategory; label: string; description: string }[] = [
+  {
+    id: "development",
+    label: "Development",
+    description:
+      "Custom websites, mobile apps, and AI products with architecture, UI, and launch handled as one product.",
+  },
+  {
+    id: "devops",
+    label: "DevOps",
+    description:
+      "Cloud, CI/CD, and maintenance so releases stay predictable after you go live.",
+  },
+  {
+    id: "digital-marketing",
+    label: "Digital Marketing",
+    description:
+      "SEO, ads, social, and design that share one brief with the product we ship.",
+  },
+];
+
+const CATEGORY_SLUGS: Record<ListingCategory, string[]> = {
+  development: [
+    "website-development",
+    "app-development",
+    "ai-ml",
+    "chatbot-development",
+  ],
+  devops: ["deployment-devops", "maintenance-support"],
+  "digital-marketing": [
+    "digital-marketing",
+    "search-engine-optimization",
+    "social-media-marketing",
+    "graphic-designing",
+    "google-ads",
+    "meta-ads",
+  ],
 };
-
-const CATEGORIES: ServiceCategory[] = ["development", "digital-marketing", "support"];
 
 type ServicesListProps = {
   services: ServiceListingItem[];
 };
 
 export default function ServicesList({ services }: ServicesListProps) {
-  const [activeTab, setActiveTab] = useState<ServiceCategory>("development");
+  const [activeTab, setActiveTab] = useState<ListingCategory>("development");
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
+  const filteredServices = useMemo(() => {
+    const slugs = CATEGORY_SLUGS[activeTab];
+    return slugs
+      .map((slug) => services.find((service) => service.slug === slug))
+      .filter((service): service is ServiceListingItem => Boolean(service));
+  }, [activeTab, services]);
 
-  const filteredServices = services.filter((s) => s.category === activeTab);
+  const activeMeta = CATEGORIES.find((category) => category.id === activeTab)!;
 
   useEffect(() => {
-    registerGsapPlugins();
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sectionRef.current || !pinRef.current || !trackRef.current || !viewportRef.current) {
-      return;
-    }
-
-    gsap.set(trackRef.current, { x: 0 });
-    if (progressRef.current) {
-      progressRef.current.style.transform = "scaleX(0.015)";
-    }
-
-    const getScrollAmount = () => {
-      const track = trackRef.current;
-      const viewport = viewportRef.current;
-      if (!track || !viewport) return 0;
-      return Math.max(track.scrollWidth - viewport.offsetWidth, 0);
-    };
-
-    const updateProgress = (progress: number) => {
-      if (progressRef.current) {
-        progressRef.current.style.transform = `scaleX(${Math.max(progress, 0.015)})`;
-      }
-    };
-
-    const ctx = gsap.context(() => {
-      gsap.to(trackRef.current, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => `+=${Math.max(getScrollAmount(), window.innerHeight * 0.5)}`,
-          pin: pinRef.current,
-          scrub: true,
-          pinSpacing: true,
-          invalidateOnRefresh: true,
-          fastScrollEnd: true,
-          onUpdate: (self) => updateProgress(self.progress),
-        },
-      });
-    }, sectionRef);
-
-    let nestedRaf = 0;
-    const refreshRaf = requestAnimationFrame(() => {
-      nestedRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
-    });
-
-    return () => {
-      cancelAnimationFrame(refreshRaf);
-      cancelAnimationFrame(nestedRaf);
-      ctx.revert();
-    };
+    scrollerRef.current?.scrollTo({ left: 0, behavior: "auto" });
   }, [activeTab]);
+
+  const scrollByDir = (dir: -1 | 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const amount = Math.min(el.clientWidth * 0.85, 360);
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
 
   return (
     <section
-      ref={sectionRef}
       id="services-list"
-      className="section-light relative text-primary"
-      aria-label="Services listing"
+      className="section-light relative border-t border-black/[0.06] section-y text-primary"
+      aria-labelledby="services-list-heading"
     >
-      <div
-        ref={pinRef}
-        className="page-gutter relative flex min-h-[min(48rem,max(30rem,calc(100svh-var(--site-nav-height))))] flex-col justify-center py-8 sm:py-10 lg:min-h-[min(48rem,max(34rem,calc(92svh-var(--site-nav-height))))] lg:py-10"
-      >
-        <div className="content-cap flex flex-1 flex-col justify-center">
-        <div className="mb-5 flex w-full shrink-0 flex-col gap-4 sm:mb-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="section-container">
+        <div className="mb-6 flex flex-col gap-5 lg:mb-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-text-gray">
-              What we offer
+              Catalog
             </span>
             <h2
               id="services-list-heading"
-              className="mt-4 text-fluid-h1 font-semibold tracking-[-0.03em] text-primary"
+              className="mt-3 text-[clamp(1.75rem,1.1rem+2.4vw,2.5rem)] font-semibold tracking-[-0.03em] text-primary"
             >
-              Our services
+              Browse by category
             </h2>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-text-gray">
+              {activeMeta.description}
+            </p>
           </div>
 
-          <div className="flex flex-col gap-4 sm:items-end">
-            <div
-              className="flex max-w-full flex-nowrap gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              role="tablist"
-              aria-label="Service categories"
-            >
-              {CATEGORIES.map((category) => (
+          <div
+            className="flex max-w-full flex-nowrap gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            role="tablist"
+            aria-label="Service categories"
+          >
+            {CATEGORIES.map((category) => {
+              const selected = activeTab === category.id;
+              return (
                 <button
-                  key={category}
+                  key={category.id}
                   type="button"
                   role="tab"
-                  aria-selected={activeTab === category}
-                  aria-controls={`tabpanel-${category}`}
-                  id={`tab-${category}`}
-                  onClick={() => setActiveTab(category)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 pointer-coarse:min-h-11 ${
-                    activeTab === category
+                  aria-selected={selected}
+                  aria-controls="services-category-panel"
+                  id={`tab-${category.id}`}
+                  onClick={() => setActiveTab(category.id)}
+                  className={cn(
+                    "shrink-0 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.16em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold pointer-coarse:min-h-11",
+                    selected
                       ? "bg-gold text-primary"
                       : "border border-gold/35 bg-gold/10 text-text-gray hover:border-gold hover:text-gold-dark"
-                  }`}
+                  )}
                 >
-                  {CATEGORY_LABELS[category]}
+                  {category.label}
                 </button>
-              ))}
-            </div>
-
-            <div className="hidden items-center gap-4 sm:flex">
-              <span className="text-sm tabular-nums text-text-gray">
-                {String(filteredServices.length).padStart(2, "0")} services
-              </span>
-              <div className="h-px w-28 overflow-hidden bg-gold/15 sm:w-40">
-                <div
-                  ref={progressRef}
-                  className="h-full origin-left bg-gold-dark"
-                  style={{ transform: "scaleX(0.015)" }}
-                />
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
 
         <div
-          ref={viewportRef}
-          className="services-viewport overflow-hidden"
           role="tabpanel"
-          id={`tabpanel-${activeTab}`}
+          id="services-category-panel"
           aria-labelledby={`tab-${activeTab}`}
         >
-          <div ref={trackRef} className="flex w-max gap-2.5 will-change-transform sm:gap-3 lg:gap-4">
+          <p className="mb-4 text-sm tabular-nums text-text-gray">
+            {String(filteredServices.length).padStart(2, "0")}{" "}
+            {filteredServices.length === 1 ? "service" : "services"}
+          </p>
+
+          <div
+            ref={scrollerRef}
+            className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-2 scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-2 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden"
+          >
             {filteredServices.map((service, index) => (
               <ServiceCard key={service.slug} service={service} index={index} />
             ))}
           </div>
-        </div>
+
+          {filteredServices.length > 1 ? (
+            <div className="mt-5 flex items-center justify-center gap-2.5 lg:hidden">
+              <button
+                type="button"
+                aria-label="Previous services"
+                onClick={() => scrollByDir(-1)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-black/15 bg-white text-black transition-colors hover:border-black/35 hover:bg-black/[0.04]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next services"
+                onClick={() => scrollByDir(1)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-black/15 bg-white text-black transition-colors hover:border-black/35 hover:bg-black/[0.04]"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

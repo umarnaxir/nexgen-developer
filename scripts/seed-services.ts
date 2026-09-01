@@ -18,7 +18,7 @@ const categories: Record<string, "development" | "digital-marketing" | "support"
   "ai-ml": "development",
   "chatbot-development": "development",
   "digital-marketing": "digital-marketing",
-  seo: "digital-marketing",
+  "search-engine-optimization": "digital-marketing",
   "social-media-marketing": "digital-marketing",
   "graphic-designing": "digital-marketing",
   "google-ads": "digital-marketing",

@@ -1,5 +1,3 @@
-"use client";
-
 import { Shield, Users, FileText, AlertCircle, CheckCircle } from "lucide-react";
 import TermsSection from "./TermsSection";
 

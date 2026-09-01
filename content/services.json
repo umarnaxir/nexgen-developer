@@ -14,8 +14,8 @@
       "maintenance-support"
     ],
     "seo": {
-      "title": "Website Software Development Services",
-      "description": "Custom software development for business websites with React and Next.js. SEO-ready builds for startups. Request a quote from NexGen Developers today.",
+      "title": "Website Development Services | NexGen Developers",
+      "description": "Custom website development for business websites with React and Next.js. SEO-ready builds for startups. Request a quote from NexGen Developers today.",
       "keywords": [
         "website development",
         "web development services",
@@ -147,8 +147,8 @@
       "deployment-devops"
     ],
     "seo": {
-      "title": "Mobile Software Development Services",
-      "description": "Mobile software development for iOS and Android with React Native and Flutter. From MVP to store launch. Get a project quote from NexGen Developers today.",
+      "title": "Mobile App Development Services | NexGen Developers",
+      "description": "Mobile app development for iOS and Android with React Native and Flutter. From MVP to store launch. Get a project quote from NexGen Developers today.",
       "keywords": [
         "mobile app development",
         "iOS app development",
@@ -279,8 +279,8 @@
       "deployment-devops"
     ],
     "seo": {
-      "title": "AI Software Development Services",
-      "description": "Custom AI software development for automation, NLP, and analytics. We design, train, and deploy models. Talk to NexGen Developers about your use case.",
+      "title": "AI & Machine Learning Development Services | NexGen Developers",
+      "description": "Custom AI and ML development for automation, NLP, and analytics. We design and deploy production models. Talk to NexGen Developers.",
       "keywords": [
         "AI solutions",
         "artificial intelligence development",
@@ -413,8 +413,8 @@
       "maintenance-support"
     ],
     "seo": {
-      "title": "AI Chatbot Development Services",
-      "description": "AI chatbot software development for sites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start your project with NexGen Developers.",
+      "title": "AI Chatbot Development Services | NexGen Developers",
+      "description": "AI chatbot development for websites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start with NexGen Developers.",
       "keywords": [
         "chatbot development",
         "AI chatbot",
@@ -545,8 +545,8 @@
       "deployment-devops"
     ],
     "seo": {
-      "title": "Software Maintenance and Support Plans",
-      "description": "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep products stable after launch. Choose a NexGen Developers support plan.",
+      "title": "Website & App Maintenance Services | NexGen Developers",
+      "description": "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep your product stable with NexGen Developers.",
       "keywords": [
         "website maintenance",
         "app maintenance",
@@ -674,8 +674,8 @@
       "maintenance-support"
     ],
     "seo": {
-      "title": "DevOps and Cloud Deployment Help",
-      "description": "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, monitoring, and handover. Launch software securely with NexGen Developers today.",
+      "title": "DevOps & Cloud Deployment Services | NexGen Developers",
+      "description": "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, and monitoring. Launch securely with NexGen Developers.",
       "keywords": [
         "DevOps services",
         "cloud deployment",
@@ -804,8 +804,8 @@
       "website-development"
     ],
     "seo": {
-      "title": "Digital Marketing Agency in India",
-      "description": "Digital marketing for software products: SEO, social, Google Ads, and Meta Ads. Grow traffic and qualified leads. Book a strategy call with NexGen Developers.",
+      "title": "Digital Marketing Agency in India | NexGen Developers",
+      "description": "Full-funnel digital marketing: strategy, content, and campaigns across search and social. Book a strategy call with NexGen Developers.",
       "keywords": [
         "digital marketing",
         "digital marketing agency",
@@ -923,7 +923,7 @@
   },
   {
     "id": "b9bc4b38-421b-4ea6-8076-7ba6e28154de",
-    "slug": "seo",
+    "slug": "search-engine-optimization",
     "label": "SEO",
     "icon": "Search",
     "category": "digital-marketing",
@@ -936,8 +936,8 @@
       "website-development"
     ],
     "seo": {
-      "title": "SEO Services for Organic Growth",
-      "description": "SEO services for software products and higher Google rankings. Technical SEO, content, and white-hat links. Request an SEO audit from NexGen Developers.",
+      "title": "SEO Services for Organic Growth | NexGen Developers",
+      "description": "SEO services to improve Google rankings: technical SEO, content, and white-hat link building. Request a free SEO audit from NexGen Developers.",
       "keywords": [
         "SEO services",
         "search engine optimization",
@@ -1047,11 +1047,11 @@
     "relatedSlugs": [
       "meta-ads",
       "graphic-designing",
-      "seo"
+      "search-engine-optimization"
     ],
     "seo": {
-      "title": "Social Media Marketing Services",
-      "description": "Social media marketing for Facebook, Instagram, and LinkedIn. Strategy, content, community, and ads. Grow your brand with NexGen Developers this month.",
+      "title": "Social Media Marketing Services | NexGen Developers",
+      "description": "Social media marketing for Facebook, Instagram, and LinkedIn: strategy, content, community, and ads. Grow your brand with NexGen Developers this month.",
       "keywords": [
         "social media marketing",
         "Facebook marketing",
@@ -1161,10 +1161,10 @@
     "relatedSlugs": [
       "social-media-marketing",
       "meta-ads",
-      "seo"
+      "search-engine-optimization"
     ],
     "seo": {
-      "title": "Graphic Design and Branding Help",
+      "title": "Graphic Design & Branding Services | NexGen Developers",
       "description": "Graphic design for logos, brand identity, social graphics, and campaigns. Professional visuals that convert. Brief NexGen Developers on your brand today.",
       "keywords": [
         "graphic design",
@@ -1274,11 +1274,11 @@
     "enabled": true,
     "relatedSlugs": [
       "meta-ads",
-      "seo",
+      "search-engine-optimization",
       "digital-marketing"
     ],
     "seo": {
-      "title": "Google Ads Management Services",
+      "title": "Google Ads Management Services | NexGen Developers",
       "description": "Google Ads management for Search, Display, YouTube, and Shopping. Conversion tracking and ROI-focused PPC. Launch campaigns with NexGen Developers now.",
       "keywords": [
         "Google Ads",
@@ -1392,8 +1392,8 @@
       "graphic-designing"
     ],
     "seo": {
-      "title": "Meta Facebook Ads Management Help",
-      "description": "Meta Ads management for Facebook and Instagram. Audience targeting, creative tests, and pixel tracking. Start paid social with NexGen Developers today.",
+      "title": "Meta Ads Management Services | NexGen Developers",
+      "description": "Meta Ads management for Facebook and Instagram: audience targeting, creative testing, and pixel tracking. Start paid social with NexGen Developers today.",
       "keywords": [
         "Meta Ads",
         "Facebook Ads",

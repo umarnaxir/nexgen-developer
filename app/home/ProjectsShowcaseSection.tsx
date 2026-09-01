@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
+import { isExternalHref, projectLiveHref } from "@/lib/utils";
 import type { Project } from "@/lib/content/types";
 
 function formatTitle(title: string) {
@@ -81,6 +82,8 @@ export default function ProjectsShowcaseSection({
   if (total === 0 || !active) return null;
 
   const title = formatTitle(active.title);
+  const liveHref = projectLiveHref(active.link);
+  const liveIsExternal = liveHref ? isExternalHref(liveHref) : false;
 
   return (
     <section
@@ -231,15 +234,27 @@ export default function ProjectsShowcaseSection({
                   </p>
 
                   <div className="mt-3 flex flex-row items-center gap-2 sm:mt-6 sm:gap-3">
-                    <a
-                      href={active.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold pointer-coarse:min-h-11 sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
-                    >
-                      View live
-                      <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
-                    </a>
+                    {liveHref ? (
+                      liveIsExternal ? (
+                        <a
+                          href={liveHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold pointer-coarse:min-h-11 sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+                        >
+                          View live
+                          <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={liveHref}
+                          className="btn-primary group inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold pointer-coarse:min-h-11 sm:flex-none sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+                        >
+                          View live
+                          <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
+                        </Link>
+                      )
+                    ) : null}
                     <Link
                       href="/projects"
                       className="inline-flex flex-1 items-center justify-center gap-1 rounded-full border border-gold/50 px-3 py-2 text-xs font-semibold text-gold-dark transition-colors hover:border-gold hover:text-primary pointer-coarse:min-h-11 sm:flex-none sm:gap-1.5 sm:border-0 sm:px-0 sm:py-0 sm:text-sm sm:underline sm:decoration-gold sm:decoration-2 sm:underline-offset-[6px] lg:text-gold lg:hover:text-white"

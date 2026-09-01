@@ -25,7 +25,7 @@ export default function FeaturedWorkSection() {
       title: "Exceptional IAS Academy - Coaching Institute Website",
       description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
       image: "/images/projects/exceptionalias.png",
-      link: "https://exceptionaliasacademy.vercel.app/",
+      link: "https://www.exceptionaliasacademy.com/",
       technologies: ["Next.js", "TypeScript", "Style System", "NestJS", "MongoDB"],
       category: "Education Website",
       duration: "15 - 20 days",
@@ -123,7 +123,7 @@ export default function FeaturedWorkSection() {
       title: "Kindness Towards Humanity Foundation",
       description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
       image: "/images/projects/kindnesstowordshumanity.png",
-      link: "https://kindnesstowardshumanity.in",
+      link: "/projects",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
       category: "Nonprofit Website",
       duration: "15 - 20 days",
@@ -151,7 +151,7 @@ export default function FeaturedWorkSection() {
       title: "Code2Concept AI",
       description: "An AI-powered platform that converts code and technical concepts into engaging animated videos using LLMs and Manim.",
       image: "/images/projects/code2concept.png",
-      link: "https://your-project-link.com",
+      link: "/projects",
       technologies: [
         "Python",
         "FastAPI",
@@ -174,7 +174,7 @@ export default function FeaturedWorkSection() {
   title: "EyeAmHere AI",
   description: "An AI-powered attendance system that automatically tracks and marks student attendance based on classroom presence and engagement.",
   image: "/images/projects/eyeamhere.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Python",
     "OpenCV",
@@ -197,7 +197,7 @@ export default function FeaturedWorkSection() {
   title: "AlgoArena - AI-Powered Learning Platform",
   description: "An intelligent learning platform that personalizes education through AI-driven roadmaps, coding challenges, skill assessments, and adaptive learning experiences.",
   image: "/images/projects/algoarena.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",
@@ -220,7 +220,7 @@ export default function FeaturedWorkSection() {
   title: "ShareStore - Smart Resource Sharing Platform",
   description: "A centralized platform for students and professionals to securely store, organize, and share notes, documents, and learning resources.",
   image: "/images/projects/sharestore.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",
@@ -243,7 +243,7 @@ export default function FeaturedWorkSection() {
   title: "Sales Analytics - AI Business Intelligence Dashboard",
   description: "An intelligent analytics platform that transforms raw business data into actionable insights through interactive dashboards and AI-driven recommendations.",
   image: "/images/projects/salesanalytics.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Python",
     "Streamlit",
@@ -264,7 +264,7 @@ export default function FeaturedWorkSection() {
   title: "DevVerse - Developer Social Network",
   description: "A social platform built for developers to connect, share ideas, discuss technologies, and collaborate on projects.",
   image: "/images/projects/devverse.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",

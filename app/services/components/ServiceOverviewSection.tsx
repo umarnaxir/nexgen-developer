@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import { ServiceReveal, ServiceRow } from "./ServiceMotion";
+import LinkedCopy from "./LinkedCopy";
 import type { ServicePillar } from "../lib/service-detail-copy";
 
 interface ServiceOverviewSectionProps {
@@ -23,7 +24,7 @@ export default function ServiceOverviewSection({
       className="service-section-anchor section-light border-t border-black/[0.06] section-y"
     >
       <div className="section-container">
-        <div className="mx-auto max-w-3xl lg:mx-0 lg:max-w-4xl">
+        <div className="w-full min-w-0">
           <ServiceReveal>
             <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-gold-dark">
               Overview
@@ -37,7 +38,7 @@ export default function ServiceOverviewSection({
             {intro.map((paragraph, index) => (
               <ServiceReveal key={paragraph.slice(0, 48)} delay={0.06 * (index + 1)}>
                 <p className="text-[16px] leading-[1.8] text-black/65 sm:text-[17px] sm:leading-[1.85]">
-                  {paragraph}
+                  <LinkedCopy text={paragraph} />
                 </p>
               </ServiceReveal>
             ))}
@@ -74,7 +75,7 @@ export default function ServiceOverviewSection({
                       {pillar.title}
                     </h3>
                     <p className="mt-1.5 text-[15px] leading-relaxed text-black/55">
-                      {pillar.text}
+                      <LinkedCopy text={pillar.text} />
                     </p>
                   </div>
                 </ServiceRow>

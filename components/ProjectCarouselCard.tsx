@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Calendar, Users, Code2, ArrowRight, LucideIcon } from "lucide-react";
+import { isExternalHref, projectLiveHref } from "@/lib/utils";
 
 interface ProjectCarouselCardProps {
   id: number;
@@ -32,6 +33,8 @@ export default function ProjectCarouselCard({
   icon: IconComponent,
   slug,
 }: ProjectCarouselCardProps) {
+  const liveHref = projectLiveHref(link);
+
   return (
     <div className="group glass-card overflow-hidden rounded-2xl sm:rounded-3xl h-full" data-aos="fade-up">
       <div className="flex flex-col lg:flex-row h-full">
@@ -105,15 +108,27 @@ export default function ProjectCarouselCard({
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-2 sm:gap-3 mt-auto pt-4 sm:pt-6">
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg bg-gradient-to-r from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/25 transition-all hover:from-gold hover:to-gold-dark hover:scale-105 active:scale-95"
-              >
-                <span>Visit Website</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
+              {liveHref ? (
+                isExternalHref(liveHref) ? (
+                  <a
+                    href={liveHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg bg-gradient-to-r from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/25 transition-all hover:from-gold hover:to-gold-dark hover:scale-105 active:scale-95"
+                  >
+                    <span>Visit Website</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <Link
+                    href={liveHref}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg bg-gradient-to-r from-gold-dark to-gold-dark text-white shadow-lg shadow-gold-dark/25 transition-all hover:from-gold hover:to-gold-dark hover:scale-105 active:scale-95"
+                  >
+                    <span>Visit Website</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
+                )
+              ) : null}
               <Link
                 href={`/projects`}
                 className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-bold rounded-lg border border-white/15 light:border-gray-200 bg-white/[0.04] light:bg-white light:shadow-sm text-white light:text-gray-900 backdrop-blur transition-all hover:border-gold/40 light:hover:border-gold-light hover:bg-white/[0.07] light:hover:bg-gray-100 hover:scale-105 active:scale-95"

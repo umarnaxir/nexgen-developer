@@ -100,7 +100,7 @@ export function organizationNode(contact?: ContactInfo | null, footer?: FooterSe
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI & ML Solutions", url: absoluteUrl("/services/ai-ml") } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chatbot Development", url: absoluteUrl("/services/chatbot-development") } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing", url: absoluteUrl("/services/digital-marketing") } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO Services", url: absoluteUrl("/services/digital-marketing/seo") } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO Services", url: absoluteUrl("/services/search-engine-optimization") } },
       ],
     },
   };

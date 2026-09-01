@@ -7,7 +7,7 @@ export const projects = [
     description: "A modern coaching institute website showcasing courses, faculty, results, and admissions with a clean, conversion-focused design.",
     detailedDescription: "A professional website for Exceptional IAS Academy designed to attract and inform aspiring civil services students. The platform highlights course offerings, experienced faculty, success stories, and study programs while making enquiry and admission simple. The design focuses on building trust and credibility with prospective students through clear information architecture and a responsive, fast-loading interface.",
     image: "/images/projects/exceptionalias.png",
-    link: "https://exceptionaliasacademy.vercel.app/",
+    link: "https://www.exceptionaliasacademy.com/",
     technologies: ["Next.js", "TypeScript", "Style System", "NestJS", "MongoDB"],
     category: "Education Website",
     features: [
@@ -151,7 +151,7 @@ export const projects = [
     description: "A nonprofit organization website highlighting mission, team, gallery, and donation support with a user-friendly design.",
     detailedDescription: "A compassionate and impactful website for the Kindness Towards Humanity Foundation, designed to inspire visitors and facilitate donations. The platform effectively communicates the organization's mission, showcases their humanitarian work through galleries and stories, and provides secure donation options. The design balances emotional connection with clear calls-to-action.",
     image: "/images/projects/kindnesstowordshumanity.png",
-    link: "https://kindnesstowardshumanity.in",
+    link: "/projects",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Payment Gateway Integration", "Content Management", "Social Media Integration"],
     category: "Nonprofit Website",
     features: [
@@ -223,7 +223,7 @@ export const projects = [
   description: "Transform code, algorithms, and technical concepts into animated educational videos using LLMs and Manim.",
   detailedDescription: "Code2Concept is an AI-powered educational content generation platform that automatically converts programming code, algorithms, and technical concepts into professional animated videos. The system leverages Large Language Models (LLMs) to analyze source code, generate explanations, create animation scripts, and render high-quality educational videos using Manim. It helps educators, students, and content creators quickly produce engaging visual explanations for complex topics without manually creating animations.",
   image: "/images/projects/code2concept.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Python",
     "Manim",
@@ -260,7 +260,7 @@ export const projects = [
   description: "An intelligent attendance and classroom engagement platform that automatically tracks student presence, attention, and participation using Computer Vision and AI.",
   detailedDescription: "EyeAmHere is an AI-powered classroom intelligence system designed to revolutionize attendance management and student engagement tracking. The platform utilizes Computer Vision, face recognition, and machine learning algorithms to automatically identify students, mark attendance, monitor attentiveness, and analyze classroom participation in real time. By eliminating manual attendance processes, EyeAmHere helps educational institutions improve accuracy, save time, and gain valuable insights into student involvement and learning behavior.",
   image: "/images/projects/eyeamhere.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Python",
     "OpenCV",
@@ -297,7 +297,7 @@ export const projects = [
   description: "An intelligent learning platform that personalizes education through AI-driven roadmaps, coding challenges, skill assessments, and adaptive learning experiences.",
   detailedDescription: "AlgoArena is an AI-powered learning ecosystem designed to help students and developers master technical skills efficiently. The platform leverages artificial intelligence to create personalized learning paths, recommend resources, analyze user performance, and generate adaptive coding challenges. With integrated progress tracking, interview preparation modules, and gamified learning experiences, AlgoArena provides a comprehensive environment for learners to enhance their programming, problem-solving, and career development skills.",
   image: "/images/projects/algoarena.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",
@@ -334,7 +334,7 @@ export const projects = [
   description: "A centralized platform for students and professionals to securely store, organize, and share notes, documents, and learning resources without losing them in crowded chats.",
   detailedDescription: "ShareStore is a modern file and knowledge-sharing platform designed to solve the common problem of important notes, assignments, documents, and resources getting buried in busy WhatsApp, Telegram, and Discord conversations. The platform provides a centralized space where students, educators, and professionals can upload, organize, discover, and access files anytime. With advanced search, categorization, and collaboration features, ShareStore ensures valuable resources remain easily accessible and never get lost in endless chat threads.",
   image: "/images/projects/sharestore.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",
@@ -371,7 +371,7 @@ export const projects = [
   description: "An intelligent analytics platform that transforms raw business data into actionable insights through interactive dashboards, reports, and AI-driven recommendations.",
   detailedDescription: "Sales Analytics is a powerful business intelligence platform designed to help organizations understand their sales performance and make data-driven decisions. By simply uploading sales data in CSV format, businesses can visualize trends, monitor key performance indicators, identify high-performing products, analyze customer behavior, and uncover growth opportunities. The platform leverages analytics and AI-powered insights to help business owners quickly identify strengths, weaknesses, and areas requiring attention without needing advanced technical expertise.",
   image: "/images/projects/salesanalytics.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Python",
     "Streamlit",
@@ -408,7 +408,7 @@ export const projects = [
   description: "A social platform built for developers to connect, share ideas, discuss technologies, and collaborate on projects in a community-driven environment.",
   detailedDescription: "DevVerse is a modern social networking platform designed specifically for developers, programmers, and tech enthusiasts. Inspired by community-driven platforms like Threads, DevVerse enables users to share technical insights, discuss emerging technologies, post development updates, seek help from peers, and build meaningful professional connections. The platform fosters collaboration, knowledge sharing, and engagement through interactive discussions, developer-focused communities, and real-time communication features.",
   image: "/images/projects/devverse.png",
-  link: "https://your-project-link.com",
+  link: "/projects",
   technologies: [
     "Next.js",
     "React",

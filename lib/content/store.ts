@@ -191,7 +191,17 @@ export function slugify(value: string): string {
   return value
     .toLowerCase()
     .trim()
+    .replace(/\b(?:in|for)[- ](?:19|20)\d{2}\b/g, "")
+    .replace(/\b(?:19|20)\d{2}\b/g, "")
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+export function uniqueSlug(value: string, takenSlugs: string[]): string {
+  const base = slugify(value);
+  if (!takenSlugs.includes(base)) return base;
+  let n = 2;
+  while (takenSlugs.includes(`${base}-${n}`)) n += 1;
+  return `${base}-${n}`;
 }

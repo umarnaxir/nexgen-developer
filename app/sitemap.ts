@@ -24,9 +24,6 @@ function url(
 }
 
 function servicePath(service: ServiceRecord) {
-  if (service.parentSlug === "digital-marketing") {
-    return `/services/digital-marketing/${service.slug}`;
-  }
   return `/services/${service.slug}`;
 }
 

@@ -65,29 +65,10 @@ export function getDigitalMarketingServiceServer(
   return getDigitalMarketingServiceMap()[subSlug];
 }
 
-export function getRelatedServicesUpToSixServer(
-  relatedSlugs: string[] | undefined,
-  excludeSlug?: string
-): ServiceDefinition[] {
-  const TOP = getTopLevelServiceMap();
-  const DM = getDigitalMarketingServiceMap();
-  const lookup = (slug: string) => TOP[slug] || DM[slug];
-
-  let result = (relatedSlugs || [])
-    .map(lookup)
-    .filter((s): s is ServiceDefinition => Boolean(s))
-    .filter((s) => s.slug !== excludeSlug);
-
-  if (result.length >= 6) return result.slice(0, 6);
-  const seen = new Set(result.map((s) => s.slug));
-
-  for (const def of [...Object.values(TOP), ...Object.values(DM)]) {
-    if (result.length >= 6) break;
-    if (def.slug === excludeSlug || seen.has(def.slug)) continue;
-    result.push(def);
-    seen.add(def.slug);
-  }
-  return result.slice(0, 6);
+export function getServiceBySlugServer(
+  slug: string
+): ServiceDefinition | undefined {
+  return getTopLevelServiceMap()[slug] || getDigitalMarketingServiceMap()[slug];
 }
 
 export function getServicesForListingServer(): ServiceListingItem[] {
@@ -97,7 +78,7 @@ export function getServicesForListingServer(): ServiceListingItem[] {
     "ai-ml": "development",
     "chatbot-development": "development",
     "digital-marketing": "digital-marketing",
-    seo: "digital-marketing",
+    "search-engine-optimization": "digital-marketing",
     "social-media-marketing": "digital-marketing",
     "graphic-designing": "digital-marketing",
     "google-ads": "digital-marketing",
@@ -164,8 +145,10 @@ export function getServicesNavItemsServer(): NavServiceItem[] {
         const sub = DM[subSlug];
         return {
           label:
-            subSlug === "seo" ? "Search Engine Optimization" : sub.label,
-          href: `/services/digital-marketing/${subSlug}`,
+            sub.slug === "search-engine-optimization"
+              ? "Search Engine Optimization"
+              : sub.label,
+          href: getServiceHref(sub),
         };
       });
       return { label: def.label, href: `/services/${slug}`, children };

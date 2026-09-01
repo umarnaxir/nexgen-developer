@@ -16,9 +16,9 @@ export const seoConfig = {
   publisher: brand.name,
   foundingDate: "2023",
 
-  defaultTitle: `Software Development Agency India | ${brand.name}`,
+  defaultTitle: `${brand.name} | Web, App, AI & Marketing Studio in India`,
   defaultDescription:
-    "Hire NexGen Developers for software development services in India. Custom products, AI, and growth support for startups. Request your free quote today.",
+    "NexGen Developers builds websites, apps, AI tools, and marketing campaigns for startups and local brands. Based in Kashmir. Start your project today.",
   defaultKeywords: [
     brand.name,
     "software development services",

@@ -61,7 +61,7 @@ const TOP_LEVEL_SLUG_LIST = [
 
 /** Digital marketing sub-service slugs */
 const DIGITAL_MARKETING_SUB_SLUG_LIST = [
- "seo",
+ "search-engine-optimization",
  "social-media-marketing",
  "graphic-designing",
  "google-ads",
@@ -76,9 +76,9 @@ const WEBSITE_DEVELOPMENT: ServiceDefinition = {
  label: "Website Development",
  icon: "Globe",
  seo: {
- title: "Website Software Development Services",
+ title: "Website Development Services | NexGen Developers",
  description:
- "Custom software development for business websites with React and Next.js. SEO-ready builds for startups. Request a quote from NexGen Developers today.",
+ "Custom website development for business websites with React and Next.js. SEO-ready builds for startups. Request a quote from NexGen Developers today.",
  keywords: [
  "website development",
  "web development services",
@@ -156,9 +156,9 @@ const APP_DEVELOPMENT: ServiceDefinition = {
  label: "App Development",
  icon: "Smartphone",
  seo: {
- title: "Mobile Software Development Services",
+ title: "Mobile App Development Services | NexGen Developers",
  description:
- "Mobile software development for iOS and Android with React Native and Flutter. From MVP to store launch. Get a project quote from NexGen Developers today.",
+ "Mobile app development for iOS and Android with React Native and Flutter. From MVP to store launch. Get a project quote from NexGen Developers today.",
  keywords: [
  "mobile app development",
  "iOS app development",
@@ -235,9 +235,9 @@ const AI_ML: ServiceDefinition = {
  label: "AI & ML Solutions",
  icon: "Cpu",
  seo: {
- title: "AI Software Development Services",
+ title: "AI & Machine Learning Development Services | NexGen Developers",
  description:
- "Custom AI software development for automation, NLP, and analytics. We design, train, and deploy models. Talk to NexGen Developers about your use case.",
+ "Custom AI and ML development for automation, NLP, and analytics. We design and deploy production models. Talk to NexGen Developers.",
  keywords: [
  "AI solutions",
  "artificial intelligence development",
@@ -316,9 +316,9 @@ const CHATBOT_DEVELOPMENT: ServiceDefinition = {
  label: "Chatbot Development",
  icon: "MessageCircle",
  seo: {
- title: "AI Chatbot Development Services",
+ title: "AI Chatbot Development Services | NexGen Developers",
  description:
- "AI chatbot software development for sites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start your project with NexGen Developers.",
+ "AI chatbot development for websites, WhatsApp, and support. NLP, CRM integrations, and 24/7 coverage. Start with NexGen Developers.",
  keywords: [
  "chatbot development",
  "AI chatbot",
@@ -395,9 +395,9 @@ const MAINTENANCE_SUPPORT: ServiceDefinition = {
  label: "Maintenance & Support",
  icon: "Wrench",
  seo: {
- title: "Software Maintenance and Support Plans",
+ title: "Website & App Maintenance Services | NexGen Developers",
  description:
- "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep products stable after launch. Choose a NexGen Developers support plan.",
+ "Software maintenance with updates, security patches, monitoring, and bug fixes. Keep your product stable with NexGen Developers.",
  keywords: [
  "website maintenance",
  "app maintenance",
@@ -473,9 +473,9 @@ const DEPLOYMENT_DEVOPS: ServiceDefinition = {
  label: "Deployment & DevOps",
  icon: "Server",
  seo: {
- title: "DevOps and Cloud Deployment Help",
+ title: "DevOps & Cloud Deployment Services | NexGen Developers",
  description:
- "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, monitoring, and handover. Launch software securely with NexGen Developers today.",
+ "DevOps and cloud deployment on AWS, Azure, or GCP with CI/CD, Docker, and monitoring. Launch securely with NexGen Developers.",
  keywords: [
  "DevOps services",
  "cloud deployment",
@@ -554,9 +554,9 @@ const DIGITAL_MARKETING: ServiceDefinition = {
  label: "Digital Marketing",
  icon: "TrendingUp",
  seo: {
- title: "Digital Marketing Agency in India",
+ title: "Digital Marketing Agency in India | NexGen Developers",
  description:
- "Digital marketing for software products: SEO, social, Google Ads, and Meta Ads. Grow traffic and qualified leads. Book a strategy call with NexGen Developers.",
+ "Full-funnel digital marketing: strategy, content, and campaigns across search and social. Book a strategy call with NexGen Developers.",
  keywords: [
  "digital marketing",
  "digital marketing agency",
@@ -630,14 +630,14 @@ const DIGITAL_MARKETING: ServiceDefinition = {
 };
 
 const SEO_SERVICE: SubServiceDefinition = {
- slug: "seo",
+ slug: "search-engine-optimization",
  parentSlug: "digital-marketing",
  label: "SEO",
  icon: "Search",
  seo: {
- title: "SEO Services for Organic Growth",
+ title: "SEO Services for Organic Growth | NexGen Developers",
  description:
- "SEO services for software products and higher Google rankings. Technical SEO, content, and white-hat links. Request an SEO audit from NexGen Developers.",
+ "SEO services to improve Google rankings: technical SEO, content, and white-hat link building. Request a free SEO audit from NexGen Developers.",
  keywords: [
  "SEO services",
  "search engine optimization",
@@ -698,9 +698,9 @@ const SOCIAL_MEDIA_MARKETING: SubServiceDefinition = {
  label: "Social Media Marketing",
  icon: "Share2",
  seo: {
- title: "Social Media Marketing Services",
+ title: "Social Media Marketing Services | NexGen Developers",
  description:
- "Social media marketing for Facebook, Instagram, and LinkedIn. Strategy, content, community, and ads. Grow your brand with NexGen Developers this month.",
+ "Social media marketing for Facebook, Instagram, and LinkedIn: strategy, content, community, and ads. Grow your brand with NexGen Developers this month.",
  keywords: [
  "social media marketing",
  "Facebook marketing",
@@ -752,7 +752,7 @@ const SOCIAL_MEDIA_MARKETING: SubServiceDefinition = {
  ctaDescription:
  "Tell us your platforms and goals and we'll outline a social media plan.",
  },
- relatedSlugs: ["meta-ads", "graphic-designing", "seo"],
+ relatedSlugs: ["meta-ads", "graphic-designing", "search-engine-optimization"],
 };
 
 const GRAPHIC_DESIGNING: SubServiceDefinition = {
@@ -761,7 +761,7 @@ const GRAPHIC_DESIGNING: SubServiceDefinition = {
  label: "Graphic Designing",
  icon: "Palette",
  seo: {
- title: "Graphic Design and Branding Help",
+ title: "Graphic Design & Branding Services | NexGen Developers",
  description:
  "Graphic design for logos, brand identity, social graphics, and campaigns. Professional visuals that convert. Brief NexGen Developers on your brand today.",
  keywords: [
@@ -815,7 +815,7 @@ const GRAPHIC_DESIGNING: SubServiceDefinition = {
  ctaDescription:
  "Share your brand and we'll propose a design package (logo, social, etc.).",
  },
- relatedSlugs: ["social-media-marketing", "meta-ads", "seo"],
+ relatedSlugs: ["social-media-marketing", "meta-ads", "search-engine-optimization"],
 };
 
 const GOOGLE_ADS: SubServiceDefinition = {
@@ -824,7 +824,7 @@ const GOOGLE_ADS: SubServiceDefinition = {
  label: "Google Ads",
  icon: "MousePointerClick",
  seo: {
- title: "Google Ads Management Services",
+ title: "Google Ads Management Services | NexGen Developers",
  description:
  "Google Ads management for Search, Display, YouTube, and Shopping. Conversion tracking and ROI-focused PPC. Launch campaigns with NexGen Developers now.",
  keywords: [
@@ -878,7 +878,7 @@ const GOOGLE_ADS: SubServiceDefinition = {
  ctaDescription:
  "Share your budget and goals and we'll propose a Google Ads strategy.",
  },
- relatedSlugs: ["meta-ads", "seo", "digital-marketing"],
+ relatedSlugs: ["meta-ads", "search-engine-optimization", "digital-marketing"],
 };
 
 const META_ADS: SubServiceDefinition = {
@@ -887,9 +887,9 @@ const META_ADS: SubServiceDefinition = {
  label: "Meta Ads",
  icon: "Facebook",
  seo: {
- title: "Meta Facebook Ads Management Help",
+ title: "Meta Ads Management Services | NexGen Developers",
  description:
- "Meta Ads management for Facebook and Instagram. Audience targeting, creative tests, and pixel tracking. Start paid social with NexGen Developers today.",
+ "Meta Ads management for Facebook and Instagram: audience targeting, creative testing, and pixel tracking. Start paid social with NexGen Developers today.",
  keywords: [
  "Meta Ads",
  "Facebook Ads",
@@ -957,7 +957,7 @@ export const TOP_LEVEL_SERVICES: Record<string, ServiceDefinition> = {
 
 /** Digital marketing sub-services */
 export const DIGITAL_MARKETING_SERVICES: Record<string, SubServiceDefinition> = {
- seo: SEO_SERVICE,
+ "search-engine-optimization": SEO_SERVICE,
  "social-media-marketing": SOCIAL_MEDIA_MARKETING,
  "graphic-designing": GRAPHIC_DESIGNING,
  "google-ads": GOOGLE_ADS,
@@ -974,12 +974,12 @@ export function getDigitalMarketingService(subSlug: string): SubServiceDefinitio
  return DIGITAL_MARKETING_SERVICES[subSlug];
 }
 
-/** Get service definition: top-level slug or digital-marketing/subSlug */
+/** Get service definition by public slug, or legacy digital-marketing/subSlug */
 export function getServiceBySlug(slug: string, subSlug?: string): ServiceDefinition | undefined {
  if (subSlug) {
  return getDigitalMarketingService(subSlug);
  }
- return getTopLevelService(slug);
+ return getTopLevelService(slug) || getDigitalMarketingService(slug);
 }
 
 /** All service URLs for sitemap and internal linking */
@@ -989,7 +989,7 @@ export function getAllServiceUrls(): { url: string; slug: string; subSlug?: stri
  urls.push({ url: `/services/${slug}`, slug, subSlug: undefined });
  });
  DIGITAL_MARKETING_SUB_SLUG_LIST.forEach((subSlug) => {
- urls.push({ url: `/services/digital-marketing/${subSlug}`, slug: "digital-marketing", subSlug });
+ urls.push({ url: `/services/${subSlug}`, slug: subSlug });
  });
  return urls;
 }
@@ -1001,6 +1001,10 @@ export interface NavServiceItem {
  children?: { label: string; href: string }[];
 }
 
+function digitalMarketingChildLabel(sub: SubServiceDefinition) {
+ return sub.slug === "search-engine-optimization" ? "Search Engine Optimization" : sub.label;
+}
+
 export function getServicesNavItems(): NavServiceItem[] {
  const items: NavServiceItem[] = TOP_LEVEL_SLUG_LIST.map((slug) => {
  const def = TOP_LEVEL_SERVICES[slug];
@@ -1008,8 +1012,8 @@ export function getServicesNavItems(): NavServiceItem[] {
  const children = DIGITAL_MARKETING_SUB_SLUG_LIST.map((subSlug) => {
  const sub = DIGITAL_MARKETING_SERVICES[subSlug];
  return {
-  label: subSlug === "seo" ? "Search Engine Optimization" : sub.label,
-  href: `/services/digital-marketing/${subSlug}`,
+  label: digitalMarketingChildLabel(sub),
+  href: getServiceHref(sub),
  };
  });
  return { label: def.label, href: `/services/${slug}`, children };
@@ -1048,61 +1052,13 @@ export function getDigitalMarketingServicesForFooter(): { label: string; href: s
  ];
  DIGITAL_MARKETING_SUB_SLUG_LIST.forEach((subSlug) => {
  const sub = DIGITAL_MARKETING_SERVICES[subSlug];
- const label = subSlug === "seo" ? "Search Engine Optimization" : sub.label;
- items.push({ label, href: `/services/digital-marketing/${subSlug}` });
+ items.push({ label: digitalMarketingChildLabel(sub), href: getServiceHref(sub) });
  });
  return items;
 }
 
-/** Get related service definitions for internal linking */
-export function getRelatedServices(relatedSlugs: string[] | undefined): ServiceDefinition[] {
- if (!relatedSlugs?.length) return [];
- return relatedSlugs
- .map((slug) => {
- const top = getTopLevelService(slug);
- if (top) return top;
- const sub = getDigitalMarketingService(slug);
- return sub;
- })
- .filter((s): s is ServiceDefinition => !!s);
-}
-
-/** Get up to 6 related services for display; pads with other services if needed */
-export function getRelatedServicesUpToSix(
- relatedSlugs: string[] | undefined,
- excludeSlug?: string
-): ServiceDefinition[] {
- let result = getRelatedServices(relatedSlugs).filter(
- (s) => s.slug !== excludeSlug
- );
- if (result.length >= 6) return result.slice(0, 6);
- const seen = new Set(result.map((s) => s.slug));
- for (const slug of TOP_LEVEL_SLUG_LIST) {
- if (result.length >= 6) break;
- if (slug === excludeSlug || seen.has(slug)) continue;
- const def = getTopLevelService(slug);
- if (def) {
- result.push(def);
- seen.add(slug);
- }
- }
- for (const subSlug of DIGITAL_MARKETING_SUB_SLUG_LIST) {
- if (result.length >= 6) break;
- if (subSlug === excludeSlug || seen.has(subSlug)) continue;
- const def = getDigitalMarketingService(subSlug);
- if (def) {
- result.push(def);
- seen.add(subSlug);
- }
- }
- return result.slice(0, 6);
-}
-
-/** Build href for a service (top-level or digital-marketing sub) */
-export function getServiceHref(service: ServiceDefinition): string {
-  if ("parentSlug" in service && service.parentSlug === "digital-marketing") {
-    return `/services/digital-marketing/${service.slug}`;
-  }
+/** Public href for any service page */
+export function getServiceHref(service: { slug: string }): string {
   return `/services/${service.slug}`;
 }
 
@@ -1135,7 +1091,7 @@ export function getServicesForListing(): ServiceListingItem[] {
     "ai-ml": "development",
     "chatbot-development": "development",
     "digital-marketing": "digital-marketing",
-    seo: "digital-marketing",
+    "search-engine-optimization": "digital-marketing",
     "social-media-marketing": "digital-marketing",
     "graphic-designing": "digital-marketing",
     "google-ads": "digital-marketing",

@@ -1,5 +1,3 @@
-"use client";
-
 import FAQAccordion from "@/components/FAQAccordion";
 import { homeFaqs } from "@/lib/seo/faqs";
 

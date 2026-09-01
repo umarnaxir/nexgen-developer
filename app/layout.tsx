@@ -10,7 +10,7 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import { GoogleTagManager, GoogleTagManagerNoscript } from "@/components/GoogleTagManager";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import { getContactInfo, getFooterSettings } from "@/lib/content/store";
-import { getSession } from "@/lib/admin/auth";
+import Footer from "@/components/Footer/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -51,17 +51,21 @@ const spaceGrotesk = localFont({
   display: "swap",
 });
 
-export const metadata = {
-  ...getHomeSEO(),
-  icons: {
-    icon: [
-      { url: "/logo/logo.png", type: "image/png" },
-      { url: "/logo/logo.png", sizes: "32x32", type: "image/png" },
-    ],
-    shortcut: "/logo/logo.png",
-    apple: "/logo/logo.png",
-  },
-};
+export function generateMetadata() {
+  return {
+    ...getHomeSEO(),
+    icons: {
+      icon: [
+        { url: "/logo/logo.png", type: "image/png" },
+        { url: "/logo/logo.png", sizes: "32x32", type: "image/png" },
+      ],
+      shortcut: "/logo/logo.png",
+      apple: "/logo/logo.png",
+    },
+  };
+}
+
+export const revalidate = 3600;
 
 export const viewport = {
   width: "device-width",
@@ -77,19 +81,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [contact, footer, session] = await Promise.all([
+  const [contact, footer] = await Promise.all([
     getContactInfo(),
     getFooterSettings(),
-    getSession(),
   ]);
 
   return (
     <html lang="en-IN" suppressHydrationWarning>
-      <head>
-        <GoogleTagManager />
-      </head>
       <body
         className={`${spaceGrotesk.variable} ${playfair.variable} ${spaceGrotesk.className} antialiased`}
+        suppressHydrationWarning
       >
         <GoogleTagManagerNoscript />
         <ThemeProvider>
@@ -98,13 +99,12 @@ export default async function RootLayout({
           <AOSInit />
           <Toaster position="top-right" richColors />
           <LayoutWrapper
-            contact={contact}
-            footer={footer}
-            isAdminLoggedIn={Boolean(session)}
+            footer={<Footer contact={contact} footer={footer} />}
           >
             {children}
           </LayoutWrapper>
         </ThemeProvider>
+        <GoogleTagManager />
       </body>
     </html>
   );

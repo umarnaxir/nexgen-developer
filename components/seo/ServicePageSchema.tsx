@@ -14,6 +14,8 @@ import {
 interface ServicePageSchemaProps {
   serviceName: string;
   serviceDescription: string;
+  pageTitle?: string;
+  pageDescription?: string;
   serviceType?: string;
   areaServed?: string;
   path: string;
@@ -24,17 +26,24 @@ interface ServicePageSchemaProps {
 export default function ServicePageSchema({
   serviceName,
   serviceDescription,
+  pageTitle,
+  pageDescription,
   serviceType,
   areaServed = "India",
   path,
   breadcrumbs,
   faqs,
 }: ServicePageSchemaProps) {
+  const exactPageTitle = Boolean(pageTitle && /nexgen developers/i.test(pageTitle));
   return (
     <>
       <WebPageSchema
-        name={buildSeoTitle(serviceName)}
-        description={buildSeoDescription(serviceDescription)}
+        name={exactPageTitle ? pageTitle! : buildSeoTitle(pageTitle || serviceName)}
+        description={
+          pageDescription
+            ? pageDescription.trim()
+            : buildSeoDescription(serviceDescription)
+        }
         url={path}
       />
       <BreadcrumbSchema items={breadcrumbs} />

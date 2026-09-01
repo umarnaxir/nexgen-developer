@@ -3,9 +3,10 @@
 import React from "react";
 import { MessageCircle, Facebook, Linkedin, Instagram } from "lucide-react";
 import XIcon from "@/components/icons/XIcon";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const socialLinks = [
-  { icon: MessageCircle, href: "https://wa.me/916006161726?text=Hi%20NexGen%20Developers%2C%20I%20want%20to%20discuss%20a%20project.", label: "WhatsApp" },
+  { icon: MessageCircle, href: null, label: "WhatsApp" },
   { icon: XIcon, href: "https://x.com/nexgendv", label: "X" },
   { icon: Linkedin, href: "https://www.linkedin.com/company/105880683/", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/nexgendv?igsh=MTJiczF6aDNxbjB2eg%3D%3D&utm_source=qr", label: "Instagram" },
@@ -21,18 +22,32 @@ export default function ContactUsSocials() {
           Follow us on social media or drop a message. We&apos;re here to help.
         </p>
         <div className="flex flex-wrap justify-center gap-3.5 sm:gap-4">
-          {socialLinks.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:bg-[#d1ac81] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 sm:h-16 sm:w-16"
-            >
+          {socialLinks.map(({ icon: Icon, href, label }) => {
+            const className =
+              "flex h-14 w-14 items-center justify-center rounded-full bg-[#e6c9a6] text-black transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:bg-[#d1ac81] active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 sm:h-16 sm:w-16";
+            const icon = (
               <Icon className="h-6 w-6 text-black sm:h-7 sm:w-7" strokeWidth={2} />
-            </a>
-          ))}
+            );
+            if (!href) {
+              return (
+                <WhatsAppLink key={label} aria-label={label} className={className}>
+                  {icon}
+                </WhatsAppLink>
+              );
+            }
+            return (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={className}
+              >
+                {icon}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

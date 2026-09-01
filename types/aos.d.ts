@@ -18,3 +18,5 @@ declare module "aos" {
 
   export default AOS;
 }
+
+declare module "aos/dist/aos.css";

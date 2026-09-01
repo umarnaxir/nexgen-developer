@@ -1,5 +1,3 @@
-"use client";
-
 import { FileText, Shield, Users, BookOpen } from "lucide-react";
 import TermsSection from "./TermsSection";
 

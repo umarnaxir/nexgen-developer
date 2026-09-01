@@ -7,19 +7,25 @@ import AboutApproach from "./components/AboutApproach";
 import AboutFAQ from "./components/AboutFAQ";
 import TechStackSection from "@/app/home/TechStackSection";
 import GetStartedCTA from "@/components/GetStartedCTA";
-import { getAboutSEO } from "@/lib/seo/page-seo";
+import { getAboutSEO, aboutSeoCopy } from "@/lib/seo/page-seo";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { aboutFaqs } from "@/lib/seo/faqs";
 
-export const metadata = getAboutSEO();
+export function generateMetadata() {
+  return getAboutSEO();
+}
+
+export const revalidate = 3600;
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
       <PageJsonLd
         path="/about"
-        title="About Our Software Development Team"
-        description="Meet NexGen Developers, a software development studio in Baramulla for startups. Engineers, designers, and marketers in one team. Start a project now."
+        title={aboutSeoCopy.title}
+        description={aboutSeoCopy.description}
+        exactTitle
+        exactDescription
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "About", url: "/about" },

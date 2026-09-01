@@ -15,11 +15,7 @@ function revalidateServicePaths(service?: ServiceRecord) {
   revalidatePath("/");
   revalidatePath("/services");
   if (service) {
-    if (service.parentSlug === "digital-marketing") {
-      revalidatePath(`/services/digital-marketing/${service.slug}`);
-    } else {
-      revalidatePath(`/services/${service.slug}`);
-    }
+    revalidatePath(`/services/${service.slug}`);
   }
 }
 
@@ -79,8 +75,9 @@ function buildService(
   orderFallback = 1
 ): ServiceRecord {
   const label = String(body.label ?? existing?.label ?? "").trim();
-  const slug =
-    String(body.slug ?? existing?.slug ?? "").trim() || slugify(label);
+  const slug = slugify(
+    String(body.slug ?? existing?.slug ?? "").trim() || label
+  );
   const parentRaw =
     body.parentSlug !== undefined
       ? body.parentSlug
